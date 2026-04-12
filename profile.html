@@ -96,33 +96,13 @@
             padding-bottom: 30px;
             margin-bottom: 30px;
         }
-
-        /* NEW: PROFILE PIC WRAPPER FOR SYNC */
-        .profile-pic-wrapper {
-            position: relative;
-            width: 120px;
-            height: 120px;
-            cursor: pointer;
-        }
         .profile-pic {
             width: 120px;
             height: 120px;
             border-radius: 50%;
             border: 3px solid #c5a059;
             object-fit: cover;
-            background: #2e2e40;
         }
-        .pic-overlay {
-            position: absolute; top: 0; left: 0;
-            width: 100%; height: 100%;
-            background: rgba(0,0,0,0.5);
-            border-radius: 50%;
-            display: flex; justify-content: center; align-items: center;
-            opacity: 0; transition: 0.3s;
-        }
-        .profile-pic-wrapper:hover .pic-overlay { opacity: 1; }
-        .pic-overlay i { color: white; font-size: 1.5rem; }
-
         .profile-info h1 {
             font-family: 'Playfair Display', serif;
             color: #c5a059;
@@ -165,7 +145,7 @@
         }
         .edit-btn:hover { background: #c5a059; color: #141612; }
 
-        /* FOOTER */
+        /* FOOTER - DASHBOARD MATCH */
         footer {
             background-color: #1e1e2f;
             padding: 60px 20px 30px;
@@ -177,16 +157,45 @@
             align-items: center;
         }
         .footer-logo {
-            height: 70px; width: 70px; border-radius: 50%;
-            border: 2px solid #c5a059; margin-bottom: 40px; object-fit: cover;
+            height: 70px;
+            width: 70px;
+            border-radius: 50%;
+            border: 2px solid #c5a059;
+            margin-bottom: 40px;
+            object-fit: cover;
         }
         .footer-links-container {
-            display: grid; grid-template-columns: repeat(4, 1fr);
-            gap: 40px; max-width: 1200px; width: 100%; margin-bottom: 40px;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 40px;
+            max-width: 1200px;
+            width: 100%;
+            margin-bottom: 40px;
         }
-        .footer-column p { font-family: 'Playfair Display', serif; color: #c5a059; font-size: 1.2rem; margin: 0 0 10px 0; font-weight: bold; }
-        .footer-column hr { border: none; border-top: 1px solid rgba(197, 160, 89, 0.3); margin-bottom: 15px; }
-        .footer-btn { display: block; background: none; border: none; color: #b5aba1; padding: 8px 0; font-size: 14px; cursor: pointer; text-align: left; transition: 0.3s; width: 100%; }
+        .footer-column p {
+            font-family: 'Playfair Display', serif;
+            color: #c5a059;
+            font-size: 1.2rem;
+            margin: 0 0 10px 0;
+            font-weight: bold;
+        }
+        .footer-column hr {
+            border: none;
+            border-top: 1px solid rgba(197, 160, 89, 0.3);
+            margin-bottom: 15px;
+        }
+        .footer-btn {
+            display: block;
+            background: none;
+            border: none;
+            color: #b5aba1;
+            padding: 8px 0;
+            font-size: 14px;
+            cursor: pointer;
+            text-align: left;
+            transition: 0.3s;
+            width: 100%;
+        }
         .footer-btn:hover { color: #c5a059; transform: translateX(5px); }
 
         .footer-bottom {
@@ -208,8 +217,10 @@
             .navbar { padding: 10px 15px; }
             .navbar-left { flex: 1; }
             .navbar-left span { display: inline-block !important; font-size: 1rem; white-space: normal; max-width: 180px; line-height: 1.2; }
+            
             .navbar-right { order: 2; margin-right: 0; }
             .navbar-right span { display: none; }
+
             .menu-toggle { display: block; order: 3; margin-left: 10px; }
 
             .sub-navbar { 
@@ -247,7 +258,7 @@
                 <input type="text" id="searchInput" placeholder="Search your account...">
             </div>
         </div>
-        <div class="navbar-right" id="userMenu" onclick="toggleUserDropdown()">
+        <div class="navbar-right" id="userMenu">
             <i class="fas fa-user" style="margin-left: 15px;"></i>
             <span id="usernameDisplay">Loading...</span>
             <div id="dropdownMenu">
@@ -269,12 +280,7 @@
 
     <div class="profile-container">
         <div class="profile-header">
-            <div class="profile-pic-wrapper" onclick="document.getElementById('imgInput').click()">
-                <img src="images/logo.png" id="profilePic" class="profile-pic" alt="User Image">
-                <div class="pic-overlay"><i class="fa-solid fa-camera"></i></div>
-            </div>
-            <input type="file" id="imgInput" style="display:none" accept="image/*" onchange="uploadAndSyncPic(event)">
-
+            <img src="images/logo.png" class="profile-pic" alt="User Image">
             <div class="profile-info">
                 <h1 id="fullName">User Name</h1>
                 <p id="userEmail">email@example.com</p>
@@ -284,76 +290,92 @@
         </div>
 
         <div class="stats-grid">
-            <div class="stat-card"><i class="fa-solid fa-horse"></i><h3>Enrolled Horses</h3><p id="horseCount">0 Horses</p></div>
-            <div class="stat-card"><i class="fa-solid fa-crown"></i><h3>Membership</h3><p id="membershipType">Basic Access</p></div>
-            <div class="stat-card"><i class="fa-solid fa-calendar-check"></i><h3>Events Joined</h3><p>0 Upcoming</p></div>
+            <div class="stat-card">
+                <i class="fa-solid fa-horse"></i>
+                <h3>Enrolled Horses</h3>
+                <p id="horseCount">0 Horses</p>
+            </div>
+            <div class="stat-card">
+                <i class="fa-solid fa-crown"></i>
+                <h3>Membership</h3>
+                <p id="membershipType">Basic Access</p>
+            </div>
+            <div class="stat-card">
+                <i class="fa-solid fa-calendar-check"></i>
+                <h3>Events Joined</h3>
+                <p>0 Upcoming</p>
+            </div>
         </div>
     </div>
 
     <footer>
         <img src="images/logo.png" alt="Logo" class="footer-logo">
         <div class="footer-links-container">
-            <div class="footer-column"><p>Navigation</p><hr>
+            <div class="footer-column">
+                <p>Navigation</p>
+                <hr>
                 <button class="footer-btn" onclick="location.href='dashboard.html'">Home</button>
                 <button class="footer-btn" onclick="location.href='memberships.html'">Memberships</button>
                 <button class="footer-btn" onclick="location.href='enroll.html'">Enroll Horse</button>
                 <button class="footer-btn" onclick="location.href='contact.html'">Contact Us</button>
             </div>
+            <div class="footer-column">
+                <p>Updates</p>
+                <hr>
+                <button class="footer-btn" onclick="location.href='Loading.html?type=events'">Upcoming Events</button>
+                <button class="footer-btn" onclick="location.href='Loading.html?type=news'">Latest News</button>
+            </div>
+            <div class="footer-column">
+                <p>About</p>
+                <hr>
+                <button class="footer-btn" onclick="location.href='about.html'">Our Story</button>
+                <button class="footer-btn" onclick="location.href='index.html'">Member Login</button>
+            </div>
+            <div class="footer-column">
+                <p>The Farm</p>
+                <hr>
+                <button class="footer-btn" onclick="location.href='availablehorses.html'">Available Horses</button>
+                <button class="footer-btn" onclick="location.href='TrainingGrounds.html'">Training Grounds</button>
+            </div>
         </div>
         <div class="footer-bottom">
             <div class="copyright">&copy; 2026 Alvarez - Roman Heritage Equestrian. All rights reserved.</div>
+            <div class="social-icons">
+                <a href="https://www.facebook.com" target="_blank" title="Facebook"><i class="fab fa-facebook"></i></a>
+                <a href="https://www.youtube.com/@AlvarezRomanHeritageEquestrian" target="_blank" title="YouTube"><i class="fab fa-youtube"></i></a>
+            </div>
         </div>
     </footer>
 
     <script>
         const API_URL = "https://login-backend-ny6x.onrender.com";
 
-        function toggleNav() { document.getElementById("subNavbar").classList.toggle("active"); }
-        function toggleUserDropdown() {
-            const dd = document.getElementById("dropdownMenu");
-            dd.style.display = dd.style.display === "block" ? "none" : "block";
-        }
-
-        /* --- SYNC IMAGE ACROSS DEVICES --- */
-        async function uploadAndSyncPic(event) {
-            const file = event.target.files[0];
-            if (!file) return;
-
-            const reader = new FileReader();
-            reader.onload = async function(e) {
-                const base64 = e.target.result;
-                document.getElementById("profilePic").src = base64;
-                localStorage.setItem("user_pfp", base64); // Local cache
-
-                const token = localStorage.getItem("token");
-                await fetch(`${API_URL}/update-profile-pic`, {
-                    method: "POST",
-                    headers: { "Content-Type": "application/json", "Authorization": "Bearer " + token },
-                    body: JSON.stringify({ image: base64 })
-                });
-            };
-            reader.readAsDataURL(file);
+        function toggleNav() {
+            document.getElementById("subNavbar").classList.toggle("active");
         }
 
         async function loadUser() {
             const isGuest = localStorage.getItem("guest");
             const dd = document.getElementById("dropdownMenu");
             
-            // Local check for fast loading
-            const localImg = localStorage.getItem("user_pfp");
-            if (localImg) document.getElementById("profilePic").src = localImg;
-
             if (isGuest === "true") {
                 document.getElementById("usernameDisplay").innerText = "Guest";
                 document.getElementById("fullName").innerText = "Guest User";
                 document.getElementById("userEmail").innerText = "Not Signed In";
                 document.getElementById("profileOption").style.display = "none";
                 document.getElementById("logoutText").innerText = "Sign In / Sign Up";
+                
+                document.getElementById("userMenu").onclick = () => {
+                    dd.style.display = dd.style.display === "block" ? "none" : "block";
+                };
                 return; 
             }
 
             const token = localStorage.getItem("token");
-            if (!token) { window.location.href = "index.html"; return; }
+            if (!token) {
+                window.location.href = "index.html";
+                return;
+            }
 
             try {
                 const res = await fetch(`${API_URL}/me`, {
@@ -362,15 +384,14 @@
 
                 if (res.ok) {
                     const data = await res.json();
-                    document.getElementById("usernameDisplay").innerText = data.fullName.split(' ')[0];
+                    document.getElementById("usernameDisplay").innerText = data.fullName;
                     document.getElementById("fullName").innerText = data.fullName;
                     document.getElementById("userEmail").innerText = data.email;
                     document.getElementById("profileOption").style.display = "block";
-                    
-                    if (data.profilePic) {
-                        document.getElementById("profilePic").src = data.profilePic;
-                        localStorage.setItem("user_pfp", data.profilePic);
-                    }
+
+                    document.getElementById("userMenu").onclick = () => {
+                        dd.style.display = dd.style.display === "block" ? "none" : "block";
+                    };
                 } else {
                     logout();
                 }
@@ -389,7 +410,8 @@
         }
 
         function logout() {
-            localStorage.clear();
+            localStorage.removeItem("token");
+            localStorage.removeItem("guest");
             window.location.href = "index.html";
         }
 
