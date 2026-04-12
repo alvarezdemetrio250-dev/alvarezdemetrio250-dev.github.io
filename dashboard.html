@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Alvarez - Roman Heritage Equestrian - Dashboard</title>
     <link rel="icon" href="images/logo.png" type="image/x-icon">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -14,10 +14,10 @@
         html, body {
             margin: 0; padding: 0; height: 100%;
             font-family: 'Roboto', sans-serif;
-            overflow-y: auto;
+            overflow-x: hidden; /* STOPS LEFT-TO-RIGHT SCROLLING */
             background-color: #141612;
         }
-        .page-wrapper { display: flex; flex-direction: column; min-height: 100vh; }
+        .page-wrapper { display: flex; flex-direction: column; min-height: 100vh; width: 100%; overflow-x: hidden; }
 
         /* NAVBAR */
         .navbar {
@@ -26,16 +26,16 @@
             position: relative;
             z-index: 100;
         }
-        .navbar-left { display: flex; align-items: center; z-index: 102; }
+        .navbar-left { display: flex; align-items: center; z-index: 102; flex: 1; }
         .navbar-left img { height: 40px; width: 40px; border-radius: 50%; object-fit: cover; margin-right: 12px; border: 2px solid #c5a059; }
         .navbar-left a { color: white; text-decoration: none; }
         .navbar-left span { font-size: 1.2rem; font-weight: bold; white-space: nowrap; font-family: 'Playfair Display', serif; letter-spacing: 0.5px;}
 
-        /* HAMBURGER BUTTON (Hidden on Desktop) */
+        /* HAMBURGER BUTTON */
         .menu-toggle {
             display: none;
             background: none; border: none; color: white;
-            font-size: 1.5rem; cursor: pointer; margin-right: 15px;
+            font-size: 1.5rem; cursor: pointer; margin-left: 15px;
             z-index: 102;
         }
 
@@ -246,55 +246,18 @@
             align-items: center;
         }
         .footer-logo {
-            height: 70px;
-            width: 70px;
-            border-radius: 50%;
-            border: 2px solid #c5a059;
-            margin-bottom: 40px;
-            object-fit: cover;
+            height: 70px; width: 70px; border-radius: 50%;
+            border: 2px solid #c5a059; margin-bottom: 40px; object-fit: cover;
         }
         .footer-links-container {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 40px;
-            max-width: 1200px;
-            width: 100%;
-            margin-bottom: 40px;
+            display: grid; grid-template-columns: repeat(4, 1fr);
+            gap: 40px; max-width: 1200px; width: 100%; margin-bottom: 40px;
         }
-        .footer-column p {
-            font-family: 'Playfair Display', serif;
-            color: #c5a059;
-            font-size: 1.2rem;
-            margin: 0 0 10px 0;
-            font-weight: bold;
-        }
-        .footer-column hr {
-            border: none;
-            border-top: 1px solid rgba(197, 160, 89, 0.3);
-            margin-bottom: 15px;
-        }
-        .footer-btn {
-            display: block;
-            background: none;
-            border: none;
-            color: #b5aba1;
-            padding: 8px 0;
-            font-size: 14px;
-            cursor: pointer;
-            text-align: left;
-            transition: 0.3s;
-            width: 100%;
-        }
+        .footer-column p { font-family: 'Playfair Display', serif; color: #c5a059; font-size: 1.2rem; margin: 0 0 10px 0; font-weight: bold; }
+        .footer-column hr { border: none; border-top: 1px solid rgba(197, 160, 89, 0.3); margin-bottom: 15px; }
+        .footer-btn { display: block; background: none; border: none; color: #b5aba1; padding: 8px 0; font-size: 14px; cursor: pointer; text-align: left; transition: 0.3s; width: 100%; }
         .footer-btn:hover { color: #c5a059; transform: translateX(5px); }
-        .footer-bottom {
-            width: 100%;
-            max-width: 1200px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-top: 1px solid rgba(255,255,255,0.1);
-            padding-top: 20px;
-        }
+        .footer-bottom { width: 100%; max-width: 1200px; display: flex; justify-content: space-between; align-items: center; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px; }
         .copyright { color: #888; font-size: 0.9rem; }
         .social-icons a { color: white; font-size: 1.5rem; margin-left: 20px; transition: 0.3s; }
         .social-icons a:hover { color: #c5a059; }
@@ -313,8 +276,19 @@
             box-shadow: 0 15px 40px rgba(0,0,0,0.6);
             max-width: 450px; width: 90%;
         }
+        .modal-content h2 { font-family: 'Playfair Display', serif; color: #c5a059; margin-top: 0; font-size: 24px;}
+        .close-btn { position: absolute; top: 15px; right: 20px; background: none; border: none; font-size: 1.2rem; cursor: pointer; color: #888; transition: 0.2s; }
+        .close-btn:hover { color: #ff6b6b; }
+        .perks-list { text-align: left; margin: 25px 0; padding: 0; list-style: none; font-size: 15px; color: #b5aba1;}
+        .perks-list li { margin-bottom: 12px; }
+        .perks-list li i { color: #c5a059; margin-right: 10px; }
+        .modal-btn { padding: 12px 24px; border-radius: 6px; border: none; cursor: pointer; font-size: 15px; font-weight: 500; transition: 0.3s; width: 100%; margin-bottom: 10px; }
+        .btn-gold { background: #c5a059; color: #141612; }
+        .btn-gold:hover { background: #e6c885; }
+        .btn-outline { background: transparent; color: #b5aba1; border: 1px solid #5c4a3f; }
+        .btn-outline:hover { color: white; border-color: #c5a059; background: rgba(197, 160, 89, 0.1); }
 
-        /* --- UPDATED MOBILE RESPONSIVE TWEAKS --- */
+        /* --- MOBILE RESPONSIVE TWEAKS --- */
         @media (max-width: 900px) {
             .info-section { flex-direction: column !important; }
             .info-text { padding: 0 !important; text-align: center; }
@@ -327,22 +301,23 @@
         }
 
         @media (max-width: 768px) {
-            .menu-toggle { display: block; }
+            .navbar-center { display: none !important; } /* REMOVE SEARCH FOR MOBILE */
             .navbar { padding: 10px 15px; }
-            .navbar-left span { font-size: 1rem; }
-            
-            /* Fixing the overlap issue from your screenshot */
-            .navbar-center { 
-                position: relative; left: 0; transform: none; 
-                width: 100%; order: 3; margin-top: 10px;
+            .navbar-left { flex: 1; }
+            .navbar-left span { 
+                display: inline-block !important; 
+                font-size: 1rem; 
+                white-space: normal; 
+                max-width: 180px; 
+                line-height: 1.2;
             }
-            .search-container { width: 100%; }
-            .search-button { right: 10px; }
-            .microphone-button { right: 40px; }
-
-            .navbar-right span { display: none; }
             
-            /* Hamburger Menu Dropdown Animation */
+            .navbar-right { order: 2; margin-right: 0; }
+            .navbar-right span { display: none; }
+            .calendar-link { display: none !important; } /* REMOVE EVENTS FROM TOP ON MOBILE */
+            
+            .menu-toggle { display: block; order: 3; } /* HAMBURGER ON RIGHT */
+            
             .sub-navbar { 
                 display: none; 
                 flex-direction: column; 
@@ -351,7 +326,7 @@
                 gap: 12px;
             }
             .sub-navbar.active { display: flex; }
-            .sub-navbar a { width: 80%; text-align: center; }
+            .sub-navbar a { width: 90%; text-align: center; }
 
             .hero-container { height: 350px; }
             .slide-text { font-size: 1.6rem; left: 20px; bottom: 60px; right: 20px; }
@@ -366,11 +341,9 @@
 
 <div class="page-wrapper">
     <div class="navbar">
-        <button class="menu-toggle" onclick="toggleNav()"><i class="fa-solid fa-bars"></i></button>
-        
         <div class="navbar-left">
             <img src="images/logo.png" alt="Logo">
-            <a href="dashboard.html"><span>Alvarez Equestrian</span></a>
+            <a href="dashboard.html"><span>Alvarez - Roman Heritage Equestrian</span></a>
         </div>
         
         <div class="navbar-center">
@@ -390,10 +363,13 @@
                 <div onclick="location.href='profile.html'" id="profileOption" style="display:none;">My Profile</div>
             </div>
         </div>
+
+        <button class="menu-toggle" onclick="toggleNav()"><i class="fa-solid fa-bars"></i></button>
     </div>
 
     <div class="sub-navbar" id="subNavbar">
         <a href="dashboard.html">Home</a>
+        <a href="events.html" style="border: 1px solid #c5a059;">Upcoming Events</a>
         <a href="enroll.html">Enroll Horse</a>
         <a href="memberships.html">Memberships</a>
         <a href="about.html">Our Story</a>
@@ -543,17 +519,36 @@
 
         /* --- SEARCH LOGIC --- */
         const voiceInput = document.getElementById('searchInput');
-        document.getElementById("searchButton").onclick = () => {
-            const q = voiceInput.value.trim();
-            if (q) window.location.href = `searchResults.html?q=${encodeURIComponent(q)}`;
-        };
+        if (document.getElementById("searchButton")) {
+            document.getElementById("searchButton").onclick = () => {
+                const q = voiceInput.value.trim();
+                if (q) window.location.href = `searchResults.html?q=${encodeURIComponent(q)}`;
+            };
+        }
+
+        const micBtn = document.getElementById('micButton');
+        const voiceModal = document.getElementById('talkModal');
+        if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) {
+            const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+            const recognition = new SpeechRecognition();
+            if (micBtn) {
+                micBtn.onclick = () => { voiceModal.style.display = 'flex'; recognition.start(); };
+            }
+            recognition.onresult = (e) => {
+                const transcript = e.results[0][0].transcript;
+                voiceInput.value = transcript;
+                setTimeout(() => { window.location.href = `searchResults.html?q=${encodeURIComponent(transcript)}`; }, 1000);
+            };
+        }
 
         const placeholderText = "What can we help you with today? ";
         let charIndex = 0;
         function typeEffect() {
-            voiceInput.placeholder = placeholderText.slice(0, charIndex++);
-            if (charIndex > placeholderText.length) charIndex = 0;
-            setTimeout(typeEffect, 100);
+            if (voiceInput) {
+                voiceInput.placeholder = placeholderText.slice(0, charIndex++);
+                if (charIndex > placeholderText.length) charIndex = 0;
+                setTimeout(typeEffect, 100);
+            }
         }
         typeEffect();
     </script>
