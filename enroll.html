@@ -19,7 +19,7 @@
         }
         .page-wrapper { display: flex; flex-direction: column; min-height: 100vh; }
 
-        /* NAVBARS */
+        /* NAVBAR - DASHBOARD MATCH */
         .navbar {
             display: flex; align-items: center; justify-content: space-between;
             background-color: #1e1e2f; padding: 10px 20px; color: white;
@@ -28,81 +28,164 @@
         .navbar-left { display: flex; align-items: center; }
         .navbar-left img { height: 40px; width: 40px; border-radius: 50%; object-fit: cover; margin-right: 12px; border: 2px solid #c5a059; }
         .navbar-left a { color: white; text-decoration: none; font-family: 'Playfair Display', serif; font-weight: bold; font-size: 1.2rem; }
+        
+        .navbar-right { display: flex; align-items: center; }
+        .navbar-right a { color: white; text-decoration: none; transition: 0.3s; display: flex; align-items: center; }
+        .navbar-right a:hover { color: #c5a059; }
+
+        /* SUB-NAVBAR - DASHBOARD MATCH */
         .sub-navbar {
             background-color: #232333; padding: 15px 20px;
             display: flex; justify-content: center; gap: 20px; border-bottom: 2px solid #c5a059;
         }
         .sub-navbar a {
             background: #4a3b32; color: #fdfaf6; text-decoration: none;
-            padding: 10px 24px; border-radius: 6px; font-size: 15px; transition: 0.3s;
+            padding: 10px 24px; border-radius: 6px; font-size: 15px; font-weight: 500;
+            border: 1px solid #5c4a3f; transition: all 0.3s ease;
         }
-        .sub-navbar a:hover { background: #c5a059; color: #141612; }
-
+        .sub-navbar a:hover { 
+            background: #c5a059; color: #141612; 
+            border-color: #c5a059;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(197, 160, 89, 0.25);
+        }
 
         /* CONTENT LAYOUT */
         .info-container {
             max-width: 1200px;
-            margin: 0 auto;
-            padding: 60px 10px;
+            margin: 60px auto;
+            padding: 0 20px;
             display: grid;
             grid-template-columns: 1fr 2fr;
             gap: 60px;
+            flex-grow: 1;
         }
 
         .side-image {
-            width: 70%;
-            border: 1px solid #c5a059;
+            width: 100%;
+            max-width: 300px;
+            border: 1px solid rgba(197, 160, 89, 0.5);
             border-radius: 8px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            margin-bottom: 20px;
         }
 
-        .main-text h2 { font-family: 'Playfair Display', serif; color: #c5a059; font-size: 2.2rem; margin-top: 0; }
+        .main-text h2 { font-family: 'Playfair Display', serif; color: #c5a059; font-size: 2.8rem; margin-top: 0; }
         .main-text p { line-height: 1.8; color: #b5aba1; font-size: 1.1rem; }
 
-        /* PRICING & FAQ BOXES */
+        /* PRICE CARD */
         .price-card {
             background: #1e1e2f;
             border-left: 4px solid #c5a059;
             padding: 25px;
             margin: 30px 0;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
         }
-        .price-card h3 { margin-top: 0; color: #c5a059; }
+        .price-card h3 { margin-top: 0; color: #c5a059; font-family: 'Playfair Display', serif; }
         
+        /* FAQ SECTION */
         .faq-item { margin-bottom: 25px; }
-        .faq-question { color: #fdfaf6; font-weight: 500; margin-bottom: 8px; display: block; border-bottom: 1px solid #4a3b32; padding-bottom: 5px; }
-        .faq-answer { color: #888; font-size: 0.95rem; }
+        .faq-question { color: #fdfaf6; font-weight: 500; font-size: 1.1rem; margin-bottom: 8px; display: block; border-bottom: 1px solid #4a3b32; padding-bottom: 5px; }
+        .faq-answer { color: #b5aba1; font-size: 1rem; line-height: 1.6; }
 
         .curriculum-list {
             list-style: none; padding: 0;
             display: grid; grid-template-columns: 1fr 1fr; gap: 15px;
+            margin-bottom: 40px;
         }
-        .curriculum-list li { color: #b5aba1; display: flex; align-items: center; }
-        .curriculum-list li i { color: #c5a059; margin-right: 10px; font-size: 0.8rem; }
+        .curriculum-list li { color: #b5aba1; display: flex; align-items: center; font-size: 1.05rem; }
+        .curriculum-list li i { color: #c5a059; margin-right: 10px; font-size: 0.9rem; }
 
-        /* FOOTER (Restored with all missing parts) */
+        .enroll-btn {
+            display: inline-block; 
+            background: #c5a059; 
+            color: #141612; 
+            padding: 15px 35px; 
+            text-decoration: none; 
+            border-radius: 6px; 
+            font-weight: bold; 
+            transition: 0.3s;
+            box-shadow: 0 4px 15px rgba(197, 160, 89, 0.3);
+        }
+        .enroll-btn:hover {
+            background: #e6c885;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(197, 160, 89, 0.4);
+        }
+
+        /* FOOTER - EXACT DASHBOARD MATCH */
         footer {
-            background-color: #1e1e2f; color: white; padding: 60px 20px;
-            text-align: center; position: relative; margin-top: auto; border-top: 2px solid #c5a059;
+            background-color: #1e1e2f;
+            padding: 60px 20px 30px;
+            margin-top: auto;
+            border-top: 2px solid #c5a059;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
         .footer-logo {
-            position: absolute; top: 20px; left: 50%; transform: translateX(-50%);
-            width: 80px; height: 80px; border-radius: 50%; border: 4px solid #c5a059; object-fit: cover;
+            height: 70px;
+            width: 70px;
+            border-radius: 50%;
+            border: 2px solid #c5a059;
+            margin-bottom: 40px;
+            object-fit: cover;
         }
         .footer-links-container {
-            margin-top: 140px; display: flex; justify-content: center; gap: 40px; flex-wrap: wrap;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 40px;
+            max-width: 1200px;
+            width: 100%;
+            margin-bottom: 40px;
         }
-        .footer-column { text-align: left; width: 200px; display: flex; flex-direction: column; }
-        .footer-column p { font-size: 1.2rem; font-weight: bold; color:#c5a059; margin-bottom: 10px; }
-        .footer-column hr { width: 100%; border: 1px solid rgba(255,255,255,0.1); margin-bottom: 15px; }
+        .footer-column p {
+            font-family: 'Playfair Display', serif;
+            color: #c5a059;
+            font-size: 1.2rem;
+            margin: 0 0 10px 0;
+            font-weight: bold;
+        }
+        .footer-column hr {
+            border: none;
+            border-top: 1px solid rgba(197, 160, 89, 0.3);
+            margin-bottom: 15px;
+        }
         .footer-btn {
-            background:none; color:white; border:1px solid rgba(255,255,255,0.3);
-            padding:8px; margin-top:10px; cursor: pointer; transition: 0.3s; text-align: left;
+            display: block;
+            background: none;
+            border: none;
+            color: #b5aba1;
+            padding: 8px 0;
+            font-size: 14px;
+            cursor: pointer;
+            text-align: left;
+            transition: 0.3s;
+            width: 100%;
         }
-        .footer-btn:hover { border-color:#c5a059; color:#c5a059; }
-        .social-icons { position: absolute; bottom: 10px; right: 20px; }
-        .social-icons a { color: #888; margin: 0 10px; font-size: 1.2rem; transition: 0.3s; }
+        .footer-btn:hover { color: #c5a059; transform: translateX(5px); }
+
+        .footer-bottom {
+            width: 100%;
+            max-width: 1200px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            padding-top: 20px;
+        }
+        .copyright { color: #888; font-size: 0.9rem; }
+        .social-icons a { color: white; font-size: 1.5rem; margin-left: 20px; transition: 0.3s; }
         .social-icons a:hover { color: #c5a059; }
-        .copyright { position: absolute; bottom: 10px; left: 20px; font-size: 0.9rem; color: #888; }
+
+        @media (max-width: 900px) {
+            .info-container { grid-template-columns: 1fr; }
+            .side-bar { text-align: center; }
+            .footer-links-container { grid-template-columns: repeat(2, 1fr); }
+            .footer-bottom { flex-direction: column; gap: 20px; text-align: center; }
+            .curriculum-list { grid-template-columns: 1fr; }
+        }
     </style>
 </head>
 <body>
@@ -128,7 +211,6 @@
         <a href="contact.html">Contact</a>
     </div>
 
-
     <div class="info-container">
         <div class="side-bar">
             <img src="images/logo.png" alt="Training" class="side-image">
@@ -143,14 +225,14 @@
             <h2>Enrolment Information</h2>
             <p>Our program is specialized for all horses to develop natural athletic ability. We specialize in perfecting foundations that prepare horses for any discipline, ensuring they are balanced, responsive, and confident. Every horse is different and requires their own specialized program to ensure they perform at their highest.</p>
             
-            <h3 style="color: #c5a059; margin-top: 40px;">What We Teach</h3>
+            <h3 style="color: #c5a059; margin-top: 40px; font-family: 'Playfair Display', serif;">What We Teach</h3>
             <ul class="curriculum-list">
-                <li><i class="fa-solid fa-check"></i>  Basic and Advanced Ground Work </li>
-                <li><i class="fa-solid fa-check"></i>  Basic and Advanced Foundation </li>
-                <li><i class="fa-solid fa-check"></i>  Many Disciplines</li>
+                <li><i class="fa-solid fa-check"></i> Basic and Advanced Ground Work</li>
+                <li><i class="fa-solid fa-check"></i> Basic and Advanced Foundation</li>
+                <li><i class="fa-solid fa-check"></i> Many Disciplines</li>
             </ul>
 
-            <h3 style="color: #c5a059; margin-top: 40px;">Common Questions (FAQ)</h3>
+            <h3 style="color: #c5a059; margin-top: 40px; font-family: 'Playfair Display', serif;">Common Questions (FAQ)</h3>
             
             <div class="faq-item">
                 <span class="faq-question">How long will my horse be in training?</span>
@@ -167,7 +249,7 @@
                 <p class="faq-answer">Horses of any age are welcome to start training.</p>
             </div>
             
-            <a href="contact.html" style="display:inline-block; background:#c5a059; color:#141612; padding:15px 30px; text-decoration:none; border-radius:5px; font-weight:bold; margin-top:20px;">Contact to enroll your horse</a>
+            <a href="contact.html" class="enroll-btn">Contact to enroll your horse</a>
         </div>
     </div>
 

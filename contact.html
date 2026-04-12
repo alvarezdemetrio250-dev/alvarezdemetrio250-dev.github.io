@@ -19,6 +19,7 @@
         }
         .page-wrapper { display: flex; flex-direction: column; min-height: 100vh; }
 
+        /* NAVBAR - EXACT DASHBOARD MATCH */
         .navbar {
             display: flex; align-items: center; justify-content: space-between;
             background-color: #1e1e2f; padding: 10px 20px; color: white;
@@ -26,67 +27,152 @@
         }
         .navbar-left { display: flex; align-items: center; }
         .navbar-left img { height: 40px; width: 40px; border-radius: 50%; object-fit: cover; margin-right: 12px; border: 2px solid #c5a059; }
-        .navbar-left a { color: white; text-decoration: none; font-family: 'Playfair Display', serif; font-weight: bold; font-size: 1.2rem; }
+        .navbar-left a { color: white; text-decoration: none; }
+        .navbar-left span { font-size: 1.2rem; font-weight: bold; white-space: nowrap; font-family: 'Playfair Display', serif; letter-spacing: 0.5px;}
+
+        .navbar-right { display: flex; align-items: center; cursor: pointer; }
+        .navbar-right a { color: white; text-decoration: none; display: flex; align-items: center; margin-right: 20px; transition: 0.2s; }
+        .navbar-right a i { margin-right: 5px; }
+        .navbar-right a:hover { color: #c5a059; }
+        .navbar-right span { margin-left: 8px; font-size: 1rem; }
+
+        /* SUB-NAVBAR - EXACT DASHBOARD MATCH */
         .sub-navbar {
-            background-color: #232333; padding: 15px 20px;
-            display: flex; justify-content: center; gap: 20px; border-bottom: 2px solid #c5a059;
+            background-color: #232333;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            border-bottom: 2px solid #c5a059;
         }
         .sub-navbar a {
-            background: #4a3b32; color: #fdfaf6; text-decoration: none;
-            padding: 10px 24px; border-radius: 6px; font-size: 15px; transition: 0.3s;
+            background: #4a3b32;
+            color: #fdfaf6;
+            text-decoration: none;
+            padding: 10px 24px;
+            border-radius: 6px;
+            font-size: 15px;
+            font-weight: 500;
+            border: 1px solid #5c4a3f;
+            transition: all 0.3s ease;
         }
-        .sub-navbar a:hover { background: #c5a059; color: #141612; }
+        .sub-navbar a:hover {
+            background: #c5a059;
+            color: #141612;
+            border-color: #c5a059;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(197, 160, 89, 0.25);
+        }
 
-       
-        /* CONTENT LAYOUT */
+        /* CONTENT */
         .contact-container {
             max-width: 1200px;
-            margin: 0 auto;
-            margin-left: 500px;
-            padding: 60px 20px;
-            display: grid;
-            grid-template-columns: 1fr 1.5fr;
-            gap: 60px;
+            margin: 80px auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: center;
+            flex-grow: 1;
         }
 
-        /* LEFT SIDE: INFO */
-        .contact-info h2 { font-family: 'Playfair Display', serif; color: #c5a059; font-size: 2.2rem; margin-top: 0; }
-        .contact-info p { line-height: 1.8; color: #b5aba1; font-size: 1.1rem; margin-bottom: 30px;}
-        
-        .info-item { display: flex; align-items: flex-start; margin-bottom: 20px; }
-        .info-item i { color: #c5a059; font-size: 1.2rem; margin-right: 15px; margin-top: 5px; }
-        .info-item div span { display: block; color: #fdfaf6; font-weight: 500; }
-        .info-item div p { margin: 0; font-size: 0.95rem; color: #888; }
-        
+        .contact-info {
+            background: #1e1e2f;
+            padding: 50px;
+            border-radius: 12px;
+            border: 1px solid rgba(197, 160, 89, 0.3);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.6);
+            width: 100%;
+            max-width: 600px;
+            text-align: center;
+        }
 
-        /* FOOTER */
+        .contact-info h2 { font-family: 'Playfair Display', serif; color: #c5a059; font-size: 2.8rem; margin-top: 0; }
+        .contact-info p { line-height: 1.8; color: #b5aba1; font-size: 1.1rem; margin-bottom: 40px;}
+        
+        .info-item { 
+            display: flex; 
+            align-items: center; 
+            justify-content: center;
+            margin-bottom: 30px; 
+            text-align: left;
+            width: fit-content;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .info-item i { color: #c5a059; font-size: 1.5rem; margin-right: 20px; }
+        .info-item div span { display: block; color: #fdfaf6; font-weight: 600; font-size: 1.1rem; }
+        .info-item div p { margin: 0; font-size: 1.1rem; color: #c5a059; }
+
+        /* FOOTER - EXACT DASHBOARD MATCH */
         footer {
-            background-color: #1e1e2f; color: white; padding: 60px 20px;
-            text-align: center; position: relative; margin-top: auto; border-top: 2px solid #c5a059;
+            background-color: #1e1e2f;
+            padding: 60px 20px 30px;
+            margin-top: auto;
+            border-top: 2px solid #c5a059;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
         .footer-logo {
-            position: absolute; top: 20px; left: 50%; transform: translateX(-50%);
-            width: 80px; height: 80px; border-radius: 50%; border: 4px solid #c5a059; object-fit: cover;
+            height: 70px;
+            width: 70px;
+            border-radius: 50%;
+            border: 2px solid #c5a059;
+            margin-bottom: 40px;
+            object-fit: cover;
         }
         .footer-links-container {
-            margin-top: 140px; display: flex; justify-content: center; gap: 40px; flex-wrap: wrap;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 40px;
+            max-width: 1200px;
+            width: 100%;
+            margin-bottom: 40px;
         }
-        .footer-column { text-align: left; width: 200px; display: flex; flex-direction: column; }
-        .footer-column p { font-size: 1.2rem; font-weight: bold; color:#c5a059; margin-bottom: 10px; }
-        .footer-column hr { width: 100%; border: 1px solid rgba(255,255,255,0.1); margin-bottom: 15px; }
+        .footer-column p {
+            font-family: 'Playfair Display', serif;
+            color: #c5a059;
+            font-size: 1.2rem;
+            margin: 0 0 10px 0;
+            font-weight: bold;
+        }
+        .footer-column hr {
+            border: none;
+            border-top: 1px solid rgba(197, 160, 89, 0.3);
+            margin-bottom: 15px;
+        }
         .footer-btn {
-            background:none; color:white; border:1px solid rgba(255,255,255,0.3);
-            padding:8px; margin-top:10px; cursor: pointer; transition: 0.3s; text-align: left;
+            display: block;
+            background: none;
+            border: none;
+            color: #b5aba1;
+            padding: 8px 0;
+            font-size: 14px;
+            cursor: pointer;
+            text-align: left;
+            transition: 0.3s;
+            width: 100%;
         }
-        .footer-btn:hover { border-color:#c5a059; color:#c5a059; }
-        .social-icons-footer { position: absolute; bottom: 10px; right: 20px; }
-        .social-icons-footer a { color: #888; margin: 0 10px; font-size: 1.2rem; transition: 0.3s; }
-        .social-icons-footer a:hover { color: #c5a059; }
-        .copyright { position: absolute; bottom: 10px; left: 20px; font-size: 0.9rem; color: #888; }
+        .footer-btn:hover { color: #c5a059; transform: translateX(5px); }
+
+        .footer-bottom {
+            width: 100%;
+            max-width: 1200px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            padding-top: 20px;
+        }
+        .copyright { color: #888; font-size: 0.9rem; }
+        .social-icons a { color: white; font-size: 1.5rem; margin-left: 20px; transition: 0.3s; }
+        .social-icons a:hover { color: #c5a059; }
 
         @media (max-width: 900px) {
-            .contact-container { grid-template-columns: 1fr; }
-            .hero-title { font-size: 2.5rem; }
+            .footer-links-container { grid-template-columns: repeat(2, 1fr); }
+            .footer-bottom { flex-direction: column; gap: 20px; text-align: center; }
+            .contact-info { padding: 30px; }
+            .contact-info h2 { font-size: 2.2rem; }
         }
     </style>
 </head>
@@ -96,12 +182,12 @@
     <div class="navbar">
         <div class="navbar-left">
             <img src="images/logo.png" alt="Logo">
-            <a href="dashboard.html">Alvarez - Roman Heritage Equestrian</a>
+            <a href="dashboard.html"><span>Alvarez - Roman Heritage Equestrian</span></a>
         </div>
         <div class="navbar-right">
-            <a href="Loading.html?type=events"><i class="fa-solid fa-calendar-days"></i><span style="margin-left:8px">Events</span></a>
+            <a href="Loading.html?type=events"><i class="fa-solid fa-calendar-days"></i><span>Events</span></a>
             <i class="fas fa-user" style="margin-left: 15px;"></i>
-            <span style="margin-left:8px">Profile</span>
+            <span>Profile</span>
         </div>
     </div>
 
@@ -115,9 +201,8 @@
 
     <div class="contact-container">
         <div class="contact-info">
-            <h2>Connect Us</h2>
-            <p>Whether you are looking to enroll your horse in our training program or have questions, here is how you can contact us.</p>
-            
+            <h2>Connect With Us</h2>
+            <p>Whether you are looking to enroll your horse in our training program or have questions, here is how you can reach out.</p>
 
             <div class="info-item">
                 <i class="fa-solid fa-phone"></i>

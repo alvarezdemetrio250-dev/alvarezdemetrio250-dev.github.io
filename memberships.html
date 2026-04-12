@@ -20,7 +20,7 @@
         }
         .page-wrapper { display: flex; flex-direction: column; min-height: 100vh; }
 
-        /* NAVBARS */
+        /* NAVBAR - DASHBOARD MATCH */
         .navbar {
             display: flex; align-items: center; justify-content: space-between;
             background-color: #1e1e2f; padding: 10px 20px; color: white;
@@ -30,10 +30,13 @@
         .navbar-left img { height: 40px; width: 40px; border-radius: 50%; object-fit: cover; margin-right: 12px; border: 2px solid #c5a059; }
         .navbar-left a { color: white; text-decoration: none; font-family: 'Playfair Display', serif; font-weight: bold; font-size: 1.2rem; }
         
-        .navbar-right { display: flex; align-items: center; gap: 15px; position: relative; }
-        .navbar-right a { color: white; text-decoration: none; }
+        .navbar-right { display: flex; align-items: center; position: relative; cursor: pointer; }
+        .navbar-right a { color: white; text-decoration: none; display: flex; align-items: center; margin-right: 20px; transition: 0.2s; }
+        .navbar-right a i { margin-right: 5px; }
+        .navbar-right a:hover { color: #c5a059; }
+        .navbar-right span { margin-left: 8px; font-size: 1rem; }
 
-        /* DROPDOWN MENU ADDED */
+        /* DROPDOWN MENU - DASHBOARD MATCH */
         #dropdownMenu {
             display: none; position: absolute; right: 0; top: 45px;
             background: #1e1e2f; padding: 10px; border-radius: 8px; z-index: 999;
@@ -42,15 +45,22 @@
         #dropdownMenu div { padding: 10px 15px; color: white; cursor: pointer; border-radius: 4px; transition: 0.2s; white-space: nowrap; }
         #dropdownMenu div:hover { background: #c5a059; color: #141612; font-weight: 500; }
 
+        /* SUB-NAVBAR - DASHBOARD MATCH */
         .sub-navbar {
             background-color: #232333; padding: 15px 20px;
             display: flex; justify-content: center; gap: 20px; border-bottom: 2px solid #c5a059;
         }
         .sub-navbar a {
             background: #4a3b32; color: #fdfaf6; text-decoration: none;
-            padding: 10px 24px; border-radius: 6px; font-size: 15px; transition: 0.3s;
+            padding: 10px 24px; border-radius: 6px; font-size: 15px; font-weight: 500;
+            border: 1px solid #5c4a3f; transition: all 0.3s ease;
         }
-        .sub-navbar a:hover { background: #c5a059; color: #141612; }
+        .sub-navbar a:hover { 
+            background: #c5a059; color: #141612; 
+            border-color: #c5a059;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(197, 160, 89, 0.25);
+        }
 
         /* HERO SECTION */
         .membership-header {
@@ -59,7 +69,7 @@
         }
         .membership-header h1 {
             font-family: 'Playfair Display', serif;
-            font-size: 3rem;
+            font-size: 3.2rem;
             color: #c5a059;
             margin-bottom: 10px;
         }
@@ -75,7 +85,10 @@
             background: rgba(30, 30, 47, 0.4);
             border-radius: 12px;
             border: 1px solid rgba(197, 160, 89, 0.2);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.4);
+            transition: 0.3s;
         }
+        .info-container:hover { border-color: rgba(197, 160, 89, 0.5); }
 
         .side-bar { text-align: center; }
         .side-image {
@@ -87,7 +100,7 @@
             margin-bottom: 20px;
         }
 
-        .main-text h2 { font-family: 'Playfair Display', serif; color: #c5a059; font-size: 2.2rem; margin-top: 0; }
+        .main-text h2 { font-family: 'Playfair Display', serif; color: #c5a059; font-size: 2.4rem; margin-top: 0; }
         .main-text p { line-height: 1.8; color: #b5aba1; font-size: 1.1rem; }
 
         /* PRICING & BADGES */
@@ -96,14 +109,15 @@
             border-left: 4px solid #c5a059;
             padding: 20px;
             text-align: left;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
         }
-        .price-card h3 { margin-top: 0; color: #c5a059; font-size: 1rem; text-transform: uppercase; }
+        .price-card h3 { margin-top: 0; color: #c5a059; font-size: 1rem; text-transform: uppercase; letter-spacing: 1px; }
         
         .premium-badge {
             background: #c5a059;
             color: #141612;
             padding: 4px 12px;
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             font-weight: bold;
             border-radius: 20px;
             display: inline-block;
@@ -115,8 +129,8 @@
             display: grid; grid-template-columns: 1fr 1fr; gap: 15px;
             margin: 25px 0;
         }
-        .curriculum-list li { color: #b5aba1; display: flex; align-items: center; }
-        .curriculum-list li i { color: #c5a059; margin-right: 10px; font-size: 0.9rem; }
+        .curriculum-list li { color: #b5aba1; display: flex; align-items: center; font-size: 1rem; }
+        .curriculum-list li i { color: #c5a059; margin-right: 12px; font-size: 0.9rem; }
 
         .enroll-btn {
             display: inline-block;
@@ -124,56 +138,93 @@
             color: #141612;
             padding: 15px 35px;
             text-decoration: none;
-            border-radius: 5px;
+            border-radius: 6px;
             font-weight: bold;
             transition: 0.3s;
             cursor: pointer;
             border: none;
-            font-family: 'Roboto', sans-serif;
             font-size: 1rem;
+            box-shadow: 0 4px 15px rgba(197, 160, 89, 0.3);
         }
-        .enroll-btn:hover { background: #fdfaf6; transform: translateY(-2px); }
+        .enroll-btn:hover { 
+            background: #fdfaf6; 
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255, 255, 255, 0.1);
+        }
 
-        /* FOOTER */
+        /* FOOTER - DASHBOARD MATCH */
         footer {
-            background-color: #1e1e2f; color: white; padding: 80px 20px 40px;
-            text-align: center; position: relative; margin-top: auto; border-top: 2px solid #c5a059;
+            background-color: #1e1e2f;
+            padding: 60px 20px 30px;
+            margin-top: auto;
+            border-top: 2px solid #c5a059;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
         .footer-logo {
-            position: absolute; top: -40px; left: 50%; transform: translateX(-50%);
-            width: 80px; height: 80px; border-radius: 50%; border: 4px solid #c5a059; object-fit: cover; background: #141612;
+            height: 70px;
+            width: 70px;
+            border-radius: 50%;
+            border: 2px solid #c5a059;
+            margin-bottom: 40px;
+            object-fit: cover;
         }
         .footer-links-container {
-            display: flex; justify-content: center; gap: 40px; flex-wrap: wrap; margin-bottom: 40px;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 40px;
+            max-width: 1200px;
+            width: 100%;
+            margin-bottom: 40px;
         }
-        .footer-column { text-align: left; width: 200px; display: flex; flex-direction: column; }
-        .footer-column p { font-size: 1.1rem; font-weight: bold; color:#c5a059; margin-bottom: 10px; }
-        .footer-column hr { width: 100%; border: 0; border-top: 1px solid rgba(255,255,255,0.1); margin-bottom: 15px; }
+        .footer-column p {
+            font-family: 'Playfair Display', serif;
+            color: #c5a059;
+            font-size: 1.2rem;
+            margin: 0 0 10px 0;
+            font-weight: bold;
+        }
+        .footer-column hr {
+            border: none;
+            border-top: 1px solid rgba(197, 160, 89, 0.3);
+            margin-bottom: 15px;
+        }
         .footer-btn {
-            background:none; color:#b5aba1; border:none;
-            padding:5px 0; margin-top:5px; cursor: pointer; transition: 0.3s; text-align: left; font-size: 0.95rem;
+            display: block;
+            background: none;
+            border: none;
+            color: #b5aba1;
+            padding: 8px 0;
+            font-size: 14px;
+            cursor: pointer;
+            text-align: left;
+            transition: 0.3s;
+            width: 100%;
         }
-        .footer-btn:hover { color:#c5a059; padding-left: 5px; }
+        .footer-btn:hover { color: #c5a059; transform: translateX(5px); }
         
         .footer-bottom {
-            border-top: 1px solid rgba(255,255,255,0.05);
-            padding-top: 20px;
+            width: 100%;
+            max-width: 1200px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            max-width: 1100px;
-            margin: 0 auto;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            padding-top: 20px;
         }
-        .social-icons a { color: #888; margin-left: 20px; font-size: 1.2rem; transition: 0.3s; }
+        .copyright { color: #888; font-size: 0.9rem; }
+        .social-icons a { color: white; font-size: 1.5rem; margin-left: 20px; transition: 0.3s; }
         .social-icons a:hover { color: #c5a059; }
-        .copyright { font-size: 0.85rem; color: #666; }
 
         @media (max-width: 768px) {
             .info-container { grid-template-columns: 1fr; text-align: center; }
             .side-bar { display: flex; flex-direction: column; align-items: center; }
             .curriculum-list { grid-template-columns: 1fr; }
             .price-card { border-left: 0; border-top: 4px solid #c5a059; }
-            .footer-bottom { flex-direction: column; gap: 20px; }
+            .footer-links-container { grid-template-columns: repeat(2, 1fr); }
+            .footer-bottom { flex-direction: column; gap: 20px; text-align: center; }
         }
     </style>
 </head>
@@ -183,13 +234,13 @@
     <div class="navbar">
         <div class="navbar-left">
             <img src="images/logo.png" alt="Logo">
-            <a href="dashboard.html">Alvarez - Roman Heritage Equestrian</a>
+            <a href="dashboard.html"><span>Alvarez - Roman Heritage Equestrian</span></a>
         </div>
         <div class="navbar-right" id="userMenu">
-            <a href="Loading.html?type=events"><i class="fa-solid fa-calendar-days"></i><span style="margin-left:8px">Events</span></a>
-            <div style="cursor: pointer; display: flex; align-items: center;">
+            <a href="events.html"><i class="fa-solid fa-calendar-days"></i><span>Events</span></a>
+            <div style="display: flex; align-items: center;">
                 <i class="fas fa-user" style="margin-left: 15px;"></i>
-                <span style="margin-left:8px" id="usernameDisplay">Profile</span>
+                <span id="usernameDisplay">Profile</span>
             </div>
             <div id="dropdownMenu">
                 <div onclick="location.href='profile.html'" id="profileOption" style="display:none;">My Profile</div>
@@ -216,7 +267,7 @@
             <img src="images/logo.png" alt="Basic Training" class="side-image">
             <div class="price-card">
                 <h3>Basic Tier</h3>
-                <p style="font-size: 1.8rem; color: #fdfaf6; margin: 5px 0;">$10 <span style="font-size: 0.9rem; color: #888;">/ mo</span></p>
+                <p style="font-size: 2rem; color: #fdfaf6; margin: 5px 0;">$10 <span style="font-size: 0.9rem; color: #888;">/ mo</span></p>
             </div>
         </div>
 
@@ -242,7 +293,7 @@
             <div class="price-card">
                 <span class="premium-badge">MOST POPULAR</span>
                 <h3>Premium Tier</h3>
-                <p style="font-size: 1.8rem; color: #fdfaf6; margin: 5px 0;">$25 <span style="font-size: 0.9rem; color: #888;">/ mo</span></p>
+                <p style="font-size: 2rem; color: #fdfaf6; margin: 5px 0;">$25 <span style="font-size: 0.9rem; color: #888;">/ mo</span></p>
             </div>
         </div>
 
@@ -312,7 +363,6 @@
 </div>
 
 <script>
-    /* MEMBERSHIP UPDATE LOGIC */
     function updateMembership(tier) {
         const isGuest = localStorage.getItem("guest");
         if (isGuest === "true") {
@@ -325,10 +375,10 @@
         window.location.href = "profile.html";
     }
 
-    /* AUTH & DROPDOWN LOGIC */
     async function loadUser() {
         const isGuest = localStorage.getItem("guest");
         const dd = document.getElementById("dropdownMenu");
+        const API_URL = "https://login-backend-ny6x.onrender.com";
         
         if (isGuest === "true") {
             document.getElementById("usernameDisplay").innerText = "Guest";
@@ -343,7 +393,7 @@
         if (!token) return;
 
         try {
-            const res = await fetch("http://localhost:3000/me", {
+            const res = await fetch(`${API_URL}/me`, {
                 headers: { "Authorization": "Bearer " + token }
             });
             if (res.ok) {

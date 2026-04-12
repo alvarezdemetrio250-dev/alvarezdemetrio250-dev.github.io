@@ -14,7 +14,7 @@
             margin: 0; padding: 0; height: 100%;
             font-family: 'Roboto', sans-serif;
             overflow-y: auto;
-            background-color: #141612; /* Dark background behind main content */
+            background-color: #141612;
         }
         .page-wrapper { display: flex; flex-direction: column; min-height: 100vh; }
 
@@ -52,7 +52,6 @@
         }
         .microphone-button:hover { color: #c5a059; }
 
-        /* RIGHT SIDE */
         .navbar-right {
             display: flex; align-items: center; position: relative; cursor: pointer;
         }
@@ -125,7 +124,6 @@
             color: white; font-size: 1.2rem;
         }
 
-        /* Middle Play Button */
         .center-play-btn {
             position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
             z-index: 10; background: rgba(197, 160, 89, 0.2); border: 2px solid #c5a059;
@@ -154,7 +152,6 @@
             border-radius: 50%; display: flex; align-items: center; justify-content: center; z-index: 2010;
         }
         .close-player:hover { background: #ff6b6b; color: white; }
-
 
         /* INFO SECTIONS */
         .info-section {
@@ -227,19 +224,80 @@
             box-shadow: 0 4px 15px rgba(197, 160, 89, 0.3);
         }
 
+        /* FOOTER SPECIFIC STYLES */
+        footer {
+            background-color: #1e1e2f;
+            padding: 60px 20px 30px;
+            margin-top: auto;
+            border-top: 2px solid #c5a059;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .footer-logo {
+            height: 70px;
+            width: 70px;
+            border-radius: 50%;
+            border: 2px solid #c5a059;
+            margin-bottom: 40px;
+            object-fit: cover;
+        }
+        .footer-links-container {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 40px;
+            max-width: 1200px;
+            width: 100%;
+            margin-bottom: 40px;
+        }
+        .footer-column p {
+            font-family: 'Playfair Display', serif;
+            color: #c5a059;
+            font-size: 1.2rem;
+            margin: 0 0 10px 0;
+            font-weight: bold;
+        }
+        .footer-column hr {
+            border: none;
+            border-top: 1px solid rgba(197, 160, 89, 0.3);
+            margin-bottom: 15px;
+        }
+        .footer-btn {
+            display: block;
+            background: none;
+            border: none;
+            color: #b5aba1;
+            padding: 8px 0;
+            font-size: 14px;
+            cursor: pointer;
+            text-align: left;
+            transition: 0.3s;
+            width: 100%;
+        }
+        .footer-btn:hover { color: #c5a059; transform: translateX(5px); }
+        .footer-bottom {
+            width: 100%;
+            max-width: 1200px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            padding-top: 20px;
+        }
+        .copyright { color: #888; font-size: 0.9rem; }
+        .social-icons a { color: white; font-size: 1.5rem; margin-left: 20px; transition: 0.3s; }
+        .social-icons a:hover { color: #c5a059; }
+
         @media (max-width: 900px) {
-            .info-section {
-                flex-direction: column !important;
-            }
-            .info-text {
-                padding-right: 0 !important;
-                padding-left: 0 !important;
-                text-align: center;
-            }
+            .info-section { flex-direction: column !important; }
+            .info-text { padding: 0 !important; text-align: center; }
             .info-image-wrapper img {
                 -webkit-mask-image: linear-gradient(to bottom, black 50%, transparent 100%) !important;
                 mask-image: linear-gradient(to bottom, black 50%, transparent 100%) !important;
             }
+            .footer-links-container { grid-template-columns: repeat(2, 1fr); }
+            .footer-bottom { flex-direction: column; gap: 20px; text-align: center; }
         }
 
         /* MODALS */
@@ -262,11 +320,9 @@
             border: none; font-size: 1.2rem; cursor: pointer; color: #888; transition: 0.2s;
         }
         .close-btn:hover { color: #ff6b6b; }
-
         .perks-list { text-align: left; margin: 25px 0; padding: 0; list-style: none; font-size: 15px; color: #b5aba1;}
         .perks-list li { margin-bottom: 12px; }
         .perks-list li i { color: #c5a059; margin-right: 10px; }
-        
         .modal-btn {
             padding: 12px 24px; border-radius: 6px; border: none; cursor: pointer;
             font-size: 15px; font-weight: 500; transition: 0.3s; width: 100%; margin-bottom: 10px;
@@ -275,19 +331,16 @@
         .btn-gold:hover { background: #e6c885; }
         .btn-outline { background: transparent; color: #b5aba1; border: 1px solid #5c4a3f; }
         .btn-outline:hover { color: white; border-color: #c5a059; background: rgba(197, 160, 89, 0.1); }
-
     </style>
 </head>
 <body>
 
 <div class="page-wrapper">
-
     <div class="navbar">
         <div class="navbar-left">
             <img src="images/logo.png" alt="Logo">
             <a href="dashboard.html"><span>Alvarez - Roman Heritage Equestrian</span></a>
         </div>
-
         <div class="navbar-center">
             <div class="search-container">
                 <input type="text" id="searchInput" placeholder="What can we help you find today?">
@@ -295,15 +348,10 @@
                 <button class="microphone-button" id="micButton"><i class="fa-solid fa-microphone"></i></button>
             </div>
         </div>
-
         <div class="navbar-right" id="userMenu">
-            <a href="events.html" class="calendar-link">
-                <i class="fa-solid fa-calendar-days"></i><span>Events</span>
-            </a>
-
+            <a href="events.html" class="calendar-link"><i class="fa-solid fa-calendar-days"></i><span>Events</span></a>
             <i class="fas fa-user" style="margin-left: 15px;"></i>
             <span id="usernameDisplay">Loading...</span>
-
             <div id="dropdownMenu">
                 <div onclick="logout()" id="logoutText">Logout</div>
                 <div onclick="location.href='profile.html'" id="profileOption" style="display:none;">My Profile</div>
@@ -321,10 +369,7 @@
 
     <div class="hero-container">
         <div class="video-container">
-            <video id="heroVideo" autoplay muted loop playsinline>
-                <source src="slideshowvideo.mp4" type="video/mp4">
-                Your browser does not support the video tag.
-            </video>
+            <video id="heroVideo" autoplay muted loop playsinline><source src="slideshowvideo.mp4" type="video/mp4"></video>
         </div>
         <button class="center-play-btn" onclick="openPlayer()"><i class="fa-solid fa-play"></i></button>
         <div class="slide-text">Welcome To Alvarez - Roman Heritage Equestrian</div>
@@ -334,82 +379,60 @@
     <div id="videoModalPlayer" class="video-modal">
         <div class="video-modal-content">
             <button class="close-player" onclick="closePlayer()"><i class="fa-solid fa-xmark"></i></button>
-            <video id="mainVideoPlayer" controls>
-                <source src="slideshowvideo.mp4" type="video/mp4">
-            </video>
+            <video id="mainVideoPlayer" controls><source src="slideshowvideo.mp4" type="video/mp4"></video>
         </div>
     </div>
 
-
     <div class="info-section">
-        <div class="info-image-wrapper">
-            <img src="images/logo.png" alt="Trainer Placeholder">
-        </div>
+        <div class="info-image-wrapper"><img src="images/logo.png" alt="Trainer Placeholder"></div>
         <div class="info-text">
             <h2>Meet the Trainer</h2>
-            <p>With generations of equestrian heritage, our head trainer brings a wealth of knowledge, patience, and passion to Alvarez - Roman Heritage Equestrian. We believe in building a foundation of absolute trust and mutual respect between horse and rider.</p>
-            <p>Whether you are stepping into the stirrups for the first time or competing at an elite level, our personalized training programs are meticulously designed to unlock your full potential while honoring the timeless, classical traditions of horsemanship.</p>
+            <p>With generations of equestrian heritage, our head trainer brings a wealth of knowledge, patience, and passion to Alvarez - Roman Heritage Equestrian.</p>
             <div class="signature">Alvarez Roman</div>
-            
             <a href="contact.html" class="section-btn">Contact the Trainer</a>
         </div>
     </div>
 
     <div class="info-section" style="flex-direction: row-reverse;">
-        <div class="info-image-wrapper">
-            <img src="images/logo.png" alt="Disciplines Placeholder" style="-webkit-mask-image: linear-gradient(to left, black 50%, transparent 100%); mask-image: linear-gradient(to left, black 50%, transparent 100%);">
-        </div>
+        <div class="info-image-wrapper"><img src="images/logo.png" alt="Disciplines Placeholder" style="mask-image: linear-gradient(to left, black 50%, transparent 100%);"></div>
         <div class="info-text" style="padding-left: 0; padding-right: 40px;">
             <h2>Interested in bringing your horse to be trained?</h2>
-            <p>We offer specialized training to meet your horse's needs across a variety of equestrian disciplines. Our training programs welcome both beginner and more advanced horses aiming for top levels of achievement.</p>
-            <p>From young to mature horses, inexperienced to experienced horses, and small to bigger horses, Demetrio Alvarez will create the perfect program for your horse to ensure they learn and progress.</p>
-            
+            <p>We offer specialized training to meet your horse's needs across a variety of equestrian disciplines.</p>
             <a href="enroll.html" class="section-btn">Enroll Your Horse</a>
         </div>
     </div>
 
     <footer>
         <img src="images/logo.png" alt="Logo" class="footer-logo">
-
         <div class="footer-links-container">
             <div class="footer-column">
-                <p>Navigation</p>
-                <hr>
+                <p>Navigation</p><hr>
                 <button class="footer-btn" onclick="location.href='dashboard.html'">Home</button>
                 <button class="footer-btn" onclick="location.href='memberships.html'">Memberships</button>
                 <button class="footer-btn" onclick="location.href='enroll.html'">Enroll Horse</button>
                 <button class="footer-btn" onclick="location.href='contact.html'">Contact Us</button>
             </div>
-
             <div class="footer-column">
-                <p>Updates</p>
-                <hr>
+                <p>Updates</p><hr>
                 <button class="footer-btn" onclick="location.href='Loading.html?type=events'">Upcoming Events</button>
                 <button class="footer-btn" onclick="location.href='Loading.html?type=news'">Latest News</button>
             </div>
-
             <div class="footer-column">
-                <p>About</p>
-                <hr>
+                <p>About</p><hr>
                 <button class="footer-btn" onclick="location.href='about.html'">Our Story</button>
                 <button class="footer-btn" onclick="location.href='index.html'">Member Login</button>
             </div>
-
             <div class="footer-column">
-                <p>The Farm</p>
-                <hr>
+                <p>The Farm</p><hr>
                 <button class="footer-btn" onclick="location.href='availablehorses.html'">Available Horses</button>
                 <button class="footer-btn" onclick="location.href='TrainingGrounds.html'">Training Grounds</button>
             </div>
         </div>
-
         <div class="footer-bottom">
-            <div class="copyright">
-                &copy; 2026 Alvarez - Roman Heritage Equestrian. All rights reserved.
-            </div>
+            <div class="copyright">&copy; 2026 Alvarez - Roman Heritage Equestrian. All rights reserved.</div>
             <div class="social-icons">
-                <a href="https://www.facebook.com" target="_blank" title="Facebook"><i class="fab fa-facebook"></i></a>
-                <a href="https://www.youtube.com/@AlvarezRomanHeritageEquestrian" target="_blank" title="YouTube"><i class="fab fa-youtube"></i></a>
+                <a href="https://www.facebook.com" target="_blank"><i class="fab fa-facebook"></i></a>
+                <a href="https://www.youtube.com/@AlvarezRomanHeritageEquestrian" target="_blank"><i class="fab fa-youtube"></i></a>
             </div>
         </div>
     </footer>
@@ -426,168 +449,89 @@
         <div class="modal-content">
             <button class="close-btn" onclick="document.getElementById('guestModal').style.display='none'"><i class="fa-solid fa-xmark"></i></button>
             <h2>Unlock More Benefits</h2>
-            <p style="color: #e2e8f0; margin-top: 5px;">Welcome to the Alvarez - Roman Heritage Equestrian website! An account is not required to use our website but for the perks that are listed below you are required to sign up for a membership and an account.</p>
-            
+            <p style="color: #e2e8f0; margin-top: 5px;">Join a membership for exclusive perks!</p>
             <ul class="perks-list">
-                <li><i class="fa-solid fa-video"></i> Watch training videos and sessions online</li>
-                <li><i class="fa-solid fa-bell"></i> Get notifiactions via email when videos come out</li>
+                <li><i class="fa-solid fa-video"></i> Watch training videos online</li>
+                <li><i class="fa-solid fa-bell"></i> Get email notifications</li>
             </ul>
-
             <button class="modal-btn btn-gold" onclick="window.location.href='index.html'">Create Account / Log In</button>
             <button class="modal-btn btn-outline" onclick="document.getElementById('guestModal').style.display='none'">Continue as Guest</button>
         </div>
     </div>
 
-        <script>
-  /* --- MODAL PLAYER LOGIC --- */
-  const vModal = document.getElementById('videoModalPlayer');
-  const vPlayer = document.getElementById('mainVideoPlayer');
+    <script>
+        /* --- MODAL PLAYER LOGIC --- */
+        const vModal = document.getElementById('videoModalPlayer');
+        const vPlayer = document.getElementById('mainVideoPlayer');
+        function openPlayer() { vModal.style.display = 'flex'; vPlayer.play(); vPlayer.muted = false; }
+        function closePlayer() { vModal.style.display = 'none'; vPlayer.pause(); vPlayer.currentTime = 0; }
 
-  function openPlayer() {
-    vModal.style.display = 'flex';
-    vPlayer.play();
-    vPlayer.muted = false;
-  }
-
-  function closePlayer() {
-    vModal.style.display = 'none';
-    vPlayer.pause();
-    vPlayer.currentTime = 0;
-  }
-
-  /* --- AUTH & GUEST LOGIC --- */
-  async function loadUser() {
-    const isGuest = localStorage.getItem("guest");
-    // This is your live Render backend URL
-    const API_URL = "https://login-backend-ny6x.onrender.com";
-
-    // 1. Check if the user is a Guest
-    if (isGuest === "true") {
-      document.getElementById("usernameDisplay").innerText = "Guest";
-      document.getElementById("logoutText").innerText = "Sign In / Sign Up";
-
-      document.getElementById("userMenu").onclick = () => {
-        const dd = document.getElementById("dropdownMenu");
-        dd.style.display = dd.style.display === "block" ? "none" : "block";
-      };
-
-      document.getElementById('guestModal').style.display = 'flex';
-      return;
-    }
-
-    // 2. Check for Token (Must be lowercase 'token' to match index.html)
-    const token = localStorage.getItem("token");
-    if (!token) {
-      console.log("No token found. Redirecting to login...");
-      window.location.href = "index.html";
-      return;
-    }
-
-    try {
-      // 3. Fetch user data from Render
-      const res = await fetch(`${API_URL}/me`, {
-        method: "GET",
-        headers: {
-          "Authorization": "Bearer " + token,
-          "Content-Type": "application/json"
+        /* --- AUTH & GUEST LOGIC --- */
+        async function loadUser() {
+            const isGuest = localStorage.getItem("guest");
+            const API_URL = "https://login-backend-ny6x.onrender.com";
+            if (isGuest === "true") {
+                document.getElementById("usernameDisplay").innerText = "Guest";
+                document.getElementById("logoutText").innerText = "Sign In / Sign Up";
+                document.getElementById("userMenu").onclick = () => {
+                    const dd = document.getElementById("dropdownMenu");
+                    dd.style.display = dd.style.display === "block" ? "none" : "block";
+                };
+                document.getElementById('guestModal').style.display = 'flex';
+                return;
+            }
+            const token = localStorage.getItem("token");
+            if (!token) { window.location.href = "index.html"; return; }
+            try {
+                const res = await fetch(`${API_URL}/me`, {
+                    headers: { "Authorization": "Bearer " + token, "Content-Type": "application/json" }
+                });
+                if (!res.ok) { localStorage.removeItem("token"); window.location.href = "index.html"; return; }
+                const data = await res.json();
+                document.getElementById("usernameDisplay").innerText = data.fullName;
+                document.getElementById("profileOption").style.display = "block";
+                document.getElementById("userMenu").onclick = () => {
+                    const dd = document.getElementById("dropdownMenu");
+                    dd.style.display = dd.style.display === "block" ? "none" : "block";
+                };
+            } catch (err) { setTimeout(loadUser, 5000); }
         }
-      });
+        function logout() { localStorage.removeItem("token"); localStorage.removeItem("guest"); window.location.href = "index.html"; }
+        loadUser();
 
-      if (!res.ok) {
-        console.log("Session expired or invalid token.");
-        localStorage.removeItem("token");
-        window.location.href = "index.html";
-        return;
-      }
+        /* --- VOICE SEARCH & TYPEWRITER --- */
+        const micBtn = document.getElementById('micButton');
+        const voiceModal = document.getElementById('talkModal');
+        const voiceInput = document.getElementById('searchInput');
+        const voiceStatus = document.getElementById('voiceStatus');
+        const closeVoiceBtn = document.getElementById('closeVoiceModal');
 
-      const data = await res.json();
+        if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) {
+            const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+            const recognition = new SpeechRecognition();
+            micBtn.onclick = () => { voiceModal.style.display = 'flex'; recognition.start(); };
+            recognition.onresult = (e) => {
+                const transcript = e.results[0][0].transcript;
+                voiceInput.value = transcript;
+                setTimeout(() => { window.location.href = `searchResults.html?q=${encodeURIComponent(transcript)}`; }, 1000);
+            };
+            closeVoiceBtn.onclick = () => { recognition.stop(); voiceModal.style.display = 'none'; };
+        }
 
-      // 4. Update UI with the user's name
-      document.getElementById("usernameDisplay").innerText = data.fullName;
-      document.getElementById("profileOption").style.display = "block";
-
-      document.getElementById("userMenu").onclick = () => {
-        const dd = document.getElementById("dropdownMenu");
-        dd.style.display = dd.style.display === "block" ? "none" : "block";
-      };
-
-    } catch (err) {
-      // 5. Handle Network Error (usually because Render is waking up)
-      console.error("Connection Error:", err);
-      document.getElementById("usernameDisplay").innerText = "Waking up server...";
-      
-      // Try again in 5 seconds instead of kicking the user out
-      setTimeout(loadUser, 5000);
-    }
-  }
-
-  function logout() {
-    localStorage.removeItem("token");
-    localStorage.removeItem("guest");
-    window.location.href = "index.html";
-  }
-
-  // Run the user check immediately on page load
-  loadUser();
-
-  /* --- VOICE SEARCH LOGIC --- */
-  const micBtn = document.getElementById('micButton');
-  const voiceModal = document.getElementById('talkModal');
-  const voiceInput = document.getElementById('searchInput');
-  const voiceStatus = document.getElementById('voiceStatus');
-  const closeVoiceBtn = document.getElementById('closeVoiceModal');
-
-  if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) {
-    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-    const recognition = new SpeechRecognition();
-    recognition.lang = 'en-US';
-    recognition.continuous = false;
-
-    micBtn.onclick = () => {
-      voiceModal.style.display = 'flex';
-      voiceStatus.innerText = "Listening...";
-      recognition.start();
-    };
-
-    recognition.onresult = (event) => {
-      const transcript = event.results[0][0].transcript;
-      voiceInput.value = transcript;
-      voiceStatus.innerText = "Searching for: " + transcript;
-      setTimeout(() => {
-        voiceModal.style.display = 'none';
-        window.location.href = `searchResults.html?q=${encodeURIComponent(transcript)}`;
-      }, 1000);
-    };
-
-    closeVoiceBtn.onclick = () => {
-      recognition.stop();
-      voiceModal.style.display = 'none';
-    };
-  }
-
-  /* --- SEARCHBAR TYPEWRITER EFFECT --- */
-  const placeholderText = "What can we help you with today?";
-  let charIndex = 0;
-
-  function typeEffect() {
-    if (charIndex <= placeholderText.length) {
-      voiceInput.placeholder = placeholderText.slice(0, charIndex++);
-      setTimeout(typeEffect, 70);
-    } else {
-      setTimeout(() => {
-        charIndex = 0;
+        const placeholderText = "What can we help you with today? ";
+        let charIndex = 0;
+        function typeEffect() {
+            voiceInput.placeholder = placeholderText.slice(0, charIndex++);
+            if (charIndex > placeholderText.length) charIndex = 0;
+            setTimeout(typeEffect, 100);
+        }
         typeEffect();
-      }, 3000);
-    }
-  }
-  typeEffect();
 
-  document.getElementById("searchButton").onclick = () => {
-    const q = voiceInput.value.trim();
-    if (q) window.location.href = `searchResults.html?q=${encodeURIComponent(q)}`;
-  };
-</script>
-
+        document.getElementById("searchButton").onclick = () => {
+            const q = voiceInput.value.trim();
+            if (q) window.location.href = `searchResults.html?q=${encodeURIComponent(q)}`;
+        };
+    </script>
 </div>
 </body>
 </html>
