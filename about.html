@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Our Story - Alvarez - Roman Heritage Equestrian</title>
     <link rel="icon" href="images/logo.png" type="image/x-icon">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -10,14 +11,17 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
     <style>
+        /* LOCK HORIZONTAL SCROLL */
         html, body {
             margin: 0; padding: 0; height: 100%;
             font-family: 'Roboto', sans-serif;
             background-color: #141612;
             color: white;
             overflow-x: hidden;
+            width: 100%;
+            position: relative;
         }
-        .page-wrapper { display: flex; flex-direction: column; min-height: 100vh; }
+        .page-wrapper { display: flex; flex-direction: column; min-height: 100vh; width: 100%; overflow-x: hidden; }
 
         /* NAVBAR - DASHBOARD MATCH */
         .navbar {
@@ -25,18 +29,27 @@
             background-color: #1e1e2f; padding: 10px 20px; color: white;
             position: relative; z-index: 100;
         }
-        .navbar-left { display: flex; align-items: center; }
+        .navbar-left { display: flex; align-items: center; z-index: 102; flex: 1; }
         .navbar-left img { height: 40px; width: 40px; border-radius: 50%; object-fit: cover; margin-right: 12px; border: 2px solid #c5a059; }
         .navbar-left a { color: white; text-decoration: none; font-family: 'Playfair Display', serif; font-weight: bold; font-size: 1.2rem; }
         
-        .navbar-right { display: flex; align-items: center; }
+        .navbar-right { display: flex; align-items: center; z-index: 102; }
         .navbar-right a { color: white; text-decoration: none; transition: 0.3s; display: flex; align-items: center; }
         .navbar-right a:hover { color: #c5a059; }
+
+        /* HAMBURGER BUTTON */
+        .menu-toggle {
+            display: none;
+            background: none; border: none; color: white;
+            font-size: 1.5rem; cursor: pointer;
+            z-index: 102;
+        }
 
         /* SUB-NAVBAR - DASHBOARD MATCH */
         .sub-navbar {
             background-color: #232333; padding: 15px 20px;
             display: flex; justify-content: center; gap: 20px; border-bottom: 2px solid #c5a059;
+            transition: max-height 0.3s ease-in-out;
         }
         .sub-navbar a {
             background: #4a3b32; color: #fdfaf6; text-decoration: none;
@@ -68,6 +81,8 @@
             text-transform: uppercase;
             letter-spacing: 4px;
             text-shadow: 3px 3px 10px rgba(0,0,0,0.8);
+            text-align: center;
+            padding: 0 20px;
         }
 
         /* STORY CONTENT */
@@ -102,7 +117,7 @@
             font-family: 'Playfair Display', serif;
         }
 
-        /* FOOTER - EXACT DASHBOARD MATCH */
+        /* FOOTER - DASHBOARD MATCH */
         footer {
             background-color: #1e1e2f;
             padding: 60px 20px 30px;
@@ -168,10 +183,38 @@
         .social-icons a { color: white; font-size: 1.5rem; margin-left: 20px; transition: 0.3s; }
         .social-icons a:hover { color: #c5a059; }
 
-        @media (max-width: 900px) {
+        /* MOBILE FIXES */
+        @media (max-width: 768px) {
+            .navbar { padding: 10px 15px; }
+            .navbar-left { flex: 1; }
+            .navbar-left a { font-size: 1rem; white-space: normal; max-width: 180px; line-height: 1.2; display: inline-block; }
+            
+            .navbar-right { order: 2; margin-right: 0; }
+            .navbar-right span { display: none; }
+            .navbar-right i.fa-calendar-days { display: none; } /* Hide icon to save space */
+            
+            .menu-toggle { display: block; order: 3; margin-left: 10px; }
+
+            .sub-navbar { 
+                display: none; 
+                flex-direction: column; 
+                align-items: center; 
+                padding: 20px;
+                gap: 12px;
+            }
+            .sub-navbar.active { display: flex; }
+            .sub-navbar a { width: 90%; text-align: center; }
+
+            .about-hero { height: 250px; }
+            .about-hero h1 { font-size: 2.2rem; }
+
+            .story-content { margin: 30px auto; }
+            .story-text h2 { font-size: 2rem; }
+            .story-text p { text-align: left; font-size: 1rem; line-height: 1.8; }
+            .highlight-quote { font-size: 1.2rem; padding: 25px 0; margin: 30px 0; }
+
             .footer-links-container { grid-template-columns: repeat(2, 1fr); }
             .footer-bottom { flex-direction: column; gap: 20px; text-align: center; }
-            .about-hero h1 { font-size: 2.5rem; }
         }
     </style>
 </head>
@@ -188,10 +231,12 @@
             <i class="fas fa-user" style="margin-left: 15px;"></i>
             <span style="margin-left:8px">Profile</span>
         </div>
+        <button class="menu-toggle" onclick="toggleNav()"><i class="fa-solid fa-bars"></i></button>
     </div>
 
-    <div class="sub-navbar">
+    <div class="sub-navbar" id="subNavbar">
         <a href="dashboard.html">Home</a>
+        <a href="events.html" class="mobile-events-link">Upcoming Events</a>
         <a href="enroll.html">Enroll Your Horse</a>
         <a href="memberships.html">Memberships</a>
         <a href="about.html">Our Story</a>
@@ -263,6 +308,12 @@
         </div>
     </footer>
 </div>
+
+<script>
+    function toggleNav() {
+        document.getElementById("subNavbar").classList.toggle("active");
+    }
+</script>
 
 </body>
 </html>
