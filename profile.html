@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>My Profile - Alvarez Roman Heritage Equestrian</title>
+    <link rel="icon" href="images/logo.png" type="image/x-icon">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <style>
+        html, body {
+            margin: 0; padding: 0; height: 100%;
+            font-family: 'Roboto', sans-serif;
+            background-color: #141612;
+            color: white;
+        }
+        .page-wrapper { display: flex; flex-direction: column; min-height: 100vh; }
+
+        /* NAVBAR STYLES (Copied from your Dashboard) */
+        .navbar {
+            display: flex; align-items: center; justify-content: space-between;
+            background-color: #1e1e2f; padding: 10px 20px; color: white;
+            position: relative; z-index: 100;
+        }
+        .navbar-left { display: flex; align-items: center; }
+        .navbar-left img { height: 40px; width: 40px; border-radius: 50%; object-fit: cover; margin-right: 12px; border: 2px solid #c5a059; }
+        .navbar-left a { color: white; text-decoration: none; }
+        .navbar-left span { font-size: 1.2rem; font-weight: bold; white-space: nowrap; font-family: 'Playfair Display', serif; letter-spacing: 0.5px;}
+
+        .navbar-center { position: absolute; left: 50%; transform: translateX(-50%); }
+        .search-container { position: relative; width: 500px; }
+        .search-container input {
+            width: 100%; padding: 10px 15px;
+            border-radius: 20px; border: none; outline: none;
+            font-size: 1rem; background: #2e2e40; color: white;
+        }
+        .navbar-right { display: flex; align-items: center; position: relative; cursor: pointer; }
+        .navbar-right a { color: white; text-decoration: none; display: flex; align-items: center; margin-right: 20px; transition: 0.2s; }
+
+        #dropdownMenu {
+            display: none; position: absolute; right: 0; top: 45px;
+            background: #1e1e2f; padding: 10px; border-radius: 8px; z-index: 999;
+            border: 1px solid rgba(197, 160, 89, 0.3); box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+        }
+        #dropdownMenu div { padding: 10px 15px; color: white; cursor: pointer; border-radius: 4px; transition: 0.2s; white-space: nowrap; }
+        #dropdownMenu div:hover { background: #c5a059; color: #141612; font-weight: 500; }
+
+        .sub-navbar {
+            background-color: #232333; padding: 15px 20px;
+            display: flex; justify-content: center; gap: 20px; border-bottom: 2px solid #c5a059;
+        }
+        .sub-navbar a {
+            background: #4a3b32; color: #fdfaf6; text-decoration: none;
+            padding: 10px 24px; border-radius: 6px; font-size: 15px; transition: 0.3s;
+        }
+        .sub-navbar a:hover { background: #c5a059; color: #141612; }
+
+        /* PROFILE SPECIFIC STYLES */
+        .profile-container {
+            max-width: 900px;
+            margin: 60px auto;
+            padding: 40px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(197, 160, 89, 0.2);
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+        }
+        .profile-header {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+            border-bottom: 1px solid rgba(197, 160, 89, 0.2);
+            padding-bottom: 30px;
+            margin-bottom: 30px;
+        }
+        .profile-pic {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            border: 3px solid #c5a059;
+            object-fit: cover;
+        }
+        .profile-info h1 {
+            font-family: 'Playfair Display', serif;
+            color: #c5a059;
+            margin: 0;
+        }
+        .profile-info p {
+            color: #b5aba1;
+            margin: 5px 0;
+        }
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+        }
+        .stat-card {
+            background: rgba(0,0,0,0.2);
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+        .stat-card i { color: #c5a059; font-size: 1.5rem; margin-bottom: 10px; }
+        .stat-card h3 { margin: 10px 0 5px 0; font-size: 1.1rem; }
+        .stat-card p { color: #b5aba1; font-size: 0.9rem; margin: 0; }
+
+        .edit-btn {
+            background: transparent;
+            color: #c5a059;
+            border: 1px solid #c5a059;
+            padding: 8px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 15px;
+            transition: 0.3s;
+        }
+        .edit-btn:hover { background: #c5a059; color: #141612; }
+
+        /* FOOTER (Copied from Dashboard) */
+        footer {
+            background-color: #1e1e2f; color: white; padding: 60px 20px;
+            text-align: center; position: relative; margin-top: auto; border-top: 2px solid #c5a059;
+        }
+    </style>
+</head>
+<body>
+
+<div class="page-wrapper">
+    <div class="navbar">
+        <div class="navbar-left">
+            <img src="images/logo.png" alt="Logo">
+            <a href="dashboard.html"><span>Alvarez - Roman Heritage Equestrian</span></a>
+        </div>
+        <div class="navbar-center">
+            <div class="search-container">
+                <input type="text" id="searchInput" placeholder="Search your account...">
+            </div>
+        </div>
+        <div class="navbar-right" id="userMenu">
+            <i class="fas fa-user" style="margin-left: 15px;"></i>
+            <span id="usernameDisplay">Loading...</span>
+            <div id="dropdownMenu">
+                <div onclick="location.href='profile.html'" id="profileOption" style="display:none;">My Profile</div>
+                <div onclick="logout()" id="logoutText">Logout</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="sub-navbar">
+        <a href="dashboard.html">Home</a>
+        <a href="enroll.html">Enroll Your Horse</a>
+        <a href="memberships.html">Memberships</a>
+        <a href="about.html">Our Story</a>
+        <a href="contact.html">Contact</a>
+    </div>
+
+    <div class="profile-container">
+        <div class="profile-header">
+            <img src="images/logo.png" class="profile-pic" alt="User Image">
+            <div class="profile-info">
+                <h1 id="fullName">User Name</h1>
+                <p id="userEmail">email@example.com</p>
+                <p>Member since: 2026</p>
+                <button class="edit-btn">Edit Profile</button>
+            </div>
+        </div>
+
+        <div class="stats-grid">
+            <div class="stat-card">
+                <i class="fa-solid fa-horse"></i>
+                <h3>Enrolled Horses</h3>
+                <p id="horseCount">0 Horses</p>
+            </div>
+            <div class="stat-card">
+                <i class="fa-solid fa-crown"></i>
+                <h3>Membership</h3>
+                <p id="membershipType">Basic Access</p>
+            </div>
+            <div class="stat-card">
+                <i class="fa-solid fa-calendar-check"></i>
+                <h3>Events Joined</h3>
+                <p>0 Upcoming</p>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <img src="images/logo.png" alt="Logo" class="footer-logo">
+
+        <div class="footer-links-container">
+            <div class="footer-column">
+                <p>Navigation</p>
+                <hr>
+                <button class="footer-btn" onclick="location.href='dashboard.html'">Home</button>
+                <button class="footer-btn" onclick="location.href='memberships.html'">Memberships</button>
+                <button class="footer-btn" onclick="location.href='enroll.html'">Enroll Horse</button>
+                <button class="footer-btn" onclick="location.href='contact.html'">Contact Us</button>
+            </div>
+
+            <div class="footer-column">
+                <p>Updates</p>
+                <hr>
+                <button class="footer-btn" onclick="location.href='Loading.html?type=events'">Upcoming Events</button>
+                <button class="footer-btn" onclick="location.href='Loading.html?type=news'">Latest News</button>
+            </div>
+
+            <div class="footer-column">
+                <p>About</p>
+                <hr>
+                <button class="footer-btn" onclick="location.href='about.html'">Our Story</button>
+                <button class="footer-btn" onclick="location.href='index.html'">Member Login</button>
+            </div>
+
+            <div class="footer-column">
+                <p>The Farm</p>
+                <hr>
+                <button class="footer-btn" onclick="location.href='availablehorses.html'">Available Horses</button>
+                <button class="footer-btn" onclick="location.href='TrainingGrounds.html'">Training Grounds</button>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <div class="copyright">
+                &copy; 2026 Alvarez - Roman Heritage Equestrian. All rights reserved.
+            </div>
+            <div class="social-icons">
+                <a href="https://www.facebook.com" target="_blank" title="Facebook"><i class="fab fa-facebook"></i></a>
+                <a href="https://www.youtube.com/@AlvarezRomanHeritageEquestrian" target="_blank" title="YouTube"><i class="fab fa-youtube"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        async function loadUser() {
+            const isGuest = localStorage.getItem("guest");
+            const dd = document.getElementById("dropdownMenu");
+            
+            // Handle Guest logic
+            if (isGuest === "true") {
+                document.getElementById("usernameDisplay").innerText = "Guest";
+                document.getElementById("profileOption").style.display = "none"; // Hide profile for guests
+                document.getElementById("logoutText").innerText = "Sign In / Sign Up";
+                
+                document.getElementById("userMenu").onclick = () => {
+                    dd.style.display = dd.style.display === "block" ? "none" : "block";
+                };
+                return; 
+            }
+
+            const token = localStorage.getItem("token");
+            if (!token) {
+                window.location.href = "index.html";
+                return;
+            }
+
+            try {
+                const res = await fetch("http://localhost:3000/me", {
+                    headers: { "Authorization": "Bearer " + token }
+                });
+
+                if (res.ok) {
+                    const data = await res.json();
+                    // Update UI with real data
+                    document.getElementById("usernameDisplay").innerText = data.fullName;
+                    document.getElementById("fullName").innerText = data.fullName;
+                    document.getElementById("userEmail").innerText = data.email;
+                    
+                    // Show Profile option because we are logged in
+                    document.getElementById("profileOption").style.display = "block";
+
+                    document.getElementById("userMenu").onclick = () => {
+                        dd.style.display = dd.style.display === "block" ? "none" : "block";
+                    };
+                } else {
+                    logout();
+                }
+            } catch (err) {
+                console.error("Failed to load user", err);
+            }
+        }
+
+const savedMembership = localStorage.getItem("userMembership");
+const membershipDisplay = document.getElementById("membershipType");
+
+if (savedMembership) {
+    membershipDisplay.innerText = savedMembership + " Access";
+} else {
+    membershipDisplay.innerText = "No Active Membership";
+}
+
+function logout() {
+            localStorage.removeItem("token");
+            localStorage.removeItem("guest");
+            window.location.href = "index.html";
+        }
+
+        loadUser();
+
+    </script>
+</div>
+</body>
+</html>

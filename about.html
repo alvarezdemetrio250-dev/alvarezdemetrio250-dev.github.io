@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Our Story - Alvarez - Roman Heritage Equestrian</title>
+    <link rel="icon" href="images/logo.png" type="image/x-icon">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <style>
+        html, body {
+            margin: 0; padding: 0; height: 100%;
+            font-family: 'Roboto', sans-serif;
+            background-color: #141612;
+            color: white;
+            overflow-x: hidden;
+        }
+        .page-wrapper { display: flex; flex-direction: column; min-height: 100vh; }
+
+        /* NAVBARS */
+        .navbar {
+            display: flex; align-items: center; justify-content: space-between;
+            background-color: #1e1e2f; padding: 10px 20px; color: white;
+            position: relative; z-index: 100;
+        }
+        .navbar-left { display: flex; align-items: center; }
+        .navbar-left img { height: 40px; width: 40px; border-radius: 50%; object-fit: cover; margin-right: 12px; border: 2px solid #c5a059; }
+        .navbar-left a { color: white; text-decoration: none; font-family: 'Playfair Display', serif; font-weight: bold; font-size: 1.2rem; }
+        
+        .sub-navbar {
+            background-color: #232333; padding: 15px 20px;
+            display: flex; justify-content: center; gap: 20px; border-bottom: 2px solid #c5a059;
+        }
+        .sub-navbar a {
+            background: #4a3b32; color: #fdfaf6; text-decoration: none;
+            padding: 10px 24px; border-radius: 6px; font-size: 15px; transition: 0.3s;
+        }
+        .sub-navbar a:hover { background: #c5a059; color: #141612; }
+
+        /* HERO BANNER */
+        .about-hero {
+            width: 100%;
+            height: 400px;
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('images/logo.png') center/contain no-repeat;
+            background-color: #1e1e2f; 
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-bottom: 2px solid #c5a059;
+        }
+        .about-hero h1 {
+            font-family: 'Playfair Display', serif;
+            color: #c5a059;
+            font-size: 4rem;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            text-shadow: 3px 3px 10px rgba(0,0,0,0.8);
+        }
+
+        /* STORY CONTENT */
+        .story-content {
+            max-width: 900px;
+            margin: 60px auto;
+            padding: 0 20px;
+            text-align: center;
+        }
+        .story-text h2 {
+            font-family: 'Playfair Display', serif;
+            color: #c5a059;
+            font-size: 2.5rem;
+            margin-bottom: 30px;
+        }
+        .story-text p {
+            font-size: 1.15rem;
+            line-height: 2;
+            color: #b5aba1;
+            margin-bottom: 25px;
+            text-align: justify;
+        }
+        .highlight-quote {
+            border-top: 1px solid #c5a059;
+            border-bottom: 1px solid #c5a059;
+            padding: 30px 0;
+            font-style: italic;
+            color: #fdfaf6;
+            margin: 50px 0;
+            font-size: 1.5rem;
+            font-family: 'Playfair Display', serif;
+        }
+
+        /* NEW CLEAN FOOTER STYLES */
+        .site-footer {
+            background-color: #1e1e2f;
+            color: white;
+            padding: 60px 20px;
+            text-align: center;
+            position: relative;
+            height: auto;
+            min-height: 420px;
+            margin-top: auto;
+            border-top: 2px solid #c5a059;
+        }
+        .footer-logo-container {
+            position: absolute;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        .footer-logo-img {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            border: 4px solid #c5a059;
+            object-fit: cover;
+        }
+        .footer-grid {
+            margin-top: 140px;
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            flex-wrap: wrap;
+        }
+        .footer-column {
+            text-align: left;
+            width: 200px;
+            display: flex;
+            flex-direction: column;
+        }
+        .footer-column p {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #c5a059;
+            margin-bottom: 10px;
+        }
+        .footer-column hr {
+            width: 100%;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            margin-bottom: 10px;
+        }
+        .footer-btn {
+            background: none;
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            padding: 8px;
+            margin-top: 10px;
+            cursor: pointer;
+            transition: 0.3s;
+            text-align: left;
+        }
+        .footer-btn:hover {
+            border-color: #c5a059;
+            color: #c5a059;
+        }
+        .footer-socials {
+            position: absolute;
+            bottom: 10px;
+            right: 20px;
+        }
+        .footer-socials a {
+            color: #888;
+            margin: 0 10px;
+            font-size: 1.2rem;
+            transition: 0.3s;
+        }
+        .footer-socials a:hover {
+            color: #c5a059;
+        }
+        .footer-copyright {
+            position: absolute;
+            bottom: 10px;
+            left: 20px;
+            font-size: 0.9rem;
+            color: #888;
+        }
+
+        @media (max-width: 768px) {
+            .about-hero h1 { font-size: 2.5rem; }
+            .story-text h2 { font-size: 2rem; }
+            .footer-copyright { position: static; margin-top: 20px; }
+            .footer-socials { position: static; margin-top: 20px; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="page-wrapper">
+    <div class="navbar">
+        <div class="navbar-left">
+            <img src="images/logo.png" alt="Logo">
+            <a href="dashboard.html">Alvarez - Roman Heritage Equestrian</a>
+        </div>
+        <div class="navbar-right">
+            <a href="events.html"><i class="fa-solid fa-calendar-days"></i><span style="margin-left:8px">Events</span></a>
+            <i class="fas fa-user" style="margin-left: 15px;"></i>
+            <span style="margin-left:8px">Profile</span>
+        </div>
+    </div>
+
+    <div class="sub-navbar">
+        <a href="dashboard.html">Home</a>
+        <a href="enroll.html">Enroll Your Horse</a>
+        <a href="memberships.html">Memberships</a>
+        <a href="about.html">Our Story</a>
+        <a href="contact.html">Contact</a>
+    </div>
+
+    <div class="about-hero">
+        <h1>Our Story</h1>
+    </div>
+
+    <div class="story-content">
+        <div class="story-text">
+            <h2>A Legacy Carved in Dust and Gold</h2>
+            <p>The story of Alvarez - Roman Heritage Equestrian is one of passion, patience, and a deep-rooted respect for the noble horse. Our journey began over four decades ago, rooted in the classical traditions of European horsemanship that have been passed down through generations.</p>
+            
+            <div class="highlight-quote">
+                "True horsemanship is not about control; it is about a conversation between two souls that speak no words."
+            </div>
+
+            <p>Founded by Demetrio Alvarez, our facility was built on the belief that every horse has the potential for greatness when met with the right guidance. We have dedicated our lives to preserving the art of the 'Classical Foundation'—a method that prioritizes the horse's physical and mental well-being above all else. We believe that a strong foundation leads to a lifetime of excellence.</p>
+            
+            <p>From a small family stable to a premier equestrian destination, we have remained true to our original mission: to honor the Roman heritage of equestrian excellence while fostering a community of riders who treat their companions with the dignity they deserve. We welcome you to be a part of our ongoing story.</p>
+        </div>
+    </div>
+
+    <footer class="site-footer">
+        <div class="footer-logo-container">
+            <img src="images/logo.png" alt="Logo" class="footer-logo-img">
+        </div>
+
+        <div class="footer-grid">
+            <div class="footer-column">
+                <p>Navigation</p>
+                <hr>
+                <button class="footer-btn" onclick="location.href='dashboard.html'">Home</button>
+                <button class="footer-btn" onclick="location.href='memberships.html'">Memberships</button>
+                <button class="footer-btn" onclick="location.href='enroll.html'">Enroll Your Horse</button>
+                <button class="footer-btn" onclick="location.href='contact.html'">Contact</button>
+            </div>
+
+            <div class="footer-column">
+                <p>Updates</p>
+                <hr>
+                <button class="footer-btn" onclick="location.href='loading.html?type=events'">Upcoming Events</button>
+                <button class="footer-btn" onclick="location.href='loading.html?type=news'">Latest News</button>
+            </div>
+
+            <div class="footer-column">
+                <p>About</p>
+                <hr>
+                <button class="footer-btn" onclick="location.href='about.html'">Our Story</button>
+                <button class="footer-btn" onclick="location.href='index.html'">Member Login</button>
+            </div>
+
+            <div class="footer-column">
+                <p>The Farm</p>
+                <hr>
+                <button class="footer-btn" onclick="location.href='availablehorses.html'">Our Horses</button>
+                <button class="footer-btn" onclick="location.href='traininggrounds.html'">Training Grounds</button>
+            </div>
+        </div>
+
+        <div class="footer-socials">
+            <a href="https://www.facebook.com/demetrio.alvarez.54" target="_blank"><i class="fab fa-facebook"></i></a>
+            <a href="https://www.youtube.com/@AlvarezRomanHeritageEquestrian" target="_blank"><i class="fab fa-youtube"></i></a>
+        </div>
+
+        <div class="footer-copyright">
+            <p>&copy; 2026 Alvarez - Roman Heritage Equestrian. All rights reserved.</p>
+        </div>
+    </footer>
+</div>
+
+</body>
+</html>

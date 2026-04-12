@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <title>Login - Alvarez Roman Heritage Equestrian</title>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Poppins", sans-serif;
+    }
+
+    body {
+      height: 100vh;
+      background-color: #141612;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .glass-card {
+      width: 380px;
+      padding: 45px 35px;
+      border-radius: 16px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(197, 160, 89, 0.3);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+      backdrop-filter: blur(20px);
+      color: #fdfaf6;
+      text-align: center;
+    }
+
+    .logo-img {
+      width: 85px;
+      height: 85px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-bottom: 20px;
+      border: 2px solid #c5a059;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
+    }
+
+    h2 {
+      font-family: "Playfair Display", serif;
+      font-size: 28px;
+      margin-bottom: 6px;
+      font-weight: 600;
+      color: #c5a059;
+      letter-spacing: 0.5px;
+    }
+
+    .subtitle {
+      margin-bottom: 28px;
+      color: #b5aba1;
+      font-size: 14px;
+      font-weight: 300;
+    }
+
+    .input-wrapper {
+      position: relative;
+      margin-bottom: 18px;
+    }
+
+    .input-field {
+      width: 100%;
+      padding: 14px 45px 14px 18px;
+      border-radius: 8px;
+      background: rgba(0, 0, 0, 0.3);
+      color: #fdfaf6;
+      font-size: 15px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      outline: none;
+      transition: all 0.3s ease;
+    }
+
+    .input-field::placeholder {
+      color: #8c857d;
+    }
+
+    .input-field:focus {
+      border-color: #c5a059;
+      background: rgba(0, 0, 0, 0.5);
+    }
+
+    .next-arrow {
+      position: absolute;
+      right: 6px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 38px;
+      height: 38px;
+      border-radius: 6px;
+      background: #4a3b32;
+      border: 1px solid #5c4a3f;
+      color: #fdfaf6;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      font-size: 22px;
+      transition: 0.3s;
+      border: none;
+    }
+
+    .next-arrow:hover {
+      background: #c5a059;
+      color: #141612;
+    }
+
+    .eye-icon {
+      position: absolute;
+      right: 15px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #8c857d;
+      cursor: pointer;
+      font-size: 16px;
+      transition: color 0.2s;
+    }
+
+    .eye-icon:hover {
+      color: #c5a059;
+    }
+
+    .error {
+      font-size: 12px;
+      color: #ff6b6b;
+      margin-top: -12px;
+      margin-bottom: 12px;
+      text-align: left;
+      padding-left: 5px;
+      min-height: 14px;
+    }
+
+    .primary-btn, .oauth-btn, .guest-btn {
+      width: 100%;
+      padding: 14px;
+      border-radius: 8px;
+      margin-bottom: 15px;
+      font-size: 15px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: 0.3s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: none;
+    }
+
+    .primary-btn {
+      background: #4a3b32;
+      color: white;
+      border: 1px solid #5c4a3f;
+      margin-top: 10px;
+    }
+
+    .primary-btn:hover:not(:disabled) {
+      background: #c5a059;
+      color: #141612;
+    }
+
+    /* GREY OUT STYLE */
+    .primary-btn:disabled {
+        background: #2a2a2a;
+        color: #666;
+        border-color: #333;
+        cursor: not-allowed;
+    }
+
+    .oauth-btn {
+      background: rgba(255, 255, 255, 0.05);
+      color: #fdfaf6;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      justify-content: space-between;
+      padding: 14px 20px;
+    }
+
+    .oauth-btn:hover {
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    .guest-btn {
+      background: transparent;
+      color: #c5a059;
+      border: 1px solid rgba(197, 160, 89, 0.5);
+      margin-top: -5px; 
+    }
+
+    .guest-btn:hover {
+      background: rgba(197, 160, 89, 0.1);
+      border-color: #c5a059;
+    }
+
+    .oauth-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .oauth-logo {
+      width: 18px;
+      height: 18px;
+    }
+
+    .strength {
+      height: 4px;
+      border-radius: 2px;
+      margin-top: 5px;
+      margin-bottom: 15px;
+      transition: 0.3s ease;
+      width: 100%;
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    .bottom-text {
+      margin-top: 25px;
+      font-size: 13px;
+      color: #b5aba1;
+    }
+
+    .bottom-text a {
+      color: #c5a059;
+      cursor: pointer;
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    .bottom-text a:hover {
+      color: #e6c885;
+      text-decoration: underline;
+    }
+
+    #password-step,
+    #signup-section {
+      display: none;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="glass-card">
+
+    <img src="images/logo.png" alt="Alvarez Roman Heritage Logo" class="logo-img" />
+
+    <form id="email-step" onsubmit="verifyEmail(event)" novalidate>
+      <h2>Welcome Back</h2>
+      <p class="subtitle">Enter your email to continue. Or continue as a guest.</p>
+
+      <div class="input-wrapper">
+        <input id="login-email" type="email" class="input-field" placeholder="Email Address" />
+        <button type="submit" class="next-arrow">›</button>
+      </div>
+
+      <p id="email-error" class="error"></p>
+
+      <div class="oauth-btn" onclick="googleLogin()">
+        <div class="oauth-left">
+          <img src="https://developers.google.com/identity/images/g-logo.png" class="oauth-logo">
+          <span>Continue with Google</span>
+        </div>
+        <i class="fa-solid fa-chevron-right" style="font-size: 12px; color: #b5aba1;"></i>
+      </div>
+
+      <button type="button" class="guest-btn" onclick="continueAsGuest()">Continue as Guest</button>
+
+      <div class="bottom-text">
+        Don't have an account? <a onclick="showSignup()">Create Account</a>
+      </div>
+    </form>
+
+    <form id="password-step" onsubmit="login(event)" novalidate>
+      <h2>Secure Login</h2>
+      <p class="subtitle" id="show-email"></p>
+
+      <div class="input-wrapper">
+        <input id="login-password" type="password" class="input-field" placeholder="Password" />
+        <i class="fa-solid fa-eye eye-icon" onclick="togglePassword('login-password', this)"></i>
+      </div>
+
+      <p id="login-password-error" class="error"></p>
+
+      <button type="submit" id="signin-btn" class="primary-btn">Sign In</button>
+
+      <div class="bottom-text">
+        Wrong email? <a onclick="backToEmail()">Go back</a>
+      </div>
+    </form>
+
+    <form id="signup-section" onsubmit="signup(event)" novalidate>
+      <h2>Create Account</h2>
+      <p class="subtitle">Join our equestrian heritage</p>
+
+      <div class="input-wrapper">
+        <input id="signup-name" type="text" class="input-field" placeholder="Full Name" />
+      </div>
+      <p id="name-error" class="error"></p>
+
+      <div class="input-wrapper">
+        <input id="signup-email" type="email" class="input-field" placeholder="Email Address" />
+      </div>
+      <p id="signup-email-error" class="error"></p>
+
+      <div class="input-wrapper">
+        <input id="signup-username" type="text" class="input-field" placeholder="Username" />
+      </div>
+      <p id="username-error" class="error"></p>
+
+      <div class="input-wrapper">
+        <input id="signup-password" type="password" class="input-field" placeholder="Password" oninput="checkStrength()" />
+        <i class="fa-solid fa-eye eye-icon" onclick="togglePassword('signup-password', this)"></i>
+      </div>
+
+      <div id="strength-bar" class="strength"></div>
+      <p id="signup-pass-error" class="error"></p>
+
+      <div class="input-wrapper">
+        <input id="signup-confirm" type="password" class="input-field" placeholder="Confirm Password" />
+        <i class="fa-solid fa-eye eye-icon" onclick="togglePassword('signup-confirm', this)"></i>
+      </div>
+      <p id="signup-confirm-error" class="error"></p>
+
+      <button type="submit" class="primary-btn">Register</button>
+
+      <div class="bottom-text">
+        Already have an account? <a onclick="showLogin()">Login</a>
+      </div>
+    </form>
+  </div>
+
+  <script>
+    // --- CONFIGURATION ---
+    // This connects your frontend to your live Render server
+    const API_BASE_URL = "https://login-backend-ny6x.onrender.com";
+    let failedAttempts = 0;
+
+    // --- TRACKING ATTEMPTS & COOLDOWN ---
+    function startCooldown() {
+        const btn = document.getElementById("signin-btn");
+        let secondsLeft = 15;
+        
+        btn.disabled = true;
+        
+        const timer = setInterval(() => {
+            btn.innerText = `Wait ${secondsLeft}s...`;
+            secondsLeft--;
+            
+            if (secondsLeft < 0) {
+                clearInterval(timer);
+                btn.disabled = false;
+                btn.innerText = "Sign In";
+                failedAttempts = 0; 
+            }
+        }, 1000);
+    }
+
+    function continueAsGuest() {
+      localStorage.setItem("guest", "true");
+      window.location.href = "dashboard.html";
+    }
+
+    // --- GOOGLE LOGIN ---
+    function googleLogin() {
+      // Updated to your actual Client ID and Render Redirect
+      const clientID = "1087470069021-e2qidvg3niahbg4cguq1uuj3f291nj5m.apps.googleusercontent.com";
+      const redirect = `${API_BASE_URL}/google-callback`;
+
+      const url =
+        `https://accounts.google.com/o/oauth2/v2/auth?` +
+        `client_id=${clientID}` +
+        `&redirect_uri=${encodeURIComponent(redirect)}` +
+        `&response_type=code` +
+        `&scope=openid%20email%20profile` +
+        `&prompt=select_account`;
+
+      window.location.href = url;
+    }
+
+    window.onload = () => {
+      const params = new URLSearchParams(window.location.search);
+      const newEmail = params.get("newEmail");
+
+      if (newEmail) {
+        showSignup();
+        document.getElementById("signup-email").value = newEmail;
+        document.getElementById("signup-email").disabled = true;
+      }
+    };
+
+    function togglePassword(id, icon) {
+      const input = document.getElementById(id);
+      if (input.type === "password") {
+        input.type = "text";
+        icon.classList.replace("fa-eye", "fa-eye-slash");
+      } else {
+        input.type = "password";
+        icon.classList.replace("fa-eye-slash", "fa-eye");
+      }
+    }
+
+    // --- LOGIN FLOW ---
+    async function verifyEmail(event) {
+      event.preventDefault(); 
+      
+      const email = document.getElementById("login-email").value;
+      const errorBox = document.getElementById("email-error");
+      
+      errorBox.innerText = "";
+
+      if (!email.trim() || !email.includes("@")) {
+        errorBox.innerText = "Please enter a valid email";
+        return;
+      }
+
+      try {
+        const res = await fetch(`${API_BASE_URL}/check-email`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ email })
+        });
+        const data = await res.json();
+        
+        if (!res.ok) {
+          errorBox.innerText = data.message;
+        } else {
+          document.getElementById("show-email").innerText = email;
+          document.getElementById("email-step").style.display = "none";
+          document.getElementById("password-step").style.display = "block";
+        }
+      } catch (error) {
+        // Since Render Free "sleeps", the first attempt might fail or time out
+        errorBox.innerText = "Server is waking up... Please try again in 30 seconds.";
+      }
+    }
+
+    async function login(event) {
+      event.preventDefault(); 
+      
+      const email = document.getElementById("login-email").value;
+      const password = document.getElementById("login-password").value;
+      const errorBox = document.getElementById("login-password-error");
+      
+      errorBox.innerText = "Attempting to sign in...";
+
+      try {
+        const res = await fetch(`${API_BASE_URL}/login`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ email, password })
+        });
+        const data = await res.json();
+        
+        if (!res.ok) {
+          errorBox.innerText = data.message;
+        } else {
+          // Force clear any old guest flags
+          localStorage.removeItem("guest");
+          // Save the token
+          localStorage.setItem("token", data.token);
+          
+          console.log("SUCCESS: Token saved to storage.");
+          
+          // Make sure this matches your filename exactly (Capital D or lowercase d)
+          window.location.href = "dashboard.html"; 
+        }
+      } catch (error) {
+        console.error("Login error:", error);
+        errorBox.innerText = "Network error. Is the server awake?";
+      }
+    }
+
+    // --- SIGNUP FLOW ---
+    function checkStrength() {
+      const pass = document.getElementById("signup-password").value;
+      const bar = document.getElementById("strength-bar");
+
+      let strength = 0;
+      if (pass.length >= 8) strength++;
+      if (/[A-Z]/.test(pass)) strength++;
+      if (/[a-z]/.test(pass)) strength++;
+      if (/[0-9]/.test(pass)) strength++;
+      if (/[^A-Za-z0-9]/.test(pass)) strength++;
+
+      const colors = ["#ff4d4d", "#ff884d", "#ffee4d", "#7fff4d", "#00e600"];
+      bar.style.background = colors[strength - 1] || "rgba(255,255,255,0.15)";
+    }
+
+    async function signup(event) {
+      event.preventDefault(); 
+      
+      const fullName = document.getElementById("signup-name").value;
+      const email = document.getElementById("signup-email").value;
+      const username = document.getElementById("signup-username").value;
+      const password = document.getElementById("signup-password").value;
+      const confirm = document.getElementById("signup-confirm").value;
+
+      if (password !== confirm) {
+        document.getElementById("signup-confirm-error").innerText = "Passwords do not match";
+        return;
+      }
+
+      try {
+        const res = await fetch(`${API_BASE_URL}/signup`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ fullName, email, username, password })
+        });
+        const data = await res.json();
+        
+        if (!res.ok) {
+          document.getElementById("signup-email-error").innerText = data.message;
+        } else {
+          alert("Account created! Please log in.");
+          showLogin();
+        }
+      } catch (error) {
+        alert("Network error. Please try again.");
+      }
+    }
+
+    // --- NAVIGATION ---
+    function showSignup() {
+      document.getElementById("email-step").style.display = "none";
+      document.getElementById("password-step").style.display = "none";
+      document.getElementById("signup-section").style.display = "block";
+    }
+
+    function showLogin() {
+      document.getElementById("signup-section").style.display = "none";
+      document.getElementById("password-step").style.display = "none";
+      document.getElementById("email-step").style.display = "block";
+    }
+
+    function backToEmail() {
+      document.getElementById("password-step").style.display = "none";
+      document.getElementById("email-step").style.display = "block";
+    }
+</script>
+
+</body>
+</html>

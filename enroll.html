@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Horse Training Info - Alvarez - Roman Heritage Equestrian</title>
+    <link rel="icon" href="images/logo.png" type="image/x-icon">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <style>
+        html, body {
+            margin: 0; padding: 0; height: 100%;
+            font-family: 'Roboto', sans-serif;
+            background-color: #141612;
+            color: white;
+            overflow-x: hidden;
+        }
+        .page-wrapper { display: flex; flex-direction: column; min-height: 100vh; }
+
+        /* NAVBARS */
+        .navbar {
+            display: flex; align-items: center; justify-content: space-between;
+            background-color: #1e1e2f; padding: 10px 20px; color: white;
+            position: relative; z-index: 100;
+        }
+        .navbar-left { display: flex; align-items: center; }
+        .navbar-left img { height: 40px; width: 40px; border-radius: 50%; object-fit: cover; margin-right: 12px; border: 2px solid #c5a059; }
+        .navbar-left a { color: white; text-decoration: none; font-family: 'Playfair Display', serif; font-weight: bold; font-size: 1.2rem; }
+        .sub-navbar {
+            background-color: #232333; padding: 15px 20px;
+            display: flex; justify-content: center; gap: 20px; border-bottom: 2px solid #c5a059;
+        }
+        .sub-navbar a {
+            background: #4a3b32; color: #fdfaf6; text-decoration: none;
+            padding: 10px 24px; border-radius: 6px; font-size: 15px; transition: 0.3s;
+        }
+        .sub-navbar a:hover { background: #c5a059; color: #141612; }
+
+
+        /* CONTENT LAYOUT */
+        .info-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 60px 10px;
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 60px;
+        }
+
+        .side-image {
+            width: 70%;
+            border: 1px solid #c5a059;
+            border-radius: 8px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        .main-text h2 { font-family: 'Playfair Display', serif; color: #c5a059; font-size: 2.2rem; margin-top: 0; }
+        .main-text p { line-height: 1.8; color: #b5aba1; font-size: 1.1rem; }
+
+        /* PRICING & FAQ BOXES */
+        .price-card {
+            background: #1e1e2f;
+            border-left: 4px solid #c5a059;
+            padding: 25px;
+            margin: 30px 0;
+        }
+        .price-card h3 { margin-top: 0; color: #c5a059; }
+        
+        .faq-item { margin-bottom: 25px; }
+        .faq-question { color: #fdfaf6; font-weight: 500; margin-bottom: 8px; display: block; border-bottom: 1px solid #4a3b32; padding-bottom: 5px; }
+        .faq-answer { color: #888; font-size: 0.95rem; }
+
+        .curriculum-list {
+            list-style: none; padding: 0;
+            display: grid; grid-template-columns: 1fr 1fr; gap: 15px;
+        }
+        .curriculum-list li { color: #b5aba1; display: flex; align-items: center; }
+        .curriculum-list li i { color: #c5a059; margin-right: 10px; font-size: 0.8rem; }
+
+        /* FOOTER (Restored with all missing parts) */
+        footer {
+            background-color: #1e1e2f; color: white; padding: 60px 20px;
+            text-align: center; position: relative; margin-top: auto; border-top: 2px solid #c5a059;
+        }
+        .footer-logo {
+            position: absolute; top: 20px; left: 50%; transform: translateX(-50%);
+            width: 80px; height: 80px; border-radius: 50%; border: 4px solid #c5a059; object-fit: cover;
+        }
+        .footer-links-container {
+            margin-top: 140px; display: flex; justify-content: center; gap: 40px; flex-wrap: wrap;
+        }
+        .footer-column { text-align: left; width: 200px; display: flex; flex-direction: column; }
+        .footer-column p { font-size: 1.2rem; font-weight: bold; color:#c5a059; margin-bottom: 10px; }
+        .footer-column hr { width: 100%; border: 1px solid rgba(255,255,255,0.1); margin-bottom: 15px; }
+        .footer-btn {
+            background:none; color:white; border:1px solid rgba(255,255,255,0.3);
+            padding:8px; margin-top:10px; cursor: pointer; transition: 0.3s; text-align: left;
+        }
+        .footer-btn:hover { border-color:#c5a059; color:#c5a059; }
+        .social-icons { position: absolute; bottom: 10px; right: 20px; }
+        .social-icons a { color: #888; margin: 0 10px; font-size: 1.2rem; transition: 0.3s; }
+        .social-icons a:hover { color: #c5a059; }
+        .copyright { position: absolute; bottom: 10px; left: 20px; font-size: 0.9rem; color: #888; }
+    </style>
+</head>
+<body>
+
+<div class="page-wrapper">
+    <div class="navbar">
+        <div class="navbar-left">
+            <img src="images/logo.png" alt="Logo">
+            <a href="dashboard.html">Alvarez - Roman Heritage Equestrian</a>
+        </div>
+        <div class="navbar-right">
+            <a href="Loading.html?type=events"><i class="fa-solid fa-calendar-days"></i><span style="margin-left:8px">Events</span></a>
+            <i class="fas fa-user" style="margin-left: 15px;"></i>
+            <span style="margin-left:8px">Profile</span>
+        </div>
+    </div>
+
+    <div class="sub-navbar">
+        <a href="dashboard.html">Home</a>
+        <a href="enroll.html">Enroll Your Horse</a>
+        <a href="memberships.html">Memberships</a>
+        <a href="about.html">Our Story</a>
+        <a href="contact.html">Contact</a>
+    </div>
+
+
+    <div class="info-container">
+        <div class="side-bar">
+            <img src="images/logo.png" alt="Training" class="side-image">
+            <div class="price-card">
+                <h3>Training Costs</h3>
+                <p style="font-size: 1.5rem; color: #fdfaf6; margin: 10px 0;">$2000 <span style="font-size: 0.9rem; color: #888;">/ month</span></p>
+                <p style="font-size: 0.85rem; color: #b5aba1;">Horses are trained 5 days a week</p>
+            </div>
+        </div>
+
+        <div class="main-text">
+            <h2>Enrolment Information</h2>
+            <p>Our program is specialized for all horses to develop natural athletic ability. We specialize in perfecting foundations that prepare horses for any discipline, ensuring they are balanced, responsive, and confident. Every horse is different and requires their own specialized program to ensure they perform at their highest.</p>
+            
+            <h3 style="color: #c5a059; margin-top: 40px;">What We Teach</h3>
+            <ul class="curriculum-list">
+                <li><i class="fa-solid fa-check"></i>  Basic and Advanced Ground Work </li>
+                <li><i class="fa-solid fa-check"></i>  Basic and Advanced Foundation </li>
+                <li><i class="fa-solid fa-check"></i>  Many Disciplines</li>
+            </ul>
+
+            <h3 style="color: #c5a059; margin-top: 40px;">Common Questions (FAQ)</h3>
+            
+            <div class="faq-item">
+                <span class="faq-question">How long will my horse be in training?</span>
+                <p class="faq-answer">While every horse is different, it might take 3 - 6 months to develop a solid foundation and gain trust and respect.</p>
+            </div>
+
+            <div class="faq-item">
+                <span class="faq-question">Can I visit my horse during training?</span>
+                <p class="faq-answer">Absolutely. We encourage owners to visit at a scheduled time to see progress and learn what is being taught.</p>
+            </div>
+
+            <div class="faq-item">
+                <span class="faq-question">What age is required to start training?</span>
+                <p class="faq-answer">Horses of any age are welcome to start training.</p>
+            </div>
+            
+            <a href="contact.html" style="display:inline-block; background:#c5a059; color:#141612; padding:15px 30px; text-decoration:none; border-radius:5px; font-weight:bold; margin-top:20px;">Contact to enroll your horse</a>
+        </div>
+    </div>
+
+    <footer>
+        <img src="images/logo.png" alt="Logo" class="footer-logo">
+
+        <div class="footer-links-container">
+            <div class="footer-column">
+                <p>Navigation</p>
+                <hr>
+                <button class="footer-btn" onclick="location.href='dashboard.html'">Home</button>
+                <button class="footer-btn" onclick="location.href='memberships.html'">Memberships</button>
+                <button class="footer-btn" onclick="location.href='enroll.html'">Enroll Horse</button>
+                <button class="footer-btn" onclick="location.href='contact.html'">Contact Us</button>
+            </div>
+
+            <div class="footer-column">
+                <p>Updates</p>
+                <hr>
+                <button class="footer-btn" onclick="location.href='Loading.html?type=events'">Upcoming Events</button>
+                <button class="footer-btn" onclick="location.href='Loading.html?type=news'">Latest News</button>
+            </div>
+
+            <div class="footer-column">
+                <p>About</p>
+                <hr>
+                <button class="footer-btn" onclick="location.href='about.html'">Our Story</button>
+                <button class="footer-btn" onclick="location.href='index.html'">Member Login</button>
+            </div>
+
+            <div class="footer-column">
+                <p>The Farm</p>
+                <hr>
+                <button class="footer-btn" onclick="location.href='availablehorses.html'">Available Horses</button>
+                <button class="footer-btn" onclick="location.href='TrainingGrounds.html'">Training Grounds</button>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <div class="copyright">
+                &copy; 2026 Alvarez - Roman Heritage Equestrian. All rights reserved.
+            </div>
+            <div class="social-icons">
+                <a href="https://www.facebook.com" target="_blank" title="Facebook"><i class="fab fa-facebook"></i></a>
+                <a href="https://www.youtube.com/@AlvarezRomanHeritageEquestrian" target="_blank" title="YouTube"><i class="fab fa-youtube"></i></a>
+            </div>
+        </div>
+    </footer>
+</div>
+
+</body>
+</html>
