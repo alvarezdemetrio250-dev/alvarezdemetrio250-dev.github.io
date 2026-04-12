@@ -365,7 +365,7 @@
 
     function continueAsGuest() {
       localStorage.setItem("guest", "true");
-      window.location.href = "Dashboard.html";
+      window.location.href = "dashboard.html";
     }
 
     // --- GOOGLE LOGIN ---
@@ -470,7 +470,7 @@
           console.log("SUCCESS: Token saved to storage.");
           
           // Make sure this matches your filename exactly (Capital D or lowercase d)
-          window.location.href = "Dashboard.html"; 
+          window.location.href = "dashboard.html"; 
         }
       } catch (error) {
         console.error("Login error:", error);
