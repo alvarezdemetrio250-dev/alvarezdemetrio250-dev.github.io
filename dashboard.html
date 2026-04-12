@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Alvarez - Roman Heritage Equestrian - Dashboard</title>
     <link rel="icon" href="images/logo.png" type="image/x-icon">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -331,6 +332,34 @@
         .btn-gold:hover { background: #e6c885; }
         .btn-outline { background: transparent; color: #b5aba1; border: 1px solid #5c4a3f; }
         .btn-outline:hover { color: white; border-color: #c5a059; background: rgba(197, 160, 89, 0.1); }
+
+        /* --- ADDITIONAL MOBILE RESPONSIVE TWEAKS --- */
+        @media (max-width: 768px) {
+            .navbar { flex-wrap: wrap; height: auto; padding: 15px; }
+            .navbar-center { 
+                position: static; transform: none; width: 100%; 
+                order: 3; margin-top: 15px; 
+            }
+            .search-container { width: 100%; }
+            .search-button { right: 40px; } /* Adjust for mobile spacing */
+            .microphone-button { right: 5px; }
+
+            .sub-navbar { 
+                overflow-x: auto; white-space: nowrap; 
+                justify-content: flex-start; padding: 10px; 
+            }
+            .sub-navbar a { padding: 8px 16px; font-size: 13px; }
+
+            .hero-container { height: 350px; }
+            .slide-text { font-size: 1.8rem; left: 20px; bottom: 60px; right: 20px; }
+            .slide-subtext { font-size: 1rem; left: 20px; bottom: 35px; }
+            
+            .info-text h2 { font-size: 2rem; }
+            .info-image-wrapper img { max-width: 100%; }
+
+            .navbar-right span { display: none; } /* Hide names on mobile navbar to save space */
+            .calendar-link span { display: inline-block !important; } /* Keep 'Events' visible */
+        }
     </style>
 </head>
 <body>
@@ -339,11 +368,11 @@
     <div class="navbar">
         <div class="navbar-left">
             <img src="images/logo.png" alt="Logo">
-            <a href="dashboard.html"><span>Alvarez - Roman Heritage Equestrian</span></a>
+            <a href="dashboard.html"><span>Alvarez Equestrian</span></a>
         </div>
         <div class="navbar-center">
             <div class="search-container">
-                <input type="text" id="searchInput" placeholder="What can we help you find today?">
+                <input type="text" id="searchInput" placeholder="Search...">
                 <button class="search-button" id="searchButton"><i class="fa-solid fa-search"></i></button>
                 <button class="microphone-button" id="micButton"><i class="fa-solid fa-microphone"></i></button>
             </div>
@@ -361,7 +390,7 @@
 
     <div class="sub-navbar">
         <a href="dashboard.html">Home</a>
-        <a href="enroll.html">Enroll Your Horse</a>
+        <a href="enroll.html">Enroll Horse</a>
         <a href="memberships.html">Memberships</a>
         <a href="about.html">Our Story</a>
         <a href="contact.html">Contact</a>
