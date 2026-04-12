@@ -480,6 +480,16 @@
         function openPlayer() { vModal.style.display = 'flex'; vPlayer.play(); vPlayer.muted = false; }
         function closePlayer() { vModal.style.display = 'none'; vPlayer.pause(); vPlayer.currentTime = 0; }
 
+        const params = new URLSearchParams(window.location.search);
+const googleToken = params.get("token");
+
+if (googleToken) {
+    localStorage.setItem("token", googleToken);
+
+    // clean URL so it doesn't keep re-triggering logic
+    window.history.replaceState({}, document.title, "dashboard.html");
+}
+
         /* --- AUTH & GUEST LOGIC --- */
         async function loadUser() {
             const isGuest = localStorage.getItem("guest");
