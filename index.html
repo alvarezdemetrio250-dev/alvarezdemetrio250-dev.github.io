@@ -3,6 +3,7 @@
 
 <head>
   <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Login - Alvarez Roman Heritage Equestrian</title>
 
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
@@ -25,6 +26,8 @@
       display: flex;
       justify-content: center;
       align-items: center;
+      /* Prevent scrolling on desktop, allow on small mobile if height is tight */
+      overflow-x: hidden;
     }
 
     .glass-card {
@@ -242,6 +245,36 @@
     #password-step,
     #signup-section {
       display: none;
+    }
+
+    /* --- MOBILE RESPONSIVE STYLES --- */
+    @media (max-width: 480px) {
+      body {
+        align-items: flex-start; /* Better for long forms on short screens */
+        padding: 20px;
+        height: auto;
+        min-height: 100vh;
+      }
+
+      .glass-card {
+        width: 100%; /* Take up full width on mobile */
+        max-width: 400px;
+        padding: 30px 20px;
+      }
+
+      h2 {
+        font-size: 24px;
+      }
+
+      .logo-img {
+        width: 70px;
+        height: 70px;
+      }
+      
+      /* Prevents zoom-on-focus for iOS */
+      .input-field {
+        font-size: 16px; 
+      }
     }
   </style>
 </head>
