@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Alvarez - Roman Heritage Equestrian - Dashboard</title>
+    <link rel="icon" href="images/logo.png" type="image/x-icon">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <style>
+        html, body {
+            margin: 0; padding: 0; height: 100%;
+            font-family: 'Roboto', sans-serif;
+            overflow-y: auto;
+            background-color: #141612; /* Dark background behind main content */
+        }
+        .page-wrapper { display: flex; flex-direction: column; min-height: 100vh; }
+
+        /* NAVBAR */
+        .navbar {
+            display: flex; align-items: center; justify-content: space-between;
+            background-color: #1e1e2f; padding: 10px 20px; color: white;
+            position: relative;
+            z-index: 100;
+        }
+        .navbar-left { display: flex; align-items: center; }
+        .navbar-left img { height: 40px; width: 40px; border-radius: 50%; object-fit: cover; margin-right: 12px; border: 2px solid #c5a059; }
+        .navbar-left a { color: white; text-decoration: none; }
+        .navbar-left span { font-size: 1.2rem; font-weight: bold; white-space: nowrap; font-family: 'Playfair Display', serif; letter-spacing: 0.5px;}
+
+        .navbar-center { position: absolute; left: 50%; transform: translateX(-50%); }
+
+        .search-container { position: relative; width: 500px; }
+        .search-container input {
+            width: 100%; padding: 10px 15px;
+            border-radius: 20px; border: none; outline: none;
+            font-size: 1rem; background: #2e2e40; color: white;
+        }
+        .search-container input::placeholder { color: #888; }
+        .search-button {
+            position: absolute; right: -25px; top: 50%; transform: translateY(-50%);
+            background: none; color: #888; cursor: pointer;
+            font-size: 1.2rem; padding: 8px; border: none; transition: 0.2s;
+        }
+        .search-button:hover { color: #c5a059; }
+        .microphone-button {
+            position: absolute; right: -65px; top: 50%; transform: translateY(-50%);
+            background: none; color: white; cursor: pointer;
+            font-size: 1.2rem; padding: 8px; border: none; transition: 0.2s;
+        }
+        .microphone-button:hover { color: #c5a059; }
+
+        /* RIGHT SIDE */
+        .navbar-right {
+            display: flex; align-items: center; position: relative; cursor: pointer;
+        }
+        .navbar-right span { margin-left: 8px; font-size: 1rem; }
+        .navbar-right a { color: white; text-decoration: none; display: flex; align-items: center; margin-right: 20px; transition: 0.2s; }
+        .navbar-right a i { margin-right: 5px; }
+        .navbar-right a:hover { color: #c5a059; }
+
+        #dropdownMenu {
+            display: none; position: absolute; right: 0; top: 45px;
+            background: #1e1e2f; padding: 10px; border-radius: 8px; z-index: 999;
+            border: 1px solid rgba(197, 160, 89, 0.3); box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+        }
+        #dropdownMenu div { padding: 10px 15px; color: white; cursor: pointer; border-radius: 4px; transition: 0.2s; white-space: nowrap; }
+        #dropdownMenu div:hover { background: #c5a059; color: #141612; font-weight: 500; }
+
+        /* UPGRADED SUB NAV */
+        .sub-navbar {
+            background-color: #232333;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            border-bottom: 2px solid #c5a059;
+        }
+        .sub-navbar a {
+            background: #4a3b32;
+            color: #fdfaf6;
+            text-decoration: none;
+            padding: 10px 24px;
+            border-radius: 6px;
+            font-size: 15px;
+            font-weight: 500;
+            border: 1px solid #5c4a3f;
+            transition: all 0.3s ease;
+        }
+        .sub-navbar a:hover {
+            background: #c5a059;
+            color: #141612;
+            border-color: #c5a059;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(197, 160, 89, 0.25);
+        }
+
+        /* HERO VIDEO SECTION */
+        .hero-container {
+            width: 100%;
+            height: 500px;
+            position: relative;
+            background: #111;
+            overflow: hidden;
+        }
+        .hero-container::after {
+            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(to top, rgba(0,0,0,0.8), rgba(0,0,0,0.2));
+            z-index: 2;
+            pointer-events: none;
+        }
+        
+        .video-container { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; }
+        .video-container video { width: 100%; height: 100%; object-fit: cover; }
+        
+        .slide-text {
+            position: absolute; bottom: 70px; left: 50px; z-index: 5;
+            color: #c5a059; font-size: 3rem; font-family: 'Playfair Display', serif;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+        }
+        .slide-subtext {
+            position: absolute; bottom: 40px; left: 52px; z-index: 5;
+            color: white; font-size: 1.2rem;
+        }
+
+        /* Middle Play Button */
+        .center-play-btn {
+            position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+            z-index: 10; background: rgba(197, 160, 89, 0.2); border: 2px solid #c5a059;
+            color: white; width: 90px; height: 90px; border-radius: 50%;
+            cursor: pointer; transition: 0.3s; font-size: 2.5rem;
+            display: flex; align-items: center; justify-content: center; backdrop-filter: blur(5px);
+        }
+        .center-play-btn:hover { background: #c5a059; color: #141612; transform: translate(-50%, -50%) scale(1.1); }
+
+        /* VIDEO PLAYER MODAL */
+        .video-modal {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.95); display: none; 
+            justify-content: center; align-items: center; z-index: 2000;
+        }
+        .video-modal-content {
+            width: 90%; max-width: 1000px; position: relative;
+            background: #000; border-radius: 12px; overflow: hidden;
+            border: 1px solid #c5a059; box-shadow: 0 0 30px rgba(197, 160, 89, 0.3);
+        }
+        .video-modal-content video { width: 100%; display: block; }
+        
+        .close-player {
+            position: absolute; top: 15px; right: 20px; background: rgba(255, 255, 255, 0.1); border: none;
+            color: white; font-size: 2rem; cursor: pointer; transition: 0.3s; width: 45px; height: 45px;
+            border-radius: 50%; display: flex; align-items: center; justify-content: center; z-index: 2010;
+        }
+        .close-player:hover { background: #ff6b6b; color: white; }
+
+
+        /* INFO SECTIONS */
+        .info-section {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            max-width: 1200px;
+            margin: 80px auto;
+            padding: 0 20px;
+            color: white;
+            position: relative;
+        }
+        .info-image-wrapper {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+        }
+        .info-image-wrapper img {
+            width: 100%;
+            max-width: 550px;
+            height: auto;
+            object-fit: cover;
+            display: block;
+            -webkit-mask-image: linear-gradient(to right, black 50%, transparent 100%);
+            mask-image: linear-gradient(to right, black 50%, transparent 100%);
+        }
+        .info-text {
+            flex: 1;
+            padding-left: 20px; 
+            z-index: 2;
+        }
+        .info-text h2 {
+            font-family: 'Playfair Display', serif;
+            color: #c5a059;
+            font-size: 2.8rem;
+            margin-top: 0;
+            margin-bottom: 20px;
+        }
+        .info-text p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #b5aba1;
+            margin-bottom: 20px;
+        }
+        .info-text .signature {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.6rem;
+            color: white;
+            font-style: italic;
+            margin-top: 30px;
+            margin-bottom: 20px;
+        }
+
+        .section-btn {
+            display: inline-block;
+            background-color: transparent;
+            color: #c5a059;
+            border: 2px solid #c5a059;
+            padding: 10px 28px;
+            font-size: 1.1rem;
+            font-weight: 500;
+            border-radius: 6px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            margin-top: 10px;
+        }
+        .section-btn:hover {
+            background-color: #c5a059;
+            color: #141612;
+            box-shadow: 0 4px 15px rgba(197, 160, 89, 0.3);
+        }
+
+        @media (max-width: 900px) {
+            .info-section {
+                flex-direction: column !important;
+            }
+            .info-text {
+                padding-right: 0 !important;
+                padding-left: 0 !important;
+                text-align: center;
+            }
+            .info-image-wrapper img {
+                -webkit-mask-image: linear-gradient(to bottom, black 50%, transparent 100%) !important;
+                mask-image: linear-gradient(to bottom, black 50%, transparent 100%) !important;
+            }
+        }
+
+        /* MODALS */
+        .modal {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.8); display: none; 
+            justify-content: center; align-items: center; z-index: 1000;
+            backdrop-filter: blur(5px);
+        }
+        .modal-content {
+            background: #1e1e2f; padding: 40px; border-radius: 12px;
+            text-align: center; position: relative; color: white;
+            border: 1px solid rgba(197, 160, 89, 0.5);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.6);
+            max-width: 450px; width: 90%;
+        }
+        .modal-content h2 { font-family: 'Playfair Display', serif; color: #c5a059; margin-top: 0; font-size: 24px;}
+        .close-btn {
+            position: absolute; top: 15px; right: 20px; background: none;
+            border: none; font-size: 1.2rem; cursor: pointer; color: #888; transition: 0.2s;
+        }
+        .close-btn:hover { color: #ff6b6b; }
+
+        .perks-list { text-align: left; margin: 25px 0; padding: 0; list-style: none; font-size: 15px; color: #b5aba1;}
+        .perks-list li { margin-bottom: 12px; }
+        .perks-list li i { color: #c5a059; margin-right: 10px; }
+        
+        .modal-btn {
+            padding: 12px 24px; border-radius: 6px; border: none; cursor: pointer;
+            font-size: 15px; font-weight: 500; transition: 0.3s; width: 100%; margin-bottom: 10px;
+        }
+        .btn-gold { background: #c5a059; color: #141612; }
+        .btn-gold:hover { background: #e6c885; }
+        .btn-outline { background: transparent; color: #b5aba1; border: 1px solid #5c4a3f; }
+        .btn-outline:hover { color: white; border-color: #c5a059; background: rgba(197, 160, 89, 0.1); }
+
+    </style>
+</head>
+<body>
+
+<div class="page-wrapper">
+
+    <div class="navbar">
+        <div class="navbar-left">
+            <img src="images/logo.png" alt="Logo">
+            <a href="dashboard.html"><span>Alvarez - Roman Heritage Equestrian</span></a>
+        </div>
+
+        <div class="navbar-center">
+            <div class="search-container">
+                <input type="text" id="searchInput" placeholder="What can we help you find today?">
+                <button class="search-button" id="searchButton"><i class="fa-solid fa-search"></i></button>
+                <button class="microphone-button" id="micButton"><i class="fa-solid fa-microphone"></i></button>
+            </div>
+        </div>
+
+        <div class="navbar-right" id="userMenu">
+            <a href="events.html" class="calendar-link">
+                <i class="fa-solid fa-calendar-days"></i><span>Events</span>
+            </a>
+
+            <i class="fas fa-user" style="margin-left: 15px;"></i>
+            <span id="usernameDisplay">Loading...</span>
+
+            <div id="dropdownMenu">
+                <div onclick="logout()" id="logoutText">Logout</div>
+                <div onclick="location.href='profile.html'" id="profileOption" style="display:none;">My Profile</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="sub-navbar">
+        <a href="dashboard.html">Home</a>
+        <a href="enroll.html">Enroll Your Horse</a>
+        <a href="Memberships.html">Memberships</a>
+        <a href="about.html">Our Story</a>
+        <a href="contact.html">Contact</a>
+    </div>
+
+    <div class="hero-container">
+        <div class="video-container">
+            <video id="heroVideo" autoplay muted loop playsinline>
+                <source src="slideshowvideo.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </div>
+        <button class="center-play-btn" onclick="openPlayer()"><i class="fa-solid fa-play"></i></button>
+        <div class="slide-text">Welcome To Alvarez - Roman Heritage Equestrian</div>
+        <div class="slide-subtext">Join our community of equestrian work</div>
+    </div>
+
+    <div id="videoModalPlayer" class="video-modal">
+        <div class="video-modal-content">
+            <button class="close-player" onclick="closePlayer()"><i class="fa-solid fa-xmark"></i></button>
+            <video id="mainVideoPlayer" controls>
+                <source src="slideshowvideo.mp4" type="video/mp4">
+            </video>
+        </div>
+    </div>
+
+
+    <div class="info-section">
+        <div class="info-image-wrapper">
+            <img src="images/logo.png" alt="Trainer Placeholder">
+        </div>
+        <div class="info-text">
+            <h2>Meet the Trainer</h2>
+            <p>With generations of equestrian heritage, our head trainer brings a wealth of knowledge, patience, and passion to Alvarez - Roman Heritage Equestrian. We believe in building a foundation of absolute trust and mutual respect between horse and rider.</p>
+            <p>Whether you are stepping into the stirrups for the first time or competing at an elite level, our personalized training programs are meticulously designed to unlock your full potential while honoring the timeless, classical traditions of horsemanship.</p>
+            <div class="signature">Alvarez Roman</div>
+            
+            <a href="contact.html" class="section-btn">Contact the Trainer</a>
+        </div>
+    </div>
+
+    <div class="info-section" style="flex-direction: row-reverse;">
+        <div class="info-image-wrapper">
+            <img src="images/logo.png" alt="Disciplines Placeholder" style="-webkit-mask-image: linear-gradient(to left, black 50%, transparent 100%); mask-image: linear-gradient(to left, black 50%, transparent 100%);">
+        </div>
+        <div class="info-text" style="padding-left: 0; padding-right: 40px;">
+            <h2>Interested in bringing your horse to be trained?</h2>
+            <p>We offer specialized training to meet your horse's needs across a variety of equestrian disciplines. Our training programs welcome both beginner and more advanced horses aiming for top levels of achievement.</p>
+            <p>From young to mature horses, inexperienced to experienced horses, and small to bigger horses, Demetrio Alvarez will create the perfect program for your horse to ensure they learn and progress.</p>
+            
+            <a href="Enroll.html" class="section-btn">Enroll Your Horse</a>
+        </div>
+    </div>
+
+    <footer style="background-color: #1e1e2f; color: white; padding: 60px 20px 60px 20px; text-align: center; position: relative; height: auto; min-height: 420px; margin-top: auto; border-top: 2px solid #c5a059;">  
+        <div style="position: absolute; top: 20px; left: 50%; transform: translateX(-50%);">
+            <img src="images/logo.png" alt="Logo" style="width: 80px; height: 80px; border-radius: 50%; border: 4px solid #c5a059; object-fit: cover;">
+        </div>
+
+        <div style="margin-top: 140px; display: flex; justify-content: center; gap: 40px; flex-wrap: wrap;">
+            <div style="text-align: left; width: 200px; display: flex; flex-direction: column;">
+                <p style="font-size: 1.2rem; font-weight: bold; color:#c5a059;">Quick Links</p>
+                <hr style="width: 100%; border: 1px solid rgba(255,255,255,0.2);">
+                <button onclick="location.href='dashboard.html'" style="background:none;color:white;border:1px solid rgba(255,255,255,0.3);padding:8px;margin-top:10px; cursor: pointer; transition: 0.3s;" onmouseover="this.style.borderColor='#c5a059'; this.style.color='#c5a059';" onmouseout="this.style.borderColor='rgba(255,255,255,0.3)'; this.style.color='white';">Home</button>
+                <button onclick="location.href='Memberships.html'" style="background:none;color:white;border:1px solid rgba(255,255,255,0.3);padding:8px;margin-top:10px; cursor: pointer; transition: 0.3s;" onmouseover="this.style.borderColor='#c5a059'; this.style.color='#c5a059';" onmouseout="this.style.borderColor='rgba(255,255,255,0.3)'; this.style.color='white';">Memberships</button>
+                <button onclick="location.href='Enroll.html'" style="background:none;color:white;border:1px solid rgba(255,255,255,0.3);padding:8px;margin-top:10px; cursor: pointer; transition: 0.3s;" onmouseover="this.style.borderColor='#c5a059'; this.style.color='#c5a059';" onmouseout="this.style.borderColor='rgba(255,255,255,0.3)'; this.style.color='white';">Enroll Your Horse</button>
+                <button onclick="location.href='contact.html'" style="background:none;color:white;border:1px solid rgba(255,255,255,0.3);padding:8px;margin-top:10px; cursor: pointer; transition: 0.3s;" onmouseover="this.style.borderColor='#c5a059'; this.style.color='#c5a059';" onmouseout="this.style.borderColor='rgba(255,255,255,0.3)'; this.style.color='white';">Contact</button>
+            </div>
+
+            <div style="text-align: left; width: 200px; display: flex; flex-direction: column;">
+                <p style="font-size: 1.2rem; font-weight: bold; color:#c5a059;">Important</p>
+                <hr style="width: 100%; border: 1px solid rgba(255,255,255,0.2);">
+                <button onclick="location.href='events.html'" style="background:none;color:white;border:1px solid rgba(255,255,255,0.3);padding:8px;margin-top:10px; cursor: pointer; transition: 0.3s;" onmouseover="this.style.borderColor='#c5a059'; this.style.color='#c5a059';" onmouseout="this.style.borderColor='rgba(255,255,255,0.3)'; this.style.color='white';">Events</button>
+                <button onclick="location.href='news.html'" style="background:none;color:white;border:1px solid rgba(255,255,255,0.3);padding:8px;margin-top:10px; cursor: pointer; transition: 0.3s;" onmouseover="this.style.borderColor='#c5a059'; this.style.color='#c5a059';" onmouseout="this.style.borderColor='rgba(255,255,255,0.3)'; this.style.color='white';">News</button>
+            </div>
+
+            <div style="text-align: left; width: 200px; display: flex; flex-direction: column;">
+                <p style="font-size: 1.2rem; font-weight: bold; color:#c5a059;">Useful Shortcuts</p>
+                <hr style="width: 100%; border: 1px solid rgba(255,255,255,0.2);">
+                <button onclick="location.href='about.html'" style="background:none;color:white;border:1px solid rgba(255,255,255,0.3);padding:8px;margin-top:10px; cursor: pointer; transition: 0.3s;" onmouseover="this.style.borderColor='#c5a059'; this.style.color='#c5a059';" onmouseout="this.style.borderColor='rgba(255,255,255,0.3)'; this.style.color='white';">Our Story</button>
+                <button onclick="location.href='index.html'" style="background:none;color:white;border:1px solid rgba(255,255,255,0.3);padding:8px;margin-top:10px; cursor: pointer; transition: 0.3s;" onmouseover="this.style.borderColor='#c5a059'; this.style.color='#c5a059';" onmouseout="this.style.borderColor='rgba(255,255,255,0.3)'; this.style.color='white';">Login/Signup</button>
+            </div>
+
+            <div style="text-align: left; width: 200px; display: flex; flex-direction: column;">
+                <p style="font-size: 1.2rem; font-weight: bold; color:#c5a059;">Around The Farm</p>
+                <hr style="width: 100%; border: 1px solid rgba(255,255,255,0.2);">
+                <button onclick="location.href='availablehorses.html'" style="background:none;color:white;border:1px solid rgba(255,255,255,0.3);padding:8px;margin-top:10px; cursor: pointer; transition: 0.3s;" onmouseover="this.style.borderColor='#c5a059'; this.style.color='#c5a059';" onmouseout="this.style.borderColor='rgba(255,255,255,0.3)'; this.style.color='white';">Our Horses</button>
+                <button onclick="location.href='TrainingGrounds.html'" style="background:none;color:white;border:1px solid rgba(255,255,255,0.3);padding:8px;margin-top:10px; cursor: pointer; transition: 0.3s;" onmouseover="this.style.borderColor='#c5a059'; this.style.color='#c5a059';" onmouseout="this.style.borderColor='rgba(255,255,255,0.3)'; this.style.color='white';">Training Grounds</button>
+            </div>
+        </div>
+
+        <div style="position: absolute; bottom: 10px; right: 20px;">
+            <a href="https://www.facebook.com/demetrio.alvarez.54" target="_blank" style="color: #888; margin: 0 10px; font-size: 1.2rem; transition: 0.3s;" onmouseover="this.style.color='#c5a059';" onmouseout="this.style.color='#888';"><i class="fab fa-facebook"></i></a>
+            <a href="https://www.youtube.com/@AlvarezRomanHeritageEquestrian" target="_blank" style="color: #888; margin: 0 10px; font-size: 1.2rem; transition: 0.3s;" onmouseover="this.style.color='#c5a059';" onmouseout="this.style.color='#888';"><i class="fab fa-youtube"></i></a>
+        </div>
+
+        <div style="position: absolute; bottom: 10px; left: 20px;">
+            <p style="font-size: 0.9rem; color: #888;">&copy; 2026 Alvarez - Roman Heritage Equestrian. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <div id="talkModal" class="modal">
+        <div class="modal-content">
+            <button class="close-btn" id="closeVoiceModal"><i class="fa-solid fa-xmark"></i></button>
+            <h2 style="margin-top: 10px;"><i class="fa-solid fa-microphone" style="margin-right: 10px;"></i>Listening</h2>
+            <p id="voiceStatus" style="color: #b5aba1;">Talk to search...</p>
+        </div>
+    </div>
+
+    <div id="guestModal" class="modal">
+        <div class="modal-content">
+            <button class="close-btn" onclick="document.getElementById('guestModal').style.display='none'"><i class="fa-solid fa-xmark"></i></button>
+            <h2>Unlock More Benefits</h2>
+            <p style="color: #e2e8f0; margin-top: 5px;">Welcome to the Alvarez - Roman Heritage Equestrian website! An account is not required to use our website but for the perks that are listed below you are required to sign up for a membership and an account.</p>
+            
+            <ul class="perks-list">
+                <li><i class="fa-solid fa-video"></i> Watch training videos and sessions online</li>
+                <li><i class="fa-solid fa-bell"></i> Get notifiactions via email when videos come out</li>
+            </ul>
+
+            <button class="modal-btn btn-gold" onclick="window.location.href='index.html'">Create Account / Log In</button>
+            <button class="modal-btn btn-outline" onclick="document.getElementById('guestModal').style.display='none'">Continue as Guest</button>
+        </div>
+    </div>
+
+        <script>
+  /* --- MODAL PLAYER LOGIC --- */
+  const vModal = document.getElementById('videoModalPlayer');
+  const vPlayer = document.getElementById('mainVideoPlayer');
+
+  function openPlayer() {
+    vModal.style.display = 'flex';
+    vPlayer.play();
+    vPlayer.muted = false;
+  }
+
+  function closePlayer() {
+    vModal.style.display = 'none';
+    vPlayer.pause();
+    vPlayer.currentTime = 0;
+  }
+
+  /* --- AUTH & GUEST LOGIC --- */
+  async function loadUser() {
+    const isGuest = localStorage.getItem("guest");
+    // This is your live Render backend URL
+    const API_URL = "https://login-backend-ny6x.onrender.com";
+
+    // 1. Check if the user is a Guest
+    if (isGuest === "true") {
+      document.getElementById("usernameDisplay").innerText = "Guest";
+      document.getElementById("logoutText").innerText = "Sign In / Sign Up";
+
+      document.getElementById("userMenu").onclick = () => {
+        const dd = document.getElementById("dropdownMenu");
+        dd.style.display = dd.style.display === "block" ? "none" : "block";
+      };
+
+      document.getElementById('guestModal').style.display = 'flex';
+      return;
+    }
+
+    // 2. Check for Token (Must be lowercase 'token' to match index.html)
+    const token = localStorage.getItem("token");
+    if (!token) {
+      console.log("No token found. Redirecting to login...");
+      window.location.href = "index.html";
+      return;
+    }
+
+    try {
+      // 3. Fetch user data from Render
+      const res = await fetch(`${API_URL}/me`, {
+        method: "GET",
+        headers: {
+          "Authorization": "Bearer " + token,
+          "Content-Type": "application/json"
+        }
+      });
+
+      if (!res.ok) {
+        console.log("Session expired or invalid token.");
+        localStorage.removeItem("token");
+        window.location.href = "index.html";
+        return;
+      }
+
+      const data = await res.json();
+
+      // 4. Update UI with the user's name
+      document.getElementById("usernameDisplay").innerText = data.fullName;
+      document.getElementById("profileOption").style.display = "block";
+
+      document.getElementById("userMenu").onclick = () => {
+        const dd = document.getElementById("dropdownMenu");
+        dd.style.display = dd.style.display === "block" ? "none" : "block";
+      };
+
+    } catch (err) {
+      // 5. Handle Network Error (usually because Render is waking up)
+      console.error("Connection Error:", err);
+      document.getElementById("usernameDisplay").innerText = "Waking up server...";
+      
+      // Try again in 5 seconds instead of kicking the user out
+      setTimeout(loadUser, 5000);
+    }
+  }
+
+  function logout() {
+    localStorage.removeItem("token");
+    localStorage.removeItem("guest");
+    window.location.href = "index.html";
+  }
+
+  // Run the user check immediately on page load
+  loadUser();
+
+  /* --- VOICE SEARCH LOGIC --- */
+  const micBtn = document.getElementById('micButton');
+  const voiceModal = document.getElementById('talkModal');
+  const voiceInput = document.getElementById('searchInput');
+  const voiceStatus = document.getElementById('voiceStatus');
+  const closeVoiceBtn = document.getElementById('closeVoiceModal');
+
+  if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) {
+    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+    const recognition = new SpeechRecognition();
+    recognition.lang = 'en-US';
+    recognition.continuous = false;
+
+    micBtn.onclick = () => {
+      voiceModal.style.display = 'flex';
+      voiceStatus.innerText = "Listening...";
+      recognition.start();
+    };
+
+    recognition.onresult = (event) => {
+      const transcript = event.results[0][0].transcript;
+      voiceInput.value = transcript;
+      voiceStatus.innerText = "Searching for: " + transcript;
+      setTimeout(() => {
+        voiceModal.style.display = 'none';
+        window.location.href = `searchResults.html?q=${encodeURIComponent(transcript)}`;
+      }, 1000);
+    };
+
+    closeVoiceBtn.onclick = () => {
+      recognition.stop();
+      voiceModal.style.display = 'none';
+    };
+  }
+
+  /* --- SEARCHBAR TYPEWRITER EFFECT --- */
+  const placeholderText = "What can we help you find today?";
+  let charIndex = 0;
+
+  function typeEffect() {
+    if (charIndex <= placeholderText.length) {
+      voiceInput.placeholder = placeholderText.slice(0, charIndex++);
+      setTimeout(typeEffect, 70);
+    } else {
+      setTimeout(() => {
+        charIndex = 0;
+        typeEffect();
+      }, 3000);
+    }
+  }
+  typeEffect();
+
+  document.getElementById("searchButton").onclick = () => {
+    const q = voiceInput.value.trim();
+    if (q) window.location.href = `searchResults.html?q=${encodeURIComponent(q)}`;
+  };
+</script>
+
+</div>
+</body>
+</html>

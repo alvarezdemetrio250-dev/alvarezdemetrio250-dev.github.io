@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Events & Calendar - Alvarez - Roman Heritage Equestrian</title>
+    <link rel="icon" href="images/logo.png" type="image/x-icon">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <style>
+        html, body {
+            margin: 0; padding: 0; height: 100%;
+            font-family: 'Roboto', sans-serif;
+            background-color: #141612;
+            color: white;
+            overflow-x: hidden;
+        }
+        .page-wrapper { display: flex; flex-direction: column; min-height: 100vh; }
+
+        /* NAVBARS */
+        .navbar {
+            display: flex; align-items: center; justify-content: space-between;
+            background-color: #1e1e2f; padding: 10px 20px; color: white;
+            position: relative; z-index: 100;
+        }
+        .navbar-left { display: flex; align-items: center; }
+        .navbar-left img { height: 40px; width: 40px; border-radius: 50%; object-fit: cover; margin-right: 12px; border: 2px solid #c5a059; }
+        .navbar-left a { color: white; text-decoration: none; font-family: 'Playfair Display', serif; font-weight: bold; font-size: 1.2rem; }
+        
+        .sub-navbar {
+            background-color: #232333; padding: 15px 20px;
+            display: flex; justify-content: center; gap: 20px; border-bottom: 2px solid #c5a059;
+        }
+        .sub-navbar a {
+            background: #4a3b32; color: #fdfaf6; text-decoration: none;
+            padding: 10px 24px; border-radius: 6px; font-size: 15px; transition: 0.3s;
+        }
+        .sub-navbar a:hover { background: #c5a059; color: #141612; }
+
+        /* MAIN CONTENT AREA */
+        .content-section {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            padding: 80px 20px;
+        }
+
+        .events-layout {
+            max-width: 1200px;
+            width: 100%;
+            display: grid;
+            grid-template-columns: 380px 1fr;
+            gap: 60px;
+            align-items: start;
+        }
+
+        /* CALENDAR STYLES */
+        .calendar-card {
+            background: #1e1e2f;
+            padding: 30px;
+            border-radius: 12px;
+            border: 1px solid rgba(197, 160, 89, 0.3);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+        }
+        .calendar-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+            color: #c5a059;
+            font-family: 'Playfair Display', serif;
+            font-size: 1.2rem;
+        }
+        .calendar-header i { cursor: pointer; padding: 5px; transition: 0.2s; }
+        .calendar-header i:hover { color: white; }
+
+        .calendar-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            text-align: center;
+            gap: 8px;
+        }
+        .day-name { font-size: 0.75rem; color: #888; font-weight: bold; padding-bottom: 12px; }
+        
+        .calendar-day {
+            padding: 12px 0;
+            font-size: 0.95rem;
+            color: #b5aba1;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: 0.2s;
+            border: 1px solid transparent;
+        }
+        .calendar-day:hover:not(.empty) {
+            background: rgba(255, 255, 255, 0.05);
+            color: white;
+        }
+        .calendar-day.empty { cursor: default; }
+
+        /* CURRENT/SELECTED DATE */
+        .calendar-day.selected {
+            background: #c5a059 !important;
+            color: #141612 !important;
+            font-weight: bold;
+        }
+        
+        .calendar-day.today {
+            border: 1px solid #c5a059;
+            color: #c5a059;
+        }
+
+        /* EVENT FEED STYLES */
+        .events-feed h2 {
+            font-family: 'Playfair Display', serif;
+            color: #c5a059;
+            margin: 0 0 35px 0;
+            font-size: 2.5rem;
+        }
+        .no-events-msg {
+            background: #1e1e2f;
+            padding: 40px;
+            border-radius: 10px;
+            border: 1px dashed rgba(197, 160, 89, 0.3);
+            text-align: center;
+            color: #888;
+        }
+        .no-events-msg i {
+            display: block;
+            font-size: 3rem;
+            color: #4a3b32;
+            margin-bottom: 15px;
+        }
+
+        /* FOOTER */
+        footer {
+            background-color: #1e1e2f; color: white; padding: 60px 20px;
+            text-align: center; position: relative; margin-top: auto; border-top: 2px solid #c5a059;
+        }
+        .footer-logo {
+            position: absolute; top: 20px; left: 50%; transform: translateX(-50%);
+            width: 80px; height: 80px; border-radius: 50%; border: 4px solid #c5a059; object-fit: cover;
+        }
+        .footer-links-container {
+            margin-top: 140px; display: flex; justify-content: center; gap: 40px; flex-wrap: wrap;
+        }
+        .footer-column { text-align: left; width: 200px; display: flex; flex-direction: column; }
+        .footer-column p { font-size: 1.2rem; font-weight: bold; color:#c5a059; margin-bottom: 10px; }
+        .footer-column hr { width: 100%; border: 1px solid rgba(255,255,255,0.1); margin-bottom: 15px; }
+        .footer-btn {
+            background:none; color:white; border:1px solid rgba(255,255,255,0.3);
+            padding:8px; margin-top:10px; cursor: pointer; transition: 0.3s; text-align: left;
+        }
+        .footer-btn:hover { border-color:#c5a059; color:#c5a059; }
+        .social-icons-footer { position: absolute; bottom: 10px; right: 20px; }
+        .social-icons-footer a { color: #888; margin: 0 10px; font-size: 1.2rem; transition: 0.3s; }
+        .social-icons-footer a:hover { color: #c5a059; }
+        .copyright { position: absolute; bottom: 10px; left: 20px; font-size: 0.9rem; color: #888; }
+    </style>
+</head>
+<body>
+
+<div class="page-wrapper">
+    <div class="navbar">
+        <div class="navbar-left">
+            <img src="images/logo.png" alt="Logo">
+            <a href="dashboard.html">Alvarez - Roman Heritage Equestrian</a>
+        </div>
+        <div class="navbar-right">
+            <a href="events.html" style="color: #c5a059;"><i class="fa-solid fa-calendar-days"></i><span style="margin-left:8px">Events</span></a>
+            <i class="fas fa-user" style="margin-left: 15px;"></i>
+            <span style="margin-left:8px">Profile</span>
+        </div>
+    </div>
+
+    <div class="sub-navbar">
+        <a href="dashboard.html">Home</a>
+        <a href="Enroll.html">Enroll Your Horse</a>
+        <a href="Memberships.html">Memberships</a>
+        <a href="about.html">Our Story</a>
+        <a href="contact.html">Contact</a>
+    </div>
+
+    <div class="content-section">
+        <div class="events-layout">
+            <aside class="calendar-card">
+                <div class="calendar-header">
+                    <i class="fa-solid fa-chevron-left" id="prevMonth"></i>
+                    <span id="monthDisplay">LOADING...</span>
+                    <i class="fa-solid fa-chevron-right" id="nextMonth"></i>
+                </div>
+                <div class="calendar-grid" id="calendarGrid"></div>
+                <p style="font-size: 0.8rem; color: #888; margin-top: 25px; text-align: center;">Gold border indicates today's date.</p>
+            </aside>
+
+            <main class="events-feed">
+                <h2>Upcoming and Current Events</h2>
+                <div class="no-events-msg">
+                    <i class="fa-solid fa-calendar-xmark"></i>
+                    <p>There are currently no events scheduled at this time.</p>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <footer>
+        <img src="images/logo.png" alt="Logo" class="footer-logo">
+        <div class="footer-links-container">
+            <div class="footer-column">
+                <p>Quick Links</p>
+                <hr>
+                <button class="footer-btn" onclick="location.href='dashboard.html'">Home</button>
+                <button class="footer-btn" onclick="location.href='Memberships.html'">Memberships</button>
+                <button class="footer-btn" onclick="location.href='Enroll.html'">Enroll Your Horse</button>
+                <button class="footer-btn" onclick="location.href='contact.html'">Contact</button>
+            </div>
+            <div class="footer-column">
+                <p>Important</p>
+                <hr>
+                <button class="footer-btn" onclick="location.href='events.html'">Events</button>
+                <button class="footer-btn" onclick="location.href='news.html'">News</button>
+            </div>
+            <div class="footer-column">
+                <p>Useful Shortcuts</p>
+                <hr>
+                <button class="footer-btn" onclick="location.href='about.html'">Our Story</button>
+                <button class="footer-btn" onclick="location.href='index.html'">Login/Signup</button>
+            </div>
+            <div class="footer-column">
+                <p>Around The Farm</p>
+                <hr>
+                <button class="footer-btn" onclick="location.href='availablehorses.html'">Our Horses</button>
+                <button class="footer-btn" onclick="location.href='TrainingGrounds.html'">Training Grounds</button>
+            </div>
+        </div>
+        <div class="social-icons-footer">
+            <a href="#"><i class="fab fa-facebook"></i></a>
+            <a href="#"><i class="fab fa-youtube"></i></a>
+        </div>
+        <div class="copyright">
+            <p>&copy; 2026 Alvarez - Roman Heritage Equestrian. All rights reserved.</p>
+        </div>
+    </footer>
+</div>
+
+<script>
+    const monthDisplay = document.getElementById('monthDisplay');
+    const calendarGrid = document.getElementById('calendarGrid');
+    const prevBtn = document.getElementById('prevMonth');
+    const nextBtn = document.getElementById('nextMonth');
+
+    // Real-time tracking
+    const today = new Date();
+    let displayedDate = new Date(today.getFullYear(), today.getMonth(), 1);
+
+    const months = ["JANUARY", "FEBRUARY", "MARCH", "APRIL", "MAY", "JUNE", "JULY", "AUGUST", "SEPTEMBER", "OCTOBER", "NOVEMBER", "DECEMBER"];
+
+    function renderCalendar() {
+        calendarGrid.innerHTML = '';
+        
+        const dayNames = ['S', 'M', 'T', 'W', 'T', 'F', 'S'];
+        dayNames.forEach(day => {
+            const div = document.createElement('div');
+            div.classList.add('day-name');
+            div.innerText = day;
+            calendarGrid.appendChild(div);
+        });
+
+        const year = displayedDate.getFullYear();
+        const month = displayedDate.getMonth();
+        monthDisplay.innerText = `${months[month]} ${year}`;
+
+        const firstDay = new Date(year, month, 1).getDay();
+        const daysInMonth = new Date(year, month + 1, 0).getDate();
+
+        for (let i = 0; i < firstDay; i++) {
+            const emptyDiv = document.createElement('div');
+            emptyDiv.classList.add('calendar-day', 'empty');
+            calendarGrid.appendChild(emptyDiv);
+        }
+
+        for (let day = 1; day <= daysInMonth; day++) {
+            const dayDiv = document.createElement('div');
+            dayDiv.classList.add('calendar-day');
+            dayDiv.innerText = day;
+
+            // Check if this is literally today's date
+            const isToday = day === today.getDate() && 
+                            month === today.getMonth() && 
+                            year === today.getFullYear();
+
+            if (isToday) {
+                dayDiv.classList.add('today', 'selected'); // Always selected by default if it is today
+            }
+
+            dayDiv.onclick = () => {
+                document.querySelectorAll('.calendar-day').forEach(d => d.classList.remove('selected'));
+                dayDiv.classList.add('selected');
+            };
+
+            calendarGrid.appendChild(dayDiv);
+        }
+    }
+
+    prevBtn.onclick = () => {
+        displayedDate.setMonth(displayedDate.getMonth() - 1);
+        renderCalendar();
+    };
+
+    nextBtn.onclick = () => {
+        displayedDate.setMonth(displayedDate.getMonth() + 1);
+        renderCalendar();
+    };
+
+    renderCalendar();
+</script>
+
+</body>
+</html>
