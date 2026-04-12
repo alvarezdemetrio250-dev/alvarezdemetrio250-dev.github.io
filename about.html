@@ -33,9 +33,19 @@
         .navbar-left img { height: 40px; width: 40px; border-radius: 50%; object-fit: cover; margin-right: 12px; border: 2px solid #c5a059; }
         .navbar-left a { color: white; text-decoration: none; font-family: 'Playfair Display', serif; font-weight: bold; font-size: 1.2rem; }
         
-        .navbar-right { display: flex; align-items: center; z-index: 102; }
-        .navbar-right a { color: white; text-decoration: none; transition: 0.3s; display: flex; align-items: center; }
+        .navbar-right { display: flex; align-items: center; position: relative; cursor: pointer; z-index: 102; }
+        .navbar-right a { color: white; text-decoration: none; transition: 0.3s; display: flex; align-items: center; margin-right: 20px; }
         .navbar-right a:hover { color: #c5a059; }
+        .navbar-right span { margin-left: 8px; font-size: 1rem; }
+
+        /* USER DROPDOWN MENU */
+        #dropdownMenu {
+            display: none; position: absolute; right: 0; top: 45px;
+            background: #1e1e2f; padding: 10px; border-radius: 8px; z-index: 999;
+            border: 1px solid rgba(197, 160, 89, 0.3); box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+        }
+        #dropdownMenu div { padding: 10px 15px; color: white; cursor: pointer; border-radius: 4px; transition: 0.2s; white-space: nowrap; }
+        #dropdownMenu div:hover { background: #c5a059; color: #141612; font-weight: 500; }
 
         /* HAMBURGER BUTTON */
         .menu-toggle {
@@ -117,7 +127,7 @@
             font-family: 'Playfair Display', serif;
         }
 
-        /* FOOTER - DASHBOARD MATCH */
+        /* FOOTER - EXACT DASHBOARD MATCH */
         footer {
             background-color: #1e1e2f;
             padding: 60px 20px 30px;
@@ -129,56 +139,19 @@
             align-items: center;
         }
         .footer-logo {
-            height: 70px;
-            width: 70px;
-            border-radius: 50%;
-            border: 2px solid #c5a059;
-            margin-bottom: 40px;
-            object-fit: cover;
+            height: 70px; width: 70px; border-radius: 50%;
+            border: 2px solid #c5a059; margin-bottom: 40px; object-fit: cover;
         }
         .footer-links-container {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 40px;
-            max-width: 1200px;
-            width: 100%;
-            margin-bottom: 40px;
+            display: grid; grid-template-columns: repeat(4, 1fr);
+            gap: 40px; max-width: 1200px; width: 100%; margin-bottom: 40px;
         }
-        .footer-column p {
-            font-family: 'Playfair Display', serif;
-            color: #c5a059;
-            font-size: 1.2rem;
-            margin: 0 0 10px 0;
-            font-weight: bold;
-        }
-        .footer-column hr {
-            border: none;
-            border-top: 1px solid rgba(197, 160, 89, 0.3);
-            margin-bottom: 15px;
-        }
-        .footer-btn {
-            display: block;
-            background: none;
-            border: none;
-            color: #b5aba1;
-            padding: 8px 0;
-            font-size: 14px;
-            cursor: pointer;
-            text-align: left;
-            transition: 0.3s;
-            width: 100%;
-        }
+        .footer-column p { font-family: 'Playfair Display', serif; color: #c5a059; font-size: 1.2rem; margin: 0 0 10px 0; font-weight: bold; }
+        .footer-column hr { border: none; border-top: 1px solid rgba(197, 160, 89, 0.3); margin-bottom: 15px; }
+        .footer-btn { display: block; background: none; border: none; color: #b5aba1; padding: 8px 0; font-size: 14px; cursor: pointer; text-align: left; transition: 0.3s; width: 100%; }
         .footer-btn:hover { color: #c5a059; transform: translateX(5px); }
 
-        .footer-bottom {
-            width: 100%;
-            max-width: 1200px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-top: 1px solid rgba(255,255,255,0.1);
-            padding-top: 20px;
-        }
+        .footer-bottom { width: 100%; max-width: 1200px; display: flex; justify-content: space-between; align-items: center; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px; }
         .copyright { color: #888; font-size: 0.9rem; }
         .social-icons a { color: white; font-size: 1.5rem; margin-left: 20px; transition: 0.3s; }
         .social-icons a:hover { color: #c5a059; }
@@ -191,7 +164,7 @@
             
             .navbar-right { order: 2; margin-right: 0; }
             .navbar-right span { display: none; }
-            .navbar-right i.fa-calendar-days { display: none; } /* Hide icon to save space */
+            .navbar-right a { display: none !important; } /* Hide events link on mobile top bar */
             
             .menu-toggle { display: block; order: 3; margin-left: 10px; }
 
@@ -226,10 +199,14 @@
             <img src="images/logo.png" alt="Logo">
             <a href="dashboard.html">Alvarez - Roman Heritage Equestrian</a>
         </div>
-        <div class="navbar-right">
+        <div class="navbar-right" id="userMenu" onclick="toggleUserDropdown()">
             <a href="events.html"><i class="fa-solid fa-calendar-days"></i><span style="margin-left:8px">Events</span></a>
             <i class="fas fa-user" style="margin-left: 15px;"></i>
-            <span style="margin-left:8px">Profile</span>
+            <span id="usernameDisplay" style="margin-left:8px">Profile</span>
+            <div id="dropdownMenu">
+                <div onclick="location.href='profile.html'">My Profile</div>
+                <div onclick="logout()">Logout</div>
+            </div>
         </div>
         <button class="menu-toggle" onclick="toggleNav()"><i class="fa-solid fa-bars"></i></button>
     </div>
@@ -313,6 +290,33 @@
     function toggleNav() {
         document.getElementById("subNavbar").classList.toggle("active");
     }
+
+    function toggleUserDropdown() {
+        const dd = document.getElementById("dropdownMenu");
+        dd.style.display = dd.style.display === "block" ? "none" : "block";
+    }
+
+    function logout() {
+        localStorage.removeItem("token");
+        localStorage.removeItem("guest");
+        window.location.href = "index.html";
+    }
+
+    // Optional: Logic to display username if token exists
+    window.onload = async function() {
+        const token = localStorage.getItem("token");
+        if (token) {
+            try {
+                const res = await fetch("https://login-backend-ny6x.onrender.com/me", {
+                    headers: { "Authorization": "Bearer " + token }
+                });
+                if (res.ok) {
+                    const data = await res.json();
+                    document.getElementById("usernameDisplay").innerText = data.fullName.split(' ')[0];
+                }
+            } catch (err) { console.log("User not logged in"); }
+        }
+    };
 </script>
 
 </body>
