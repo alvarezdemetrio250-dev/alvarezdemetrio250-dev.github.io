@@ -11,7 +11,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
     <style>
-        /* LOCK HORIZONTAL SCROLL */
         html, body {
             margin: 0; padding: 0; height: 100%;
             font-family: 'Roboto', sans-serif;
@@ -23,226 +22,79 @@
         }
         .page-wrapper { display: flex; flex-direction: column; min-height: 100vh; width: 100%; overflow-x: hidden; }
 
-        /* NAVBAR - DASHBOARD MATCH */
+        /* NAVBAR */
         .navbar {
             display: flex; align-items: center; justify-content: space-between;
             background-color: #1e1e2f; padding: 10px 20px; color: white;
             position: relative; z-index: 100;
         }
-        .navbar-left { display: flex; align-items: center; z-index: 102; flex: 1; }
+        .navbar-left { display: flex; align-items: center; flex: 1; }
         .navbar-left img { height: 40px; width: 40px; border-radius: 50%; object-fit: cover; margin-right: 12px; border: 2px solid #c5a059; }
         .navbar-left a { color: white; text-decoration: none; }
-        .navbar-left span { font-size: 1.2rem; font-weight: bold; white-space: nowrap; font-family: 'Playfair Display', serif; letter-spacing: 0.5px;}
+        .navbar-left span { font-size: 1.2rem; font-weight: bold; font-family: 'Playfair Display', serif; }
 
-        /* HAMBURGER BUTTON */
-        .menu-toggle {
-            display: none;
-            background: none; border: none; color: white;
-            font-size: 1.5rem; cursor: pointer;
-            z-index: 102;
-        }
-
-        .navbar-center { position: absolute; left: 50%; transform: translateX(-50%); z-index: 101; }
-        .search-container { position: relative; width: 500px; }
+        .navbar-center { position: absolute; left: 50%; transform: translateX(-50%); }
+        .search-container { position: relative; width: 400px; }
         .search-container input {
             width: 100%; padding: 10px 15px;
             border-radius: 20px; border: none; outline: none;
-            font-size: 1rem; background: #2e2e40; color: white;
+            background: #2e2e40; color: white;
         }
-        .navbar-right { display: flex; align-items: center; position: relative; cursor: pointer; z-index: 102; }
-        .navbar-right span { margin-left: 8px; font-size: 1rem; }
 
+        .navbar-right { display: flex; align-items: center; cursor: pointer; position: relative; }
         #dropdownMenu {
             display: none; position: absolute; right: 0; top: 45px;
             background: #1e1e2f; padding: 10px; border-radius: 8px; z-index: 999;
-            border: 1px solid rgba(197, 160, 89, 0.3); box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+            border: 1px solid rgba(197, 160, 89, 0.3);
         }
-        #dropdownMenu div { padding: 10px 15px; color: white; cursor: pointer; border-radius: 4px; transition: 0.2s; white-space: nowrap; }
-        #dropdownMenu div:hover { background: #c5a059; color: #141612; font-weight: 500; }
+        #dropdownMenu div { padding: 10px 15px; white-space: nowrap; }
+        #dropdownMenu div:hover { background: #c5a059; color: #141612; }
 
-        /* SUB-NAVBAR - DASHBOARD MATCH */
         .sub-navbar {
-            background-color: #232333; padding: 15px 20px;
+            background-color: #232333; padding: 15px;
             display: flex; justify-content: center; gap: 20px; border-bottom: 2px solid #c5a059;
-            transition: max-height 0.3s ease-in-out;
         }
         .sub-navbar a {
             background: #4a3b32; color: #fdfaf6; text-decoration: none;
-            padding: 10px 24px; border-radius: 6px; font-size: 15px; font-weight: 500;
-            border: 1px solid #5c4a3f; transition: all 0.3s ease;
+            padding: 8px 20px; border-radius: 6px; transition: 0.3s;
         }
-        .sub-navbar a:hover { 
-            background: #c5a059; color: #141612; 
-            border-color: #c5a059;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(197, 160, 89, 0.25);
-        }
+        .sub-navbar a:hover { background: #c5a059; color: #141612; }
 
-        /* PROFILE SPECIFIC STYLES */
+        /* PROFILE */
         .profile-container {
-            max-width: 900px;
-            margin: 60px auto;
-            padding: 40px;
-            background: rgba(30, 30, 47, 0.4);
+            max-width: 900px; margin: 40px auto; padding: 40px;
+            background: rgba(30, 30, 47, 0.4); border-radius: 15px;
             border: 1px solid rgba(197, 160, 89, 0.2);
-            border-radius: 15px;
-            box-shadow: 0 15px 40px rgba(0,0,0,0.4);
         }
-        .profile-header {
-            display: flex;
-            align-items: center;
-            gap: 30px;
-            border-bottom: 1px solid rgba(197, 160, 89, 0.2);
-            padding-bottom: 30px;
-            margin-bottom: 30px;
-        }
-        .profile-pic {
-            width: 120px;
-            height: 120px;
-            border-radius: 50%;
-            border: 3px solid #c5a059;
-            object-fit: cover;
-        }
-        .profile-info h1 {
-            font-family: 'Playfair Display', serif;
-            color: #c5a059;
-            margin: 0;
-            font-size: 2.5rem;
-        }
-        .profile-info p {
-            color: #b5aba1;
-            margin: 5px 0;
-            font-size: 1.1rem;
-        }
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 20px;
-        }
-        .stat-card {
-            background: rgba(0,0,0,0.3);
-            padding: 25px;
-            border-radius: 12px;
-            text-align: center;
-            border: 1px solid rgba(255,255,255,0.05);
-            transition: 0.3s;
-        }
-        .stat-card:hover { border-color: #c5a059; transform: translateY(-5px); }
-        .stat-card i { color: #c5a059; font-size: 1.8rem; margin-bottom: 10px; }
-        .stat-card h3 { margin: 10px 0 5px 0; font-size: 1.1rem; color: #fdfaf6; }
-        .stat-card p { color: #b5aba1; font-size: 1rem; margin: 0; }
+        .profile-header { display: flex; align-items: center; gap: 30px; padding-bottom: 30px; border-bottom: 1px solid rgba(197, 160, 89, 0.2); }
+        .profile-pic { width: 120px; height: 120px; border-radius: 50%; border: 3px solid #c5a059; object-fit: cover; }
+        .profile-info h1 { font-family: 'Playfair Display', serif; color: #c5a059; margin: 0; }
+        
+        .stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 30px; }
+        .stat-card { background: rgba(0,0,0,0.3); padding: 20px; border-radius: 12px; text-align: center; }
+        .stat-card i { color: #c5a059; font-size: 1.5rem; }
 
-        .edit-btn {
-            background: transparent;
-            color: #c5a059;
-            border: 1px solid #c5a059;
-            padding: 10px 24px;
-            border-radius: 6px;
-            cursor: pointer;
-            margin-top: 15px;
-            transition: 0.3s;
-            font-weight: 500;
-        }
+        .edit-btn { background: transparent; color: #c5a059; border: 1px solid #c5a059; padding: 10px 20px; border-radius: 6px; cursor: pointer; margin-top: 10px; }
         .edit-btn:hover { background: #c5a059; color: #141612; }
 
-        /* FOOTER - DASHBOARD MATCH */
-        footer {
-            background-color: #1e1e2f;
-            padding: 60px 20px 30px;
-            margin-top: auto;
-            border-top: 2px solid #c5a059;
-            color: white;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+        /* MODAL */
+        .modal {
+            display: none; position: fixed; z-index: 2000; left: 0; top: 0;
+            width: 100%; height: 100%; background: rgba(0,0,0,0.85); backdrop-filter: blur(5px);
         }
-        .footer-logo {
-            height: 70px;
-            width: 70px;
-            border-radius: 50%;
-            border: 2px solid #c5a059;
-            margin-bottom: 40px;
-            object-fit: cover;
+        .modal-content {
+            background: #1e1e2f; margin: 5% auto; padding: 30px;
+            width: 90%; max-width: 400px; border-radius: 15px; border: 1px solid #c5a059;
         }
-        .footer-links-container {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 40px;
-            max-width: 1200px;
-            width: 100%;
-            margin-bottom: 40px;
-        }
-        .footer-column p {
-            font-family: 'Playfair Display', serif;
-            color: #c5a059;
-            font-size: 1.2rem;
-            margin: 0 0 10px 0;
-            font-weight: bold;
-        }
-        .footer-column hr {
-            border: none;
-            border-top: 1px solid rgba(197, 160, 89, 0.3);
-            margin-bottom: 15px;
-        }
-        .footer-btn {
-            display: block;
-            background: none;
-            border: none;
-            color: #b5aba1;
-            padding: 8px 0;
-            font-size: 14px;
-            cursor: pointer;
-            text-align: left;
-            transition: 0.3s;
-            width: 100%;
-        }
-        .footer-btn:hover { color: #c5a059; transform: translateX(5px); }
+        .form-group { margin-bottom: 15px; }
+        .form-group label { display: block; margin-bottom: 5px; color: #b5aba1; }
+        .form-group input { width: 100%; padding: 10px; background: #2e2e40; border: 1px solid #4a3b32; color: white; border-radius: 5px; box-sizing: border-box; }
+        
+        .modal-footer { display: flex; justify-content: flex-end; gap: 10px; margin-top: 20px; }
+        .save-btn { background: #c5a059; color: #141612; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; font-weight: bold; }
+        .cancel-btn { background: transparent; color: #888; border: none; cursor: pointer; }
 
-        .footer-bottom {
-            width: 100%;
-            max-width: 1200px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-top: 1px solid rgba(255,255,255,0.1);
-            padding-top: 20px;
-        }
-        .copyright { color: #888; font-size: 0.9rem; }
-        .social-icons a { color: white; font-size: 1.5rem; margin-left: 20px; transition: 0.3s; }
-        .social-icons a:hover { color: #c5a059; }
-
-        /* MOBILE FIXES */
-        @media (max-width: 768px) {
-            .navbar-center { display: none !important; }
-            .navbar { padding: 10px 15px; }
-            .navbar-left { flex: 1; }
-            .navbar-left span { display: inline-block !important; font-size: 1rem; white-space: normal; max-width: 180px; line-height: 1.2; }
-            
-            .navbar-right { order: 2; margin-right: 0; }
-            .navbar-right span { display: none; }
-
-            .menu-toggle { display: block; order: 3; margin-left: 10px; }
-
-            .sub-navbar { 
-                display: none; 
-                flex-direction: column; 
-                align-items: center; 
-                padding: 20px;
-                gap: 12px;
-            }
-            .sub-navbar.active { display: flex; }
-            .sub-navbar a { width: 90%; text-align: center; }
-
-            .profile-container { margin: 20px auto; padding: 20px; width: 90%; }
-            .profile-header { flex-direction: column; text-align: center; gap: 15px; }
-            .profile-info h1 { font-size: 1.8rem; }
-            
-            .stats-grid { grid-template-columns: 1fr; }
-            .stat-card { padding: 15px; }
-
-            .footer-links-container { grid-template-columns: repeat(2, 1fr); }
-            .footer-bottom { flex-direction: column; gap: 20px; text-align: center; }
-        }
+        footer { background: #1e1e2f; padding: 40px; margin-top: auto; border-top: 2px solid #c5a059; text-align: center; }
     </style>
 </head>
 <body>
@@ -251,172 +103,224 @@
     <div class="navbar">
         <div class="navbar-left">
             <img src="images/logo.png" alt="Logo">
-            <a href="dashboard.html"><span>Alvarez - Roman Heritage Equestrian</span></a>
-        </div>
-        <div class="navbar-center">
-            <div class="search-container">
-                <input type="text" id="searchInput" placeholder="Search your account...">
-            </div>
+            <a href="dashboard.html"><span>Alvarez Equestrian</span></a>
         </div>
         <div class="navbar-right" id="userMenu">
-            <i class="fas fa-user" style="margin-left: 15px;"></i>
-            <span id="usernameDisplay">Loading...</span>
+            <i class="fas fa-user"></i>
+            <span id="usernameDisplay" style="margin-left: 10px;">Loading...</span>
             <div id="dropdownMenu">
-                <div onclick="location.href='profile.html'" id="profileOption" style="display:none;">My Profile</div>
-                <div onclick="logout()" id="logoutText">Logout</div>
+                <div onclick="location.href='profile.html'">My Profile</div>
+                <div onclick="logout()">Logout</div>
             </div>
         </div>
-        <button class="menu-toggle" onclick="toggleNav()"><i class="fa-solid fa-bars"></i></button>
     </div>
 
-    <div class="sub-navbar" id="subNavbar">
+    <div class="sub-navbar">
         <a href="dashboard.html">Home</a>
-        <a href="Loading.html?type=events" class="mobile-events-link">Upcoming Events</a>
-        <a href="enroll.html">Enroll Your Horse</a>
         <a href="memberships.html">Memberships</a>
-        <a href="about.html">Our Story</a>
         <a href="contact.html">Contact</a>
     </div>
 
     <div class="profile-container">
         <div class="profile-header">
-            <img src="images/logo.png" class="profile-pic" alt="User Image">
+            <img src="images/logo.png" class="profile-pic" id="profileDisplayPic" alt="User">
             <div class="profile-info">
                 <h1 id="fullName">User Name</h1>
                 <p id="userEmail">email@example.com</p>
-                <p>Member since: 2026</p>
-                <button class="edit-btn">Edit Profile</button>
+                <button class="edit-btn" onclick="openEditModal()">Edit Profile</button>
             </div>
         </div>
 
         <div class="stats-grid">
             <div class="stat-card">
                 <i class="fa-solid fa-horse"></i>
-                <h3>Enrolled Horses</h3>
-                <p id="horseCount">0 Horses</p>
+                <h3>Horses</h3>
+                <p id="horseCount">0 Enrolled</p>
             </div>
             <div class="stat-card">
                 <i class="fa-solid fa-crown"></i>
-                <h3>Membership</h3>
+                <h3>Level</h3>
                 <p id="membershipType">Basic Access</p>
             </div>
-            <div class="stat-card">
-                <i class="fa-solid fa-calendar-check"></i>
-                <h3>Events Joined</h3>
-                <p>0 Upcoming</p>
+        </div>
+    </div>
+
+    <div id="editModal" class="modal">
+        <div class="modal-content">
+            <h2 style="font-family: 'Playfair Display'; color: #c5a059;">Edit Profile</h2>
+            
+            <div class="form-group">
+                <label>Profile Image</label>
+                <input type="file" id="editPicFile" accept="image/*">
+            </div>
+            <div class="form-group">
+                <label>Full Name</label>
+                <input type="text" id="editFullName">
+            </div>
+            <div class="form-group">
+                <label>Username</label>
+                <input type="text" id="editUsername">
+            </div>
+            <div class="form-group">
+                <label>Email Address</label>
+                <input type="email" id="editEmail">
+            </div>
+
+            <div class="modal-footer">
+                <button class="cancel-btn" onclick="closeEditModal()">Cancel</button>
+                <button class="save-btn" id="saveBtn" onclick="saveProfile()">Save Changes</button>
             </div>
         </div>
     </div>
 
     <footer>
-        <img src="images/logo.png" alt="Logo" class="footer-logo">
-        <div class="footer-links-container">
-            <div class="footer-column">
-                <p>Navigation</p>
-                <hr>
-                <button class="footer-btn" onclick="location.href='dashboard.html'">Home</button>
-                <button class="footer-btn" onclick="location.href='memberships.html'">Memberships</button>
-                <button class="footer-btn" onclick="location.href='enroll.html'">Enroll Horse</button>
-                <button class="footer-btn" onclick="location.href='contact.html'">Contact Us</button>
-            </div>
-            <div class="footer-column">
-                <p>Updates</p>
-                <hr>
-                <button class="footer-btn" onclick="location.href='Loading.html?type=events'">Upcoming Events</button>
-                <button class="footer-btn" onclick="location.href='Loading.html?type=news'">Latest News</button>
-            </div>
-            <div class="footer-column">
-                <p>About</p>
-                <hr>
-                <button class="footer-btn" onclick="location.href='about.html'">Our Story</button>
-                <button class="footer-btn" onclick="location.href='index.html'">Member Login</button>
-            </div>
-            <div class="footer-column">
-                <p>The Farm</p>
-                <hr>
-                <button class="footer-btn" onclick="location.href='availablehorses.html'">Available Horses</button>
-                <button class="footer-btn" onclick="location.href='TrainingGrounds.html'">Training Grounds</button>
-            </div>
-        </div>
-        <div class="footer-bottom">
-            <div class="copyright">&copy; 2026 Alvarez - Roman Heritage Equestrian. All rights reserved.</div>
-            <div class="social-icons">
-                <a href="https://www.facebook.com" target="_blank" title="Facebook"><i class="fab fa-facebook"></i></a>
-                <a href="https://www.youtube.com/@AlvarezRomanHeritageEquestrian" target="_blank" title="YouTube"><i class="fab fa-youtube"></i></a>
-            </div>
-        </div>
+        <div class="copyright">&copy; 2026 Alvarez - Roman Heritage Equestrian.</div>
     </footer>
-
-    <script>
-        const API_URL = "https://login-backend-ny6x.onrender.com";
-
-        function toggleNav() {
-            document.getElementById("subNavbar").classList.toggle("active");
-        }
-
-        async function loadUser() {
-            const isGuest = localStorage.getItem("guest");
-            const dd = document.getElementById("dropdownMenu");
-            
-            if (isGuest === "true") {
-                document.getElementById("usernameDisplay").innerText = "Guest";
-                document.getElementById("fullName").innerText = "Guest User";
-                document.getElementById("userEmail").innerText = "Not Signed In";
-                document.getElementById("profileOption").style.display = "none";
-                document.getElementById("logoutText").innerText = "Sign In / Sign Up";
-                
-                document.getElementById("userMenu").onclick = () => {
-                    dd.style.display = dd.style.display === "block" ? "none" : "block";
-                };
-                return; 
-            }
-
-            const token = localStorage.getItem("token");
-            if (!token) {
-                window.location.href = "index.html";
-                return;
-            }
-
-            try {
-                const res = await fetch(`${API_URL}/me`, {
-                    headers: { "Authorization": "Bearer " + token }
-                });
-
-                if (res.ok) {
-                    const data = await res.json();
-                    document.getElementById("usernameDisplay").innerText = data.fullName;
-                    document.getElementById("fullName").innerText = data.fullName;
-                    document.getElementById("userEmail").innerText = data.email;
-                    document.getElementById("profileOption").style.display = "block";
-
-                    document.getElementById("userMenu").onclick = () => {
-                        dd.style.display = dd.style.display === "block" ? "none" : "block";
-                    };
-                } else {
-                    logout();
-                }
-            } catch (err) {
-                console.error("Failed to load user", err);
-                document.getElementById("usernameDisplay").innerText = "Connection Error";
-            }
-        }
-
-        const savedMembership = localStorage.getItem("userMembership");
-        const membershipDisplay = document.getElementById("membershipType");
-        if (savedMembership) {
-            membershipDisplay.innerText = savedMembership + " Access";
-        } else {
-            membershipDisplay.innerText = "No Active Membership";
-        }
-
-        function logout() {
-            localStorage.removeItem("token");
-            localStorage.removeItem("guest");
-            window.location.href = "index.html";
-        }
-
-        loadUser();
-    </script>
 </div>
+
+<script>
+    const API_URL = "https://login-backend-ny6x.onrender.com";
+
+    function openEditModal() {
+        if(localStorage.getItem("guest") === "true") {
+            alert("Guests cannot edit profiles.");
+            return;
+        }
+        document.getElementById("editFullName").value = document.getElementById("fullName").innerText;
+        document.getElementById("editEmail").value = document.getElementById("userEmail").innerText;
+        document.getElementById("editUsername").value = document.getElementById("usernameDisplay").innerText;
+        document.getElementById("editModal").style.display = "block";
+    }
+
+    function closeEditModal() {
+        document.getElementById("editModal").style.display = "none";
+    }
+
+    // Helper to convert file to string
+    function fileToBase64(file) {
+        return new Promise((resolve, reject) => {
+            const reader = new FileReader();
+            reader.readAsDataURL(file);
+            reader.onload = () => resolve(reader.result);
+            reader.onerror = error => reject(error);
+        });
+    }
+
+    async function saveProfile() {
+        const token = localStorage.getItem("token");
+        const saveBtn = document.getElementById("saveBtn");
+        
+        const newName = document.getElementById("editFullName").value;
+        const newUsername = document.getElementById("editUsername").value;
+        const newEmail = document.getElementById("editEmail").value;
+        const picFile = document.getElementById("editPicFile").files[0];
+
+        saveBtn.innerText = "Saving...";
+        saveBtn.disabled = true;
+
+        let profilePicData = document.getElementById("profileDisplayPic").src;
+
+        try {
+            if (picFile) {
+                profilePicData = await fileToBase64(picFile);
+            }
+
+            const res = await fetch(`${API_URL}/update-profile`, {
+                method: 'PUT',
+                headers: { 
+                    "Authorization": "Bearer " + token,
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({ 
+                    fullName: newName, 
+                    username: newUsername,
+                    email: newEmail, 
+                    profilePic: profilePicData 
+                })
+            });
+
+            if (res.ok) {
+                const updatedUser = await res.json();
+                document.getElementById("fullName").innerText = updatedUser.fullName;
+                document.getElementById("userEmail").innerText = updatedUser.email;
+                document.getElementById("usernameDisplay").innerText = updatedUser.fullName;
+                if (updatedUser.profilePic) {
+                    document.getElementById("profileDisplayPic").src = updatedUser.profilePic;
+                }
+                closeEditModal();
+                alert("Profile Saved!");
+            } else {
+                alert("Update failed on server.");
+            }
+        } catch (err) {
+            console.error(err);
+            alert("Error connecting to server.");
+        } finally {
+            saveBtn.innerText = "Save Changes";
+            saveBtn.disabled = false;
+        }
+    }
+
+    async function loadUser() {
+    const token = localStorage.getItem("token");
+    const isGuest = localStorage.getItem("guest");
+    const dd = document.getElementById("dropdownMenu");
+
+    // Menu Toggle Logic
+    document.getElementById("userMenu").onclick = (e) => {
+        e.stopPropagation();
+        dd.style.display = dd.style.display === "block" ? "none" : "block";
+    };
+    
+    // Close dropdown when clicking outside
+    window.onclick = () => { dd.style.display = "none"; };
+
+    if (isGuest === "true") {
+        document.getElementById("usernameDisplay").innerText = "Guest";
+        document.getElementById("fullName").innerText = "Guest User";
+        document.getElementById("userEmail").innerText = "Guest Mode";
+        return;
+    }
+
+    if (!token) {
+        window.location.href = "index.html";
+        return;
+    }
+
+    try {
+        const res = await fetch(`${API_URL}/me`, {
+            headers: { "Authorization": "Bearer " + token }
+        });
+
+        if (res.ok) {
+            const data = await res.json();
+            
+            // Set Text Data
+            document.getElementById("usernameDisplay").innerText = data.username || data.fullName;
+            document.getElementById("fullName").innerText = data.fullName;
+            document.getElementById("userEmail").innerText = data.email;
+            
+            // CRITICAL: Set the Profile Image from Backend
+            if (data.profilePic && data.profilePic.startsWith("data:image")) {
+                document.getElementById("profileDisplayPic").src = data.profilePic;
+            }
+            
+            document.getElementById("profileOption").style.display = "block";
+        } else {
+            logout();
+        }
+    } catch (err) {
+        console.error("Load Error:", err);
+    }
+}
+
+    function logout() {
+        localStorage.clear();
+        window.location.href = "index.html";
+    }
+
+    loadUser();
+</script>
+
 </body>
 </html>
