@@ -12,12 +12,21 @@
 
     <style>
         html, body {
-            margin: 0; padding: 0; height: 100%;
-            font-family: 'Roboto', sans-serif;
-            overflow-x: hidden; /* STOPS LEFT-TO-RIGHT SCROLLING */
-            background-color: #141612;
-        }
-        .page-wrapper { display: flex; flex-direction: column; min-height: 100vh; width: 100%; overflow-x: hidden; }
+    margin: 0;
+    padding: 0;
+    height: auto; /* Changed from 100% */
+    min-height: 100%; 
+    background-color: #141612;
+    font-family: 'Roboto', sans-serif;
+    overflow-x: hidden;
+}
+
+        .page-wrapper {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* Changed from height to min-height */
+    width: 100%;
+}
 
         /* NAVBAR */
         .navbar {
@@ -79,6 +88,7 @@
 
         /* UPGRADED SUB NAV */
         .sub-navbar {
+            margin: 0;
             background-color: #232333;
             padding: 15px 20px;
             display: flex;
@@ -108,12 +118,12 @@
 
         /* HERO VIDEO SECTION */
         .hero-container {
-            width: 100%;
-            height: 500px;
-            position: relative;
-            background: #111;
-            overflow: hidden;
-        }
+    width: 100%;
+    height: 500px; /* Adjust this number to make the video area smaller/larger */
+    position: relative;
+    margin-top: 0; /* Ensure no margin is pushing it down */
+}
+
         .hero-container::after {
             content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
             background: linear-gradient(to top, rgba(0,0,0,0.8), rgba(0,0,0,0.2));
@@ -335,6 +345,17 @@
             .info-text h2 { font-size: 2rem; }
             .center-play-btn { width: 70px; height: 70px; font-size: 1.8rem; }
         }
+
+        .nav-profile-pic {
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 1px solid #c5a059;
+        margin-left: 10px;
+        display: none; /* Hidden by default until image loads */
+    }
+    
     </style>
 </head>
 <body>
@@ -354,14 +375,19 @@
             </div>
         </div>
         
-        <div class="navbar-right" id="userMenu">
-            <a href="events.html" class="calendar-link"><i class="fa-solid fa-calendar-days"></i><span>Events</span></a>
-            <i class="fas fa-user" style="margin-left: 15px;"></i>
-            <span id="usernameDisplay">Loading...</span>
-            <div id="dropdownMenu">
-                <div onclick="logout()" id="logoutText">Logout</div>
-                <div onclick="location.href='profile.html'" id="profileOption" style="display:none;">My Profile</div>
-            </div>
+        <div class="navbar-right" id="userMenu" style="cursor: pointer; display: flex; align-items: center; position: relative;">
+    <a href="events.html" class="calendar-link" style="margin-right: 15px;"><i class="fa-solid fa-calendar-days"></i><span>Events</span></a>
+    
+    <div id="userTrigger" style="display: flex; align-items: center;">
+        <i class="fas fa-user" id="defaultUserIcon" style="font-size: 20px;"></i>
+        <img id="navProfilePic" src="" alt="PFP" style="display: none; width: 35px; height: 35px; border-radius: 50%; object-fit: cover; border: 1px solid #c5a059;">
+        <span id="usernameDisplay" style="margin-left: 10px; white-space: nowrap;">Loading...</span>
+    </div>
+
+    <div id="dropdownMenu">
+        <div onclick="location.href='profile.html'" id="profileOption" style="display:none;">My Profile</div>
+        <div onclick="logout()" id="logoutText">Logout</div>
+    </div>
         </div>
 
         <button class="menu-toggle" onclick="toggleNav()"><i class="fa-solid fa-bars"></i></button>
@@ -493,40 +519,103 @@ if (googleToken) {
 
         /* --- AUTH & GUEST LOGIC --- */
         async function loadUser() {
-            const isGuest = localStorage.getItem("guest");
-            const API_URL = "https://login-backend-ny6x.onrender.com";
-            const userDisplay = document.getElementById("usernameDisplay");
+    const isGuest = localStorage.getItem("guest");
+    const API_URL = "https://login-backend-ny6x.onrender.com";
+    
+    // Select elements
+    const userDisplay = document.getElementById("usernameDisplay");
+    const navPic = document.getElementById("navProfilePic");
+    const defaultIcon = document.getElementById("defaultUserIcon");
+    const dd = document.getElementById("dropdownMenu");
+    const userMenu = document.getElementById("userMenu");
 
-            if (isGuest === "true") {
-                userDisplay.innerText = "Guest";
-                document.getElementById("logoutText").innerText = "Sign In / Sign Up";
-                document.getElementById("userMenu").onclick = () => {
-                    const dd = document.getElementById("dropdownMenu");
-                    dd.style.display = dd.style.display === "block" ? "none" : "block";
-                };
-                document.getElementById('guestModal').style.display = 'flex';
-                return;
+    // 1. FIXED CLICK LOGIC: Make the whole right-side area clickable
+    if (userMenu) {
+        userMenu.onclick = (e) => {
+            e.stopPropagation();
+            // Toggle dropdown visibility
+            const isVisible = dd.style.display === "block";
+            dd.style.display = isVisible ? "none" : "block";
+        };
+    }
+    
+    // Close dropdown if user clicks anywhere else on the screen
+    window.onclick = () => { 
+        if (dd) dd.style.display = "none"; 
+    };
+
+    // 2. Handle Guest Mode
+    if (isGuest === "true") {
+        userDisplay.innerText = "Guest";
+        document.getElementById("logoutText").innerText = "Sign In / Sign Up";
+        // Show default icon for guests
+        if (navPic) navPic.style.display = "none";
+        if (defaultIcon) defaultIcon.style.display = "block";
+        return;
+    }
+
+    // 3. Handle Google/Regular Tokens
+    const params = new URLSearchParams(window.location.search);
+    const googleToken = params.get("token");
+    if (googleToken) {
+        localStorage.setItem("token", googleToken);
+        window.history.replaceState({}, document.title, "dashboard.html");
+    }
+
+    const token = localStorage.getItem("token");
+    if (!token) { 
+        window.location.href = "index.html"; 
+        return; 
+    }
+
+    // 4. Fetch User Data from your Render Backend
+    try {
+        const res = await fetch(`${API_URL}/me`, {
+            headers: { 
+                "Authorization": "Bearer " + token,
+                "Content-Type": "application/json" 
             }
+        });
+
+        if (res.ok) {
+            const data = await res.json();
             
-            const token = localStorage.getItem("token");
-            if (!token) { window.location.href = "index.html"; return; }
+            // Update the display name
+            userDisplay.innerText = data.fullName;
             
-            try {
-                const res = await fetch(`${API_URL}/me`, {
-                    headers: { "Authorization": "Bearer " + token, "Content-Type": "application/json" }
-                });
-                if (!res.ok) { localStorage.removeItem("token"); window.location.href = "index.html"; return; }
-                const data = await res.json();
-                userDisplay.innerText = data.fullName;
-                document.getElementById("profileOption").style.display = "block";
-                document.getElementById("userMenu").onclick = () => {
-                    const dd = document.getElementById("dropdownMenu");
-                    dd.style.display = dd.style.display === "block" ? "none" : "block";
-                };
-            } catch (err) { setTimeout(loadUser, 5000); }
+            // --- PROFILE PICTURE SWAP ---
+            if (data.profilePic && data.profilePic.startsWith("data:image")) {
+                if (navPic) {
+                    navPic.src = data.profilePic;
+                    navPic.style.display = "block"; // Show the uploaded photo
+                }
+                if (defaultIcon) {
+                    defaultIcon.style.display = "none"; // Hide the placeholder guy
+                }
+            } else {
+                // Keep default if no image is found
+                if (navPic) navPic.style.display = "none";
+                if (defaultIcon) defaultIcon.style.display = "block";
+            }
+
+            document.getElementById("profileOption").style.display = "block";
+        } else {
+            // If token is dead, boot to login
+            logout();
         }
-        function logout() { localStorage.removeItem("token"); localStorage.removeItem("guest"); window.location.href = "index.html"; }
-        loadUser();
+    } catch (err) { 
+        console.error("Connection error:", err);
+        // Retry logic if server is sleeping
+        setTimeout(loadUser, 5000); 
+    }
+}
+
+        function logout() {
+    localStorage.clear();
+    window.location.href = "index.html";
+}
+
+loadUser();
 
         /* --- SEARCH LOGIC --- */
         const voiceInput = document.getElementById('searchInput');
