@@ -21,7 +21,7 @@
         }
         .page-wrapper { display: flex; flex-direction: column; min-height: 100vh; }
 
-        /* NAVBAR (Synced with Dashboard) */
+        /* NAVBAR */
         .navbar {
             display: flex; align-items: center; justify-content: space-between;
             background-color: #1e1e2f; padding: 10px 20px; color: white;
@@ -33,17 +33,6 @@
         .navbar-left span { font-size: 1.2rem; font-weight: bold; white-space: nowrap; font-family: 'Playfair Display', serif; letter-spacing: 0.5px;}
 
         .menu-toggle { display: none; background: none; border: none; color: white; font-size: 1.5rem; cursor: pointer; margin-left: 15px; z-index: 102; }
-
-        .navbar-center { position: absolute; left: 50%; transform: translateX(-50%); z-index: 101; }
-        .search-container { position: relative; width: 500px; }
-        .search-container input {
-            width: 100%; padding: 10px 15px; border-radius: 20px; border: none; outline: none;
-            font-size: 1rem; background: #2e2e40; color: white;
-        }
-        .search-button, .microphone-button { position: absolute; top: 50%; transform: translateY(-50%); background: none; border: none; cursor: pointer; transition: 0.2s; }
-        .search-button { right: 10px; color: #888; }
-        .microphone-button { right: 45px; color: white; }
-        .search-button:hover, .microphone-button:hover { color: #c5a059; }
 
         .navbar-right { display: flex; align-items: center; position: relative; cursor: pointer; z-index: 102; }
         .navbar-right span { margin-left: 8px; font-size: 1rem; }
@@ -73,7 +62,7 @@
         .page-header h1 { font-family: 'Playfair Display', serif; color: #c5a059; font-size: 3rem; margin: 0; }
         .page-header p { color: #b5aba1; font-size: 1.1rem; max-width: 600px; margin: 15px auto 0; }
 
-        /* SALES GRID (The Fix) */
+        /* SALES GRID */
         .sales-container {
             max-width: 1200px; margin: 0 auto; padding: 40px 20px;
             display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 30px;
@@ -90,17 +79,24 @@
         .horse-specs span i { color: #c5a059; margin-right: 8px; }
         .price-tag { font-weight: bold; color: white; font-size: 1.1rem; margin-bottom: 20px; }
 
-        /* BUTTON FIX */
+        /* BUTTONS */
+        .view-btn {
+            display: block; width: 100%; box-sizing: border-box;
+            padding: 12px; background: #c5a059; color: #141612;
+            border: 1px solid #c5a059; text-align: center; text-decoration: none;
+            border-radius: 6px; font-weight: 600; transition: 0.3s;
+            margin-bottom: 10px;
+        }
+        .view-btn:hover { background: transparent; color: #c5a059; }
+
         .inquire-btn {
-            display: block; width: 100%; box-sizing: border-box; /* Fixes the overflow/offset */
+            display: block; width: 100%; box-sizing: border-box;
             padding: 12px; background: transparent; color: #c5a059;
             border: 1px solid #c5a059; text-align: center; text-decoration: none;
             border-radius: 6px; font-weight: 500; transition: 0.3s;
-            margin: 0; /* Remove potential default margins */
         }
-        .inquire-btn:hover { background: #c5a059; color: #141612; }
+        .inquire-btn:hover { background: rgba(197, 160, 89, 0.1); }
 
-        /* FOOTER (Synced) */
         footer { background-color: #1e1e2f; padding: 60px 20px 30px; border-top: 2px solid #c5a059; color: white; display: flex; flex-direction: column; align-items: center; }
         .footer-logo { height: 70px; width: 70px; border-radius: 50%; border: 2px solid #c5a059; margin-bottom: 40px; object-fit: cover; }
         .footer-links-container { display: grid; grid-template-columns: repeat(4, 1fr); gap: 40px; max-width: 1200px; width: 100%; margin-bottom: 40px; }
@@ -112,9 +108,7 @@
         .social-icons a { color: white; font-size: 1.5rem; margin-left: 20px; transition: 0.3s; }
         .social-icons a:hover { color: #c5a059; }
 
-        /* MOBILE RESPONSIVE (Dashboard Logic) */
         @media (max-width: 768px) {
-            .navbar-center { display: none !important; }
             .navbar-left span { font-size: 1rem; white-space: normal; max-width: 180px; }
             .navbar-right span { display: none; }
             .menu-toggle { display: block; }
@@ -126,10 +120,6 @@
             .footer-links-container { grid-template-columns: repeat(2, 1fr); }
             .footer-bottom { flex-direction: column; gap: 20px; text-align: center; }
         }
-
-        /* VOICE MODAL */
-        .modal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); display: none; justify-content: center; align-items: center; z-index: 2000; backdrop-filter: blur(5px); }
-        .modal-content { background: #1e1e2f; padding: 40px; border-radius: 12px; text-align: center; color: white; border: 1px solid #c5a059; max-width: 400px; width: 90%; }
     </style>
 </head>
 <body>
@@ -140,15 +130,6 @@
             <img src="images/logo.png" alt="Logo">
             <a href="dashboard.html"><span>Alvarez - Roman Heritage Equestrian</span></a>
         </div>
-        
-        <div class="navbar-center">
-            <div class="search-container">
-                <input type="text" id="searchInput" placeholder="Search horses...">
-                <button class="search-button" id="searchButton"><i class="fa-solid fa-search"></i></button>
-                <button class="microphone-button" id="micButton"><i class="fa-solid fa-microphone"></i></button>
-            </div>
-        </div>
-
         <div class="navbar-right" id="userMenu">
             <i class="fas fa-user" style="margin-left: 15px;"></i>
             <span id="usernameDisplay">Loading...</span>
@@ -176,56 +157,18 @@
 
     <div class="sales-container">
         <div class="horse-card">
-            <img src="images/logo.png" class="horse-image" alt="El Dorado">
+            <img src="images/shiraz_main.jpg" class="horse-image" alt="Shiraz">
             <div class="horse-content">
-                <h2 class="horse-name">El Dorado</h2>
+                <h2 class="horse-name">Shiraz</h2>
                 <div class="horse-specs">
-                    <span><i class="fa-solid fa-dna"></i> Andalusian</span>
-                    <span><i class="fa-solid fa-calendar"></i> 7 Years Old</span>
-                    <span><i class="fa-solid fa-ruler-vertical"></i> 16.2 hh</span>
-                    <span><i class="fa-solid fa-star"></i> Dressage</span>
+                    <span><i class="fa-solid fa-dna"></i> Azteca</span>
+                    <span><i class="fa-solid fa-calendar"></i> 11 Years Old</span>
+                    <span><i class="fa-solid fa-ruler-vertical"></i> 16 hands</span>
                 </div>
                 <div class="price-tag">Price: $45,000</div>
-                <a href="contact.html?horse=ElDorado" class="inquire-btn">Inquire for Details</a>
+                <a href="shiraz-profile.html" class="view-btn">View More</a>
+                <a href="contact.html" class="inquire-btn">Contact for More Details</a>
             </div>
-        </div>
-
-        <div class="horse-card">
-            <img src="images/logo.png" class="horse-image" alt="Luna Nueva">
-            <div class="horse-content">
-                <h2 class="horse-name">Luna Nueva</h2>
-                <div class="horse-specs">
-                    <span><i class="fa-solid fa-dna"></i> Lusitano</span>
-                    <span><i class="fa-solid fa-calendar"></i> 5 Years Old</span>
-                    <span><i class="fa-solid fa-ruler-vertical"></i> 15.3 hh</span>
-                    <span><i class="fa-solid fa-star"></i> Working Equitation</span>
-                </div>
-                <div class="price-tag">Price: Inquire</div>
-                <a href="contact.html?horse=LunaNueva" class="inquire-btn">Inquire for Details</a>
-            </div>
-        </div>
-
-        <div class="horse-card">
-            <img src="images/logo.png" class="horse-image" alt="Vaquero">
-            <div class="horse-content">
-                <h2 class="horse-name">Vaquero</h2>
-                <div class="horse-specs">
-                    <span><i class="fa-solid fa-dna"></i> Quarter Horse</span>
-                    <span><i class="fa-solid fa-calendar"></i> 10 Years Old</span>
-                    <span><i class="fa-solid fa-ruler-vertical"></i> 15.1 hh</span>
-                    <span><i class="fa-solid fa-star"></i> Reining</span>
-                </div>
-                <div class="price-tag">Price: $18,500</div>
-                <a href="contact.html?horse=Vaquero" class="inquire-btn">Inquire for Details</a>
-            </div>
-        </div>
-    </div>
-
-    <div id="talkModal" class="modal">
-        <div class="modal-content">
-            <h2><i class="fa-solid fa-microphone"></i> Listening</h2>
-            <p>Speak to search horses...</p>
-            <button onclick="document.getElementById('talkModal').style.display='none'" style="margin-top:20px; background:none; border:1px solid #c5a059; color:#c5a059; padding:8px 20px; border-radius:5px; cursor:pointer;">Cancel</button>
         </div>
     </div>
 
@@ -267,13 +210,10 @@
 
 <script>
     const API_URL = "https://login-backend-ny6x.onrender.com";
-
     function toggleNav() { document.getElementById("subNavbar").classList.toggle("active"); }
-
     async function loadUser() {
         const isGuest = localStorage.getItem("guest");
         const dd = document.getElementById("dropdownMenu");
-        
         if (isGuest === "true") {
             document.getElementById("usernameDisplay").innerText = "Guest";
         } else {
@@ -288,29 +228,12 @@
                 } catch (err) { console.error(err); }
             }
         }
-        document.getElementById("userMenu").onclick = () => { dd.style.display = dd.style.display === "block" ? "none" : "block"; };
-    }
-
-    /* SEARCH & VOICE (From Dashboard) */
-    const searchInput = document.getElementById('searchInput');
-    document.getElementById("searchButton").onclick = () => {
-        const q = searchInput.value.trim();
-        if (q) window.location.href = `searchResults.html?q=${encodeURIComponent(q)}`;
-    };
-
-    if ('webkitSpeechRecognition' in window) {
-        const recognition = new webkitSpeechRecognition();
-        document.getElementById('micButton').onclick = () => { 
-            document.getElementById('talkModal').style.display = 'flex';
-            recognition.start(); 
+        document.getElementById("userMenu").onclick = (e) => { 
+            e.stopPropagation();
+            dd.style.display = dd.style.display === "block" ? "none" : "block"; 
         };
-        recognition.onresult = (e) => {
-            const transcript = e.results[0][0].transcript;
-            searchInput.value = transcript;
-            window.location.href = `searchResults.html?q=${encodeURIComponent(transcript)}`;
-        };
+        window.onclick = () => { dd.style.display = "none"; };
     }
-
     function logout() { localStorage.clear(); window.location.href = "index.html"; }
     loadUser();
 </script>
