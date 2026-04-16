@@ -276,6 +276,33 @@
         font-size: 16px; 
       }
     }
+
+    .next-arrow i {
+  font-size: 18px;
+}
+
+/* Optional: Subtle pulse effect for the button while loading */
+.loading-pulse {
+  animation: pulse 1.5s infinite;
+  opacity: 0.8;
+  pointer-events: none;
+}
+
+@keyframes pulse {
+  0% { transform: translateY(-50%) scale(1); }
+  50% { transform: translateY(-50%) scale(0.95); }
+  100% { transform: translateY(-50%) scale(1); }
+}
+
+#email-spinner {
+  font-size: 16px;
+  /* Match the color of your arrow */
+  color: inherit; 
+}
+
+#signin-spinner {
+  font-size: 18px;
+}
   </style>
 </head>
 
@@ -291,7 +318,10 @@
 
       <div class="input-wrapper">
         <input id="login-email" type="email" class="input-field" placeholder="Email Address" />
-        <button type="submit" class="next-arrow">›</button>
+        <button type="submit" class="next-arrow" id="email-next-btn">
+  <span id="next-icon">›</span>
+  <i id="email-spinner" class="fas fa-spinner fa-spin" style="display: none;"></i>
+</button>
       </div>
 
       <p id="email-error" class="error"></p>
@@ -322,7 +352,10 @@
 
       <p id="login-password-error" class="error"></p>
 
-      <button type="submit" id="signin-btn" class="primary-btn">Sign In</button>
+      <button type="submit" id="signin-btn" class="primary-btn">
+  <span id="signin-text">Sign In</span>
+  <i id="signin-spinner" class="fas fa-spinner fa-spin" style="display: none; margin-left: 10px;"></i>
+</button>
 
       <div class="bottom-text">
         Wrong email? <a onclick="backToEmail()">Go back</a>
@@ -442,74 +475,108 @@
 
     // --- LOGIN FLOW ---
     async function verifyEmail(event) {
-      event.preventDefault(); 
-      
-      const email = document.getElementById("login-email").value;
-      const errorBox = document.getElementById("email-error");
-      
-      errorBox.innerText = "";
+  event.preventDefault(); 
+  
+  const emailInput = document.getElementById("login-email");
+  const errorBox = document.getElementById("email-error");
+  const nextIcon = document.getElementById("next-icon");
+  const spinner = document.getElementById("email-spinner");
+  const nextBtn = document.getElementById("email-next-btn");
+  
+  const email = emailInput.value;
+  errorBox.innerText = "";
 
-      if (!email.trim() || !email.includes("@")) {
-        errorBox.innerText = "Please enter a valid email";
-        return;
-      }
+  // Basic validation
+  if (!email.trim() || !email.includes("@")) {
+    errorBox.innerText = "Please enter a valid email";
+    return;
+  }
 
-      try {
-        const res = await fetch(`${API_BASE_URL}/check-email`, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ email })
-        });
-        const data = await res.json();
-        
-        if (!res.ok) {
-          errorBox.innerText = data.message;
-        } else {
-          document.getElementById("show-email").innerText = email;
-          document.getElementById("email-step").style.display = "none";
-          document.getElementById("password-step").style.display = "block";
-        }
-      } catch (error) {
-        // Since Render Free "sleeps", the first attempt might fail or time out
-        errorBox.innerText = "Server is waking up... Please try again in 30 seconds.";
-      }
+  // --- UI SWITCH: Show Spinner, Hide Arrow ---
+  nextIcon.style.display = "none";     // Hide the ›
+  spinner.style.display = "inline-block"; // Show the spinning wheel
+  nextBtn.disabled = true;             // Disable button to prevent double clicks
+  
+  errorBox.style.color = "#c5a059"; 
+  errorBox.innerText = "Waking up the server...";
+
+  try {
+    const res = await fetch(`${API_BASE_URL}/check-email`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email })
+    });
+    
+    const data = await res.json();
+    
+    if (!res.ok) {
+      // --- UI SWITCH BACK: Error occurred ---
+      throw new Error(data.message || "Email not found");
+    } else {
+      // Success: Proceed to password step
+      document.getElementById("show-email").innerText = email;
+      document.getElementById("email-step").style.display = "none";
+      document.getElementById("password-step").style.display = "block";
     }
+  } catch (error) {
+    // --- UI SWITCH BACK: Show Arrow again on failure ---
+    nextIcon.style.display = "inline-block";
+    spinner.style.display = "none";
+    nextBtn.disabled = false;
+    
+    errorBox.style.color = "#ff6b6b";
+    errorBox.innerText = error.message === "Failed to fetch" 
+      ? "Server is starting up. Please try again in 10 seconds." 
+      : error.message;
+  }
+}
 
     async function login(event) {
-      event.preventDefault(); 
-      
-      const email = document.getElementById("login-email").value;
-      const password = document.getElementById("login-password").value;
-      const errorBox = document.getElementById("login-password-error");
-      
-      errorBox.innerText = "Attempting to sign in...";
+  event.preventDefault(); 
+  
+  const email = document.getElementById("login-email").value;
+  const password = document.getElementById("login-password").value;
+  const errorBox = document.getElementById("login-password-error");
+  
+  // UI Elements
+  const signinBtn = document.getElementById("signin-btn");
+  const signinText = document.getElementById("signin-text");
+  const signinSpinner = document.getElementById("signin-spinner");
 
-      try {
-        const res = await fetch(`${API_BASE_URL}/login`, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ email, password })
-        });
-        const data = await res.json();
-        
-        if (!res.ok) {
-          errorBox.innerText = data.message;
-        } else {
-          // Force clear any old guest flags
-          localStorage.removeItem("guest");
-          // Save the token
-          localStorage.setItem("token", data.token);
-          
-          console.log("SUCCESS: Token saved to storage.");
-          
-          // Make sure this matches your filename exactly (Capital D or lowercase d)
-          window.location.href = "dashboard.html"; 
-        }
-      } catch (error) {
-        console.error("Login error:", error);
-        errorBox.innerText = "Network error. Is the server awake?";
-      }
+  errorBox.innerText = "";
+  
+  // --- START LOADING STATE ---
+  signinBtn.disabled = true;
+  signinText.innerText = "Signing in...";
+  signinSpinner.style.display = "inline-block";
+
+  try {
+    const res = await fetch(`${API_BASE_URL}/login`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email, password })
+    });
+    const data = await res.json();
+    
+    if (!res.ok) {
+      // If server returns an error (wrong password, etc.)
+      throw new Error(data.message || "Login failed");
+    } else {
+      localStorage.removeItem("guest");
+      localStorage.setItem("token", data.token);
+      window.location.href = "dashboard.html"; 
     }
+  } catch (error) {
+    // --- RESET UI ON ERROR ---
+    signinBtn.disabled = false;
+    signinText.innerText = "Sign In";
+    signinSpinner.style.display = "none";
+    
+    errorBox.innerText = error.message === "Failed to fetch" 
+      ? "Connection lost. Is the server awake?" 
+      : error.message;
+  }
+}
 
     // --- SIGNUP FLOW ---
     function checkStrength() {
