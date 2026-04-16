@@ -136,25 +136,25 @@
             <img src="images/logo.png" alt="Logo">
             <a href="dashboard.html"><span>Alvarez - Roman Heritage Equestrian</span></a>
         </div>
-        <div class="navbar-right">
-            <div id="userMenu" style="display: flex; align-items: center;">
-                <i class="fas fa-user"></i>
-                <span id="usernameDisplay" style="margin-left: 8px;">Loading...</span>
+        <div class="navbar-right" id="userMenu">
+            <div id="userTrigger" style="display: flex; align-items: center;">
+                <i class="fas fa-user" id="defaultUserIcon" style="font-size: 20px;"></i>
+                <img id="navProfilePic" src="" alt="PFP" style="display: none; width: 35px; height: 35px; border-radius: 50%; object-fit: cover; border: 1px solid #c5a059;">
+                <span id="usernameDisplay" style="margin-left: 10px;">Loading...</span>
             </div>
             <div id="dropdownMenu">
                 <div onclick="location.href='profile.html'" id="profileOption" style="display:none;">My Profile</div>
-                <div onclick="logout()">Logout</div>
+                <div onclick="logout()" id="logoutText">Logout</div>
             </div>
-            <button class="menu-toggle" onclick="toggleNav()"><i class="fa-solid fa-bars"></i></button>
         </div>
+        <button class="menu-toggle" onclick="toggleNav()"><i class="fa-solid fa-bars"></i></button>
     </div>
 
     <div class="sub-navbar" id="subNavbar">
         <a href="dashboard.html">Home</a>
-        <a href="Loading.html?type=events" style="border: 1px solid #c5a059;">Upcoming Events</a>
+        <a href="availablehorses.html">Available Horses</a>
         <a href="enroll.html">Enroll Horse</a>
         <a href="memberships.html">Memberships</a>
-        <a href="availablehorses.html">Available Horses</a>
         <a href="about.html">Our Story</a>
         <a href="contact.html">Contact</a>
     </div>
@@ -311,7 +311,17 @@
                 document.getElementById("fullName").innerText = updatedUser.fullName;
                 document.getElementById("userEmail").innerText = updatedUser.email;
                 document.getElementById("usernameDisplay").innerText = updatedUser.username || updatedUser.fullName;
-                if (updatedUser.profilePic) document.getElementById("profileDisplayPic").src = updatedUser.profilePic;
+                
+                // Update profile picture on the page and in the navbar
+                if (updatedUser.profilePic) {
+                    document.getElementById("profileDisplayPic").src = updatedUser.profilePic;
+                    const navPic = document.getElementById("navProfilePic");
+                    if (navPic) {
+                        navPic.src = updatedUser.profilePic;
+                        navPic.style.display = "block";
+                        document.getElementById("defaultUserIcon").style.display = "none";
+                    }
+                }
                 closeEditModal();
                 alert("Profile Saved!");
             } else {
@@ -326,24 +336,34 @@
     }
 
     async function loadUser() {
-        const token = localStorage.getItem("token");
         const isGuest = localStorage.getItem("guest");
+        const userDisplay = document.getElementById("usernameDisplay");
+        const navPic = document.getElementById("navProfilePic");
+        const defaultIcon = document.getElementById("defaultUserIcon");
         const dd = document.getElementById("dropdownMenu");
+        const userMenu = document.getElementById("userMenu");
 
-        document.getElementById("userMenu").onclick = (e) => {
-            e.stopPropagation();
-            dd.style.display = dd.style.display === "block" ? "none" : "block";
-        };
-        
-        window.onclick = () => { dd.style.display = "none"; };
+        // Click logic for the user menu
+        if (userMenu) {
+            userMenu.onclick = (e) => {
+                e.stopPropagation();
+                const isVisible = dd.style.display === "block";
+                dd.style.display = isVisible ? "none" : "block";
+            };
+        }
+        window.onclick = () => { if (dd) dd.style.display = "none"; };
 
         if (isGuest === "true") {
-            document.getElementById("usernameDisplay").innerText = "Guest";
+            userDisplay.innerText = "Guest";
             document.getElementById("fullName").innerText = "Guest User";
             document.getElementById("userEmail").innerText = "Guest Mode";
+            document.getElementById("logoutText").innerText = "Sign In / Sign Up";
+            if (navPic) navPic.style.display = "none";
+            if (defaultIcon) defaultIcon.style.display = "block";
             return;
         }
 
+        const token = localStorage.getItem("token");
         if (!token) { window.location.href = "index.html"; return; }
 
         try {
@@ -353,12 +373,22 @@
 
             if (res.ok) {
                 const data = await res.json();
-                document.getElementById("usernameDisplay").innerText = data.username || data.fullName;
+                userDisplay.innerText = data.username || data.fullName;
                 document.getElementById("fullName").innerText = data.fullName;
                 document.getElementById("userEmail").innerText = data.email;
                 document.getElementById("profileOption").style.display = "block";
+                
+                // Swap Profile Picture if it exists
                 if (data.profilePic && data.profilePic.startsWith("data:image")) {
                     document.getElementById("profileDisplayPic").src = data.profilePic;
+                    if (navPic) {
+                        navPic.src = data.profilePic;
+                        navPic.style.display = "block";
+                    }
+                    if (defaultIcon) defaultIcon.style.display = "none";
+                } else {
+                    if (navPic) navPic.style.display = "none";
+                    if (defaultIcon) defaultIcon.style.display = "block";
                 }
             } else {
                 logout();

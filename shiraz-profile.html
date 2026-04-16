@@ -2,45 +2,136 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Shiraz - Profile - Alvarez Equestrian</title>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Shiraz - Alvarez - Roman Heritage Equestrian</title>
+    <link rel="icon" href="images/logo.png" type="image/x-icon">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
     <style>
-        /* Shared Styles */
-        body { background: #141612; color: white; font-family: 'Roboto', sans-serif; margin: 0; }
-        .container { max-width: 1000px; margin: 0 auto; padding: 40px 20px; }
-        
-        /* Header Section */
+        html, body {
+            margin: 0; padding: 0; height: 100%;
+            font-family: 'Roboto', sans-serif;
+            background-color: #141612;
+            color: white;
+            overflow-x: hidden;
+            width: 100%;
+        }
+        .page-wrapper { display: flex; flex-direction: column; min-height: 100vh; }
+
+        /* NAVBAR */
+        .navbar {
+            display: flex; align-items: center; justify-content: space-between;
+            background-color: #1e1e2f; padding: 10px 20px; color: white;
+            position: relative; z-index: 100;
+        }
+        .navbar-left { display: flex; align-items: center; z-index: 102; flex: 1; }
+        .navbar-left img { height: 40px; width: 40px; border-radius: 50%; object-fit: cover; margin-right: 12px; border: 2px solid #c5a059; }
+        .navbar-left a { color: white; text-decoration: none; }
+        .navbar-left span { font-size: 1.2rem; font-weight: bold; white-space: nowrap; font-family: 'Playfair Display', serif; letter-spacing: 0.5px;}
+
+        .menu-toggle { display: none; background: none; border: none; color: white; font-size: 1.5rem; cursor: pointer; margin-left: 15px; z-index: 102; }
+
+        .navbar-right { display: flex; align-items: center; position: relative; cursor: pointer; z-index: 102; }
+        .navbar-right span { margin-left: 8px; font-size: 1rem; }
+
+        #dropdownMenu {
+            display: none; position: absolute; right: 0; top: 45px;
+            background: #1e1e2f; padding: 10px; border-radius: 8px; z-index: 999;
+            border: 1px solid rgba(197, 160, 89, 0.3); box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+        }
+        #dropdownMenu div { padding: 10px 15px; color: white; cursor: pointer; border-radius: 4px; transition: 0.2s; white-space: nowrap; }
+        #dropdownMenu div:hover { background: #c5a059; color: #141612; font-weight: 500; }
+
+        .sub-navbar {
+            background-color: #232333; padding: 15px 20px;
+            display: flex; justify-content: center; gap: 20px; border-bottom: 2px solid #c5a059;
+            transition: max-height 0.3s ease-in-out;
+        }
+        .sub-navbar a {
+            background: #4a3b32; color: #fdfaf6; text-decoration: none;
+            padding: 10px 24px; border-radius: 6px; font-size: 15px; font-weight: 500;
+            border: 1px solid #5c4a3f; transition: all 0.3s ease;
+        }
+        .sub-navbar a:hover { background: #c5a059; color: #141612; transform: translateY(-2px); box-shadow: 0 4px 12px rgba(197, 160, 89, 0.25); }
+
+        /* PROFILE CONTENT */
+        .container { max-width: 1000px; margin: 0 auto; padding: 60px 20px; flex-grow: 1; }
         .profile-header { text-align: center; margin-bottom: 60px; }
         .profile-header h1 { font-family: 'Playfair Display', serif; color: #c5a059; font-size: 4rem; margin: 0; }
-        .profile-header p { font-size: 1.4rem; color: #b5aba1; font-weight: 300; }
-
-        /* Content Sections */
+        .profile-header p { font-size: 1.4rem; color: #b5aba1; font-weight: 300; margin-top: 15px; }
         .section-title { font-family: 'Playfair Display', serif; color: #c5a059; border-bottom: 1px solid rgba(197, 160, 89, 0.3); padding-bottom: 10px; margin-bottom: 30px; font-size: 2rem; }
         
-        /* Videos */
         .video-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 20px; margin-bottom: 60px; }
         .video-card { background: #1e1e2f; border-radius: 8px; overflow: hidden; border: 1px solid rgba(197, 160, 89, 0.2); }
         .video-placeholder { width: 100%; aspect-ratio: 16/9; background: #000; display: flex; align-items: center; justify-content: center; }
 
-        /* Gallery */
         .image-gallery { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 15px; margin-bottom: 60px; }
         .gallery-img { width: 100%; height: 250px; object-fit: cover; border-radius: 4px; border: 1px solid rgba(197, 160, 89, 0.2); transition: 0.3s; }
         .gallery-img:hover { border-color: #c5a059; transform: scale(1.02); }
 
-        /* Final Action */
-        .contact-section { text-align: center; padding: 40px; background: #1e1e2f; border-radius: 12px; border: 1px solid #c5a059; }
-        .final-btn { display: inline-block; padding: 15px 50px; background: #c5a059; color: #141612; text-decoration: none; font-weight: bold; border-radius: 6px; font-size: 1.2rem; transition: 0.3s; }
-        .final-btn:hover { transform: scale(1.05); box-shadow: 0 5px 20px rgba(197, 160, 89, 0.3); }
+        .contact-section { text-align: center; padding: 40px; background: #1e1e2f; border-radius: 12px; border: 1px solid #c5a059; margin-bottom: 40px; }
+        .final-btn { display: inline-block; padding: 15px 50px; background: #c5a059; color: #141612; text-decoration: none; font-weight: bold; border-radius: 6px; font-size: 1.2rem; transition: 0.3s; border: 1px solid #c5a059;}
+        .final-btn:hover { background: transparent; color: #c5a059; transform: scale(1.05); }
 
-        @media (max-width: 600px) {
+        /* FOOTER */
+        footer { background-color: #1e1e2f; padding: 60px 20px 30px; border-top: 2px solid #c5a059; color: white; display: flex; flex-direction: column; align-items: center; }
+        .footer-logo { height: 70px; width: 70px; border-radius: 50%; border: 2px solid #c5a059; margin-bottom: 40px; object-fit: cover; }
+        .footer-links-container { display: grid; grid-template-columns: repeat(4, 1fr); gap: 40px; max-width: 1200px; width: 100%; margin-bottom: 40px; }
+        .footer-column p { font-family: 'Playfair Display', serif; color: #c5a059; font-size: 1.2rem; margin: 0 0 10px 0; font-weight: bold; }
+        .footer-column hr { border: none; border-top: 1px solid rgba(197, 160, 89, 0.3); margin-bottom: 15px; }
+        .footer-btn { display: block; background: none; border: none; color: #b5aba1; padding: 8px 0; font-size: 14px; cursor: pointer; text-align: left; transition: 0.3s; width: 100%; }
+        .footer-btn:hover { color: #c5a059; transform: translateX(5px); }
+        .footer-bottom { width: 100%; max-width: 1200px; display: flex; justify-content: space-between; align-items: center; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px; }
+        .social-icons a { color: white; font-size: 1.5rem; margin-left: 20px; transition: 0.3s; }
+        .social-icons a:hover { color: #c5a059; }
+
+        @media (max-width: 768px) {
+            .navbar-left span { font-size: 1rem; white-space: normal; max-width: 180px; }
+            .navbar-right span { display: none; }
+            .menu-toggle { display: block; }
+            .sub-navbar { display: none; flex-direction: column; align-items: center; padding: 20px; gap: 12px; }
+            .sub-navbar.active { display: flex; }
+            .sub-navbar a { width: 90%; text-align: center; }
+            .profile-header h1 { font-size: 2.8rem; }
             .video-grid { grid-template-columns: 1fr; }
-            .profile-header h1 { font-size: 2.5rem; }
+            .footer-links-container { grid-template-columns: repeat(2, 1fr); }
+            .footer-bottom { flex-direction: column; gap: 20px; text-align: center; }
         }
     </style>
 </head>
 <body>
+
+<div class="page-wrapper">
+    <div class="navbar">
+        <div class="navbar-left">
+            <img src="images/logo.png" alt="Logo">
+            <a href="dashboard.html"><span>Alvarez - Roman Heritage Equestrian</span></a>
+        </div>
+        <div class="navbar-right" id="userMenu">
+            <div id="userTrigger" style="display: flex; align-items: center;">
+                <i class="fas fa-user" id="defaultUserIcon" style="font-size: 20px;"></i>
+                <img id="navProfilePic" src="" alt="PFP" style="display: none; width: 35px; height: 35px; border-radius: 50%; object-fit: cover; border: 1px solid #c5a059;">
+                <span id="usernameDisplay" style="margin-left: 10px;">Loading...</span>
+            </div>
+            <div id="dropdownMenu">
+                <div onclick="location.href='profile.html'" id="profileOption" style="display:none;">My Profile</div>
+                <div onclick="logout()" id="logoutText">Logout</div>
+            </div>
+        </div>
+        <button class="menu-toggle" onclick="toggleNav()"><i class="fa-solid fa-bars"></i></button>
+    </div>
+
+    <div class="sub-navbar" id="subNavbar">
+        <a href="dashboard.html">Home</a>
+        <a href="availablehorses.html">Available Horses</a>
+        <a href="enroll.html">Enroll Horse</a>
+        <a href="memberships.html">Memberships</a>
+        <a href="about.html">Our Story</a>
+        <a href="contact.html">Contact</a>
+    </div>
 
     <div class="container">
         <div class="profile-header">
@@ -52,11 +143,11 @@
         <div class="video-grid">
             <div class="video-card">
                 <div class="video-placeholder"><i class="fas fa-play fa-3x" style="color:#c5a059"></i></div>
-                <p style="padding: 15px; margin:0;">Dressage Showcase - Fall 2025</p>
+                <p style="padding: 15px; margin:0; color:#b5aba1;">Dressage Showcase - Fall 2025</p>
             </div>
             <div class="video-card">
                 <div class="video-placeholder"><i class="fas fa-play fa-3x" style="color:#c5a059"></i></div>
-                <p style="padding: 15px; margin:0;">Liberty Work Training</p>
+                <p style="padding: 15px; margin:0; color:#b5aba1;">Liberty Work Training</p>
             </div>
         </div>
 
@@ -69,11 +160,106 @@
         </div>
 
         <div class="contact-section">
-            <h3 style="font-family: 'Playfair Display', serif; font-size: 1.8rem; margin-top: 0;">Interested in Shiraz?</h3>
+            <h3 style="font-family: 'Playfair Display', serif; font-size: 1.8rem; margin-top: 0; color:#c5a059;">Interested in Shiraz?</h3>
             <p style="color: #b5aba1; margin-bottom: 25px;">Schedule a viewing or request a full vetting report.</p>
             <a href="contact.html" class="final-btn">Contact Us</a>
         </div>
     </div>
 
-    </body>
+    <footer>
+        <img src="images/logo.png" alt="Logo" class="footer-logo">
+        <div class="footer-links-container">
+            <div class="footer-column">
+                <p>Navigation</p><hr>
+                <button class="footer-btn" onclick="location.href='dashboard.html'">Home</button>
+                <button class="footer-btn" onclick="location.href='memberships.html'">Memberships</button>
+                <button class="footer-btn" onclick="location.href='enroll.html'">Enroll Horse</button>
+                <button class="footer-btn" onclick="location.href='contact.html'">Contact Us</button>
+            </div>
+            <div class="footer-column">
+                <p>Updates</p><hr>
+                <button class="footer-btn" onclick="location.href='Loading.html?type=events'">Upcoming Events</button>
+                <button class="footer-btn" onclick="location.href='Loading.html?type=news'">Latest News</button>
+            </div>
+            <div class="footer-column">
+                <p>About</p><hr>
+                <button class="footer-btn" onclick="location.href='about.html'">Our Story</button>
+                <button class="footer-btn" onclick="location.href='index.html'">Member Login</button>
+            </div>
+            <div class="footer-column">
+                <p>The Farm</p><hr>
+                <button class="footer-btn" onclick="location.href='availablehorses.html'">Available Horses</button>
+                <button class="footer-btn" onclick="location.href='TrainingGrounds.html'">Training Grounds</button>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="copyright">&copy; 2026 Alvarez - Roman Heritage Equestrian. All rights reserved.</div>
+            <div class="social-icons">
+                <a href="#"><i class="fab fa-facebook"></i></a>
+                <a href="#"><i class="fab fa-youtube"></i></a>
+            </div>
+        </div>
+    </footer>
+</div>
+
+<script>
+    const API_URL = "https://login-backend-ny6x.onrender.com";
+
+    function toggleNav() { document.getElementById("subNavbar").classList.toggle("active"); }
+
+    async function loadUser() {
+        const isGuest = localStorage.getItem("guest");
+        const userDisplay = document.getElementById("usernameDisplay");
+        const navPic = document.getElementById("navProfilePic");
+        const defaultIcon = document.getElementById("defaultUserIcon");
+        const dd = document.getElementById("dropdownMenu");
+        const userMenu = document.getElementById("userMenu");
+
+        if (userMenu) {
+            userMenu.onclick = (e) => {
+                e.stopPropagation();
+                const isVisible = dd.style.display === "block";
+                dd.style.display = isVisible ? "none" : "block";
+            };
+        }
+        window.onclick = () => { if (dd) dd.style.display = "none"; };
+
+        if (isGuest === "true") {
+            userDisplay.innerText = "Guest";
+            document.getElementById("logoutText").innerText = "Sign In / Sign Up";
+            if (navPic) navPic.style.display = "none";
+            if (defaultIcon) defaultIcon.style.display = "block";
+            return;
+        }
+
+        const token = localStorage.getItem("token");
+        if (!token) { window.location.href = "index.html"; return; }
+
+        try {
+            const res = await fetch(`${API_URL}/me`, {
+                headers: { "Authorization": "Bearer " + token }
+            });
+
+            if (res.ok) {
+                const data = await res.json();
+                userDisplay.innerText = data.fullName;
+                if (data.profilePic && data.profilePic.startsWith("data:image")) {
+                    if (navPic) { navPic.src = data.profilePic; navPic.style.display = "block"; }
+                    if (defaultIcon) defaultIcon.style.display = "none";
+                } else {
+                    if (navPic) navPic.style.display = "none";
+                    if (defaultIcon) defaultIcon.style.display = "block";
+                }
+                document.getElementById("profileOption").style.display = "block";
+            } else {
+                logout();
+            }
+        } catch (err) { console.error(err); setTimeout(loadUser, 5000); }
+    }
+
+    function logout() { localStorage.clear(); window.location.href = "index.html"; }
+    loadUser();
+</script>
+
+</body>
 </html>

@@ -12,21 +12,21 @@
 
     <style>
         html, body {
-    margin: 0;
-    padding: 0;
-    height: auto; /* Changed from 100% */
-    min-height: 100%; 
-    background-color: #141612;
-    font-family: 'Roboto', sans-serif;
-    overflow-x: hidden;
-}
+            margin: 0;
+            padding: 0;
+            height: auto;
+            min-height: 100%; 
+            background-color: #141612;
+            font-family: 'Roboto', sans-serif;
+            overflow-x: hidden;
+        }
 
         .page-wrapper {
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh; /* Changed from height to min-height */
-    width: 100%;
-}
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            width: 100%;
+        }
 
         /* NAVBAR */
         .navbar {
@@ -40,7 +40,6 @@
         .navbar-left a { color: white; text-decoration: none; }
         .navbar-left span { font-size: 1.2rem; font-weight: bold; white-space: nowrap; font-family: 'Playfair Display', serif; letter-spacing: 0.5px;}
 
-        /* HAMBURGER BUTTON */
         .menu-toggle {
             display: none;
             background: none; border: none; color: white;
@@ -48,35 +47,10 @@
             z-index: 102;
         }
 
-        .navbar-center { position: absolute; left: 50%; transform: translateX(-50%); z-index: 101; }
-
-        .search-container { position: relative; width: 500px; }
-        .search-container input {
-            width: 100%; padding: 10px 15px;
-            border-radius: 20px; border: none; outline: none;
-            font-size: 1rem; background: #2e2e40; color: white;
-        }
-        .search-container input::placeholder { color: #888; }
-        .search-button {
-            position: absolute; right: 10px; top: 50%; transform: translateY(-50%);
-            background: none; color: #888; cursor: pointer;
-            font-size: 1.2rem; padding: 5px; border: none; transition: 0.2s;
-        }
-        .search-button:hover { color: #c5a059; }
-        .microphone-button {
-            position: absolute; right: 45px; top: 50%; transform: translateY(-50%);
-            background: none; color: white; cursor: pointer;
-            font-size: 1.2rem; padding: 5px; border: none; transition: 0.2s;
-        }
-        .microphone-button:hover { color: #c5a059; }
-
         .navbar-right {
             display: flex; align-items: center; position: relative; cursor: pointer; z-index: 102;
         }
         .navbar-right span { margin-left: 8px; font-size: 1rem; }
-        .navbar-right a { color: white; text-decoration: none; display: flex; align-items: center; margin-right: 20px; transition: 0.2s; }
-        .navbar-right a i { margin-right: 5px; }
-        .navbar-right a:hover { color: #c5a059; }
 
         #dropdownMenu {
             display: none; position: absolute; right: 0; top: 45px;
@@ -118,11 +92,11 @@
 
         /* HERO VIDEO SECTION */
         .hero-container {
-    width: 100%;
-    height: 500px; /* Adjust this number to make the video area smaller/larger */
-    position: relative;
-    margin-top: 0; /* Ensure no margin is pushing it down */
-}
+            width: 100%;
+            height: 500px;
+            position: relative;
+            margin-top: 0;
+        }
 
         .hero-container::after {
             content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
@@ -272,33 +246,6 @@
         .social-icons a { color: white; font-size: 1.5rem; margin-left: 20px; transition: 0.3s; }
         .social-icons a:hover { color: #c5a059; }
 
-        /* MODALS */
-        .modal {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.8); display: none; 
-            justify-content: center; align-items: center; z-index: 1000;
-            backdrop-filter: blur(5px);
-        }
-        .modal-content {
-            background: #1e1e2f; padding: 40px; border-radius: 12px;
-            text-align: center; position: relative; color: white;
-            border: 1px solid rgba(197, 160, 89, 0.5);
-            box-shadow: 0 15px 40px rgba(0,0,0,0.6);
-            max-width: 450px; width: 90%;
-        }
-        .modal-content h2 { font-family: 'Playfair Display', serif; color: #c5a059; margin-top: 0; font-size: 24px;}
-        .close-btn { position: absolute; top: 15px; right: 20px; background: none; border: none; font-size: 1.2rem; cursor: pointer; color: #888; transition: 0.2s; }
-        .close-btn:hover { color: #ff6b6b; }
-        .perks-list { text-align: left; margin: 25px 0; padding: 0; list-style: none; font-size: 15px; color: #b5aba1;}
-        .perks-list li { margin-bottom: 12px; }
-        .perks-list li i { color: #c5a059; margin-right: 10px; }
-        .modal-btn { padding: 12px 24px; border-radius: 6px; border: none; cursor: pointer; font-size: 15px; font-weight: 500; transition: 0.3s; width: 100%; margin-bottom: 10px; }
-        .btn-gold { background: #c5a059; color: #141612; }
-        .btn-gold:hover { background: #e6c885; }
-        .btn-outline { background: transparent; color: #b5aba1; border: 1px solid #5c4a3f; }
-        .btn-outline:hover { color: white; border-color: #c5a059; background: rgba(197, 160, 89, 0.1); }
-
-        /* --- MOBILE RESPONSIVE TWEAKS --- */
         @media (max-width: 900px) {
             .info-section { flex-direction: column !important; }
             .info-text { padding: 0 !important; text-align: center; }
@@ -311,7 +258,6 @@
         }
 
         @media (max-width: 768px) {
-            .navbar-center { display: none !important; } /* REMOVE SEARCH FOR MOBILE */
             .navbar { padding: 10px 15px; }
             .navbar-left { flex: 1; }
             .navbar-left span { 
@@ -324,9 +270,8 @@
             
             .navbar-right { order: 2; margin-right: 0; }
             .navbar-right span { display: none; }
-            .calendar-link { display: none !important; } /* REMOVE EVENTS FROM TOP ON MOBILE */
             
-            .menu-toggle { display: block; order: 3; } /* HAMBURGER ON RIGHT */
+            .menu-toggle { display: block; order: 3; } 
             
             .sub-navbar { 
                 display: none; 
@@ -345,17 +290,6 @@
             .info-text h2 { font-size: 2rem; }
             .center-play-btn { width: 70px; height: 70px; font-size: 1.8rem; }
         }
-
-        .nav-profile-pic {
-        width: 30px;
-        height: 30px;
-        border-radius: 50%;
-        object-fit: cover;
-        border: 1px solid #c5a059;
-        margin-left: 10px;
-        display: none; /* Hidden by default until image loads */
-    }
-    
     </style>
 </head>
 <body>
@@ -367,27 +301,17 @@
             <a href="dashboard.html"><span>Alvarez - Roman Heritage Equestrian</span></a>
         </div>
         
-        <div class="navbar-center">
-            <div class="search-container">
-                <input type="text" id="searchInput" placeholder="Search...">
-                <button class="search-button" id="searchButton"><i class="fa-solid fa-search"></i></button>
-                <button class="microphone-button" id="micButton"><i class="fa-solid fa-microphone"></i></button>
+        <div class="navbar-right" id="userMenu">
+            <div id="userTrigger" style="display: flex; align-items: center; cursor: pointer;">
+                <i class="fas fa-user" id="defaultUserIcon" style="font-size: 20px;"></i>
+                <img id="navProfilePic" src="" alt="PFP" style="display: none; width: 35px; height: 35px; border-radius: 50%; object-fit: cover; border: 1px solid #c5a059;">
+                <span id="usernameDisplay" style="margin-left: 10px; white-space: nowrap;">Loading...</span>
             </div>
-        </div>
-        
-        <div class="navbar-right" id="userMenu" style="cursor: pointer; display: flex; align-items: center; position: relative;">
-    <a href="events.html" class="calendar-link" style="margin-right: 15px;"><i class="fa-solid fa-calendar-days"></i><span>Events</span></a>
-    
-    <div id="userTrigger" style="display: flex; align-items: center;">
-        <i class="fas fa-user" id="defaultUserIcon" style="font-size: 20px;"></i>
-        <img id="navProfilePic" src="" alt="PFP" style="display: none; width: 35px; height: 35px; border-radius: 50%; object-fit: cover; border: 1px solid #c5a059;">
-        <span id="usernameDisplay" style="margin-left: 10px; white-space: nowrap;">Loading...</span>
-    </div>
 
-    <div id="dropdownMenu">
-        <div onclick="location.href='profile.html'" id="profileOption" style="display:none;">My Profile</div>
-        <div onclick="logout()" id="logoutText">Logout</div>
-    </div>
+            <div id="dropdownMenu">
+                <div onclick="location.href='profile.html'" id="profileOption" style="display:none;">My Profile</div>
+                <div onclick="logout()" id="logoutText">Logout</div>
+            </div>
         </div>
 
         <button class="menu-toggle" onclick="toggleNav()"><i class="fa-solid fa-bars"></i></button>
@@ -395,7 +319,7 @@
 
     <div class="sub-navbar" id="subNavbar">
         <a href="dashboard.html">Home</a>
-        <a href="events.html" style="border: 1px solid #c5a059;">Upcoming Events</a>
+        <a href="events.html">Upcoming Events</a>
         <a href="enroll.html">Enroll Horse</a>
         <a href="memberships.html">Memberships</a>
         <a href="availablehorses.html">Available Horses</a>
@@ -473,28 +397,6 @@
         </div>
     </footer>
 
-    <div id="talkModal" class="modal">
-        <div class="modal-content">
-            <button class="close-btn" id="closeVoiceModal" onclick="document.getElementById('talkModal').style.display='none'"><i class="fa-solid fa-xmark"></i></button>
-            <h2 style="margin-top: 10px;"><i class="fa-solid fa-microphone" style="margin-right: 10px;"></i>Listening</h2>
-            <p id="voiceStatus" style="color: #b5aba1;">Talk to search...</p>
-        </div>
-    </div>
-
-    <div id="guestModal" class="modal">
-        <div class="modal-content">
-            <button class="close-btn" onclick="document.getElementById('guestModal').style.display='none'"><i class="fa-solid fa-xmark"></i></button>
-            <h2>Unlock More Benefits</h2>
-            <p style="color: #e2e8f0; margin-top: 5px;">Join a membership for exclusive perks!</p>
-            <ul class="perks-list">
-                <li><i class="fa-solid fa-video"></i> Watch training videos online</li>
-                <li><i class="fa-solid fa-bell"></i> Get email notifications</li>
-            </ul>
-            <button class="modal-btn btn-gold" onclick="window.location.href='index.html'">Create Account / Log In</button>
-            <button class="modal-btn btn-outline" onclick="document.getElementById('guestModal').style.display='none'">Continue as Guest</button>
-        </div>
-    </div>
-
     <script>
         /* --- MOBILE NAV TOGGLE --- */
         function toggleNav() {
@@ -507,150 +409,91 @@
         function openPlayer() { vModal.style.display = 'flex'; vPlayer.play(); vPlayer.muted = false; }
         function closePlayer() { vModal.style.display = 'none'; vPlayer.pause(); vPlayer.currentTime = 0; }
 
-        const params = new URLSearchParams(window.location.search);
-const googleToken = params.get("token");
-
-if (googleToken) {
-    localStorage.setItem("token", googleToken);
-
-    // clean URL so it doesn't keep re-triggering logic
-    window.history.replaceState({}, document.title, "dashboard.html");
-}
-
         /* --- AUTH & GUEST LOGIC --- */
         async function loadUser() {
-    const isGuest = localStorage.getItem("guest");
-    const API_URL = "https://login-backend-ny6x.onrender.com";
-    
-    // Select elements
-    const userDisplay = document.getElementById("usernameDisplay");
-    const navPic = document.getElementById("navProfilePic");
-    const defaultIcon = document.getElementById("defaultUserIcon");
-    const dd = document.getElementById("dropdownMenu");
-    const userMenu = document.getElementById("userMenu");
+            const isGuest = localStorage.getItem("guest");
+            const API_URL = "https://login-backend-ny6x.onrender.com";
+            
+            const userDisplay = document.getElementById("usernameDisplay");
+            const navPic = document.getElementById("navProfilePic");
+            const defaultIcon = document.getElementById("defaultUserIcon");
+            const dd = document.getElementById("dropdownMenu");
+            const userMenu = document.getElementById("userMenu");
 
-    // 1. FIXED CLICK LOGIC: Make the whole right-side area clickable
-    if (userMenu) {
-        userMenu.onclick = (e) => {
-            e.stopPropagation();
-            // Toggle dropdown visibility
-            const isVisible = dd.style.display === "block";
-            dd.style.display = isVisible ? "none" : "block";
-        };
-    }
-    
-    // Close dropdown if user clicks anywhere else on the screen
-    window.onclick = () => { 
-        if (dd) dd.style.display = "none"; 
-    };
-
-    // 2. Handle Guest Mode
-    if (isGuest === "true") {
-        userDisplay.innerText = "Guest";
-        document.getElementById("logoutText").innerText = "Sign In / Sign Up";
-        // Show default icon for guests
-        if (navPic) navPic.style.display = "none";
-        if (defaultIcon) defaultIcon.style.display = "block";
-        return;
-    }
-
-    // 3. Handle Google/Regular Tokens
-    const params = new URLSearchParams(window.location.search);
-    const googleToken = params.get("token");
-    if (googleToken) {
-        localStorage.setItem("token", googleToken);
-        window.history.replaceState({}, document.title, "dashboard.html");
-    }
-
-    const token = localStorage.getItem("token");
-    if (!token) { 
-        window.location.href = "index.html"; 
-        return; 
-    }
-
-    // 4. Fetch User Data from your Render Backend
-    try {
-        const res = await fetch(`${API_URL}/me`, {
-            headers: { 
-                "Authorization": "Bearer " + token,
-                "Content-Type": "application/json" 
+            if (userMenu) {
+                userMenu.onclick = (e) => {
+                    e.stopPropagation();
+                    const isVisible = dd.style.display === "block";
+                    dd.style.display = isVisible ? "none" : "block";
+                };
             }
-        });
+            
+            window.onclick = () => { 
+                if (dd) dd.style.display = "none"; 
+            };
 
-        if (res.ok) {
-            const data = await res.json();
-            
-            // Update the display name
-            userDisplay.innerText = data.fullName;
-            
-            // --- PROFILE PICTURE SWAP ---
-            if (data.profilePic && data.profilePic.startsWith("data:image")) {
-                if (navPic) {
-                    navPic.src = data.profilePic;
-                    navPic.style.display = "block"; // Show the uploaded photo
-                }
-                if (defaultIcon) {
-                    defaultIcon.style.display = "none"; // Hide the placeholder guy
-                }
-            } else {
-                // Keep default if no image is found
+            if (isGuest === "true") {
+                userDisplay.innerText = "Guest";
+                document.getElementById("logoutText").innerText = "Sign In / Sign Up";
                 if (navPic) navPic.style.display = "none";
                 if (defaultIcon) defaultIcon.style.display = "block";
+                return;
             }
 
-            document.getElementById("profileOption").style.display = "block";
-        } else {
-            // If token is dead, boot to login
-            logout();
+            const params = new URLSearchParams(window.location.search);
+            const googleToken = params.get("token");
+            if (googleToken) {
+                localStorage.setItem("token", googleToken);
+                window.history.replaceState({}, document.title, "dashboard.html");
+            }
+
+            const token = localStorage.getItem("token");
+            if (!token) { 
+                window.location.href = "index.html"; 
+                return; 
+            }
+
+            try {
+                const res = await fetch(`${API_URL}/me`, {
+                    headers: { 
+                        "Authorization": "Bearer " + token,
+                        "Content-Type": "application/json" 
+                    }
+                });
+
+                if (res.ok) {
+                    const data = await res.json();
+                    userDisplay.innerText = data.fullName;
+                    
+                    if (data.profilePic && data.profilePic.startsWith("data:image")) {
+                        if (navPic) {
+                            navPic.src = data.profilePic;
+                            navPic.style.display = "block";
+                        }
+                        if (defaultIcon) {
+                            defaultIcon.style.display = "none";
+                        }
+                    } else {
+                        if (navPic) navPic.style.display = "none";
+                        if (defaultIcon) defaultIcon.style.display = "block";
+                    }
+
+                    document.getElementById("profileOption").style.display = "block";
+                } else {
+                    logout();
+                }
+            } catch (err) { 
+                console.error("Connection error:", err);
+                setTimeout(loadUser, 5000); 
+            }
         }
-    } catch (err) { 
-        console.error("Connection error:", err);
-        // Retry logic if server is sleeping
-        setTimeout(loadUser, 5000); 
-    }
-}
 
         function logout() {
-    localStorage.clear();
-    window.location.href = "index.html";
-}
-
-loadUser();
-
-        /* --- SEARCH LOGIC --- */
-        const voiceInput = document.getElementById('searchInput');
-        if (document.getElementById("searchButton")) {
-            document.getElementById("searchButton").onclick = () => {
-                const q = voiceInput.value.trim();
-                if (q) window.location.href = `searchResults.html?q=${encodeURIComponent(q)}`;
-            };
+            localStorage.clear();
+            window.location.href = "index.html";
         }
 
-        const micBtn = document.getElementById('micButton');
-        const voiceModal = document.getElementById('talkModal');
-        if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) {
-            const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-            const recognition = new SpeechRecognition();
-            if (micBtn) {
-                micBtn.onclick = () => { voiceModal.style.display = 'flex'; recognition.start(); };
-            }
-            recognition.onresult = (e) => {
-                const transcript = e.results[0][0].transcript;
-                voiceInput.value = transcript;
-                setTimeout(() => { window.location.href = `searchResults.html?q=${encodeURIComponent(transcript)}`; }, 1000);
-            };
-        }
-
-        const placeholderText = "What can we help you with today? ";
-        let charIndex = 0;
-        function typeEffect() {
-            if (voiceInput) {
-                voiceInput.placeholder = placeholderText.slice(0, charIndex++);
-                if (charIndex > placeholderText.length) charIndex = 0;
-                setTimeout(typeEffect, 100);
-            }
-        }
-        typeEffect();
+        loadUser();
     </script>
 </div>
 </body>

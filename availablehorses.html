@@ -130,12 +130,16 @@
             <img src="images/logo.png" alt="Logo">
             <a href="dashboard.html"><span>Alvarez - Roman Heritage Equestrian</span></a>
         </div>
+        
         <div class="navbar-right" id="userMenu">
-            <i class="fas fa-user" style="margin-left: 15px;"></i>
-            <span id="usernameDisplay">Loading...</span>
+            <div id="userTrigger" style="display: flex; align-items: center;">
+                <i class="fas fa-user" id="defaultUserIcon" style="font-size: 20px;"></i>
+                <img id="navProfilePic" src="" alt="PFP" style="display: none; width: 35px; height: 35px; border-radius: 50%; object-fit: cover; border: 1px solid #c5a059;">
+                <span id="usernameDisplay" style="margin-left: 10px;">Loading...</span>
+            </div>
             <div id="dropdownMenu">
-                <div onclick="location.href='profile.html'">My Profile</div>
-                <div onclick="logout()">Logout</div>
+                <div onclick="location.href='profile.html'" id="profileOption" style="display:none;">My Profile</div>
+                <div onclick="logout()" id="logoutText">Logout</div>
             </div>
         </div>
         <button class="menu-toggle" onclick="toggleNav()"><i class="fa-solid fa-bars"></i></button>
@@ -210,30 +214,72 @@
 
 <script>
     const API_URL = "https://login-backend-ny6x.onrender.com";
-    function toggleNav() { document.getElementById("subNavbar").classList.toggle("active"); }
+
+    function toggleNav() { 
+        document.getElementById("subNavbar").classList.toggle("active"); 
+    }
+
     async function loadUser() {
         const isGuest = localStorage.getItem("guest");
+        const userDisplay = document.getElementById("usernameDisplay");
+        const navPic = document.getElementById("navProfilePic");
+        const defaultIcon = document.getElementById("defaultUserIcon");
         const dd = document.getElementById("dropdownMenu");
-        if (isGuest === "true") {
-            document.getElementById("usernameDisplay").innerText = "Guest";
-        } else {
-            const token = localStorage.getItem("token");
-            if (token) {
-                try {
-                    const res = await fetch(`${API_URL}/me`, { headers: { "Authorization": "Bearer " + token }});
-                    if (res.ok) {
-                        const data = await res.json();
-                        document.getElementById("usernameDisplay").innerText = data.fullName;
-                    }
-                } catch (err) { console.error(err); }
-            }
+        const userMenu = document.getElementById("userMenu");
+
+        if (userMenu) {
+            userMenu.onclick = (e) => {
+                e.stopPropagation();
+                const isVisible = dd.style.display === "block";
+                dd.style.display = isVisible ? "none" : "block";
+            };
         }
-        document.getElementById("userMenu").onclick = (e) => { 
-            e.stopPropagation();
-            dd.style.display = dd.style.display === "block" ? "none" : "block"; 
-        };
-        window.onclick = () => { dd.style.display = "none"; };
+        
+        window.onclick = () => { if (dd) dd.style.display = "none"; };
+
+        if (isGuest === "true") {
+            userDisplay.innerText = "Guest";
+            document.getElementById("logoutText").innerText = "Sign In / Sign Up";
+            if (navPic) navPic.style.display = "none";
+            if (defaultIcon) defaultIcon.style.display = "block";
+            return;
+        }
+
+        const token = localStorage.getItem("token");
+        if (!token) { 
+            window.location.href = "index.html"; 
+            return; 
+        }
+
+        try {
+            const res = await fetch(`${API_URL}/me`, {
+                headers: { "Authorization": "Bearer " + token }
+            });
+
+            if (res.ok) {
+                const data = await res.json();
+                userDisplay.innerText = data.fullName;
+                
+                if (data.profilePic && data.profilePic.startsWith("data:image")) {
+                    if (navPic) {
+                        navPic.src = data.profilePic;
+                        navPic.style.display = "block";
+                    }
+                    if (defaultIcon) defaultIcon.style.display = "none";
+                } else {
+                    if (navPic) navPic.style.display = "none";
+                    if (defaultIcon) defaultIcon.style.display = "block";
+                }
+                document.getElementById("profileOption").style.display = "block";
+            } else {
+                logout();
+            }
+        } catch (err) { 
+            console.error(err);
+            setTimeout(loadUser, 5000); 
+        }
     }
+
     function logout() { localStorage.clear(); window.location.href = "index.html"; }
     loadUser();
 </script>

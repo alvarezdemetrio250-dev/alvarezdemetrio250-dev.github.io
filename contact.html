@@ -33,15 +33,15 @@
         .navbar-left img { height: 40px; width: 40px; border-radius: 50%; object-fit: cover; margin-right: 12px; border: 2px solid #c5a059; }
         .navbar-left a { color: white; text-decoration: none; font-family: 'Playfair Display', serif; font-weight: bold; font-size: 1.2rem; }
         
-        .navbar-right { display: flex; align-items: center; position: relative; cursor: pointer; z-index: 102; }
-        .navbar-right a { color: white; text-decoration: none; transition: 0.2s; display: flex; align-items: center; margin-right: 20px; }
-        .navbar-right a i { margin-right: 5px; }
-        .navbar-right a:hover { color: #c5a059; }
-        .navbar-right span { margin-left: 8px; font-size: 1rem; }
+        .navbar-right { display: flex; align-items: center; position: relative; z-index: 102; }
+
+        /* USER TRIGGER */
+        #userTrigger { display: flex; align-items: center; cursor: pointer; padding: 5px 10px; border-radius: 4px; transition: 0.2s; }
+        #userTrigger:hover { background: rgba(255,255,255,0.05); }
 
         /* DROPDOWN MENU */
         #dropdownMenu {
-            display: none; position: absolute; right: 0; top: 45px;
+            display: none; position: absolute; right: 0; top: 50px;
             background: #1e1e2f; padding: 10px; border-radius: 8px; z-index: 999;
             border: 1px solid rgba(197, 160, 89, 0.3); box-shadow: 0 5px 15px rgba(0,0,0,0.5);
         }
@@ -50,10 +50,8 @@
 
         /* HAMBURGER BUTTON */
         .menu-toggle {
-            display: none;
-            background: none; border: none; color: white;
-            font-size: 1.5rem; cursor: pointer;
-            z-index: 102;
+            display: none; background: none; border: none; color: white;
+            font-size: 1.5rem; cursor: pointer; margin-left: 15px; z-index: 105;
         }
 
         /* SUB-NAVBAR - DASHBOARD MATCH */
@@ -112,90 +110,34 @@
         .info-item div span { display: block; color: #fdfaf6; font-weight: 600; font-size: 1.1rem; }
         .info-item div p { margin: 0; font-size: 1.1rem; color: #c5a059; }
 
-        /* FOOTER - DASHBOARD MATCH */
+        /* FOOTER */
         footer {
-            background-color: #1e1e2f;
-            padding: 60px 20px 30px;
-            margin-top: auto;
-            border-top: 2px solid #c5a059;
-            color: white;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+            background-color: #1e1e2f; padding: 60px 20px 30px; margin-top: auto;
+            border-top: 2px solid #c5a059; color: white;
+            display: flex; flex-direction: column; align-items: center;
         }
-        .footer-logo {
-            height: 70px;
-            width: 70px;
-            border-radius: 50%;
-            border: 2px solid #c5a059;
-            margin-bottom: 40px;
-            object-fit: cover;
-        }
+        .footer-logo { height: 70px; width: 70px; border-radius: 50%; border: 2px solid #c5a059; margin-bottom: 40px; object-fit: cover; }
         .footer-links-container {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 40px;
-            max-width: 1200px;
-            width: 100%;
-            margin-bottom: 40px;
+            display: grid; grid-template-columns: repeat(4, 1fr);
+            gap: 40px; max-width: 1200px; width: 100%; margin-bottom: 40px;
         }
-        .footer-column p {
-            font-family: 'Playfair Display', serif;
-            color: #c5a059;
-            font-size: 1.2rem;
-            margin: 0 0 10px 0;
-            font-weight: bold;
-        }
-        .footer-column hr {
-            border: none;
-            border-top: 1px solid rgba(197, 160, 89, 0.3);
-            margin-bottom: 15px;
-        }
-        .footer-btn {
-            display: block;
-            background: none;
-            border: none;
-            color: #b5aba1;
-            padding: 8px 0;
-            font-size: 14px;
-            cursor: pointer;
-            text-align: left;
-            transition: 0.3s;
-            width: 100%;
-        }
+        .footer-column p { font-family: 'Playfair Display', serif; color: #c5a059; font-size: 1.2rem; margin: 0 0 10px 0; font-weight: bold; }
+        .footer-column hr { border: none; border-top: 1px solid rgba(197, 160, 89, 0.3); margin-bottom: 15px; }
+        .footer-btn { display: block; background: none; border: none; color: #b5aba1; padding: 8px 0; font-size: 14px; cursor: pointer; text-align: left; transition: 0.3s; width: 100%; }
         .footer-btn:hover { color: #c5a059; transform: translateX(5px); }
-
-        .footer-bottom {
-            width: 100%;
-            max-width: 1200px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-top: 1px solid rgba(255,255,255,0.1);
-            padding-top: 20px;
-        }
+        .footer-bottom { width: 100%; max-width: 1200px; display: flex; justify-content: space-between; align-items: center; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px; }
         .copyright { color: #888; font-size: 0.9rem; }
         .social-icons a { color: white; font-size: 1.5rem; margin-left: 20px; transition: 0.3s; }
         .social-icons a:hover { color: #c5a059; }
 
         /* MOBILE FIXES */
         @media (max-width: 768px) {
-            .navbar { padding: 10px 15px; }
-            .navbar-left { flex: 1; }
-            .navbar-left a { font-size: 1rem; white-space: normal; max-width: 180px; line-height: 1.2; display: inline-block; }
-            
-            .navbar-right { order: 2; margin-right: 0; }
+            .navbar-left span { font-size: 1rem; white-space: normal; max-width: 180px; }
             .navbar-right span { display: none; }
-            .navbar-right a { display: none !important; } /* Hide events from top bar */
-
-            .menu-toggle { display: block; order: 3; margin-left: 10px; }
+            .menu-toggle { display: block; }
 
             .sub-navbar { 
-                display: none; 
-                flex-direction: column; 
-                align-items: center; 
-                padding: 20px;
-                gap: 12px;
+                display: none; flex-direction: column; align-items: center; padding: 20px; gap: 12px;
             }
             .sub-navbar.active { display: flex; }
             .sub-navbar a { width: 90%; text-align: center; }
@@ -203,7 +145,6 @@
             .contact-container { margin: 30px auto; }
             .contact-info { padding: 30px; }
             .contact-info h2 { font-size: 2.2rem; }
-            
             .footer-links-container { grid-template-columns: repeat(2, 1fr); }
             .footer-bottom { flex-direction: column; gap: 20px; text-align: center; }
         }
@@ -217,21 +158,24 @@
             <img src="images/logo.png" alt="Logo">
             <a href="dashboard.html">Alvarez - Roman Heritage Equestrian</a>
         </div>
-        <div class="navbar-right" id="userMenu" onclick="toggleUserDropdown()">
-            <a href="Loading.html?type=events"><i class="fa-solid fa-calendar-days"></i><span>Events</span></a>
-            <i class="fas fa-user"></i>
-            <span id="usernameDisplay">Profile</span>
+        <div class="navbar-right">
+            <div id="userTrigger">
+                <i class="fas fa-user" id="defaultUserIcon" style="font-size: 20px;"></i>
+                <img id="navProfilePic" src="" alt="PFP" style="display: none; width: 35px; height: 35px; border-radius: 50%; object-fit: cover; border: 1px solid #c5a059;">
+                <span id="usernameDisplay" style="margin-left: 10px;">Loading...</span>
+            </div>
+
             <div id="dropdownMenu">
                 <div onclick="location.href='profile.html'">My Profile</div>
                 <div onclick="logout()">Logout</div>
             </div>
+            <button class="menu-toggle" id="burgerBtn"><i class="fa-solid fa-bars"></i></button>
         </div>
-        <button class="menu-toggle" onclick="toggleNav()"><i class="fa-solid fa-bars"></i></button>
     </div>
 
     <div class="sub-navbar" id="subNavbar">
         <a href="dashboard.html">Home</a>
-        <a href="Loading.html?type=events" class="mobile-only">Upcoming Events</a>
+        <a href="events.html">Upcoming Events</a>
         <a href="enroll.html">Enroll Your Horse</a>
         <a href="memberships.html">Memberships</a>
         <a href="availablehorses.html">Available Horses</a>
@@ -266,28 +210,24 @@
         <img src="images/logo.png" alt="Logo" class="footer-logo">
         <div class="footer-links-container">
             <div class="footer-column">
-                <p>Navigation</p>
-                <hr>
+                <p>Navigation</p><hr>
                 <button class="footer-btn" onclick="location.href='dashboard.html'">Home</button>
                 <button class="footer-btn" onclick="location.href='memberships.html'">Memberships</button>
                 <button class="footer-btn" onclick="location.href='enroll.html'">Enroll Horse</button>
                 <button class="footer-btn" onclick="location.href='contact.html'">Contact Us</button>
             </div>
             <div class="footer-column">
-                <p>Updates</p>
-                <hr>
+                <p>Updates</p><hr>
                 <button class="footer-btn" onclick="location.href='Loading.html?type=events'">Upcoming Events</button>
                 <button class="footer-btn" onclick="location.href='Loading.html?type=news'">Latest News</button>
             </div>
             <div class="footer-column">
-                <p>About</p>
-                <hr>
+                <p>About</p><hr>
                 <button class="footer-btn" onclick="location.href='about.html'">Our Story</button>
                 <button class="footer-btn" onclick="location.href='index.html'">Member Login</button>
             </div>
             <div class="footer-column">
-                <p>The Farm</p>
-                <hr>
+                <p>The Farm</p><hr>
                 <button class="footer-btn" onclick="location.href='availablehorses.html'">Available Horses</button>
                 <button class="footer-btn" onclick="location.href='TrainingGrounds.html'">Training Grounds</button>
             </div>
@@ -303,20 +243,70 @@
 </div>
 
 <script>
-    function toggleNav() {
+    const API_URL = "https://login-backend-ny6x.onrender.com";
+
+    // BURGER MENU LOGIC
+    function toggleNav(e) {
+        if(e) e.stopPropagation();
         document.getElementById("subNavbar").classList.toggle("active");
     }
+    document.getElementById("burgerBtn").addEventListener("click", toggleNav);
 
-    function toggleUserDropdown() {
+    async function loadUser() {
+        const isGuest = localStorage.getItem("guest");
+        const userDisplay = document.getElementById("usernameDisplay");
+        const navPic = document.getElementById("navProfilePic");
+        const defaultIcon = document.getElementById("defaultUserIcon");
         const dd = document.getElementById("dropdownMenu");
-        dd.style.display = dd.style.display === "block" ? "none" : "block";
+        const userTrigger = document.getElementById("userTrigger");
+
+        // Profile Dropdown Logic
+        if (userTrigger) {
+            userTrigger.onclick = (e) => {
+                e.stopPropagation();
+                const isVisible = dd.style.display === "block";
+                dd.style.display = isVisible ? "none" : "block";
+                document.getElementById("subNavbar").classList.remove("active");
+            };
+        }
+        
+        window.onclick = () => { if (dd) dd.style.display = "none"; };
+
+        if (isGuest === "true") {
+            userDisplay.innerText = "Guest";
+            if (navPic) navPic.style.display = "none";
+            if (defaultIcon) defaultIcon.style.display = "block";
+            return;
+        }
+
+        const token = localStorage.getItem("token");
+        if (!token) return;
+
+        try {
+            const res = await fetch(`${API_URL}/me`, {
+                headers: { "Authorization": "Bearer " + token }
+            });
+            if (res.ok) {
+                const data = await res.json();
+                userDisplay.innerText = data.fullName;
+                
+                if (data.profilePic && data.profilePic.startsWith("data:image")) {
+                    if (navPic) {
+                        navPic.src = data.profilePic;
+                        navPic.style.display = "block";
+                    }
+                    if (defaultIcon) defaultIcon.style.display = "none";
+                }
+            }
+        } catch (err) { console.error("Error loading user profile"); }
     }
 
     function logout() {
-        localStorage.removeItem("token");
-        localStorage.removeItem("guest");
+        localStorage.clear();
         window.location.href = "index.html";
     }
+
+    window.onload = loadUser;
 </script>
 
 </body>

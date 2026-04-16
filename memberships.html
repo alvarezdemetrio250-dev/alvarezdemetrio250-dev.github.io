@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Memberships - Alvarez - Roman Heritage Equestrian</title>
     <link rel="icon" href="images/logo.png" type="image/x-icon">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -20,35 +20,41 @@
         }
         .page-wrapper { display: flex; flex-direction: column; min-height: 100vh; }
 
-        /* NAVBAR - DASHBOARD MATCH */
+        /* NAVBAR */
         .navbar {
             display: flex; align-items: center; justify-content: space-between;
             background-color: #1e1e2f; padding: 10px 20px; color: white;
             position: relative; z-index: 100;
         }
-        .navbar-left { display: flex; align-items: center; }
+        .navbar-left { display: flex; align-items: center; z-index: 102; flex: 1; }
         .navbar-left img { height: 40px; width: 40px; border-radius: 50%; object-fit: cover; margin-right: 12px; border: 2px solid #c5a059; }
         .navbar-left a { color: white; text-decoration: none; font-family: 'Playfair Display', serif; font-weight: bold; font-size: 1.2rem; }
         
-        .navbar-right { display: flex; align-items: center; position: relative; cursor: pointer; }
-        .navbar-right a { color: white; text-decoration: none; display: flex; align-items: center; margin-right: 20px; transition: 0.2s; }
-        .navbar-right a i { margin-right: 5px; }
-        .navbar-right a:hover { color: #c5a059; }
-        .navbar-right span { margin-left: 8px; font-size: 1rem; }
+        .navbar-right { display: flex; align-items: center; position: relative; z-index: 102; }
+        
+        /* Profile Trigger */
+        #userTrigger { display: flex; align-items: center; cursor: pointer; padding: 5px 10px; border-radius: 4px; transition: 0.2s; }
+        #userTrigger:hover { background: rgba(255,255,255,0.05); }
 
-        /* DROPDOWN MENU - DASHBOARD MATCH */
         #dropdownMenu {
-            display: none; position: absolute; right: 0; top: 45px;
+            display: none; position: absolute; right: 0; top: 50px;
             background: #1e1e2f; padding: 10px; border-radius: 8px; z-index: 999;
             border: 1px solid rgba(197, 160, 89, 0.3); box-shadow: 0 5px 15px rgba(0,0,0,0.5);
         }
         #dropdownMenu div { padding: 10px 15px; color: white; cursor: pointer; border-radius: 4px; transition: 0.2s; white-space: nowrap; }
         #dropdownMenu div:hover { background: #c5a059; color: #141612; font-weight: 500; }
 
-        /* SUB-NAVBAR - DASHBOARD MATCH */
+        /* MOBILE BURGER */
+        .menu-toggle { 
+            display: none; background: none; border: none; color: white; 
+            font-size: 1.5rem; cursor: pointer; margin-left: 20px; z-index: 105; 
+        }
+
+        /* SUB-NAVBAR */
         .sub-navbar {
             background-color: #232333; padding: 15px 20px;
             display: flex; justify-content: center; gap: 20px; border-bottom: 2px solid #c5a059;
+            transition: max-height 0.3s ease-in-out;
         }
         .sub-navbar a {
             background: #4a3b32; color: #fdfaf6; text-decoration: none;
@@ -56,169 +62,61 @@
             border: 1px solid #5c4a3f; transition: all 0.3s ease;
         }
         .sub-navbar a:hover { 
-            background: #c5a059; color: #141612; 
-            border-color: #c5a059;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(197, 160, 89, 0.25);
+            background: #c5a059; color: #141612; border-color: #c5a059;
+            transform: translateY(-2px); box-shadow: 0 4px 12px rgba(197, 160, 89, 0.25);
         }
 
-        /* HERO SECTION */
-        .membership-header {
-            text-align: center;
-            padding: 60px 20px 20px;
-        }
-        .membership-header h1 {
-            font-family: 'Playfair Display', serif;
-            font-size: 3.2rem;
-            color: #c5a059;
-            margin-bottom: 10px;
-        }
+        /* MEMBERSHIP CONTENT */
+        .membership-header { text-align: center; padding: 60px 20px 20px; }
+        .membership-header h1 { font-family: 'Playfair Display', serif; font-size: 3.2rem; color: #c5a059; margin-bottom: 10px; }
 
-        /* CONTENT LAYOUT */
         .info-container {
-            max-width: 1100px;
-            margin: 0 auto 40px;
-            padding: 40px 20px;
-            display: grid;
-            grid-template-columns: 1fr 2.5fr;
-            gap: 50px;
-            background: rgba(30, 30, 47, 0.4);
-            border-radius: 12px;
-            border: 1px solid rgba(197, 160, 89, 0.2);
-            box-shadow: 0 15px 40px rgba(0,0,0,0.4);
+            max-width: 1100px; margin: 0 auto 40px; padding: 40px 20px;
+            display: grid; grid-template-columns: 1fr 2.5fr; gap: 50px;
+            background: rgba(30, 30, 47, 0.4); border-radius: 12px;
+            border: 1px solid rgba(197, 160, 89, 0.2); box-shadow: 0 15px 40px rgba(0,0,0,0.4);
             transition: 0.3s;
         }
         .info-container:hover { border-color: rgba(197, 160, 89, 0.5); }
-
         .side-bar { text-align: center; }
-        .side-image {
-            width: 100%;
-            max-width: 250px;
-            border: 1px solid #c5a059;
-            border-radius: 8px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-            margin-bottom: 20px;
-        }
-
+        .side-image { width: 100%; max-width: 250px; border: 1px solid #c5a059; border-radius: 8px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); margin-bottom: 20px; }
         .main-text h2 { font-family: 'Playfair Display', serif; color: #c5a059; font-size: 2.4rem; margin-top: 0; }
         .main-text p { line-height: 1.8; color: #b5aba1; font-size: 1.1rem; }
 
-        /* PRICING & BADGES */
-        .price-card {
-            background: #1e1e2f;
-            border-left: 4px solid #c5a059;
-            padding: 20px;
-            text-align: left;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-        }
+        .price-card { background: #1e1e2f; border-left: 4px solid #c5a059; padding: 20px; text-align: left; box-shadow: 0 5px 15px rgba(0,0,0,0.3); }
         .price-card h3 { margin-top: 0; color: #c5a059; font-size: 1rem; text-transform: uppercase; letter-spacing: 1px; }
-        
-        .premium-badge {
-            background: #c5a059;
-            color: #141612;
-            padding: 4px 12px;
-            font-size: 0.75rem;
-            font-weight: bold;
-            border-radius: 20px;
-            display: inline-block;
-            margin-bottom: 10px;
-        }
+        .premium-badge { background: #c5a059; color: #141612; padding: 4px 12px; font-size: 0.75rem; font-weight: bold; border-radius: 20px; display: inline-block; margin-bottom: 10px; }
 
-        .curriculum-list {
-            list-style: none; padding: 0;
-            display: grid; grid-template-columns: 1fr 1fr; gap: 15px;
-            margin: 25px 0;
-        }
+        .curriculum-list { list-style: none; padding: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin: 25px 0; }
         .curriculum-list li { color: #b5aba1; display: flex; align-items: center; font-size: 1rem; }
         .curriculum-list li i { color: #c5a059; margin-right: 12px; font-size: 0.9rem; }
 
         .enroll-btn {
-            display: inline-block;
-            background: #c5a059;
-            color: #141612;
-            padding: 15px 35px;
-            text-decoration: none;
-            border-radius: 6px;
-            font-weight: bold;
-            transition: 0.3s;
-            cursor: pointer;
-            border: none;
-            font-size: 1rem;
-            box-shadow: 0 4px 15px rgba(197, 160, 89, 0.3);
+            display: inline-block; background: #c5a059; color: #141612; padding: 15px 35px;
+            text-decoration: none; border-radius: 6px; font-weight: bold; transition: 0.3s;
+            cursor: pointer; border: none; font-size: 1rem; box-shadow: 0 4px 15px rgba(197, 160, 89, 0.3);
         }
-        .enroll-btn:hover { 
-            background: #fdfaf6; 
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(255, 255, 255, 0.1);
-        }
+        .enroll-btn:hover { background: #fdfaf6; transform: translateY(-2px); box-shadow: 0 6px 20px rgba(255, 255, 255, 0.1); }
 
-        /* FOOTER - DASHBOARD MATCH */
-        footer {
-            background-color: #1e1e2f;
-            padding: 60px 20px 30px;
-            margin-top: auto;
-            border-top: 2px solid #c5a059;
-            color: white;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-        .footer-logo {
-            height: 70px;
-            width: 70px;
-            border-radius: 50%;
-            border: 2px solid #c5a059;
-            margin-bottom: 40px;
-            object-fit: cover;
-        }
-        .footer-links-container {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 40px;
-            max-width: 1200px;
-            width: 100%;
-            margin-bottom: 40px;
-        }
-        .footer-column p {
-            font-family: 'Playfair Display', serif;
-            color: #c5a059;
-            font-size: 1.2rem;
-            margin: 0 0 10px 0;
-            font-weight: bold;
-        }
-        .footer-column hr {
-            border: none;
-            border-top: 1px solid rgba(197, 160, 89, 0.3);
-            margin-bottom: 15px;
-        }
-        .footer-btn {
-            display: block;
-            background: none;
-            border: none;
-            color: #b5aba1;
-            padding: 8px 0;
-            font-size: 14px;
-            cursor: pointer;
-            text-align: left;
-            transition: 0.3s;
-            width: 100%;
-        }
+        /* FOOTER */
+        footer { background-color: #1e1e2f; padding: 60px 20px 30px; margin-top: auto; border-top: 2px solid #c5a059; color: white; display: flex; flex-direction: column; align-items: center; }
+        .footer-logo { height: 70px; width: 70px; border-radius: 50%; border: 2px solid #c5a059; margin-bottom: 40px; object-fit: cover; }
+        .footer-links-container { display: grid; grid-template-columns: repeat(4, 1fr); gap: 40px; max-width: 1200px; width: 100%; margin-bottom: 40px; }
+        .footer-column p { font-family: 'Playfair Display', serif; color: #c5a059; font-size: 1.2rem; margin: 0 0 10px 0; font-weight: bold; }
+        .footer-column hr { border: none; border-top: 1px solid rgba(197, 160, 89, 0.3); margin-bottom: 15px; }
+        .footer-btn { display: block; background: none; border: none; color: #b5aba1; padding: 8px 0; font-size: 14px; cursor: pointer; text-align: left; transition: 0.3s; width: 100%; }
         .footer-btn:hover { color: #c5a059; transform: translateX(5px); }
-        
-        .footer-bottom {
-            width: 100%;
-            max-width: 1200px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-top: 1px solid rgba(255,255,255,0.1);
-            padding-top: 20px;
-        }
-        .copyright { color: #888; font-size: 0.9rem; }
+        .footer-bottom { width: 100%; max-width: 1200px; display: flex; justify-content: space-between; align-items: center; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px; }
         .social-icons a { color: white; font-size: 1.5rem; margin-left: 20px; transition: 0.3s; }
         .social-icons a:hover { color: #c5a059; }
 
         @media (max-width: 768px) {
+            .navbar-left a { font-size: 1rem; white-space: normal; max-width: 180px; line-height: 1.2; }
+            .navbar-right span { display: none; }
+            .menu-toggle { display: block; }
+            .sub-navbar { display: none; flex-direction: column; align-items: center; padding: 20px; gap: 12px; }
+            .sub-navbar.active { display: flex; }
+            .sub-navbar a { width: 90%; text-align: center; }
             .info-container { grid-template-columns: 1fr; text-align: center; }
             .side-bar { display: flex; flex-direction: column; align-items: center; }
             .curriculum-list { grid-template-columns: 1fr; }
@@ -234,22 +132,23 @@
     <div class="navbar">
         <div class="navbar-left">
             <img src="images/logo.png" alt="Logo">
-            <a href="dashboard.html"><span>Alvarez - Roman Heritage Equestrian</span></a>
+            <a href="dashboard.html">Alvarez - Roman Heritage Equestrian</a>
         </div>
-        <div class="navbar-right" id="userMenu">
-            <a href="events.html"><i class="fa-solid fa-calendar-days"></i><span>Events</span></a>
-            <div style="display: flex; align-items: center;">
-                <i class="fas fa-user" style="margin-left: 15px;"></i>
-                <span id="usernameDisplay">Profile</span>
+        <div class="navbar-right">
+            <div id="userTrigger">
+                <i class="fas fa-user" id="defaultUserIcon" style="font-size: 20px;"></i>
+                <img id="navProfilePic" src="" alt="PFP" style="display: none; width: 35px; height: 35px; border-radius: 50%; object-fit: cover; border: 1px solid #c5a059;">
+                <span id="usernameDisplay" style="margin-left: 10px;">Loading...</span>
             </div>
             <div id="dropdownMenu">
                 <div onclick="location.href='profile.html'" id="profileOption" style="display:none;">My Profile</div>
                 <div onclick="logout()" id="logoutText">Logout</div>
             </div>
+            <button class="menu-toggle" id="burgerBtn"><i class="fa-solid fa-bars"></i></button>
         </div>
     </div>
 
-    <div class="sub-navbar">
+    <div class="sub-navbar" id="subNavbar">
         <a href="dashboard.html">Home</a>
         <a href="enroll.html">Enroll Your Horse</a>
         <a href="memberships.html">Memberships</a>
@@ -271,11 +170,9 @@
                 <p style="font-size: 2rem; color: #fdfaf6; margin: 5px 0;">$10 <span style="font-size: 0.9rem; color: #888;">/ mo</span></p>
             </div>
         </div>
-
         <div class="main-text">
             <h2>Basic Membership</h2>
             <p>Our basic membership is designed for enthusiasts looking for a solid theoretical and practical foundation in equine handling and Roman heritage techniques.</p>
-            
             <h3 style="color: #c5a059; margin-top: 30px; font-size: 1.2rem;">What's Included:</h3>
             <ul class="curriculum-list">
                 <li><i class="fa-solid fa-circle-check"></i> Member-only video library</li>
@@ -283,7 +180,6 @@
                 <li><i class="fa-solid fa-circle-check"></i> Advanced Foundation theory</li>
                 <li><i class="fa-solid fa-circle-check"></i> Community forum access</li>
             </ul>
-            
             <button onclick="updateMembership('Basic')" class="enroll-btn">Select Basic Tier</button>
         </div>
     </div>
@@ -297,73 +193,68 @@
                 <p style="font-size: 2rem; color: #fdfaf6; margin: 5px 0;">$25 <span style="font-size: 0.9rem; color: #888;">/ mo</span></p>
             </div>
         </div>
-
         <div class="main-text">
             <h2>Elite Heritage Membership</h2>
             <p>For the dedicated rider. Gain full access to our entire training curriculum, including advanced performance maneuvers and direct coaching insights.</p>
-            
             <h3 style="color: #c5a059; margin-top: 30px; font-size: 1.2rem;">What's Included:</h3>
             <ul class="curriculum-list">
                 <li><i class="fa-solid fa-star"></i> Everything in Basic</li>
                 <li><i class="fa-solid fa-star"></i> Performance Maneuvers</li>
                 <li><i class="fa-solid fa-star"></i> Monthly Live Q&A Sessions</li>
-                <li><i class="fa-solid fa-star"></i> 10% Discount on Memberships</li>
+                <li><i class="fa-solid fa-star"></i> 10% Discount on Training</li>
                 <li><i class="fa-solid fa-star"></i> Early Event Registration</li>
                 <li><i class="fa-solid fa-star"></i> Behind-the-Scenes Content</li>
             </ul>
-            
             <button onclick="updateMembership('Premium')" class="enroll-btn">Go Premium</button>
         </div>
     </div>
 
     <footer>
         <img src="images/logo.png" alt="Logo" class="footer-logo">
-
         <div class="footer-links-container">
             <div class="footer-column">
-                <p>Navigation</p>
-                <hr>
+                <p>Navigation</p><hr>
                 <button class="footer-btn" onclick="location.href='dashboard.html'">Home</button>
                 <button class="footer-btn" onclick="location.href='memberships.html'">Memberships</button>
                 <button class="footer-btn" onclick="location.href='enroll.html'">Enroll Horse</button>
                 <button class="footer-btn" onclick="location.href='contact.html'">Contact Us</button>
             </div>
-
             <div class="footer-column">
-                <p>Updates</p>
-                <hr>
+                <p>Updates</p><hr>
                 <button class="footer-btn" onclick="location.href='Loading.html?type=events'">Upcoming Events</button>
                 <button class="footer-btn" onclick="location.href='Loading.html?type=news'">Latest News</button>
             </div>
-
             <div class="footer-column">
-                <p>About</p>
-                <hr>
+                <p>About</p><hr>
                 <button class="footer-btn" onclick="location.href='about.html'">Our Story</button>
                 <button class="footer-btn" onclick="location.href='index.html'">Member Login</button>
             </div>
-
             <div class="footer-column">
-                <p>The Farm</p>
-                <hr>
+                <p>The Farm</p><hr>
                 <button class="footer-btn" onclick="location.href='availablehorses.html'">Available Horses</button>
                 <button class="footer-btn" onclick="location.href='TrainingGrounds.html'">Training Grounds</button>
             </div>
         </div>
-
         <div class="footer-bottom">
-            <div class="copyright">
-                &copy; 2026 Alvarez - Roman Heritage Equestrian. All rights reserved.
-            </div>
+            <div class="copyright">&copy; 2026 Alvarez - Roman Heritage Equestrian. All rights reserved.</div>
             <div class="social-icons">
-                <a href="https://www.facebook.com" target="_blank" title="Facebook"><i class="fab fa-facebook"></i></a>
-                <a href="https://www.youtube.com/@AlvarezRomanHeritageEquestrian" target="_blank" title="YouTube"><i class="fab fa-youtube"></i></a>
+                <a href="https://www.facebook.com" target="_blank"><i class="fab fa-facebook"></i></a>
+                <a href="https://www.youtube.com/@AlvarezRomanHeritageEquestrian" target="_blank"><i class="fab fa-youtube"></i></a>
             </div>
         </div>
     </footer>
 </div>
 
 <script>
+    const API_URL = "https://login-backend-ny6x.onrender.com";
+
+    // BURGER MENU LOGIC
+    function toggleNav(e) {
+        if(e) e.stopPropagation();
+        document.getElementById("subNavbar").classList.toggle("active");
+    }
+    document.getElementById("burgerBtn").addEventListener("click", toggleNav);
+
     function updateMembership(tier) {
         const isGuest = localStorage.getItem("guest");
         if (isGuest === "true") {
@@ -378,15 +269,29 @@
 
     async function loadUser() {
         const isGuest = localStorage.getItem("guest");
+        const userDisplay = document.getElementById("usernameDisplay");
+        const navPic = document.getElementById("navProfilePic");
+        const defaultIcon = document.getElementById("defaultUserIcon");
         const dd = document.getElementById("dropdownMenu");
-        const API_URL = "https://login-backend-ny6x.onrender.com";
-        
-        if (isGuest === "true") {
-            document.getElementById("usernameDisplay").innerText = "Guest";
-            document.getElementById("logoutText").innerText = "Sign In / Sign Up";
-            document.getElementById("userMenu").onclick = () => {
-                dd.style.display = dd.style.display === "block" ? "none" : "block";
+        const userTrigger = document.getElementById("userTrigger");
+
+        // Profile Dropdown logic
+        if (userTrigger) {
+            userTrigger.onclick = (e) => {
+                e.stopPropagation();
+                const isVisible = dd.style.display === "block";
+                dd.style.display = isVisible ? "none" : "block";
+                document.getElementById("subNavbar").classList.remove("active");
             };
+        }
+        
+        window.onclick = () => { if (dd) dd.style.display = "none"; };
+
+        if (isGuest === "true") {
+            userDisplay.innerText = "Guest";
+            document.getElementById("logoutText").innerText = "Sign In / Sign Up";
+            if (navPic) navPic.style.display = "none";
+            if (defaultIcon) defaultIcon.style.display = "block";
             return; 
         }
 
@@ -399,18 +304,22 @@
             });
             if (res.ok) {
                 const data = await res.json();
-                document.getElementById("usernameDisplay").innerText = data.fullName;
+                userDisplay.innerText = data.fullName;
                 document.getElementById("profileOption").style.display = "block";
-                document.getElementById("userMenu").onclick = () => {
-                    dd.style.display = dd.style.display === "block" ? "none" : "block";
-                };
+                
+                if (data.profilePic && data.profilePic.startsWith("data:image")) {
+                    if (navPic) {
+                        navPic.src = data.profilePic;
+                        navPic.style.display = "block";
+                    }
+                    if (defaultIcon) defaultIcon.style.display = "none";
+                }
             }
         } catch (err) { console.error(err); }
     }
 
     function logout() {
-        localStorage.removeItem("token");
-        localStorage.removeItem("guest");
+        localStorage.clear();
         window.location.href = "index.html";
     }
 
