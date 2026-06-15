@@ -13,7 +13,19 @@
         .dark-card { background-color: #2f3136; }
     </style>
 </head>
-<body class="text-gray-200 min-h-screen flex relative overflow-x-hidden">
+<body class="text-gray-200 min-h-screen flex flex-col md:flex-row relative overflow-x-hidden">
+
+    <div class="md:hidden flex items-center justify-between bg-[#202225] p-4 border-b border-gray-800 z-[60] w-full sticky top-0">
+        <a href="index.html" class="flex items-center space-x-3">
+            <img src="Images/DigitalCLogo.png" alt="Logo" class="w-8 h-8 object-contain">
+            <span class="font-bold text-sm tracking-wide text-white">Digital Community</span>
+        </a>
+        <button onclick="toggleMobileMenu()" class="text-gray-400 hover:text-white focus:outline-none">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+            </svg>
+        </button>
+    </div>
 
     <div id="custom-modal" class="hidden fixed inset-0 bg-black/70 flex items-center justify-center z-[100] backdrop-blur-sm transition-opacity duration-200">
         <div class="bg-[#313338] w-full max-w-[440px] rounded-md shadow-2xl overflow-hidden border border-zinc-800 transform scale-95 transition-transform duration-200 p-6 text-center flex flex-col items-center mx-4">
@@ -26,9 +38,9 @@
         </div>
     </div>
 
-    <aside class="w-64 bg-[#202225] border-r border-gray-800 flex flex-col justify-between h-screen sticky top-0 flex-shrink-0 z-50">
+    <aside id="sidebar" class="fixed md:sticky top-[65px] md:top-0 left-0 w-64 bg-[#202225] border-r border-gray-800 flex flex-col justify-between h-[calc(100vh-65px)] md:h-screen flex-shrink-0 z-50 transform -translate-x-full md:translate-x-0 transition-transform duration-300 ease-in-out">
         <div class="p-4 space-y-6">
-            <a href="index.html" class="flex items-center space-x-3 px-2">
+            <a href="index.html" class="hidden md:flex items-center space-x-3 px-2">
                 <img src="Images/DigitalCLogo.png" alt="Logo" class="w-9 h-9 object-contain">
                 <span class="font-bold text-base tracking-wide text-white whitespace-nowrap">Digital Community</span>
             </a>
@@ -44,23 +56,23 @@
         </div>
 
         <div class="p-4 border-t border-gray-800 bg-[#1e1f22]" id="auth-container">
-            <a href="https://discord.com/oauth2/authorize?client_id=1515407511270854656&response_type=token&redirect_uri=https%3A%2F%2Fwww.digitalcommunity.linkpc.net%2Fdashboard.html&scope=identify" class="w-full text-center discord-blurple discord-blurple-hover text-white py-2 rounded font-medium text-xs flex items-center justify-center transition shadow-md"></a>
+            <a href="https://discord.com/oauth2/authorize?client_id=1515407511270854656&response_type=token&redirect_uri=https%3A%2F%2Fwww.digitalcommunity.linkpc.net%2Fdashboard.html&scope=identify" class="w-full text-center discord-blurple discord-blurple-hover text-white py-2 rounded font-medium text-xs flex items-center justify-center transition shadow-md">
                 <span>Login with Discord</span>
             </a>
         </div>
     </aside>
 
-    <main class="flex-grow flex flex-col min-w-0">
-        <section class="page-section flex-grow flex flex-col justify-center py-12">
+    <main class="flex-grow flex flex-col min-w-0 w-full">
+        <section class="page-section flex-grow flex flex-col justify-center py-6 md:py-12">
             
-            <div class="max-w-4xl mx-auto text-center py-12 px-4">
-                <h1 class="text-4xl sm:text-5xl font-extrabold text-white mb-6 leading-tight">
+            <div class="max-w-4xl mx-auto text-center py-6 md:py-12 px-4">
+                <h1 class="text-3xl sm:text-4xl md:text-5xl font-extrabold text-white mb-6 leading-tight">
                     Welcome to Digital Community
                 </h1>
-                <p class="text-base sm:text-lg text-gray-400 mb-8 max-w-2xl mx-auto">
+                <p class="text-sm sm:text-base md:text-lg text-gray-400 mb-8 max-w-2xl mx-auto">
                     Need help, want to release a project, apply for a role, or ask a question? Submit requests directly through our community platform.
                 </p>
-                <div class="flex flex-col sm:flex-row justify-center items-center gap-4">
+                <div class="flex flex-col sm:flex-row justify-center items-center gap-4 px-4 sm:px-0">
                     <a href="dashboard.html" class="w-full sm:w-auto discord-blurple discord-blurple-hover text-white px-8 py-3 rounded-md font-semibold shadow-lg transition transform hover:-translate-y-0.5 text-center">
                         Open Dashboard
                     </a>
@@ -70,50 +82,50 @@
                 </div>
             </div>
 
-            <div class="max-w-6xl mx-auto w-full px-4 sm:px-6 lg:px-8 py-12 border-t border-gray-800/60">
-                <h2 class="text-xl font-bold text-white text-center mb-10 tracking-wide">Explore The Mass Amount of Features We Offer!</h2>
+            <div class="max-w-6xl mx-auto w-full px-4 sm:px-6 lg:px-8 py-8 md:py-12 border-t border-gray-800/60">
+                <h2 class="text-lg md:text-xl font-bold text-white text-center mb-6 md:mb-10 tracking-wide">Explore The Mass Amount of Features We Offer!</h2>
                 
-                <div class="flex items-center justify-between gap-4 relative">
-                    <button onclick="prevSlide()" class="bg-[#2f3136] hover:bg-[#4f545c] text-white w-10 h-10 rounded-full flex items-center justify-center transition shrink-0 select-none border border-gray-700 shadow-md z-10 active:scale-95">
+                <div class="flex items-center justify-between gap-2 md:gap-4 relative">
+                    <button onclick="prevSlide()" class="bg-[#2f3136] hover:bg-[#4f545c] text-white w-8 h-8 md:w-10 md:h-10 rounded-full flex items-center justify-center transition shrink-0 select-none border border-gray-700 shadow-md z-10 active:scale-95">
                         &#10229;
                     </button>
 
                     <div class="w-full overflow-hidden py-2">
                         <div id="slider-track" class="flex w-[200%] transition-transform duration-500 ease-in-out transform translate-x-0">
                             
-                            <div id="slide-1" class="w-1/2 grid grid-cols-1 md:grid-cols-3 gap-6 px-2 transition-opacity duration-500 opacity-100">
-                                <div class="dark-card p-6 rounded-xl border border-gray-800 shadow-lg flex flex-col justify-between">
+                            <div id="slide-1" class="w-1/2 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 md:gap-6 px-2 transition-opacity duration-500 opacity-100">
+                                <div class="dark-card p-4 md:p-6 rounded-xl border border-gray-800 shadow-lg flex flex-col justify-between">
                                     <div>
                                         <div class="text-blue-400 text-2xl mb-3">🚀</div>
-                                        <h3 class="text-base font-semibold text-white mb-2">Publish & Release Projects</h3>
+                                        <h3 class="text-sm md:text-base font-semibold text-white mb-2">Publish & Release Projects</h3>
                                         <p class="text-gray-400 text-xs sm:text-sm leading-relaxed">Share your hard work, creations, and tools with the entire community instantly.</p>
                                     </div>
                                 </div>
-                                <div class="dark-card p-6 rounded-xl border border-gray-800 shadow-lg flex flex-col justify-between">
+                                <div class="dark-card p-4 md:p-6 rounded-xl border border-gray-800 shadow-lg flex flex-col justify-between">
                                     <div>
                                         <div class="text-green-400 text-2xl mb-3">💼</div>
-                                        <h3 class="text-base font-semibold text-white mb-2">Apply for Positions</h3>
+                                        <h3 class="text-sm md:text-base font-semibold text-white mb-2">Apply for Positions</h3>
                                         <p class="text-gray-400 text-xs sm:text-sm leading-relaxed">Want to help us grow? Apply for staff, moderation, or specialized team roles.</p>
                                     </div>
                                 </div>
-                                <div class="dark-card p-6 rounded-xl border border-gray-800 shadow-lg flex flex-col justify-between">
+                                <div class="dark-card p-4 md:p-6 rounded-xl border border-gray-800 shadow-lg flex flex-col justify-between sm:col-span-2 md:col-span-1">
                                     <div>
                                         <div class="text-amber-400 text-2xl mb-3">🛠️</div>
-                                        <h3 class="text-base font-semibold text-white mb-2">Request Project Help</h3>
+                                        <h3 class="text-sm md:text-base font-semibold text-white mb-2">Request Project Help</h3>
                                         <p class="text-gray-400 text-xs sm:text-sm leading-relaxed">Stuck on a bug or need design feedback? Ask our seasoned developers for help.</p>
                                     </div>
                                 </div>
                             </div>
 
-                            <div id="slide-2" class="w-1/2 grid grid-cols-1 md:grid-cols-2 gap-6 px-2 transition-opacity duration-500 opacity-0 pointer-events-none">
-                                <div class="dark-card p-6 rounded-xl border border-gray-800 shadow-lg">
+                            <div id="slide-2" class="w-1/2 grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6 px-2 transition-opacity duration-500 opacity-0 pointer-events-none">
+                                <div class="dark-card p-4 md:p-6 rounded-xl border border-gray-800 shadow-lg">
                                     <div class="text-purple-400 text-2xl mb-2">❓</div>
-                                    <h3 class="text-base font-semibold text-white mb-1">Ask Questions</h3>
+                                    <h3 class="text-sm md:text-base font-semibold text-white mb-1">Ask Questions</h3>
                                     <p class="text-gray-400 text-xs sm:text-sm leading-relaxed">Need details on something general? Reach out to our community.</p>
                                 </div>
-                                <div class="dark-card p-6 rounded-xl border border-gray-800 shadow-lg">
+                                <div class="dark-card p-4 md:p-6 rounded-xl border border-gray-800 shadow-lg">
                                     <div class="text-blue-400 text-2xl mb-2">📋</div>
-                                    <h3 class="text-base font-semibold text-white mb-1">Learn About the Server</h3>
+                                    <h3 class="text-sm md:text-base font-semibold text-white mb-1">Learn About the Server</h3>
                                     <p class="text-gray-400 text-xs sm:text-sm leading-relaxed">Read up on our server rules, modern resources, guidelines, and staff hierarchy.</p>
                                 </div>
                             </div>
@@ -121,7 +133,7 @@
                         </div>
                     </div>
 
-                    <button onclick="nextSlide()" class="bg-[#2f3136] hover:bg-[#4f545c] text-white w-10 h-10 rounded-full flex items-center justify-center transition shrink-0 select-none border border-gray-700 shadow-md z-10 active:scale-95">
+                    <button onclick="nextSlide()" class="bg-[#2f3136] hover:bg-[#4f545c] text-white w-8 h-8 md:w-10 md:h-10 rounded-full flex items-center justify-center transition shrink-0 select-none border border-gray-700 shadow-md z-10 active:scale-95">
                         &#10230;
                     </button>
                 </div>
@@ -129,10 +141,10 @@
         </section>
 
         <footer class="bg-[#202225] border-t border-gray-800 py-6 mt-auto w-full">
-            <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-gray-400">
+            <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-gray-400 text-center md:text-left">
                 <div>&copy; 2026 Digital Community. All rights reserved.</div>
                 <div>This Website was made by lilgamer1</div>
-                <div class="flex space-x-6">
+                <div class="flex flex-wrap justify-center space-x-6">
                     <a href="https://discord.gg/tjxtvsTZaA" class="hover:text-white transition">Discord</a>
                     <a href="terms.html" class="hover:text-white transition">Terms of Service</a>
                     <a href="contact.html" class="hover:text-white transition">Contact Web Developer</a>
@@ -146,6 +158,11 @@
         const track = document.getElementById('slider-track');
         const s1 = document.getElementById('slide-1');
         const s2 = document.getElementById('slide-2');
+
+        function toggleMobileMenu() {
+            const sidebar = document.getElementById('sidebar');
+            sidebar.classList.toggle('-translate-x-full');
+        }
 
         function updateSlides() {
             if (currentSlide === 1) {
@@ -244,6 +261,3 @@
     </script>
 </body>
 </html>
-
-
-
