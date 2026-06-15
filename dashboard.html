@@ -22,9 +22,21 @@
         }
     </style>
 </head>
-<body class="text-gray-200 min-h-screen flex relative overflow-x-hidden">
+<body class="text-gray-200 min-h-screen flex flex-col md:flex-row relative overflow-x-hidden">
 
-    <div id="toast-popup" class="fixed top-[-100px] left-1/2 transform -translate-x-1/2 w-full max-w-md bg-[#232428] border border-emerald-500/30 rounded-lg shadow-2xl z-[200] transition-all duration-500 overflow-hidden flex flex-col">
+    <div class="md:hidden flex items-center justify-between bg-[#202225] p-4 border-b border-gray-800 z-[60] w-full sticky top-0">
+        <a href="index.html" class="flex items-center space-x-3 px-2">
+            <div class="w-8 h-8 discord-blurple rounded-full flex items-center justify-center font-bold text-white text-xs">LH</div>
+            <span class="font-bold text-base tracking-wide text-white">Portal</span>
+        </a>
+        <button onclick="toggleMobileMenu()" class="text-gray-400 hover:text-white focus:outline-none p-1">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+            </svg>
+        </button>
+    </div>
+
+    <div id="toast-popup" class="fixed top-[-100px] left-1/2 transform -translate-x-1/2 w-[calc(100%-2rem)] max-w-md bg-[#232428] border border-emerald-500/30 rounded-lg shadow-2xl z-[200] transition-all duration-500 overflow-hidden flex flex-col mx-4">
         <div class="p-4 flex items-start space-x-3">
             <div class="w-8 h-8 rounded-full bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-emerald-400 flex-shrink-0 font-bold">✓</div>
             <div class="flex-grow">
@@ -46,7 +58,7 @@
             <h3 class="text-xl font-bold text-white mb-2">Woah Hold Up!</h3>
             <p class="text-zinc-400 text-sm mb-6 leading-relaxed">You must be logged in with Discord to access your user dashboard.</p>
             <div class="w-full space-y-3">
-                <a href="https://discord.com/oauth2/authorize?client_id=1515407511270854656&response_type=token&redirect_uri=https%3A%2F%2Fwww.digitalcommunity.linkpc.net%2Fdashboard.html&scope=identify" class="w-full text-center discord-blurple discord-blurple-hover text-white py-2 rounded font-medium text-xs flex items-center justify-center transition shadow-md"></a>
+                <a href="https://discord.com/oauth2/authorize?client_id=1515407511270854656&response_type=token&redirect_uri=https%3A%2F%2Fwww.digitalcommunity.linkpc.net%2Fdashboard.html&scope=identify" class="w-full text-center discord-blurple discord-blurple-hover text-white py-2 rounded font-medium text-xs flex items-center justify-center transition shadow-md">
                     <span>Login with Discord</span>
                 </a>
                 <a href="index.html" class="w-full block bg-[#4e5058] hover:bg-[#6d6f78] text-white py-2 rounded font-medium text-sm transition">Back to Home</a>
@@ -54,9 +66,9 @@
         </div>
     </div>
 
-    <aside class="w-64 bg-[#202225] border-r border-gray-800 flex flex-col justify-between h-screen sticky top-0 flex-shrink-0 z-50">
+    <aside id="sidebar" class="fixed md:sticky top-[65px] md:top-0 left-0 w-64 bg-[#202225] border-r border-gray-800 flex flex-col justify-between h-[calc(100vh-65px)] md:h-screen flex-shrink-0 z-50 transform -translate-x-full md:translate-x-0 transition-transform duration-300 ease-in-out">
         <div class="p-4 space-y-6">
-            <a href="index.html" class="flex items-center space-x-3 px-2">
+            <a href="index.html" class="hidden md:flex items-center space-x-3 px-2">
                 <div class="w-9 h-9 discord-blurple rounded-full flex items-center justify-center font-bold text-white text-sm">LH</div>
                 <span class="font-bold text-lg tracking-wide text-white">Portal</span>
             </a>
@@ -78,15 +90,15 @@
         </div>
     </aside>
 
-    <main class="flex-grow p-8 lg:p-12 flex flex-col">
+    <main class="flex-grow p-4 sm:p-8 lg:p-12 flex flex-col w-full min-w-0">
         
-        <div class="flex items-start justify-between w-full mb-12">
-            <div>
-                <h1 id="welcome-heading" class="text-3xl font-bold text-white mb-2">User Dashboard</h1>
-                <p class="text-gray-400 text-sm">Select an action below to get started with your submission requests.</p>
+        <div class="flex items-start justify-between w-full mb-8 md:mb-12 gap-4">
+            <div class="min-w-0">
+                <h1 id="welcome-heading" class="text-2xl sm:text-3xl font-bold text-white mb-2 truncate">User Dashboard</h1>
+                <p class="text-gray-400 text-xs sm:text-sm">Select an action below to get started with your submission requests.</p>
             </div>
 
-            <div class="relative pt-1">
+            <div class="relative pt-1 flex-shrink-0">
                 <button onclick="toggleNotificationBox()" class="relative p-2.5 bg-[#202225] border border-gray-800 rounded-full text-gray-400 hover:text-white transition focus:outline-none shadow-md">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
@@ -94,7 +106,7 @@
                     <span id="notif-badge" class="hidden absolute top-1 right-1 bg-red-500 w-2.5 h-2.5 rounded-full"></span>
                 </button>
                 
-                <div id="notification-box" class="hidden absolute right-0 mt-2 w-80 bg-[#232428] border border-gray-800 rounded-md shadow-2xl z-50 overflow-hidden">
+                <div id="notification-box" class="hidden absolute right-0 mt-2 w-72 sm:w-80 bg-[#232428] border border-gray-800 rounded-md shadow-2xl z-50 overflow-hidden">
                     <div class="p-3 border-b border-gray-800 font-bold text-sm text-white flex items-center justify-between">
                         <span>Inbox Notifications</span>
                         <button onclick="clearAllNotifications()" class="text-xs text-gray-400 hover:text-red-400 font-normal">Clear All</button>
@@ -106,46 +118,46 @@
         </div>
 
         <div class="flex-grow flex items-center justify-center w-full max-w-5xl mx-auto pb-12">
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 w-full">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 w-full">
                 
-                <a href="publish-form.html" class="dark-card p-6 rounded-xl border border-gray-800 hover:border-gray-700 cursor-pointer transition transform hover:-translate-y-1 shadow-md flex flex-col justify-between min-h-[140px]">
+                <a href="publish-form.html" class="dark-card p-5 sm:p-6 rounded-xl border border-gray-800 hover:border-gray-700 cursor-pointer transition transform hover:-translate-y-1 shadow-md flex flex-col justify-between min-h-[140px]">
                     <div>
-                        <h3 class="text-xl font-bold text-white mb-2">Publish / Release</h3>
-                        <p class="text-gray-400 text-sm">Submit a project release</p>
+                        <h3 class="text-lg sm:text-xl font-bold text-white mb-2">Publish / Release</h3>
+                        <p class="text-gray-400 text-xs sm:text-sm">Submit a project release</p>
                     </div>
-                    <span class="text-sm font-semibold text-gray-400 mt-4 inline-block">Open →</span>
+                    <span class="text-xs sm:text-sm font-semibold text-gray-400 mt-4 inline-block">Open →</span>
                 </a>
 
-                <a href="apply-form.html" class="dark-card p-6 rounded-xl border border-gray-800 hover:border-gray-700 cursor-pointer transition transform hover:-translate-y-1 shadow-md flex flex-col justify-between min-h-[140px]">
+                <a href="apply-form.html" class="dark-card p-5 sm:p-6 rounded-xl border border-gray-800 hover:border-gray-700 cursor-pointer transition transform hover:-translate-y-1 shadow-md flex flex-col justify-between min-h-[140px]">
                     <div>
-                        <h3 class="text-xl font-bold text-white mb-2">Apply</h3>
-                        <p class="text-gray-400 text-sm">Apply for staff or teams</p>
+                        <h3 class="text-lg sm:text-xl font-bold text-white mb-2">Apply</h3>
+                        <p class="text-gray-400 text-xs sm:text-sm">Apply for staff or teams</p>
                     </div>
-                    <span class="text-sm font-semibold text-gray-400 mt-4 inline-block">Open →</span>
+                    <span class="text-xs sm:text-sm font-semibold text-gray-400 mt-4 inline-block">Open →</span>
                 </a>
 
-                <a href="help-form.html" class="dark-card p-6 rounded-xl border border-gray-800 hover:border-gray-700 cursor-pointer transition transform hover:-translate-y-1 shadow-md flex flex-col justify-between min-h-[140px]">
+                <a href="help-form.html" class="dark-card p-5 sm:p-6 rounded-xl border border-gray-800 hover:border-gray-700 cursor-pointer transition transform hover:-translate-y-1 shadow-md flex flex-col justify-between min-h-[140px]">
                     <div>
-                        <h3 class="text-xl font-bold text-white mb-2">Project Help</h3>
-                        <p class="text-gray-400 text-sm">Get help with your project</p>
+                        <h3 class="text-lg sm:text-xl font-bold text-white mb-2">Project Help</h3>
+                        <p class="text-gray-400 text-xs sm:text-sm">Get help with your project</p>
                     </div>
-                    <span class="text-sm font-semibold text-gray-400 mt-4 inline-block">Open →</span>
+                    <span class="text-xs sm:text-sm font-semibold text-gray-400 mt-4 inline-block">Open →</span>
                 </a>
 
-                <a href="question-form.html" class="dark-card p-6 rounded-xl border border-gray-800 hover:border-gray-700 cursor-pointer transition transform hover:-translate-y-1 shadow-md flex flex-col justify-between min-h-[140px]">
+                <a href="question-form.html" class="dark-card p-5 sm:p-6 rounded-xl border border-gray-800 hover:border-gray-700 cursor-pointer transition transform hover:-translate-y-1 shadow-md flex flex-col justify-between min-h-[140px]">
                     <div>
-                        <h3 class="text-xl font-bold text-white mb-2">Questions</h3>
-                        <p class="text-gray-400 text-sm">Ask the community something</p>
+                        <h3 class="text-lg sm:text-xl font-bold text-white mb-2">Questions</h3>
+                        <p class="text-gray-400 text-xs sm:text-sm">Ask the community something</p>
                     </div>
-                    <span class="text-sm font-semibold text-gray-400 mt-4 inline-block">Open →</span>
+                    <span class="text-xs sm:text-sm font-semibold text-gray-400 mt-4 inline-block">Open →</span>
                 </a>
 
-                <a href="about.html" class="dark-card p-6 rounded-xl border border-gray-800 hover:border-gray-700 cursor-pointer transition transform hover:-translate-y-1 shadow-md flex flex-col justify-between min-h-[140px]">
+                <a href="about.html" class="dark-card p-5 sm:p-6 rounded-xl border border-gray-800 hover:border-gray-700 cursor-pointer transition transform hover:-translate-y-1 shadow-md flex flex-col justify-between min-h-[140px]">
                     <div>
-                        <h3 class="text-xl font-bold text-white mb-2">About Server</h3>
-                        <p class="text-gray-400 text-sm">Information about us</p>
+                        <h3 class="text-lg sm:text-xl font-bold text-white mb-2">About Server</h3>
+                        <p class="text-gray-400 text-xs sm:text-sm">Information about us</p>
                     </div>
-                    <span class="text-sm font-semibold text-gray-400 mt-4 inline-block">View Info →</span>
+                    <span class="text-xs sm:text-sm font-semibold text-gray-400 mt-4 inline-block">View Info →</span>
                 </a>
 
             </div>
@@ -155,6 +167,11 @@
     <script>
         let loggedInUser = null;
         let toastTimeout = null;
+
+        function toggleMobileMenu() {
+            const sidebar = document.getElementById('sidebar');
+            sidebar.classList.toggle('-translate-x-full');
+        }
 
         window.onload = function () {
             // Check if a dynamic form submission flag exists
@@ -257,7 +274,7 @@
                     <div class="p-3 text-xs hover:bg-[#2b2d31] transition">
                         <div class="font-semibold text-white flex justify-between mb-0.5">
                             <span>${n.title}</span>
-                            <span class="text-[10px] text-gray-500 font-normal">${n.date}</span>
+                            <span class="text-[10px] text-gray-500 font-normal ml-2 flex-shrink-0">${n.date}</span>
                         </div>
                         <p class="text-gray-400 leading-normal">${n.message}</p>
                     </div>
