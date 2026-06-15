@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Poppins', sans-serif; background-color: #1a1c1e; }
+        .discord-blurple { background-color: #5865F2; }
+        .discord-blurple-hover:hover { background-color: #4752C4; }
+        .dark-card { background-color: #2f3136; }
+    </style>
+</head>
+<body class="text-gray-200 min-h-screen flex flex-col">
+
+    <header class="bg-[#202225] border-b border-gray-800 sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+            <a href="index.html" class="flex items-center space-x-3 cursor-pointer">
+                <div class="w-9 h-9 discord-blurple rounded-full flex items-center justify-center font-bold text-white">LH</div>
+                <span class="font-bold text-xl tracking-wide text-white">Name?</span>
+            </a>
+            <nav class="flex items-center space-x-6">
+                <a href="index.html" class="hover:text-white transition">Home</a>
+                <a href="about.html" class="hover:text-white transition text-white">About</a>
+                <a href="dashboard.html" class="hover:text-white transition">Dashboard</a>
+                <a href="admin.html" class="text-xs bg-red-900/40 text-red-300 px-2 py-1 rounded border border-red-700/50 hover:bg-red-900/60 transition">Admin Panel</a>
+                <a href="dashboard.html" class="discord-blurple discord-blurple-hover text-white px-4 py-2 rounded-md font-medium text-sm flex items-center space-x-2 transition shadow-lg">
+                    <span>Login with Discord</span>
+                </a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="flex-grow max-w-4xl mx-auto px-4 py-10 w-full">
+        <div class="dark-card p-8 rounded-xl border border-gray-800 space-y-8">
+            <div>
+                <h2 class="text-3xl font-bold text-white mb-2">About Our Server</h2>
+                <p class="text-gray-400">Welcome to our community! We are a collection of developers, creators, and enthusiasts structuralizing workflows, helping each other out, and building beautiful code together.</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="bg-[#202225] p-5 rounded-lg border border-gray-800">
+                    <h3 class="text-lg font-bold text-white mb-2">📜 Core Rules</h3>
+                    <ul class="list-disc list-inside text-sm text-gray-400 space-y-1">
+                        <li>Be respectful to all members.</li>
+                        <li>No harassment or hate speech.</li>
+                        <li>Keep code talk constructive.</li>
+                        <li>Do not spam tickets or requests.</li>
+                    </ul>
+                </div>
+                <div class="bg-[#202225] p-5 rounded-lg border border-gray-800">
+                    <h3 class="text-lg font-bold text-white mb-2">🛠️ Helpful Resources</h3>
+                    <ul class="list-disc list-inside text-sm text-gray-400 space-y-1">
+                        <li>Official Documentation</li>
+                        <li>Community GitHub Repo</li>
+                        <li>Design Guideline Assets</li>
+                        <li>Bot Setup Guide</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div>
+                <h3 class="text-xl font-bold text-white mb-3">👥 Our Staff Team</h3>
+                <div class="flex flex-wrap gap-3">
+                    <span class="bg-red-900/40 text-red-300 border border-red-800 text-xs px-3 py-1.5 rounded-full font-medium">Owner Name</span>
+                    <span class="bg-blue-900/40 text-blue-300 border border-blue-800 text-xs px-3 py-1.5 rounded-full font-medium">Admin Individual</span>
+                    <span class="bg-green-900/40 text-green-300 border border-green-800 text-xs px-3 py-1.5 rounded-full font-medium">Mod Team Leader</span>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="bg-[#202225] border-t border-gray-800 py-6 mt-auto">
+        <div class="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-gray-400">
+            <div>&copy; 2026 CommunityPortal. All rights reserved.</div>
+            <div class="flex space-x-6">
+                <a href="#" class="hover:text-white transition">Discord</a>
+                <a href="#" class="hover:text-white transition">Terms of Service</a>
+                <a href="#" class="hover:text-white transition">Contact</a>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

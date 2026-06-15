@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel - Digital Communitity</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Poppins', sans-serif; background-color: #1a1c1e; }
+        .discord-blurple { background-color: #5865F2; }
+        .dark-card { background-color: #2f3136; }
+        .dark-bg { background-color: #36393f; }
+    </style>
+</head>
+<body class="text-gray-200 min-h-screen flex flex-col">
+
+    <header class="bg-[#202225] border-b border-gray-800 sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+            <a href="index.html" class="flex items-center space-x-3 cursor-pointer">
+                <div class="w-9 h-9 discord-blurple rounded-full flex items-center justify-center font-bold text-white">LH</div>
+                <span class="font-bold text-xl tracking-wide text-white">Portal</span>
+            </a>
+            <nav class="flex items-center space-x-6">
+                <a href="index.html" class="hover:text-white transition">Home</a>
+                <a href="about.html" class="hover:text-white transition">About</a>
+                <a href="dashboard.html" class="hover:text-white transition">Dashboard</a>
+                <a href="admin.html" class="text-xs bg-red-900/40 text-red-300 px-2 py-1 rounded border border-red-700/50 hover:bg-red-900/60 transition font-medium">Admin Panel</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="flex-grow flex min-h-[calc(100vh-4rem)]">
+        <aside class="w-64 bg-[#202225] border-r border-gray-800 p-4 space-y-1 flex flex-col justify-between">
+            <div class="space-y-1">
+                <div class="text-xs font-semibold text-gray-500 uppercase tracking-wider px-3 mb-2">Admin Panel</div>
+                <button onclick="switchAdminTab('applications')" class="admin-tab-btn w-full text-left px-3 py-2 rounded text-sm font-medium bg-gray-800 text-white">Applications</button>
+                <button onclick="switchAdminTab('releases')" class="admin-tab-btn w-full text-left px-3 py-2 rounded text-sm font-medium text-gray-400 hover:bg-gray-800/50 hover:text-white">Releases</button>
+                <button onclick="switchAdminTab('project-help')" class="admin-tab-btn w-full text-left px-3 py-2 rounded text-sm font-medium text-gray-400 hover:bg-gray-800/50 hover:text-white">Project Help</button>
+                <button onclick="switchAdminTab('questions')" class="admin-tab-btn w-full text-left px-3 py-2 rounded text-sm font-medium text-gray-400 hover:bg-gray-800/50 hover:text-white">Questions</button>
+            </div>
+        </aside>
+
+        <div class="flex-grow p-8 dark-bg">
+            <div id="admin-tab-applications" class="admin-tab-content space-y-4">
+                <h2 class="text-2xl font-bold text-white mb-4">Pending Applications</h2>
+                <div id="applications-list-target" class="space-y-4"></div>
+            </div>
+
+            <div id="admin-tab-releases" class="admin-tab-content hidden space-y-4">
+                <h2 class="text-2xl font-bold text-white mb-4">Submitted Releases</h2>
+                <div id="releases-list-target" class="space-y-4"></div>
+            </div>
+
+            <div id="admin-tab-project-help" class="admin-tab-content hidden space-y-4">
+                <h2 class="text-2xl font-bold text-white mb-4">Help Requests</h2>
+                <div id="help-list-target" class="space-y-4"></div>
+            </div>
+
+            <div id="admin-tab-questions" class="admin-tab-content hidden space-y-4">
+                <h2 class="text-2xl font-bold text-white mb-4">Community Questions</h2>
+                <div id="questions-list-target" class="space-y-4"></div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        window.onload = function() {
+            // Initial data pull on load
+            renderAdminApplications();
+            renderAdminReleases();
+            renderAdminHelp();
+            renderAdminQuestions();
+        };
+
+        // --- APPLICATIONS COMPONENT ---
+        function renderAdminApplications() {
+            const listTarget = document.getElementById('applications-list-target');
+            const apps = JSON.parse(localStorage.getItem('portal_applications') || '[]');
+            
+            if(apps.length === 0) {
+                listTarget.innerHTML = `<p class="text-gray-400 text-sm italic">No applications found inside storage.</p>`;
+                return;
+            }
+
+            listTarget.innerHTML = apps.map(app => `
+                <div class="dark-card p-5 rounded-xl border border-gray-800 space-y-3 shadow-md">
+                    <div class="flex items-center justify-between border-b border-gray-700/50 pb-2">
+                        <div>
+                            <div class="font-bold text-lg text-emerald-400">${app.username} <span class="text-xs text-gray-400 font-normal">(Age: ${app.age})</span></div>
+                            <div class="text-xs text-gray-400">Applied for: <span class="text-white font-medium">${app.position}</span> • Date: ${app.date}</div>
+                        </div>
+                        <div class="text-xs px-2 py-1 rounded font-bold ${app.status === 'Pending' ? 'bg-amber-500/20 text-amber-300' : app.status === 'Approved' ? 'bg-emerald-500/20 text-emerald-300' : 'bg-red-500/20 text-red-300'}">
+                            ${app.status}
+                        </div>
+                    </div>
+                    <div class="text-sm space-y-2 text-gray-300">
+                        <div><strong class="text-gray-400 text-xs uppercase block">Experience:</strong> ${app.experience}</div>
+                        <div><strong class="text-gray-400 text-xs uppercase block">Why Pick Me:</strong> ${app.why}</div>
+                        ${app.links ? `<div><strong class="text-gray-400 text-xs uppercase block">Links:</strong> <a href="${app.links}" target="_blank" class="text-blue-400 hover:underline text-xs">${app.links}</a></div>` : ''}
+                        ${app.notes ? `<div><strong class="text-gray-400 text-xs uppercase block">Additional Notes:</strong> ${app.notes}</div>` : ''}
+                    </div>
+                    ${app.status === 'Pending' ? `
+                        <div class="flex justify-end space-x-2 pt-2 border-t border-gray-700/50">
+                            <button onclick="processApplication(${app.id}, 'Approved')" class="bg-emerald-600 hover:bg-emerald-700 text-xs font-semibold text-white px-4 py-2 rounded transition">Approve</button>
+                            <button onclick="processApplication(${app.id}, 'Denied')" class="bg-red-600 hover:bg-red-700 text-xs font-semibold text-white px-4 py-2 rounded transition">Deny</button>
+                        </div>
+                    ` : ''}
+                </div>
+            `).join('');
+        }
+
+        function processApplication(appId, nextStatus) {
+            let apps = JSON.parse(localStorage.getItem('portal_applications') || '[]');
+            const idx = apps.findIndex(a => a.id === appId);
+            
+            if(idx !== -1) {
+                apps[idx].status = nextStatus;
+                localStorage.setItem('portal_applications', JSON.stringify(apps));
+                
+                pushSystemNotification(apps[idx].userId, 'Application Status Update', `Your application for <strong>${apps[idx].position}</strong> has been <strong>${nextStatus.toUpperCase()}</strong>.`);
+                alert(`Application marked as ${nextStatus}!`);
+                renderAdminApplications();
+            }
+        }
+
+        // --- RELEASES COMPONENT ---
+        function renderAdminReleases() {
+            const listTarget = document.getElementById('releases-list-target');
+            const releases = JSON.parse(localStorage.getItem('portal_releases') || '[]');
+
+            if(releases.length === 0) {
+                listTarget.innerHTML = `<p class="text-gray-400 text-sm italic">No project releases found inside storage.</p>`;
+                return;
+            }
+
+            listTarget.innerHTML = releases.map(rel => `
+                <div class="dark-card p-5 rounded-xl border border-gray-800 space-y-3 shadow-md">
+                    <div class="flex items-center justify-between border-b border-gray-700/50 pb-2">
+                        <div>
+                            <div class="font-bold text-lg text-blue-400">${rel.projectName} <span class="text-xs text-gray-400 font-normal">(Version: ${rel.version})</span></div>
+                            <div class="text-xs text-gray-400">Submitted by: <span class="text-white font-medium">${rel.username}</span> • Date: ${rel.date}</div>
+                        </div>
+                        <div class="text-xs px-2 py-1 rounded font-bold ${rel.status === 'Pending' ? 'bg-amber-500/20 text-amber-300' : rel.status === 'Approved' ? 'bg-emerald-500/20 text-emerald-300' : 'bg-red-500/20 text-red-300'}">
+                            ${rel.status || 'Pending'}
+                        </div>
+                    </div>
+                    <div class="text-sm space-y-2 text-gray-300">
+                        <div><strong class="text-gray-400 text-xs uppercase block">Description & Changelog:</strong> ${rel.description}</div>
+                        ${rel.downloadUrl ? `<div><strong class="text-gray-400 text-xs uppercase block">Download/Repository URL:</strong> <a href="${rel.downloadUrl}" target="_blank" class="text-blue-400 hover:underline text-xs">${rel.downloadUrl}</a></div>` : ''}
+                    </div>
+                    ${(!rel.status || rel.status === 'Pending') ? `
+                        <div class="flex justify-end space-x-2 pt-2 border-t border-gray-700/50">
+                            <button onclick="processRelease(${rel.id}, 'Approved')" class="bg-emerald-600 hover:bg-emerald-700 text-xs font-semibold text-white px-4 py-2 rounded transition">Approve Release</button>
+                            <button onclick="processRelease(${rel.id}, 'Denied')" class="bg-red-600 hover:bg-red-700 text-xs font-semibold text-white px-4 py-2 rounded transition">Deny Release</button>
+                        </div>
+                    ` : ''}
+                </div>
+            `).join('');
+        }
+
+        function processRelease(relId, nextStatus) {
+            let releases = JSON.parse(localStorage.getItem('portal_releases') || '[]');
+            const idx = releases.findIndex(r => r.id === relId);
+            if(idx !== -1) {
+                releases[idx].status = nextStatus;
+                localStorage.setItem('portal_releases', JSON.stringify(releases));
+                pushSystemNotification(releases[idx].userId, 'Release Review Update', `Your deployment package for <strong>${releases[idx].projectName} (${releases[idx].version})</strong> was <strong>${nextStatus.toUpperCase()}</strong>.`);
+                alert(`Release marked as ${nextStatus}!`);
+                renderAdminReleases();
+            }
+        }
+
+        // --- PROJECT HELP COMPONENT ---
+        function renderAdminHelp() {
+            const listTarget = document.getElementById('help-list-target');
+            const tickets = JSON.parse(localStorage.getItem('portal_help') || '[]');
+
+            if(tickets.length === 0) {
+                listTarget.innerHTML = `<p class="text-gray-400 text-sm italic">No technical support tickets loaded.</p>`;
+                return;
+            }
+
+            listTarget.innerHTML = tickets.map(t => `
+                <div class="dark-card p-5 rounded-xl border border-gray-800 space-y-3 shadow-md">
+                    <div class="flex items-center justify-between border-b border-gray-700/50 pb-2">
+                        <div>
+                            <div class="font-bold text-lg text-amber-400">${t.issueTitle || 'Technical Issue'}</div>
+                            <div class="text-xs text-gray-400">Opened by: <span class="text-white font-medium">${t.username}</span> • Severity: <span class="text-red-400 font-semibold">${t.severity || 'Normal'}</span> • Date: ${t.date}</div>
+                        </div>
+                        <div class="text-xs px-2 py-1 rounded font-bold ${t.status === 'Resolved' ? 'bg-emerald-500/20 text-emerald-300' : 'bg-amber-500/20 text-amber-300'}">
+                            ${t.status || 'Open'}
+                        </div>
+                    </div>
+                    <div class="text-sm space-y-2 text-gray-300">
+                        <div><strong class="text-gray-400 text-xs uppercase block">Issue Details:</strong> ${t.details || t.description}</div>
+                    </div>
+                    ${(!t.status || t.status === 'Open') ? `
+                        <div class="flex justify-end pt-2 border-t border-gray-700/50">
+                            <button onclick="processHelpTicket(${t.id}, 'Resolved')" class="bg-blue-600 hover:bg-blue-700 text-xs font-semibold text-white px-4 py-2 rounded transition">Mark Resolved</button>
+                        </div>
+                    ` : ''}
+                </div>
+            `).join('');
+        }
+
+        function processHelpTicket(ticketId, nextStatus) {
+            let tickets = JSON.parse(localStorage.getItem('portal_help') || '[]');
+            const idx = tickets.findIndex(t => t.id === ticketId);
+            if(idx !== -1) {
+                tickets[idx].status = nextStatus;
+                localStorage.setItem('portal_help', JSON.stringify(tickets));
+                pushSystemNotification(tickets[idx].userId, 'Support Ticket Resolved', `Your help request titled "<strong>${tickets[idx].issueTitle}</strong>" has been marked as completed.`);
+                alert(`Ticket marked as ${nextStatus}!`);
+                renderAdminHelp();
+            }
+        }
+
+        // --- QUESTIONS COMPONENT ---
+        function renderAdminQuestions() {
+            const listTarget = document.getElementById('questions-list-target');
+            const questions = JSON.parse(localStorage.getItem('portal_questions') || '[]');
+
+            if(questions.length === 0) {
+                listTarget.innerHTML = `<p class="text-gray-400 text-sm italic">No user questions found inside storage.</p>`;
+                return;
+            }
+
+            listTarget.innerHTML = questions.map(q => `
+                <div class="dark-card p-5 rounded-xl border border-gray-800 space-y-3 shadow-md">
+                    <div class="flex items-center justify-between border-b border-gray-700/50 pb-2">
+                        <div>
+                            <div class="font-bold text-lg text-purple-400">Inquiry Thread</div>
+                            <div class="text-xs text-gray-400">Asked by: <span class="text-white font-medium">${q.username}</span> • Date: ${q.date}</div>
+                        </div>
+                        <div class="text-xs px-2 py-1 rounded font-bold ${q.status === 'Answered' ? 'bg-emerald-500/20 text-emerald-300' : 'bg-zinc-500/20 text-zinc-300'}">
+                            ${q.status || 'Unanswered'}
+                        </div>
+                    </div>
+                    <div class="text-sm space-y-2 text-gray-300">
+                        <div><strong class="text-gray-400 text-xs uppercase block">Question:</strong> ${q.questionText || q.question}</div>
+                    </div>
+                    <div class="pt-2 border-t border-gray-700/50 flex flex-col space-y-2">
+                        <textarea id="reply-to-${q.id}" placeholder="Type administrative response..." class="w-full bg-[#1e1f22] border border-gray-700 rounded p-2 text-xs text-white focus:outline-none focus:border-purple-500 transition h-16 resize-none"></textarea>
+                        <div class="flex justify-end">
+                            <button onclick="answerQuestion(${q.id})" class="bg-purple-600 hover:bg-purple-700 text-xs font-semibold text-white px-4 py-1.5 rounded transition">Send Answer</button>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function answerQuestion(qId) {
+            const answerField = document.getElementById(`reply-to-${qId}`);
+            if(!answerField.value.trim()) {
+                alert('Please type an answer before submitting.');
+                return;
+            }
+
+            let questions = JSON.parse(localStorage.getItem('portal_questions') || '[]');
+            const idx = questions.findIndex(q => q.id === qId);
+            if(idx !== -1) {
+                questions[idx].status = 'Answered';
+                questions[idx].answer = answerField.value.trim();
+                localStorage.setItem('portal_questions', JSON.stringify(questions));
+                
+                pushSystemNotification(
+                    questions[idx].userId, 
+                    'Question Answered', 
+                    `An administrator replied to your question: "${questions[idx].answer}"`
+                );
+                
+                alert('Response dispatched successfully!');
+                renderAdminQuestions();
+            }
+        }
+
+        // --- CORE TAB SWITCH CONTROLLER ---
+        function switchAdminTab(tabName) {
+            // Hide all tab containers
+            document.querySelectorAll('.admin-tab-content').forEach(content => content.classList.add('hidden'));
+            // Uncover the clicked workspace panel block
+            document.getElementById(`admin-tab-${tabName}`).classList.remove('hidden');
+
+            // Reset navigation style formatting lines
+            const buttons = document.querySelectorAll('.admin-tab-btn');
+            buttons.forEach(btn => {
+                btn.classList.remove('bg-gray-800', 'text-white');
+                btn.classList.add('text-gray-400', 'hover:bg-gray-800/50', 'hover:text-white');
+            });
+
+            // Target current element execution context safely
+            if(event && event.currentTarget) {
+                event.currentTarget.classList.add('bg-gray-800', 'text-white');
+                event.currentTarget.classList.remove('text-gray-400', 'hover:bg-gray-800/50', 'hover:text-white');
+            }
+        }
+
+        // --- GLOBAL SYSTEM NOTIFICATION ENGINE ---
+        function pushSystemNotification(targetUserId, titleStr, messageStr) {
+            let notifications = JSON.parse(localStorage.getItem('portal_notifications') || '[]');
+            notifications.push({
+                id: Date.now() + Math.floor(Math.random() * 1000),
+                userId: targetUserId || "guest_user",
+                title: titleStr,
+                message: messageStr,
+                date: new Date().toLocaleDateString(),
+                read: false
+            });
+            localStorage.setItem('portal_notifications', JSON.stringify(notifications));
+        }
+    </script>
+</body>
+</html>

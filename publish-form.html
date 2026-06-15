@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Publish / Release Project</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Poppins', sans-serif; background-color: #1a1c1e; }
+        .dark-card { background-color: #2f3136; }
+        .dark-input { background-color: #202225; border-color: #2f3136; }
+    </style>
+</head>
+<body class="text-gray-200 min-h-screen flex flex-col justify-center items-center px-4">
+
+    <main class="w-full max-w-2xl py-10">
+        <a href="dashboard.html" class="text-sm text-gray-400 hover:text-white mb-4 inline-flex items-center">&larr; Back to Dashboard</a>
+        <div class="dark-card p-8 rounded-xl border border-gray-800 shadow-xl">
+            <h2 class="text-2xl font-bold text-white mb-2">Publish a Project Release</h2>
+            <p class="text-gray-400 text-sm mb-6">Share your updated platform builds, modules, or tools with the administration team.</p>
+            
+            <form onsubmit="handlePublishSubmit(event)" class="space-y-4">
+                <div>
+                    <label class="block text-sm font-medium text-gray-300 mb-1">Project Name</label>
+                    <input type="text" id="rel-name" placeholder="e.g., Auth System Module" required class="w-full dark-input rounded-md bg-[#202225] border border-gray-700 p-2.5 text-white focus:outline-none focus:border-blue-500">
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-300 mb-1">Version Tag</label>
+                        <input type="text" id="rel-version" placeholder="e.g., v1.0.4" required class="w-full dark-input rounded-md bg-[#202225] border border-gray-700 p-2.5 text-white focus:outline-none focus:border-blue-500">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-300 mb-1">Source Code / Download Link</label>
+                        <input type="url" id="rel-link" placeholder="https://github.com/..." required class="w-full dark-input rounded-md bg-[#202225] border border-gray-700 p-2.5 text-white focus:outline-none focus:border-blue-500">
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium text-gray-300 mb-1">Release Notes & Changelog</label>
+                    <textarea id="rel-changelog" rows="4" placeholder="What is new or fixed in this specific build version?..." required class="w-full dark-input rounded-md bg-[#202225] border border-gray-700 p-2.5 text-white focus:outline-none focus:border-blue-500"></textarea>
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium text-gray-300 mb-1">Known Issues / Quirks</label>
+                    <textarea id="rel-issues" rows="2" placeholder="Any known bugs users should avoid? (Optional)" class="w-full dark-input rounded-md bg-[#202225] border border-gray-700 p-2.5 text-white focus:outline-none focus:border-blue-500"></textarea>
+                </div>
+
+                <button type="submit" id="submit-btn" class="w-full bg-[#5865F2] hover:bg-[#4752C4] text-white p-3 rounded-md font-semibold transition mt-2 shadow-lg flex items-center justify-center space-x-2">
+                    <span id="btn-text">Publish Release</span>
+                    <div id="btn-spinner" class="hidden w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
+                </button>
+            </form>
+        </div>
+    </main>
+
+    <script>
+        function handlePublishSubmit(event) {
+            event.preventDefault();
+            const btn = document.getElementById('submit-btn');
+            const btnText = document.getElementById('btn-text');
+            const btnSpinner = document.getElementById('btn-spinner');
+
+            btn.disabled = true;
+            btnText.innerText = "Uploading to Cloud...";
+            btnSpinner.classList.remove('hidden');
+
+            const projName = document.getElementById('rel-name').value;
+            const versionTag = document.getElementById('rel-version').value;
+
+            // Optional Local Storage tracking data save placeholder block
+            let currentNotifications = JSON.parse(localStorage.getItem('portal_notifications') || '[]');
+            currentNotifications.push({
+                id: Date.now(),
+                userId: "guest_user", // Fallback fallback wrapper
+                title: "Release Logged",
+                message: `Your project upload deployment metadata card for <strong>${projName} (${versionTag})</strong> has been verified. Status is <span class="text-amber-400 font-medium">PENDING</span> runtime vetting.`,
+                date: new Date().toLocaleDateString()
+            });
+            localStorage.setItem('portal_notifications', JSON.stringify(currentNotifications));
+
+            // Set up customized Toast texts
+            localStorage.setItem('toast_title', 'Release Published!');
+            localStorage.setItem('toast_desc', 'Your project release and changelog are now visible to the administration team.');
+            localStorage.setItem('show_submit_toast', 'true');
+
+            setTimeout(() => {
+                window.location.href = 'dashboard.html';
+            }, 1200);
+        }
+    </script>
+</body>
+</html>

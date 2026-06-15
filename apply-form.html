@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apply for Positions - Digital Communitity</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Poppins', sans-serif; background-color: #1a1c1e; }
+        .dark-card { background-color: #2f3136; }
+        .dark-input { background-color: #202225; border-color: #2f3136; }
+    </style>
+</head>
+<body class="text-gray-200 min-h-screen flex flex-col justify-center items-center px-4">
+
+    <main class="w-full max-w-2xl py-10">
+        <a href="dashboard.html" class="text-sm text-gray-400 hover:text-white mb-4 inline-flex items-center">&larr; Back to Dashboard</a>
+        <div class="dark-card p-8 rounded-xl border border-gray-800 shadow-xl">
+            <h2 class="text-2xl font-bold text-white mb-6">Staff / Team Application</h2>
+            
+            <form onsubmit="handleFormSubmit(event)" class="space-y-4">
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-300 mb-1">Discord Username</label>
+                        <input type="text" id="app-username" placeholder="username" required class="w-full dark-input rounded-md bg-[#202225] border border-gray-700 p-2.5 text-white focus:outline-none focus:border-blue-500">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-300 mb-1">Age</label>
+                        <input type="number" id="app-age" required class="w-full dark-input rounded-md bg-[#202225] border border-gray-700 p-2.5 text-white focus:outline-none focus:border-blue-500">
+                    </div>
+                </div>
+                
+                <div>
+                    <label class="block text-sm font-medium text-gray-300 mb-1">Position Applying For</label>
+                    <select id="app-position" required class="w-full dark-input rounded-md bg-[#202225] border border-gray-700 p-2.5 text-white focus:outline-none focus:border-blue-500">
+                        <option value="" disabled selected>Select an open team position...</option>
+                        <option value="Community Moderator">Community Moderator</option>
+                        <option value="Platform Developer">Platform Developer</option>
+                        <option value="UI/UX Layout Designer">UI/UX Layout Designer</option>
+                        <option value="Support Team Agent">Support Team Agent</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium text-gray-300 mb-1">Experience</label>
+                    <textarea id="app-experience" rows="3" placeholder="Describe your relevant experience..." required class="w-full dark-input rounded-md bg-[#202225] border border-gray-700 p-2.5 text-white focus:outline-none focus:border-blue-500"></textarea>
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-300 mb-1">Why Should We Pick You?</label>
+                    <textarea id="app-why" rows="3" required class="w-full dark-input rounded-md bg-[#202225] border border-gray-700 p-2.5 text-white focus:outline-none focus:border-blue-500"></textarea>
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-300 mb-1">Previous Work (Links)</label>
+                    <input type="text" id="app-links" placeholder="GitHub, portfolio, or server links" class="w-full dark-input rounded-md bg-[#202225] border border-gray-700 p-2.5 text-white focus:outline-none focus:border-blue-500">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-300 mb-1">Additional Notes</label>
+                    <textarea id="app-notes" rows="2" class="w-full dark-input rounded-md bg-[#202225] border border-gray-700 p-2.5 text-white focus:outline-none focus:border-blue-500"></textarea>
+                </div>
+
+                <button type="submit" id="submit-btn" class="w-full bg-green-600 hover:bg-green-700 text-white p-3 rounded-md font-semibold transition mt-2 shadow-lg flex items-center justify-center space-x-2">
+                    <span id="btn-text">Submit Application</span>
+                    <div id="btn-spinner" class="hidden w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
+                </button>
+            </form>
+        </div>
+    </main>
+
+    <script>
+        let discordUserId = "guest_user";
+
+        window.onload = function() {
+            const accessToken = localStorage.getItem('discord_access_token');
+            if (accessToken) {
+                fetch('https://discord.com/api/users/@me', {
+                    headers: { Authorization: `Bearer ${accessToken}` },
+                })
+                .then(res => res.json())
+                .then(user => {
+                    if(user.username) {
+                        document.getElementById('app-username').value = user.username;
+                        discordUserId = user.id;
+                    }
+                }).catch(err => console.log("Discord authentication fallback active"));
+            }
+        };
+
+        function handleFormSubmit(event) {
+            event.preventDefault();
+            
+            const btn = document.getElementById('submit-btn');
+            const btnText = document.getElementById('btn-text');
+            const btnSpinner = document.getElementById('btn-spinner');
+
+            btn.disabled = true;
+            btnText.innerText = "Submitting...";
+            btnSpinner.classList.remove('hidden');
+            
+            const positionSelected = document.getElementById('app-position').value;
+
+            const newApplication = {
+                id: Date.now(),
+                userId: discordUserId,
+                username: document.getElementById('app-username').value,
+                age: document.getElementById('app-age').value,
+                position: positionSelected,
+                experience: document.getElementById('app-experience').value,
+                why: document.getElementById('app-why').value,
+                links: document.getElementById('app-links').value,
+                notes: document.getElementById('app-notes').value,
+                date: new Date().toLocaleDateString(),
+                status: 'Pending'
+            };
+
+            let currentApps = JSON.parse(localStorage.getItem('portal_applications') || '[]');
+            currentApps.push(newApplication);
+            localStorage.setItem('portal_applications', JSON.stringify(currentApps));
+
+            // Log System Inbox Notification Card
+            let currentNotifications = JSON.parse(localStorage.getItem('portal_notifications') || '[]');
+            currentNotifications.push({
+                id: Date.now() + 1,
+                userId: discordUserId,
+                title: "Application Received",
+                message: `Your application for <strong>${positionSelected}</strong> has been logged successfully and is currently marked as <span class="text-amber-400 font-medium">PENDING</span> review.`,
+                date: new Date().toLocaleDateString()
+            });
+            localStorage.setItem('portal_notifications', JSON.stringify(currentNotifications));
+
+            // Populate Toast Layout Strings
+            localStorage.setItem('toast_title', 'Application Submitted!');
+            localStorage.setItem('toast_desc', 'Your application has been logged. Admin reviews will reflect directly in your alert inbox tab panels.');
+            localStorage.setItem('show_submit_toast', 'true');
+
+            setTimeout(() => {
+                window.location.href = 'dashboard.html';
+            }, 1200);
+        }
+    </script>
+</body>
+</html>

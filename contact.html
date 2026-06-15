@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Web Developer - Digital Community</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Poppins', sans-serif; background-color: #1a1c1e; }
+        .discord-blurple { background-color: #5865F2; }
+        .discord-blurple-hover:hover { background-color: #4752C4; }
+        .dark-card { background-color: #2f3136; }
+    </style>
+</head>
+<body id="main-layout" class="text-gray-200 min-h-screen flex flex-col relative">
+
+    <div id="success-modal" class="hidden fixed inset-0 bg-black/80 flex items-center justify-center z-[100] backdrop-blur-sm transition-opacity duration-200">
+        <div class="bg-[#313338] w-full max-w-[440px] rounded-md shadow-2xl overflow-hidden border border-zinc-800 transform scale-95 transition-transform duration-200 p-6 text-center flex flex-col items-center">
+            
+            <div class="w-14 h-14 rounded-full bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center mb-4 text-emerald-400 text-2xl font-bold shadow-md">
+                ✓
+            </div>
+            
+            <h3 class="text-xl font-semibold text-white mb-2">Proposal Submitted!</h3>
+            <p class="text-zinc-400 text-sm mb-6 leading-relaxed">
+                Your web development proposal has been successfully sent. I will review your project details and get back to you shortly via the email address you provided.
+            </p>
+            
+            <button onclick="closeSuccessModal()" class="w-full discord-blurple discord-blurple-hover text-white py-2.5 rounded font-medium text-sm transition shadow-lg active:scale-[0.98]">
+                Return to Dashboard
+            </button>
+        </div>
+    </div>
+
+    <header class="bg-[#202225] border-b border-gray-800 sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+            <a href="index.html" class="flex items-center space-x-3 cursor-pointer">
+                <img src="Images/DigitalCLogo.png" alt="Logo" class="w-9 h-9 object-contain">
+                <span class="font-bold text-xl tracking-wide text-white">Digital Community</span>
+            </a>
+            <nav class="flex items-center space-x-6">
+                <a href="index.html" class="hover:text-white transition">Home</a>
+                <a href="dashboard.html" class="hover:text-white transition">Dashboard</a>
+                
+                <div id="auth-container">
+                    <a href="https://discord.com/oauth2/authorize?client_id=1515407511270854656&response_type=token&redirect_uri=http%3A%2F%2F127.0.0.1%3A5500%2Fdashboard.html&scope=identify" class="text-xs discord-blurple discord-blurple-hover text-white px-3 py-1.5 rounded font-medium transition">Login With Discord</a>
+                </div>
+            </nav>
+        </div>
+    </header>
+    <main class="flex-grow max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-12 w-full flex flex-col justify-center">
+        
+        <div class="mb-8 text-center sm:text-left">
+            <h1 class="text-3xl font-bold text-white mb-2">🌐 Hire Me for Web Development</h1>
+            <p class="text-gray-400">Looking for a clean, responsive website or need edits done to an existing build? Fill out the project details below. (NOTE: You are hiring the developer who designed and coded this website!)</p>
+        </div>
+        <div class="dark-card p-6 sm:p-8 rounded-xl border border-gray-800 shadow-xl">
+            <form onsubmit="handleDevFormSubmit(event)">
+                
+                <div class="mb-6">
+                    <label class="block text-xs font-bold text-gray-300 uppercase tracking-wider mb-2">Your Email Address</label>
+                    <input type="email" id="dev-email" required class="w-full bg-[#1e1f22] border border-gray-800 rounded p-3 text-sm text-white focus:outline-none focus:border-gray-600 transition placeholder-gray-600" placeholder="name@example.com">
+                </div>
+
+                <div class="mb-6">
+                    <label class="block text-xs font-bold text-gray-300 uppercase tracking-wider mb-2">Service Needed</label>
+                    <select id="dev-type" class="w-full bg-[#1e1f22] border border-gray-800 rounded p-3 text-sm text-white focus:outline-none focus:border-gray-600 transition">
+                        <option value="Full Website Build">Full Website Build (Frontend & Backend)</option>
+                        <option value="Landing Page / Portfolio">Landing Page / Single-Page Portfolio</option>
+                        <option value="Website Fixes / Edits">Website Tweaks & Bug Fixing</option>
+                        <option value="UI/UX Redesign">UI/UX Layout Redesign</option>
+                    </select>
+                </div>
+
+                <div class="mb-6">
+                    <label class="block text-xs font-bold text-gray-300 uppercase tracking-wider mb-2">Estimated Budget Range</label>
+                    <select id="dev-budget" class="w-full bg-[#1e1f22] border border-gray-800 rounded p-3 text-sm text-white focus:outline-none focus:border-gray-600 transition">
+                        <option value="Under $100">Under $100</option>
+                        <option value="$100 - $300">$100 - $300</option>
+                        <option value="$300 - $500">$300 - $500</option>
+                        <option value="$500+">$500+</option>
+                    </select>
+                </div>
+
+                <div class="mb-6">
+                    <label class="block text-xs font-bold text-gray-300 uppercase tracking-wider mb-2">Project Requirements & Timeline</label>
+                    <textarea id="dev-message" required rows="5" class="w-full bg-[#1e1f22] border border-gray-800 rounded p-3 text-sm text-white focus:outline-none focus:border-gray-600 transition placeholder-gray-600" placeholder="Please describe what kind of web platform you want built, how many pages it requires, any specific features, and when you need it completed by..."></textarea>
+                </div>
+
+                <div class="flex flex-col sm:flex-row items-center justify-end gap-3 pt-2">
+                    <a href="index.html" class="w-full sm:w-auto text-center bg-[#4f545c] hover:bg-[#686d73] text-white px-6 py-2.5 rounded font-semibold text-sm transition">
+                        Cancel
+                    </a>
+                    <button type="submit" class="w-full sm:w-auto discord-blurple discord-blurple-hover text-white px-8 py-2.5 rounded font-semibold text-sm shadow-lg transition">
+                        Submit Web Request
+                    </button>
+                </div>
+
+            </form>
+        </div>
+
+    </main>
+
+    <footer class="bg-[#202225] border-t border-gray-800 py-6 mt-auto">
+        <div class="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-gray-400">
+            <div>&copy; 2026 CommunityPortal. All rights reserved.</div>
+        </div>
+    </footer>
+
+    <script>
+        let currentActiveUser = null;
+
+        window.onload = function () {
+            const accessToken = localStorage.getItem('discord_access_token');
+            
+            // FIXED: If they are logged in, fetch data. If not, fail silently without kicking them off the page.
+            if (accessToken) {
+                fetch('https://discord.com/api/users/@me', {
+                    headers: { Authorization: `Bearer ${accessToken}` },
+                })
+                .then(res => {
+                    if (!res.ok) throw new Error('Unauthorized');
+                    return res.json();
+                })
+                .then(user => {
+                    currentActiveUser = user;
+                    
+                    const avatarUrl = user.avatar 
+                        ? `https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.png`
+                        : `https://cdn.discordapp.com/embed/avatars/0.png`;
+
+                    document.getElementById('auth-container').innerHTML = `
+                        <div class="flex items-center space-x-3 bg-[#2f3136] pr-4 pl-2 py-1.5 rounded-full border border-gray-700">
+                            <img src="${avatarUrl}" alt="Avatar" class="w-8 h-8 rounded-full border border-gray-600">
+                            <span class="text-sm font-medium text-white max-w-[100px] truncate">${user.username}</span>
+                            <button onclick="logout()" class="text-xs text-gray-400 hover:text-red-400 transition ml-2 font-semibold">Logout</button>
+                        </div>
+                    `;
+                })
+                .catch(() => {
+                    // Token expired or invalid, clear it but let them stay
+                    localStorage.removeItem('discord_access_token');
+                });
+            }
+        };
+
+        function handleDevFormSubmit(event) {
+            event.preventDefault();
+
+            const email = document.getElementById('dev-email').value;
+            const category = document.getElementById('dev-type').value;
+            const budget = document.getElementById('dev-budget').value;
+            const context = document.getElementById('dev-message').value;
+
+            // FIXED: If logged out, save their username details as "Anonymous Guest Client" 
+            const ticketRecord = {
+                id: Date.now(),
+                type: 'Web Dev Hire Lead',
+                username: currentActiveUser ? currentActiveUser.username : 'Anonymous Guest Client',
+                userId: currentActiveUser ? currentActiveUser.id : 'N/A',
+                optionSelected: `${category} (Budget: ${budget})`,
+                textData: `Contact Email: ${email}\n\nRequirements:\n${context}`,
+                timestamp: new Date().toLocaleString()
+            };
+
+            let submissionsList = JSON.parse(localStorage.getItem('portal_submissions') || '[]');
+            submissionsList.push(ticketRecord);
+            localStorage.setItem('portal_submissions', JSON.stringify(submissionsList));
+
+            // Show popup confirmation modal dynamically
+            document.getElementById('success-modal').classList.remove('hidden');
+        }
+
+        function closeSuccessModal() {
+            document.getElementById('success-modal').classList.add('hidden');
+            // FIXED: Send them to index.html if logged out, or dashboard if logged in
+            if (currentActiveUser) {
+                window.location.href = 'dashboard.html';
+            } else {
+                window.location.href = 'index.html';
+            }
+        }
+
+        function logout() {
+            localStorage.removeItem('discord_access_token');
+            window.location.href = 'index.html?logout=success';
+        }
+    </script>
+</body>
+</html>
+</html>

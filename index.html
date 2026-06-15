@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home - Digital Community</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Poppins', sans-serif; background-color: #1a1c1e; }
+        .discord-blurple { background-color: #5865F2; }
+        .discord-blurple-hover:hover { background-color: #4752C4; }
+        .dark-card { background-color: #2f3136; }
+    </style>
+</head>
+<body class="text-gray-200 min-h-screen flex relative overflow-x-hidden">
+
+    <div id="custom-modal" class="hidden fixed inset-0 bg-black/70 flex items-center justify-center z-[100] backdrop-blur-sm transition-opacity duration-200">
+        <div class="bg-[#313338] w-full max-w-[440px] rounded-md shadow-2xl overflow-hidden border border-zinc-800 transform scale-95 transition-transform duration-200 p-6 text-center flex flex-col items-center mx-4">
+            <div class="w-12 h-12 rounded-full discord-blurple flex items-center justify-center mb-4 text-white text-xl font-bold shadow-md">!</div>
+            <h3 id="modal-title" class="text-xl font-semibold text-white mb-2">Notification</h3>
+            <p id="modal-message" class="text-zinc-400 text-sm mb-6 leading-relaxed">Message content goes here.</p>
+            <button onclick="closeModal()" class="w-full discord-blurple discord-blurple-hover text-white py-2.5 rounded font-medium text-sm transition shadow-lg active:scale-[0.98]">
+                Okay
+            </button>
+        </div>
+    </div>
+
+    <aside class="w-64 bg-[#202225] border-r border-gray-800 flex flex-col justify-between h-screen sticky top-0 flex-shrink-0 z-50">
+        <div class="p-4 space-y-6">
+            <a href="index.html" class="flex items-center space-x-3 px-2">
+                <img src="Images/DigitalCLogo.png" alt="Logo" class="w-9 h-9 object-contain">
+                <span class="font-bold text-base tracking-wide text-white whitespace-nowrap">Digital Community</span>
+            </a>
+            
+            <nav class="space-y-1 flex flex-col">
+                <div class="text-[11px] font-semibold text-gray-500 uppercase tracking-wider px-2 mb-2">Navigation</div>
+                <a href="index.html" class="bg-gray-800 text-white px-3 py-2 rounded text-sm font-medium transition">Home</a>
+                <a href="about.html" class="text-gray-400 hover:bg-gray-800/40 hover:text-white px-3 py-2 rounded text-sm font-medium transition">About Info</a>
+                <a href="dashboard.html" class="text-gray-400 hover:bg-gray-800/40 hover:text-white px-3 py-2 rounded text-sm font-medium transition">User Dashboard</a>
+                
+                <a id="admin-nav-btn" href="admin.html" class="hidden text-xs text-red-400 bg-red-950/20 border border-red-900/30 hover:bg-red-900/30 px-3 py-2 rounded font-medium mt-4 transition block text-center">Admin Panel</a>
+            </nav>
+        </div>
+
+        <div class="p-4 border-t border-gray-800 bg-[#1e1f22]" id="auth-container">
+            <a href="https://discord.com/oauth2/authorize?client_id=1515407511270854656&response_type=token&redirect_uri=http%3A%2F%2F127.0.0.1%3A5500%2Fdashboard.html&scope=identify" class="w-full text-center discord-blurple discord-blurple-hover text-white py-2 rounded font-medium text-xs flex items-center justify-center transition shadow-md">
+                <span>Login with Discord</span>
+            </a>
+        </div>
+    </aside>
+
+    <main class="flex-grow flex flex-col min-w-0">
+        <section class="page-section flex-grow flex flex-col justify-center py-12">
+            
+            <div class="max-w-4xl mx-auto text-center py-12 px-4">
+                <h1 class="text-4xl sm:text-5xl font-extrabold text-white mb-6 leading-tight">
+                    Welcome to Digital Community
+                </h1>
+                <p class="text-base sm:text-lg text-gray-400 mb-8 max-w-2xl mx-auto">
+                    Need help, want to release a project, apply for a role, or ask a question? Submit requests directly through our community platform.
+                </p>
+                <div class="flex flex-col sm:flex-row justify-center items-center gap-4">
+                    <a href="dashboard.html" class="w-full sm:w-auto discord-blurple discord-blurple-hover text-white px-8 py-3 rounded-md font-semibold shadow-lg transition transform hover:-translate-y-0.5 text-center">
+                        Open Dashboard
+                    </a>
+                    <a href="https://discord.gg/tjxtvsTZaA" class="w-full sm:w-auto bg-[#4f545c] hover:bg-[#686d73] text-white px-8 py-3 rounded-md font-semibold shadow-lg transition transform hover:-translate-y-0.5 text-center">
+                        Join Our Discord
+                    </a>
+                </div>
+            </div>
+
+            <div class="max-w-6xl mx-auto w-full px-4 sm:px-6 lg:px-8 py-12 border-t border-gray-800/60">
+                <h2 class="text-xl font-bold text-white text-center mb-10 tracking-wide">Explore The Mass Amount of Features We Offer!</h2>
+                
+                <div class="flex items-center justify-between gap-4 relative">
+                    <button onclick="prevSlide()" class="bg-[#2f3136] hover:bg-[#4f545c] text-white w-10 h-10 rounded-full flex items-center justify-center transition shrink-0 select-none border border-gray-700 shadow-md z-10 active:scale-95">
+                        &#10229;
+                    </button>
+
+                    <div class="w-full overflow-hidden py-2">
+                        <div id="slider-track" class="flex w-[200%] transition-transform duration-500 ease-in-out transform translate-x-0">
+                            
+                            <div id="slide-1" class="w-1/2 grid grid-cols-1 md:grid-cols-3 gap-6 px-2 transition-opacity duration-500 opacity-100">
+                                <div class="dark-card p-6 rounded-xl border border-gray-800 shadow-lg flex flex-col justify-between">
+                                    <div>
+                                        <div class="text-blue-400 text-2xl mb-3">🚀</div>
+                                        <h3 class="text-base font-semibold text-white mb-2">Publish & Release Projects</h3>
+                                        <p class="text-gray-400 text-xs sm:text-sm leading-relaxed">Share your hard work, creations, and tools with the entire community instantly.</p>
+                                    </div>
+                                </div>
+                                <div class="dark-card p-6 rounded-xl border border-gray-800 shadow-lg flex flex-col justify-between">
+                                    <div>
+                                        <div class="text-green-400 text-2xl mb-3">💼</div>
+                                        <h3 class="text-base font-semibold text-white mb-2">Apply for Positions</h3>
+                                        <p class="text-gray-400 text-xs sm:text-sm leading-relaxed">Want to help us grow? Apply for staff, moderation, or specialized team roles.</p>
+                                    </div>
+                                </div>
+                                <div class="dark-card p-6 rounded-xl border border-gray-800 shadow-lg flex flex-col justify-between">
+                                    <div>
+                                        <div class="text-amber-400 text-2xl mb-3">🛠️</div>
+                                        <h3 class="text-base font-semibold text-white mb-2">Request Project Help</h3>
+                                        <p class="text-gray-400 text-xs sm:text-sm leading-relaxed">Stuck on a bug or need design feedback? Ask our seasoned developers for help.</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div id="slide-2" class="w-1/2 grid grid-cols-1 md:grid-cols-2 gap-6 px-2 transition-opacity duration-500 opacity-0 pointer-events-none">
+                                <div class="dark-card p-6 rounded-xl border border-gray-800 shadow-lg">
+                                    <div class="text-purple-400 text-2xl mb-2">❓</div>
+                                    <h3 class="text-base font-semibold text-white mb-1">Ask Questions</h3>
+                                    <p class="text-gray-400 text-xs sm:text-sm leading-relaxed">Need details on something general? Reach out to our community.</p>
+                                </div>
+                                <div class="dark-card p-6 rounded-xl border border-gray-800 shadow-lg">
+                                    <div class="text-blue-400 text-2xl mb-2">📋</div>
+                                    <h3 class="text-base font-semibold text-white mb-1">Learn About the Server</h3>
+                                    <p class="text-gray-400 text-xs sm:text-sm leading-relaxed">Read up on our server rules, modern resources, guidelines, and staff hierarchy.</p>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <button onclick="nextSlide()" class="bg-[#2f3136] hover:bg-[#4f545c] text-white w-10 h-10 rounded-full flex items-center justify-center transition shrink-0 select-none border border-gray-700 shadow-md z-10 active:scale-95">
+                        &#10230;
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <footer class="bg-[#202225] border-t border-gray-800 py-6 mt-auto w-full">
+            <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-gray-400">
+                <div>&copy; 2026 Digital Community. All rights reserved.</div>
+                <div>This Website was made by lilgamer1</div>
+                <div class="flex space-x-6">
+                    <a href="https://discord.gg/tjxtvsTZaA" class="hover:text-white transition">Discord</a>
+                    <a href="terms.html" class="hover:text-white transition">Terms of Service</a>
+                    <a href="contact.html" class="hover:text-white transition">Contact Web Developer</a>
+                </div>
+            </div>
+        </footer>
+    </main>
+
+    <script>
+        let currentSlide = 1;
+        const track = document.getElementById('slider-track');
+        const s1 = document.getElementById('slide-1');
+        const s2 = document.getElementById('slide-2');
+
+        function updateSlides() {
+            if (currentSlide === 1) {
+                track.style.transform = 'translateX(0%)';
+                s1.classList.add('opacity-100');
+                s1.classList.remove('opacity-0', 'pointer-events-none');
+                s2.classList.add('opacity-0', 'pointer-events-none');
+                s2.classList.remove('opacity-100');
+            } else {
+                track.style.transform = 'translateX(-50%)';
+                s1.classList.add('opacity-0', 'pointer-events-none');
+                s1.classList.remove('opacity-100');
+                s2.classList.add('opacity-100');
+                s2.classList.remove('opacity-0', 'pointer-events-none');
+            }
+        }
+
+        function nextSlide() {
+            currentSlide = currentSlide === 1 ? 2 : 1;
+            updateSlides();
+        }
+
+        function prevSlide() {
+            currentSlide = currentSlide === 2 ? 1 : 2;
+            updateSlides();
+        }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            if (urlParams.get('logout') === 'success') {
+                showModal('Logged Out', 'You have been successfully signed out of your account.');
+                window.history.replaceState({}, document.title, window.location.pathname);
+            }
+
+            const accessToken = localStorage.getItem('discord_access_token');
+            if (accessToken) {
+                fetch('https://discord.com/api/users/@me', {
+                    headers: { Authorization: `Bearer ${accessToken}` }
+                })
+                .then(res => {
+                    if (!res.ok) throw new Error('Unauthorized');
+                    return res.json();
+                })
+                .then(data => {
+                    if (data.username) {
+                        const avatarUrl = data.avatar 
+                            ? `https://cdn.discordapp.com/avatars/${data.id}/${data.avatar}.png`
+                            : `https://cdn.discordapp.com/embed/avatars/0.png`;
+
+                        // Check if the authenticated user matches your specific admin Discord ID
+                        if (data.id === "1110583546466279494") {
+                            document.getElementById('admin-nav-btn').classList.remove('hidden');
+                        }
+
+                        document.getElementById('auth-container').innerHTML = `
+                            <div class="flex items-center justify-between bg-[#2f3136] p-2 rounded-md border border-gray-700 w-full overflow-hidden">
+                                <div class="flex items-center space-x-2 truncate min-w-0">
+                                    <img src="${avatarUrl}" alt="Avatar" class="w-7 h-7 rounded-full border border-gray-600 flex-shrink-0">
+                                    <span class="text-xs font-medium text-white truncate">${data.username}</span>
+                                </div>
+                                <button onclick="logout()" class="text-[10px] text-gray-400 hover:text-red-400 transition font-semibold ml-1 flex-shrink-0">Logout</button>
+                            </div>
+                        `;
+                    }
+                })
+                .catch(() => localStorage.removeItem('discord_access_token'));
+            }
+        });
+
+        function showModal(title, msg) {
+            document.getElementById('modal-title').innerText = title;
+            document.getElementById('modal-message').innerText = msg;
+            const modal = document.getElementById('custom-modal');
+            modal.classList.remove('hidden');
+            setTimeout(() => {
+                modal.querySelector('div').classList.remove('scale-95');
+            }, 10);
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('custom-modal');
+            modal.querySelector('div').classList.add('scale-95');
+            setTimeout(() => {
+                modal.classList.add('hidden');
+            }, 150);
+        }
+
+        function logout() {
+            localStorage.removeItem('discord_access_token');
+            document.getElementById('admin-nav-btn').classList.add('hidden'); // Re-hide button on logout
+            showModal('Logged Out', 'You have been successfully logged out of your account.');
+            setTimeout(() => {
+                window.location.reload();
+            }, 1200);
+        }
+    </script>
+</body>
+</html>
