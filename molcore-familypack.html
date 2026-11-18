@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Quanalv Molcore Family Pack 1.0.0 | Multi-PC Household OS &amp; Office Bundle</title>
+<link rel="icon" type="image/png" href="pictures/browsericon.png" />
+<style>
+  :root {
+    --bg-primary: #ffffff;
+    --bg-secondary: #f8fafc;
+    --bg-dark: #101622;
+    --bg-hero: #202c39;
+    --text-main: #0f172a;
+    --text-muted: #475569;
+    --text-light: #f8fafc;
+    --accent-blue: #1d63b8;
+    --accent-blue-hover: #17529b;
+    --border-light: #e2e8f0;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    color: var(--text-main);
+    background-color: var(--bg-primary);
+    line-height: 1.6;
+  }
+  a { text-decoration: none; color: inherit; }
+  .container { max-width: 1160px; margin: 0 auto; padding: 0 24px; }
+  .top-strip { background: #0b101b; color: #94a3b8; font-size: 12px; border-bottom: 1px solid #1e293b; }
+  .top-strip-inner { display: flex; justify-content: space-between; align-items: center; height: 36px; }
+  .top-strip strong { color: #f8fafc; }
+  .top-strip a { color: #60a5fa; }
+  .main-header { background: var(--bg-dark); color: var(--text-light); position: sticky; top: 0; z-index: 1000; border-bottom: 1px solid #1e293b; }
+  .nav-inner { display: flex; align-items: center; justify-content: space-between; height: 64px; }
+  .brand { display: flex; align-items: center; gap: 10px; font-weight: 700; font-size: 14px; letter-spacing: 0.06em; color: #fff; text-transform: uppercase; }
+  .brand-logo { height: 30px; width: auto; display: block; object-fit: contain; }
+  .nav-toggle { display: none; background: #1e293b; border: 1px solid #475569; color: #fff; padding: 6px 12px; font-size: 13px; cursor: pointer; }
+  .nav-links { display: flex; align-items: center; gap: 26px; list-style: none; }
+  .nav-item { position: relative; }
+  .nav-link { font-size: 13.5px; font-weight: 500; color: #cbd5e1; padding: 20px 0; display: inline-flex; align-items: center; gap: 5px; }
+  .nav-link:hover, .nav-link.active { color: #fff; }
+  .dropdown-menu {
+    position: absolute; top: 100%; left: 0; min-width: 240px; background: #fff; color: var(--text-main);
+    border: 1px solid var(--border-light); box-shadow: 0 10px 25px rgba(15, 23, 42, 0.12);
+    padding: 8px 0; display: none; z-index: 200; list-style: none;
+  }
+  .nav-item:hover .dropdown-menu, .nav-item.open .dropdown-menu { display: block; }
+  .dropdown-item { display: block; padding: 8px 16px; font-size: 13px; color: #1e293b; }
+  .dropdown-item:hover { background: #f1f5f9; color: var(--accent-blue); }
+  .nav-cta { border: 1px solid #475569; background: #1e293b; color: #fff; font-size: 13px; font-weight: 600; padding: 8px 16px; }
+  .nav-cta:hover { background: #334155; }
+  .sub-nav { background: #fff; border-bottom: 1px solid var(--border-light); }
+  .sub-nav-inner { display: flex; align-items: center; justify-content: space-between; height: 46px; }
+  .sub-nav-label { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: #64748b; }
+  .sub-nav-links { display: flex; align-items: center; gap: 22px; height: 100%; }
+  .sub-nav-link { font-size: 13px; font-weight: 500; color: #475569; height: 100%; display: inline-flex; align-items: center; border-bottom: 2px solid transparent; }
+  .sub-nav-link:hover, .sub-nav-link.active { color: var(--text-main); border-bottom-color: var(--accent-blue); }
+  .hero { background: var(--bg-hero); color: #fff; padding: 76px 0 84px; border-bottom: 1px solid #1e293b; }
+  .eyebrow-light { font-size: 11.5px; font-weight: 700; letter-spacing: 0.09em; text-transform: uppercase; color: #60a5fa; margin-bottom: 14px; display: block; }
+  .hero h1 { font-size: 40px; font-weight: 700; line-height: 1.18; margin-bottom: 18px; max-width: 780px; }
+  .hero p { font-size: 17px; color: #cbd5e1; max-width: 700px; margin-bottom: 32px; }
+  .hero-actions { display: flex; flex-wrap: wrap; gap: 14px; }
+  .btn-primary { background: var(--accent-blue); color: #fff; font-size: 14px; font-weight: 600; padding: 12px 22px; border: 1px solid var(--accent-blue); cursor: pointer; display: inline-block; text-align: center; }
+  .btn-primary:hover { background: var(--accent-blue-hover); }
+  .btn-outline-light { background: rgba(255,255,255,0.04); color: #fff; font-size: 14px; font-weight: 600; padding: 12px 22px; border: 1px solid #475569; display: inline-block; }
+  .btn-outline-dark { background: #fff; color: var(--text-main); font-size: 14px; font-weight: 600; padding: 11px 20px; border: 1px solid #cbd5e1; display: inline-block; text-align: center; margin-top: 10px; width: 100%; }
+  .btn-block { width: 100%; }
+  .section { padding: 72px 0; border-bottom: 1px solid var(--border-light); scroll-margin-top: 64px; }
+  .section-alt { background: var(--bg-secondary); }
+  .eyebrow-dark { font-size: 11.5px; font-weight: 700; letter-spacing: 0.09em; text-transform: uppercase; color: var(--accent-blue); margin-bottom: 10px; display: block; }
+  .section-title { font-size: 30px; font-weight: 700; color: var(--text-main); margin-bottom: 12px; }
+  .section-lead { font-size: 16px; color: var(--text-muted); max-width: 720px; margin-bottom: 40px; }
+  .two-col-grid { display: grid; grid-template-columns: 1.45fr 1fr; gap: 56px; align-items: start; }
+  .prose-block p { font-size: 15.5px; color: #334155; margin-bottom: 18px; }
+  .spec-sidebar { border-left: 2px solid #cbd5e1; padding-left: 28px; }
+  .spec-sidebar h3 { font-size: 18px; margin-bottom: 20px; }
+  .spec-item { padding: 13px 0; border-bottom: 1px solid var(--border-light); }
+  .spec-label { font-size: 11px; font-weight: 700; text-transform: uppercase; color: #64748b; }
+  .spec-value { font-size: 14.5px; font-weight: 500; }
+  .bundle-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; }
+  .bundle-card, .control-box { background: #fff; border: 1px solid var(--border-light); padding: 30px; }
+  .bundle-tag { font-size: 11px; font-weight: 700; text-transform: uppercase; color: var(--accent-blue); margin-bottom: 10px; display: block; }
+  .bundle-list { list-style: none; border-top: 1px solid var(--border-light); padding-top: 14px; margin-top: 16px; }
+  .bundle-list li { display: flex; justify-content: space-between; font-size: 13.5px; padding: 8px 0; border-bottom: 1px solid #f1f5f9; gap: 12px; }
+  .bundle-list li span:first-child { font-weight: 600; }
+  .bundle-list li span:last-child { color: var(--text-muted); text-align: right; }
+  .table-wrap { border: 1px solid var(--border-light); background: #fff; overflow-x: auto; }
+  table { width: 100%; border-collapse: collapse; text-align: left; }
+  th, td { font-size: 14px; padding: 15px 20px; border-bottom: 1px solid var(--border-light); }
+  th { background: #f8fafc; font-weight: 700; }
+  .feature-col { font-weight: 600; }
+  .control-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
+  .control-box h4 { font-size: 17px; margin-bottom: 10px; }
+  .control-box p { font-size: 14.5px; color: var(--text-muted); }
+  .acquire-panel { background: #fff; border: 1px solid var(--border-light); border-top: 3px solid var(--accent-blue); padding: 36px; display: grid; grid-template-columns: 1.5fr 1fr; gap: 40px; align-items: center; }
+  .acquire-meta { display: flex; flex-wrap: wrap; gap: 24px; margin-top: 18px; font-size: 13.5px; color: #334155; }
+  .acquire-cta-box { background: #f8fafc; border: 1px solid var(--border-light); padding: 26px; text-align: center; }
+  .price-tag { font-size: 36px; font-weight: 700; color: var(--text-main); }
+  .price-sub { font-size: 13px; color: var(--text-muted); margin-bottom: 18px; }
+  .modal-backdrop { position: fixed; inset: 0; background: rgba(15,23,42,0.65); display: none; align-items: center; justify-content: center; z-index: 2000; padding: 20px; }
+  .modal-backdrop.open { display: flex; }
+  .modal-box { background: #fff; width: 100%; max-width: 500px; border: 1px solid var(--border-light); padding: 32px; }
+  .modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; }
+  .modal-close { background: none; border: none; font-size: 24px; cursor: pointer; color: #64748b; }
+  .form-group { margin-bottom: 16px; }
+  .form-group label { display: block; font-size: 12px; font-weight: 700; text-transform: uppercase; margin-bottom: 6px; }
+  .form-group input, .form-group select { width: 100%; padding: 10px 12px; font-size: 14px; border: 1px solid #cbd5e1; }
+  .order-confirm { display: none; margin-top: 16px; padding: 14px; background: #f0fdf4; border-left: 3px solid #15803d; color: #14532d; font-size: 13.5px; }
+  .site-footer { background: var(--bg-dark); color: #94a3b8; padding: 64px 0 36px; font-size: 13.5px; }
+  .footer-grid { display: grid; grid-template-columns: 1.4fr 1fr 1fr 1fr; gap: 40px; padding-bottom: 44px; border-bottom: 1px solid #1e293b; }
+  .footer-col h4 { color: #fff; font-size: 13px; text-transform: uppercase; margin-bottom: 16px; }
+  .footer-links { list-style: none; }
+  .footer-links li { margin-bottom: 10px; }
+  .footer-links a:hover { color: #fff; }
+  .footer-bottom { padding-top: 24px; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px; font-size: 12.5px; color: #64748b; }
+  @media (max-width: 920px) {
+    .two-col-grid, .bundle-grid, .control-grid, .acquire-panel, .footer-grid { grid-template-columns: 1fr; }
+    .nav-toggle { display: inline-block; }
+    .nav-links { display: none; position: absolute; top: 64px; left: 0; right: 0; background: var(--bg-dark); flex-direction: column; align-items: flex-start; padding: 16px 24px 24px; gap: 12px; }
+    .nav-links.mobile-open { display: flex; }
+  }
+</style>
+</head>
+<body>
+  <div class="top-strip">
+    <div class="container top-strip-inner">
+      <div>A Proprietary Software Suite by <strong>Quanalv Corporation</strong></div>
+      <div><a href="index.html">&larr; Return to Quanalv Corporate Home</a></div>
+    </div>
+  </div>
+
+  <header class="main-header">
+    <div class="container nav-inner">
+      <a href="molcoreindex.html" class="brand">
+        <img src="pictures/quanalvlogo.png" alt="Quanalv Corp Logo" class="brand-logo" />
+        <span>QUANALV MOLCORE OS</span>
+      </a>
+      <button class="nav-toggle" id="navToggle" type="button">Menu &#9776;</button>
+      <ul class="nav-links" id="primaryNav">
+        <li class="nav-item"><a href="index.html" class="nav-link">Home</a></li>
+        <li class="nav-item">
+          <a href="molcoreindex.html" class="nav-link active">Molcore OS &#9662;</a>
+          <div class="dropdown-menu">
+            <a href="molcoreindex.html" class="dropdown-item">Molcore 1.0 Overview</a>
+            <a href="molcore-business.html" class="dropdown-item">Molcore Business Edition</a>
+            <a href="molcore-familypack.html" class="dropdown-item">Molcore Family Pack 1.0.0</a>
+            <a href="molcoreactivation.html" class="dropdown-item">OS Activation Portal</a>
+          </div>
+        </li>
+        <li class="nav-item">
+          <a href="quanalvoffice.html" class="nav-link">Quanalv Office &#9662;</a>
+          <div class="dropdown-menu">
+            <a href="quanalvoffice.html" class="dropdown-item">Quanalv Office 1.0</a>
+            <a href="quanalvofficeactivation.html" class="dropdown-item">Office Activation Portal</a>
+          </div>
+        </li>
+        <li class="nav-item">
+          <a href="aboutquanalv.html" class="nav-link">About Quanalv &#9662;</a>
+          <div class="dropdown-menu">
+            <a href="aboutquanalv.html" class="dropdown-item">Corporate Profile</a>
+            <a href="aboutquanalv.html#architecture" class="dropdown-item">Proprietary Architecture</a>
+          </div>
+        </li>
+        <li class="nav-item"><a href="careers.html" class="nav-link">Careers</a></li>
+        <li class="nav-cta-wrap"><a href="#acquire-pack" class="nav-cta">Acquire Family Pack</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <div class="sub-nav">
+    <div class="container sub-nav-inner">
+      <div class="sub-nav-label">FAMILY PACK 1.0.0</div>
+      <div class="sub-nav-links">
+        <a href="#household-licensing" class="sub-nav-link active">Household Licensing</a>
+        <a href="#included-software" class="sub-nav-link">Included Software</a>
+        <a href="#edition-comparison" class="sub-nav-link">Edition Comparison</a>
+        <a href="#household-controls" class="sub-nav-link">Household Controls</a>
+        <a href="#acquire-pack" class="sub-nav-link">Acquire Family Pack</a>
+      </div>
+    </div>
+  </div>
+
+  <section class="hero">
+    <div class="container">
+      <span class="eyebrow-light">MULTI-PC HOUSEHOLD &amp; HOME PRODUCTIVITY BUNDLE</span>
+      <h1>Quanalv Molcore Family Pack 1.0.0</h1>
+      <p>Equip every computer in your home with a single perpetual household license. Includes <strong>Quanalv Molcore 1.0 Operating System</strong> and <strong>Quanalv Office 1.0 Home Suite</strong> for up to 5 personal household PCs—with zero recurring subscriptions and full offline activation support.</p>
+      <div class="hero-actions">
+        <a href="#acquire-pack" class="btn-primary">Acquire Family Pack 1.0.0</a>
+        <a href="#included-software" class="btn-outline-light">Inspect Included Software</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="household-licensing" class="section">
+    <div class="container">
+      <span class="eyebrow-dark">HOUSEHOLD LICENSING POLICY</span>
+      <h2 class="section-title">One Perpetual Pack for Up to Five Home Computers</h2>
+      <p class="section-lead">Eliminate individual operating system purchases, per-PC office subscriptions, and mandatory cloud account sign-ins across your family&rsquo;s desktop and laptop systems.</p>
+      <div class="two-col-grid">
+        <div class="prose-block">
+          <p>When your household purchases <strong>Quanalv Molcore Family Pack 1.0.0</strong>, Quanalv Corporation issues a unified <strong>5-Seat Household Master Key</strong> alongside physical or downloadable ISO installation media for both the operating system and productivity suite.</p>
+          <p>Unlike single-seat retail licenses restricted to one motherboard, your Family Pack key authorizes up to <strong>five separate personal computers</strong> located within the same household. Each machine activates independently via the <a href="molcoreactivation.html" style="color: var(--accent-blue); text-decoration: underline;">Molcore Activation Portal</a> or offline certificate exchange without tying family members to centralized cloud telemetry.</p>
+          <p>All five installations receive perpetual ownership of <strong>Quanalv Molcore 1.0</strong> and <strong>Quanalv Office 1.0</strong>, complete with local-first security updates, hardware driver support, and offline media reinstallation rights.</p>
+        </div>
+        <aside class="spec-sidebar">
+          <h3>Package Specifications</h3>
+          <div class="spec-item"><div class="spec-label">PRODUCT RELEASE</div><div class="spec-value">Quanalv Molcore Family Pack 1.0.0</div></div>
+          <div class="spec-item"><div class="spec-label">HOUSEHOLD SEAT LIMIT</div><div class="spec-value">Up to 5 personal household PCs</div></div>
+          <div class="spec-item"><div class="spec-label">KEY PREFIX FORMAT</div><div class="spec-value">QMFP-XXXXX-XXXXX-XXXXX-XXXXX</div></div>
+          <div class="spec-item"><div class="spec-label">LICENSE TERM</div><div class="spec-value">Perpetual one-time purchase (No subscription)</div></div>
+          <div class="spec-item"><div class="spec-label">ACTIVATION CHANNELS</div><div class="spec-value">Online Key Check &amp; Offline Hardware Certificate</div></div>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <section id="included-software" class="section section-alt">
+    <div class="container">
+      <span class="eyebrow-dark">COMPLETE HOME SOFTWARE STACK</span>
+      <h2 class="section-title">What Is Included in Family Pack 1.0.0</h2>
+      <div class="bundle-grid">
+        <div class="bundle-card">
+          <span class="bundle-tag">CORE OPERATING SYSTEM</span>
+          <h3>Quanalv Molcore 1.0 (5-PC Household License)</h3>
+          <p>Built on our proprietary closed-source FreeBSD architecture for fast boot times, deterministic memory safety, and zero background adware or cloud account lock-in.</p>
+          <ul class="bundle-list">
+            <li><span>Molcore Desktop Shell</span><span>Clean, low-overhead workspace</span></li>
+            <li><span>Local Profile Isolation</span><span>Separate accounts per family member</span></li>
+            <li><span>System Recovery Snapshot</span><span>Instant rollback &amp; offline ISO rescue</span></li>
+            <li><span>Hardware Compatibility</span><span>x86_64 desktops &amp; laptops (4 GB+ RAM)</span></li>
+          </ul>
+        </div>
+        <div class="bundle-card">
+          <span class="bundle-tag">PRODUCTIVITY SUITE</span>
+          <h3>Quanalv Office 1.0 Home Suite (5-PC License)</h3>
+          <p>Native desktop applications engineered for schoolwork, household budgeting, presentations, and personal correspondence with full OpenDocument and OOXML support.</p>
+          <ul class="bundle-list">
+            <li><span>Quanalv Write</span><span>Word processing &amp; academic reports</span></li>
+            <li><span>Quanalv Grid</span><span>Household budgets &amp; spreadsheets</span></li>
+            <li><span>Quanalv Deck</span><span>School &amp; family slide presentations</span></li>
+            <li><span>Quanalv Mail</span><span>Offline-capable local email client</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section id="edition-comparison" class="section">
+    <div class="container">
+      <span class="eyebrow-dark">LICENSING TIERS</span>
+      <h2 class="section-title">Compare Quanalv Molcore Editions</h2>
+      <p class="section-lead">Select the licensing tier matched to a single workstation, a multi-PC household, or a commercial organization.</p>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Specification</th><th>Molcore Standard 1.0</th><th>Molcore Family Pack 1.0.0</th><th>Molcore Business Edition</th></tr>
+          </thead>
+          <tbody>
+            <tr><td class="feature-col">Authorized Machines</td><td>1 Personal PC</td><td><strong>Up to 5 Household PCs</strong></td><td>Unlimited Organizational PCs</td></tr>
+            <tr><td class="feature-col">Quanalv Office 1.0</td><td>Sold Separately</td><td><strong>Included (5-PC Home Suite)</strong></td><td>Available via Volume License</td></tr>
+            <tr><td class="feature-col">Product Key Prefix</td><td><code>QM10-</code></td><td><code>QMFP-</code></td><td><code>QMBZ-</code></td></tr>
+            <tr><td class="feature-col">Household User Profiles</td><td>Standard Local Users</td><td><strong>Multi-User Parent &amp; Student Profiles</strong></td><td>Enterprise Workstation Controls</td></tr>
+            <tr><td class="feature-col">Offline Activation</td><td>Supported</td><td><strong>Supported (Up to 5 Certificates)</strong></td><td>Supported (Organizational Master)</td></tr>
+            <tr><td class="feature-col">Commercial Use</td><td>Personal / Non-Commercial</td><td><strong>Personal Household Only</strong></td><td>Licensed Commercial &amp; Institutional</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section id="household-controls" class="section section-alt">
+    <div class="container">
+      <span class="eyebrow-dark">LOCAL PRIVACY &amp; FAMILY GOVERNANCE</span>
+      <h2 class="section-title">Built-In Household Controls Without Cloud Tracking</h2>
+      <div class="control-grid">
+        <div class="control-box"><h4>Local Parent &amp; Student Accounts</h4><p>Configure administrator accounts for parents and standard local accounts for children with clean file isolation, screen-time schedules, and application permissions stored strictly on-device.</p></div>
+        <div class="control-box"><h4>Zero-Telemetry Study Mode</h4><p>Disable non-essential network services and background notifications during homework hours so students can write papers in Quanalv Write without distractions or data harvesting.</p></div>
+        <div class="control-box"><h4>Portable USB Media &amp; Key Transfer</h4><p>Replace an aging family computer at any time by deactivating a retired slot in the activation portal and reassigning that seat to your new household PC.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="acquire-pack" class="section">
+    <div class="container">
+      <span class="eyebrow-dark">DIRECT HOUSEHOLD DISTRIBUTION</span>
+      <h2 class="section-title">Acquire Quanalv Molcore Family Pack 1.0.0</h2>
+      <div class="acquire-panel">
+        <div>
+          <h3>Quanalv Molcore Family Pack 1.0.0 &mdash; Full Household Box &amp; Digital Kit</h3>
+          <p>Includes bootable x86_64 installation media, offline SHA-256 verification hashes, printed quick-start booklet (optional), and your perpetual 25-character <code>QMFP-</code> license key valid for 5 household computers.</p>
+          <div class="acquire-meta">
+            <div><strong>Version:</strong> 1.0.0 (Build 10042)</div>
+            <div><strong>Seats:</strong> 5 Personal PCs</div>
+            <div><strong>Media:</strong> Digital ISO + Optional USB Kit</div>
+          </div>
+        </div>
+        <div class="acquire-cta-box">
+          <div class="price-tag">$189.00</div>
+          <div class="price-sub">One-time perpetual license &bull; Covers 5 household PCs</div>
+          <button type="button" class="btn-primary btn-block" onclick="openOrderModal()">Request Household License Kit</button>
+          <a href="molcoreactivation.html" class="btn-outline-dark">Already Have a Key? Activate Now</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div id="orderModal" class="modal-backdrop">
+    <div class="modal-box">
+      <div class="modal-header">
+        <h3>Request Quanalv Molcore Family Pack 1.0.0</h3>
+        <button type="button" class="modal-close" onclick="closeOrderModal()">&times;</button>
+      </div>
+      <form id="familyOrderForm" onsubmit="submitFamilyOrder(event)">
+        <div class="form-group"><label for="holderName">Primary Household License Holder</label><input type="text" id="holderName" required placeholder="e.g., Jordan Vance" /></div>
+        <div class="form-group"><label for="holderEmail">Delivery Email Address</label><input type="email" id="holderEmail" required placeholder="jordan@example.com" /></div>
+        <div class="form-group">
+          <label for="mediaType">Installation Media Format</label>
+          <select id="mediaType">
+            <option value="digital">Digital ISO Download + Instant QMFP Key ($189.00)</option>
+            <option value="usb">Digital ISO + Bootable Recovery USB Media ($209.00)</option>
+          </select>
+        </div>
+        <button type="submit" class="btn-primary btn-block">Generate Household License Reservation</button>
+      </form>
+      <div id="orderConfirm" class="order-confirm"></div>
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col">
+          <h4>QUANALV CORPORATION</h4>
+          <p style="line-height: 1.65; max-width: 300px;">Engineering deterministic operating systems and local-first productivity software built on our proprietary FreeBSD foundation.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Operating Systems</h4>
+          <ul class="footer-links">
+            <li><a href="molcoreindex.html">Quanalv Molcore 1.0</a></li>
+            <li><a href="molcore-familypack.html">Molcore Family Pack 1.0.0</a></li>
+            <li><a href="molcore-business.html">Molcore Business Edition</a></li>
+            <li><a href="molcoreactivation.html">OS Activation Portal</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Productivity Software</h4>
+          <ul class="footer-links">
+            <li><a href="quanalvoffice.html">Quanalv Office 1.0</a></li>
+            <li><a href="quanalvofficeactivation.html">Office Activation Portal</a></li>
+            <li><a href="quanalvoffice.html#applications">Write, Grid, Deck &amp; Mail</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Corporate</h4>
+          <ul class="footer-links">
+            <li><a href="index.html">Quanalv Home</a></li>
+            <li><a href="aboutquanalv.html">About Quanalv Corporation</a></li>
+            <li><a href="careers.html">Careers &amp; Contributors</a></li>
+            <li><a href="molcore-business.html">Enterprise Volume Licensing</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div>&copy; 2026 Quanalv Corporation. All rights reserved.</div>
+        <div>Quanalv, Molcore, and Quanalv Office are proprietary trademarks of Quanalv Corporation.</div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById('navToggle').addEventListener('click', function () {
+      document.getElementById('primaryNav').classList.toggle('mobile-open');
+    });
+    function openOrderModal() { document.getElementById("orderModal").classList.add("open"); }
+    function closeOrderModal() { document.getElementById("orderModal").classList.remove("open"); }
+    function submitFamilyOrder(e) {
+      e.preventDefault();
+      const name = document.getElementById("holderName").value.trim();
+      const email = document.getElementById("holderEmail").value.trim();
+      const refId = "QFP-100-" + Math.floor(100000 + Math.random() * 900000);
+      const confirmBox = document.getElementById("orderConfirm");
+      confirmBox.style.display = "block";
+      confirmBox.innerHTML =
+        "<strong>Reservation Recorded (" + refId + ")</strong><br>" +
+        "Household license package prepared for <strong>" + name + "</strong> (" + email + "). " +
+        "Your 5-seat <code>QMFP-</code> product key and ISO download manifest are queued for dispatch.";
+    }
+  </script>
+</body>
+</html>

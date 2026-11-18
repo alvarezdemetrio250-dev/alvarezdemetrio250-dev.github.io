@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Support Portal | Quanalv Corporation</title>
+<link rel="icon" type="image/png" href="pictures/browsericon.png" />
+<style>
+  :root {
+    --bg-primary: #ffffff;
+    --bg-secondary: #f8fafc;
+    --bg-dark: #101622;
+    --bg-hero: #202c39;
+    --text-main: #0f172a;
+    --text-muted: #475569;
+    --text-light: #f8fafc;
+    --accent-blue: #1d63b8;
+    --accent-blue-hover: #17529b;
+    --border-light: #e2e8f0;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    color: var(--text-main);
+    background-color: var(--bg-primary);
+    line-height: 1.6;
+  }
+  a { text-decoration: none; color: inherit; }
+  .container { max-width: 1160px; margin: 0 auto; padding: 0 24px; }
+  .top-strip { background: #0b101b; color: #94a3b8; font-size: 12px; border-bottom: 1px solid #1e293b; }
+  .top-strip-inner { display: flex; justify-content: space-between; align-items: center; height: 36px; }
+  .top-strip strong { color: #f8fafc; }
+  .top-strip a { color: #60a5fa; }
+  .main-header { background: var(--bg-dark); color: var(--text-light); position: sticky; top: 0; z-index: 1000; border-bottom: 1px solid #1e293b; }
+  .nav-inner { display: flex; align-items: center; justify-content: space-between; height: 64px; }
+  .brand { display: flex; align-items: center; gap: 10px; font-weight: 700; font-size: 14px; letter-spacing: 0.06em; color: #fff; text-transform: uppercase; }
+  .brand-logo { height: 30px; width: auto; display: block; object-fit: contain; }
+  .nav-toggle { display: none; background: #1e293b; border: 1px solid #475569; color: #fff; padding: 6px 12px; font-size: 13px; cursor: pointer; }
+  .nav-links { display: flex; align-items: center; gap: 26px; list-style: none; }
+  .nav-item { position: relative; }
+  .nav-link { font-size: 13.5px; font-weight: 500; color: #cbd5e1; padding: 20px 0; display: inline-flex; align-items: center; gap: 5px; }
+  .nav-link:hover, .nav-link.active { color: #fff; }
+  .dropdown-menu {
+    position: absolute; top: 100%; left: 0; min-width: 240px; background: #fff; color: var(--text-main);
+    border: 1px solid var(--border-light); box-shadow: 0 10px 25px rgba(15, 23, 42, 0.12);
+    padding: 8px 0; display: none; z-index: 200; list-style: none;
+  }
+  .nav-item:hover .dropdown-menu, .nav-item.open .dropdown-menu { display: block; }
+  .dropdown-item { display: block; padding: 8px 16px; font-size: 13px; color: #1e293b; }
+  .dropdown-item:hover { background: #f1f5f9; color: var(--accent-blue); }
+  .nav-cta { border: 1px solid #475569; background: #1e293b; color: #fff; font-size: 13px; font-weight: 600; padding: 8px 16px; }
+  .nav-cta:hover { background: #334155; }
+  .sub-nav { background: #fff; border-bottom: 1px solid var(--border-light); }
+  .sub-nav-inner { display: flex; align-items: center; justify-content: space-between; height: 46px; }
+  .sub-nav-label { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: #64748b; }
+  .sub-nav-links { display: flex; align-items: center; gap: 22px; height: 100%; list-style: none; }
+  .sub-nav-links li { height: 100%; }
+  .sub-nav-links a { font-size: 13px; font-weight: 500; color: #475569; height: 100%; display: inline-flex; align-items: center; border-bottom: 2px solid transparent; }
+  .sub-nav-links a:hover, .sub-nav-links a.active { color: var(--text-main); border-bottom-color: var(--accent-blue); }
+  .hero { background: var(--bg-hero); color: #fff; padding: 76px 0 84px; border-bottom: 1px solid #1e293b; }
+  .hero-eyebrow { font-size: 11.5px; font-weight: 700; letter-spacing: 0.09em; text-transform: uppercase; color: #60a5fa; margin-bottom: 14px; display: block; }
+  .hero h1 { font-size: 40px; font-weight: 700; line-height: 1.18; margin-bottom: 18px; max-width: 760px; }
+  .hero-desc { font-size: 17px; color: #cbd5e1; max-width: 700px; margin-bottom: 32px; }
+  .hero-actions { display: flex; flex-wrap: wrap; gap: 14px; }
+  .btn-primary { background: var(--accent-blue); color: #fff; font-size: 14px; font-weight: 600; padding: 12px 22px; border: 1px solid var(--accent-blue); cursor: pointer; display: inline-block; }
+  .btn-primary:hover { background: var(--accent-blue-hover); }
+  .btn-outline-light { background: rgba(255,255,255,0.04); color: #fff; font-size: 14px; font-weight: 600; padding: 12px 22px; border: 1px solid #475569; display: inline-block; }
+  .section { padding: 72px 0; border-bottom: 1px solid var(--border-light); scroll-margin-top: 64px; }
+  .section-subtle { background: var(--bg-secondary); }
+  .eyebrow-dark { font-size: 11.5px; font-weight: 700; letter-spacing: 0.09em; text-transform: uppercase; color: var(--accent-blue); margin-bottom: 10px; display: block; }
+  .section-title { font-size: 30px; font-weight: 700; color: var(--text-main); margin-bottom: 12px; }
+  .section-lead { font-size: 16px; color: var(--text-muted); max-width: 720px; margin-bottom: 36px; }
+  .three-col-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
+  .two-col-grid { display: grid; grid-template-columns: 1.45fr 1fr; gap: 56px; align-items: start; }
+  .card { background: #fff; border: 1px solid var(--border-light); padding: 28px; display: flex; flex-direction: column; justify-content: space-between; }
+  .card-tag { font-size: 11px; font-weight: 700; text-transform: uppercase; color: var(--accent-blue); margin-bottom: 8px; display: block; }
+  .card h3 { font-size: 19px; margin-bottom: 10px; }
+  .card p { font-size: 14.5px; color: var(--text-muted); margin-bottom: 18px; }
+  .card-link { font-size: 13.5px; font-weight: 600; color: var(--accent-blue); }
+  .card-link:hover { text-decoration: underline; }
+  .form-box { background: #fff; border: 1px solid var(--border-light); padding: 32px; }
+  .form-group { margin-bottom: 18px; }
+  .form-label { display: block; font-size: 12px; font-weight: 700; text-transform: uppercase; color: #334155; margin-bottom: 6px; }
+  .form-input, .form-select, .form-textarea { width: 100%; padding: 11px 14px; font-size: 14px; font-family: inherit; border: 1px solid #cbd5e1; background: #fff; }
+  .form-textarea { min-height: 120px; resize: vertical; }
+  .status-banner { display: none; margin-top: 20px; padding: 16px; font-size: 13.5px; background: #f0fdf4; border-left: 3px solid #15803d; color: #14532d; }
+  .spec-sidebar { border-left: 2px solid #cbd5e1; padding-left: 28px; }
+  .spec-item { padding: 13px 0; border-bottom: 1px solid var(--border-light); }
+  .spec-label { font-size: 11px; font-weight: 700; text-transform: uppercase; color: #64748b; }
+  .spec-value { font-size: 14.5px; font-weight: 500; }
+  .site-footer { background: var(--bg-dark); color: #94a3b8; padding: 64px 0 36px; font-size: 13.5px; }
+  .footer-grid { display: grid; grid-template-columns: 1.4fr 1fr 1fr 1fr; gap: 40px; padding-bottom: 44px; border-bottom: 1px solid #1e293b; }
+  .footer-col h4 { color: #fff; font-size: 13px; text-transform: uppercase; margin-bottom: 16px; }
+  .footer-links { list-style: none; }
+  .footer-links li { margin-bottom: 10px; }
+  .footer-links a:hover { color: #fff; }
+  .footer-bottom { padding-top: 24px; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px; font-size: 12.5px; color: #64748b; }
+  @media (max-width: 920px) {
+    .three-col-grid, .two-col-grid, .footer-grid { grid-template-columns: 1fr; }
+    .nav-toggle { display: inline-block; }
+    .nav-links { display: none; position: absolute; top: 64px; left: 0; right: 0; background: var(--bg-dark); flex-direction: column; align-items: flex-start; padding: 16px 24px 24px; gap: 12px; }
+    .nav-links.mobile-open { display: flex; }
+  }
+</style>
+</head>
+<body>
+  <div class="top-strip">
+    <div class="container top-strip-inner">
+      <div><strong>Quanalv Corporation</strong> &mdash; Customer &amp; Technical Support Center</div>
+      <div><a href="index.html">&larr; Return to Quanalv Corporate Home</a></div>
+    </div>
+  </div>
+
+  <header class="main-header">
+    <div class="container nav-inner">
+      <a href="index.html" class="brand">
+        <img src="pictures/quanalvlogo.png" alt="Quanalv Corp Logo" class="brand-logo" />
+        <span>QUANALV SUPPORT</span>
+      </a>
+      <button class="nav-toggle" id="navToggle" type="button">Menu &#9776;</button>
+      <ul class="nav-links" id="primaryNav">
+        <li class="nav-item"><a href="index.html" class="nav-link">Home</a></li>
+        <li class="nav-item">
+          <a href="molcoreindex.html" class="nav-link">Molcore OS &#9662;</a>
+          <div class="dropdown-menu">
+            <a href="molcoreindex.html" class="dropdown-item">Molcore 1.0 Overview</a>
+            <a href="molcore-business.html" class="dropdown-item">Molcore Business Edition</a>
+            <a href="molcore-familypack.html" class="dropdown-item">Molcore Family Pack 1.0.0</a>
+            <a href="molcoreactivation.html" class="dropdown-item">Molcore OS Activation</a>
+          </div>
+        </li>
+        <li class="nav-item">
+          <a href="quanalvoffice.html" class="nav-link">Quanalv Office &#9662;</a>
+          <div class="dropdown-menu">
+            <a href="quanalvoffice.html" class="dropdown-item">Quanalv Office 1.0 Suite</a>
+            <a href="quanalvofficeactivation.html" class="dropdown-item">Office Product Activation</a>
+          </div>
+        </li>
+        <li class="nav-item"><a href="quanalvallsoftware.html" class="nav-link">All Software</a></li>
+        <li class="nav-item"><a href="aboutquanalv.html" class="nav-link">About Quanalv</a></li>
+        <li class="nav-item"><a href="careers.html" class="nav-link">Careers</a></li>
+        <li><a href="#submit-ticket" class="nav-cta">Open Support Ticket</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <nav class="sub-nav" aria-label="Support Sections">
+    <div class="container sub-nav-inner">
+      <div class="sub-nav-label">TECHNICAL SUPPORT</div>
+      <ul class="sub-nav-links">
+        <li><a href="#portals" class="active">Activation &amp; Licensing</a></li>
+        <li><a href="#submit-ticket">Submit Support Request</a></li>
+        <li><a href="#sla-tiers">Support Tiers &amp; SLA</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <section class="hero">
+    <div class="container">
+      <span class="hero-eyebrow">QUANALV TECHNICAL ASSISTANCE &amp; ENTITLEMENT DESK</span>
+      <h1>Quanalv Support Portal</h1>
+      <p class="hero-desc">Validate product keys, generate offline air-gapped activation certificates, transfer hardware licenses, or submit a direct technical engineering ticket for Molcore OS and Quanalv Office.</p>
+      <div class="hero-actions">
+        <a href="#submit-ticket" class="btn-primary">Submit Technical Ticket</a>
+        <a href="molcoreactivation.html" class="btn-outline-light">OS Activation Portal</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="portals" class="section">
+    <div class="container">
+      <span class="eyebrow-dark">SELF-SERVICE CLEARINGHOUSES</span>
+      <h2 class="section-title">Direct Activation &amp; Licensing Tools</h2>
+      <p class="section-lead">Resolve key verification, offline certificate issuance, and edition lookups immediately without waiting in a support queue.</p>
+      <div class="three-col-grid">
+        <div class="card">
+          <div>
+            <span class="card-tag">OPERATING SYSTEM</span>
+            <h3>Molcore OS Activation</h3>
+            <p>Validate Standard (<code>QM10-</code>), Family Pack (<code>QMFP-</code>), or Business (<code>QMBZ-</code>) keys and generate offline <code>QMCERT-1.0</code> tokens.</p>
+          </div>
+          <a href="molcoreactivation.html" class="card-link">Launch OS Activation Portal &rarr;</a>
+        </div>
+        <div class="card">
+          <div>
+            <span class="card-tag">PRODUCTIVITY SUITE</span>
+            <h3>Quanalv Office Activation</h3>
+            <p>Verify 25-character Quanalv Office 1.0 Standard (<code>QO10-</code>) and Business Volume (<code>QOBZ-</code>) licenses or issue offline hardware certificates.</p>
+          </div>
+          <a href="quanalvofficeactivation.html" class="card-link">Launch Office Activation Portal &rarr;</a>
+        </div>
+        <div class="card">
+          <div>
+            <span class="card-tag">COMMERCIAL &amp; VOLUME</span>
+            <h3>Business SLA &amp; Fleet Imaging</h3>
+            <p>Access organizational master key documentation, bulk PXE imaging guidance, and commercial workstation deployment terms.</p>
+          </div>
+          <a href="molcore-business.html" class="card-link">View Business Licensing &rarr;</a>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section id="submit-ticket" class="section section-subtle">
+    <div class="container two-col-grid">
+      <div>
+        <span class="eyebrow-dark">ENGINEERING ASSISTANCE</span>
+        <h2 class="section-title">Submit a Technical Support Request</h2>
+        <p class="section-lead">Provide your product edition, optional license key prefix, and issue description so our systems specialists can respond.</p>
+        <div class="form-box">
+          <form id="supportForm">
+            <div class="form-group">
+              <label class="form-label" for="supName">Full Name or IT Administrator</label>
+              <input type="text" id="supName" class="form-input" placeholder="e.g. Jordan Vance" required />
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="supEmail">Contact Email Address</label>
+              <input type="email" id="supEmail" class="form-input" placeholder="admin@organization.com" required />
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="supProduct">Product &amp; Edition</label>
+              <select id="supProduct" class="form-select">
+                <option value="Molcore 1.0 Standard">Quanalv Molcore 1.0 (Standard / Home)</option>
+                <option value="Molcore Family Pack 1.0.0">Quanalv Molcore Family Pack 1.0.0</option>
+                <option value="Molcore Business Edition">Quanalv Molcore Business Edition (SLA)</option>
+                <option value="Quanalv Office 1.0">Quanalv Office 1.0 Productivity Suite</option>
+                <option value="Hardware Transfer / Activation">License Key Recovery or Hardware Transfer</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="supMessage">Issue Summary &amp; Hardware Details</label>
+              <textarea id="supMessage" class="form-textarea" placeholder="Describe your hardware configuration, CLI error output, or license transfer request..." required></textarea>
+            </div>
+            <button type="submit" class="btn-primary">Dispatch Support Ticket</button>
+          </form>
+          <div id="supportStatus" class="status-banner" role="status"></div>
+        </div>
+      </div>
+
+      <aside id="sla-tiers" class="spec-sidebar">
+        <h3 style="font-size:18px; margin-bottom:18px;">Support Channels &amp; SLA</h3>
+        <div class="spec-item"><div class="spec-label">BUSINESS EDITION SLA</div><div class="spec-value">Priority Commercial Engineering Response (&lt; 4 Hours)</div></div>
+        <div class="spec-item"><div class="spec-label">STANDARD &amp; FAMILY PACK</div><div class="spec-value">Standard Technical Support &amp; Hardware Transfer Desk</div></div>
+        <div class="spec-item"><div class="spec-label">KEY RECOVERY &amp; RE-ARMING</div><div class="spec-value">Motherboard Swap &amp; Retired Seat Reassignment</div></div>
+        <div class="spec-item"><div class="spec-label">TELEMETRY POLICY</div><div class="spec-value">Zero Automated Diagnostic Uploads — Logs Shared Only by You</div></div>
+      </aside>
+    </div>
+  </section>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col">
+          <div style="display:flex; align-items:center; gap:10px; color:#fff; font-weight:700; margin-bottom:14px;">
+            <img src="pictures/quanalvlogo.png" alt="Quanalv Corp Logo" style="height:26px; width:auto;" />
+            <span>QUANALV CORPORATION</span>
+          </div>
+          <p>Engineering deterministic operating systems and local-first productivity software built on our proprietary FreeBSD foundation.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Operating Systems</h4>
+          <ul class="footer-links">
+            <li><a href="molcoreindex.html">Molcore 1.0 Standard</a></li>
+            <li><a href="molcore-familypack.html">Molcore Family Pack 1.0.0</a></li>
+            <li><a href="molcore-business.html">Molcore Business Edition</a></li>
+            <li><a href="molcoreactivation.html">OS Activation Portal</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Productivity Suite</h4>
+          <ul class="footer-links">
+            <li><a href="quanalvoffice.html">Quanalv Office 1.0</a></li>
+            <li><a href="quanalvofficeactivation.html">Office Activation Portal</a></li>
+            <li><a href="quanalvallsoftware.html">All Software Directory</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Corporate</h4>
+          <ul class="footer-links">
+            <li><a href="index.html">Quanalv Home</a></li>
+            <li><a href="aboutquanalv.html">About Quanalv</a></li>
+            <li><a href="careers.html">Careers &amp; Contributors</a></li>
+            <li><a href="quanalvsupport.html">Support Portal</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div>&copy; 2026 Quanalv Corporation. All Rights Reserved.</div>
+        <div>Quanalv Technical Support &amp; Licensing Clearinghouse</div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById('navToggle').addEventListener('click', function () {
+      document.getElementById('primaryNav').classList.toggle('mobile-open');
+    });
+    document.getElementById('supportForm').addEventListener('submit', function (e) {
+      e.preventDefault();
+      var name = document.getElementById('supName').value.trim();
+      var email = document.getElementById('supEmail').value.trim();
+      var product = document.getElementById('supProduct').value;
+      var ticketId = 'QLV-SUP-' + Math.floor(100000 + Math.random() * 900000);
+      var banner = document.getElementById('supportStatus');
+      banner.style.display = 'block';
+      banner.innerHTML = '<strong>Ticket Logged (' + ticketId + '):</strong> Thank you, <strong>' + name + '</strong>. Your inquiry for <strong>' + product + '</strong> has been queued and a confirmation receipt was sent to <strong>' + email + '</strong>.';
+    });
+  </script>
+</body>
+</html>

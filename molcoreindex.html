@@ -1,0 +1,988 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Quanalv Molcore Operating System | Enterprise Resilience &amp; Workstation Control</title>
+<link rel="icon" type="image/png" href="pictures/browsericon.png" />
+<style>
+  :root {
+    --bg-primary: #ffffff;
+    --bg-secondary: #f8fafc;
+    --bg-dark: #101622;
+    --bg-hero: #202c39;
+    --text-main: #0f172a;
+    --text-muted: #475569;
+    --text-light: #f8fafc;
+    --accent-blue: #1d63b8;
+    --accent-blue-hover: #17529b;
+    --border-light: #e2e8f0;
+    --border-dark: #334155;
+  }
+
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    color: var(--text-main);
+    background-color: var(--bg-primary);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  a {
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .container {
+    max-width: 1160px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  /* Top Corporate Bar */
+  .top-strip {
+    background-color: #0b101b;
+    color: #94a3b8;
+    font-size: 12px;
+    border-bottom: 1px solid #1e293b;
+  }
+
+  .top-strip-inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 36px;
+  }
+
+  .top-strip strong {
+    color: #f8fafc;
+    font-weight: 600;
+  }
+
+  .top-strip a {
+    color: #60a5fa;
+    transition: color 0.15s ease;
+  }
+
+  .top-strip a:hover {
+    color: #93c5fd;
+  }
+
+  /* Unified Dark Navigation Bar */
+  .main-header {
+    background-color: var(--bg-dark);
+    color: var(--text-light);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    border-bottom: 1px solid #1e293b;
+  }
+
+  .nav-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 64px;
+  }
+
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 700;
+    font-size: 14px;
+    letter-spacing: 0.06em;
+    color: #ffffff;
+    text-transform: uppercase;
+  }
+
+  .brand-logo {
+    height: 28px;
+    width: auto;
+    display: block;
+    object-fit: contain;
+  }
+
+  .nav-toggle {
+    display: none;
+    background: #1e293b;
+    border: 1px solid #475569;
+    color: #ffffff;
+    padding: 6px 12px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+  }
+
+  .nav-links {
+    display: flex;
+    align-items: center;
+    gap: 28px;
+    list-style: none;
+  }
+
+  .nav-item {
+    position: relative;
+  }
+
+  .nav-link {
+    font-size: 13.5px;
+    font-weight: 500;
+    color: #cbd5e1;
+    padding: 20px 0;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    background: none;
+    border: none;
+    font-family: inherit;
+    cursor: pointer;
+    transition: color 0.15s ease;
+  }
+
+  .nav-link:hover,
+  .nav-link.active {
+    color: #ffffff;
+  }
+
+  .dropdown-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    min-width: 240px;
+    background-color: #ffffff;
+    color: var(--text-main);
+    border: 1px solid var(--border-light);
+    box-shadow: 0 10px 25px rgba(15, 23, 42, 0.12);
+    padding: 8px 0;
+    display: none;
+    z-index: 200;
+  }
+
+  .nav-item:hover .dropdown-menu,
+  .nav-item.open .dropdown-menu {
+    display: block;
+  }
+
+  .dropdown-header {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: #64748b;
+    padding: 8px 16px 4px;
+  }
+
+  .dropdown-divider {
+    height: 1px;
+    background-color: var(--border-light);
+    margin: 6px 0;
+  }
+
+  .dropdown-item {
+    display: block;
+    padding: 8px 16px;
+    font-size: 13px;
+    color: #1e293b;
+    transition: background-color 0.12s ease;
+  }
+
+  .dropdown-item:hover {
+    background-color: #f1f5f9;
+    color: var(--accent-blue);
+  }
+
+  .nav-cta {
+    border: 1px solid #475569;
+    background-color: #1e293b;
+    color: #ffffff;
+    font-size: 13px;
+    font-weight: 600;
+    padding: 8px 16px;
+    transition: background-color 0.15s ease, border-color 0.15s ease;
+  }
+
+  .nav-cta:hover {
+    background-color: #334155;
+    border-color: #64748b;
+  }
+
+  /* Secondary Sub-Navigation Strip */
+  .sub-nav {
+    background-color: #ffffff;
+    border-bottom: 1px solid var(--border-light);
+  }
+
+  .sub-nav-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 46px;
+  }
+
+  .sub-nav-label {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: #64748b;
+  }
+
+  .sub-nav-links {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    height: 100%;
+  }
+
+  .sub-nav-link {
+    font-size: 13px;
+    font-weight: 500;
+    color: #475569;
+    height: 100%;
+    display: inline-flex;
+    align-items: center;
+    border-bottom: 2px solid transparent;
+    transition: color 0.15s ease, border-color 0.15s ease;
+  }
+
+  .sub-nav-link:hover,
+  .sub-nav-link.active {
+    color: var(--text-main);
+    border-bottom-color: var(--accent-blue);
+  }
+
+  /* Hero Section */
+  .hero {
+    background-color: var(--bg-hero);
+    color: #ffffff;
+    padding: 76px 0 84px;
+    border-bottom: 1px solid #1e293b;
+  }
+
+  .hero-badge {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+    color: #60a5fa;
+    border: 1px solid #475569;
+    padding: 4px 10px;
+    margin-bottom: 16px;
+  }
+
+  .hero h1 {
+    font-size: 40px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    line-height: 1.18;
+    margin-bottom: 18px;
+    max-width: 760px;
+  }
+
+  .hero p {
+    font-size: 17px;
+    color: #cbd5e1;
+    max-width: 680px;
+    line-height: 1.65;
+    margin-bottom: 32px;
+  }
+
+  .hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+  }
+
+  .btn-primary {
+    background-color: var(--accent-blue);
+    color: #ffffff;
+    font-size: 14px;
+    font-weight: 600;
+    padding: 12px 22px;
+    border: 1px solid var(--accent-blue);
+    cursor: pointer;
+    display: inline-block;
+    text-align: center;
+    font-family: inherit;
+    transition: background-color 0.15s ease;
+  }
+
+  .btn-primary:hover {
+    background-color: var(--accent-blue-hover);
+  }
+
+  .btn-outline-light {
+    background-color: rgba(255, 255, 255, 0.04);
+    color: #ffffff;
+    font-size: 14px;
+    font-weight: 600;
+    padding: 12px 22px;
+    border: 1px solid #475569;
+    cursor: pointer;
+    display: inline-block;
+    transition: background-color 0.15s ease, border-color 0.15s ease;
+  }
+
+  .btn-outline-light:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-color: #94a3b8;
+  }
+
+  .btn-outline-dark {
+    background-color: #ffffff;
+    color: var(--text-main);
+    font-size: 14px;
+    font-weight: 600;
+    padding: 12px 22px;
+    border: 1px solid #cbd5e1;
+    cursor: pointer;
+    display: inline-block;
+    text-align: center;
+    font-family: inherit;
+    transition: background-color 0.15s ease, border-color 0.15s ease;
+  }
+
+  .btn-outline-dark:hover {
+    background-color: #f8fafc;
+    border-color: #94a3b8;
+  }
+
+  /* Sections */
+  .section {
+    padding: 72px 0;
+    border-bottom: 1px solid var(--border-light);
+    scroll-margin-top: 64px;
+  }
+
+  .section-alt {
+    background-color: var(--bg-secondary);
+  }
+
+  .eyebrow-dark {
+    font-size: 11.5px;
+    font-weight: 700;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+    color: var(--accent-blue);
+    margin-bottom: 10px;
+    display: block;
+  }
+
+  .section-title {
+    font-size: 30px;
+    font-weight: 700;
+    letter-spacing: -0.015em;
+    color: var(--text-main);
+    margin-bottom: 28px;
+  }
+
+  /* Architecture Split */
+  .arch-layout {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr;
+    gap: 48px;
+    align-items: center;
+  }
+
+  .arch-main p {
+    font-size: 16px;
+    color: #334155;
+    line-height: 1.75;
+  }
+
+  .arch-callout {
+    background-color: #f8fafc;
+    border: 1px solid var(--border-light);
+    border-left: 4px solid var(--accent-blue);
+    padding: 28px;
+  }
+
+  .arch-callout h3 {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--text-main);
+    margin-bottom: 8px;
+  }
+
+  .arch-callout p {
+    font-size: 14.5px;
+    color: var(--text-muted);
+  }
+
+  /* Pricing Grid */
+  .pricing-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 28px;
+  }
+
+  .pricing-col {
+    background-color: #ffffff;
+    border: 1px solid var(--border-light);
+    padding: 32px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  .pricing-col.featured {
+    border-top: 3px solid var(--accent-blue);
+  }
+
+  .pricing-col h3 {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--text-main);
+    margin-bottom: 8px;
+  }
+
+  .pricing-desc {
+    font-size: 14px;
+    color: var(--text-muted);
+    margin-bottom: 20px;
+  }
+
+  .pricing-price {
+    font-size: 32px;
+    font-weight: 700;
+    color: var(--text-main);
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--border-light);
+  }
+
+  .pricing-price span {
+    font-size: 14px;
+    font-weight: 500;
+    color: #64748b;
+  }
+
+  .pricing-features {
+    list-style: none;
+    margin-bottom: 28px;
+  }
+
+  .pricing-features li {
+    font-size: 14px;
+    color: #334155;
+    padding: 6px 0 6px 18px;
+    position: relative;
+  }
+
+  .pricing-features li::before {
+    content: "\25AA";
+    position: absolute;
+    left: 0;
+    color: var(--accent-blue);
+  }
+
+  /* Footer & Directory */
+  .site-footer {
+    background-color: var(--bg-dark);
+    color: #94a3b8;
+    padding: 64px 0 36px;
+    font-size: 13.5px;
+  }
+
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr 1fr 1fr;
+    gap: 40px;
+    padding-bottom: 44px;
+    border-bottom: 1px solid #1e293b;
+  }
+
+  .footer-col h4 {
+    color: #ffffff;
+    font-size: 13px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: 16px;
+  }
+
+  .footer-col p {
+    font-size: 13.5px;
+    line-height: 1.65;
+    color: #94a3b8;
+  }
+
+  .footer-links {
+    list-style: none;
+  }
+
+  .footer-links li {
+    margin-bottom: 10px;
+  }
+
+  .footer-links a {
+    color: #94a3b8;
+    transition: color 0.15s ease;
+  }
+
+  .footer-links a:hover {
+    color: #ffffff;
+  }
+
+  .footer-bottom {
+    padding-top: 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    font-size: 12.5px;
+    color: #64748b;
+  }
+
+  /* Modal Dialog */
+  .modal-backdrop {
+    position: fixed;
+    inset: 0;
+    background-color: rgba(15, 23, 42, 0.65);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 500;
+    padding: 20px;
+  }
+
+  .modal-backdrop.open {
+    display: flex;
+  }
+
+  .modal-dialog {
+    background-color: #ffffff;
+    width: 100%;
+    max-width: 500px;
+    border: 1px solid var(--border-light);
+    padding: 32px;
+    position: relative;
+  }
+
+  .modal-close {
+    position: absolute;
+    top: 16px;
+    right: 20px;
+    background: none;
+    border: none;
+    font-size: 24px;
+    color: #64748b;
+    cursor: pointer;
+  }
+
+  .modal-dialog h3 {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--text-main);
+    margin-bottom: 8px;
+  }
+
+  .modal-dialog p {
+    font-size: 14px;
+    color: var(--text-muted);
+    margin-bottom: 22px;
+  }
+
+  .form-group {
+    margin-bottom: 18px;
+  }
+
+  .form-group label {
+    display: block;
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #334155;
+    margin-bottom: 6px;
+  }
+
+  .form-group input,
+  .form-group select {
+    width: 100%;
+    padding: 11px 14px;
+    font-size: 14px;
+    font-family: inherit;
+    color: var(--text-main);
+    background-color: #ffffff;
+    border: 1px solid #cbd5e1;
+    outline: none;
+  }
+
+  .form-group input:focus,
+  .form-group select:focus {
+    border-color: var(--accent-blue);
+  }
+
+  .checkout-status {
+    margin-top: 16px;
+    padding: 14px;
+    background-color: #f0fdf4;
+    border-left: 3px solid #15803d;
+    color: #14532d;
+    font-size: 13.5px;
+    display: none;
+  }
+
+  @media (max-width: 920px) {
+    .arch-layout,
+    .pricing-grid,
+    .footer-grid {
+      grid-template-columns: 1fr;
+    }
+    .nav-toggle {
+      display: inline-block;
+    }
+    .nav-links {
+      display: none;
+      flex-direction: column;
+      align-items: flex-start;
+      position: absolute;
+      top: 64px;
+      left: 0;
+      right: 0;
+      background-color: var(--bg-dark);
+      padding: 16px 24px;
+      border-bottom: 1px solid #1e293b;
+      gap: 12px;
+    }
+    .nav-links.mobile-open {
+      display: flex;
+    }
+    .nav-link {
+      padding: 8px 0;
+    }
+  }
+</style>
+</head>
+<body>
+
+  <div class="top-strip">
+    <div class="container top-strip-inner">
+      <div>A Proprietary Operating System by <strong>Quanalv Corporation</strong></div>
+      <div><a href="index.html">&larr; Return to Quanalv Corporate Home</a></div>
+    </div>
+  </div>
+
+  <header class="main-header" id="topNav">
+    <div class="container nav-inner">
+      <a href="molcoreindex.html" class="brand">
+        <img src="pictures/quanalvlogo.png" alt="Quanalv Corp Logo" class="brand-logo" />
+        <span>QUANALV MOLCORE OS</span>
+      </a>
+
+      <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="navMenu">Menu &#9776;</button>
+
+      <ul class="nav-links" id="navMenu">
+        <li class="nav-item"><a href="index.html" class="nav-link">Home</a></li>
+        <li class="nav-item" data-dropdown>
+          <button type="button" class="nav-link active" aria-expanded="false">Molcore OS &#9662;</button>
+          <div class="dropdown-menu">
+            <div class="dropdown-header">Operating System</div>
+            <a href="molcoreindex.html" class="dropdown-item">Molcore 1.0 Overview</a>
+            <a href="molcore-business.html" class="dropdown-item">Molcore Business Edition</a>
+            <a href="molcore-familypack.html" class="dropdown-item">Molcore Family Pack</a>
+            <div class="dropdown-divider"></div>
+            <a href="molcoreactivation.html" class="dropdown-item">Molcore Activation Portal</a>
+          </div>
+        </li>
+        <li class="nav-item" data-dropdown>
+          <button type="button" class="nav-link" aria-expanded="false">Quanalv Office &#9662;</button>
+          <div class="dropdown-menu">
+            <div class="dropdown-header">Productivity Suite</div>
+            <a href="quanalvoffice.html" class="dropdown-item">Quanalv Office 1.0</a>
+            <a href="quanalvofficeactivation.html" class="dropdown-item">Office Activation Portal</a>
+          </div>
+        </li>
+        <li class="nav-item" data-dropdown>
+          <button type="button" class="nav-link" aria-expanded="false">About &amp; Careers &#9662;</button>
+          <div class="dropdown-menu">
+            <div class="dropdown-header">Organization</div>
+            <a href="about.html" class="dropdown-item">Origin &amp; Vision</a>
+            <a href="careers.html" class="dropdown-item">Careers &amp; Contributors</a>
+            <a href="quanalvsupport.html" class="dropdown-item">Support Portal</a>
+          </div>
+        </li>
+      </ul>
+
+      <a href="#purchase" class="nav-cta">Get Quanalv Molcore</a>
+    </div>
+  </header>
+
+  <nav class="sub-nav" aria-label="Page sections">
+    <div class="container sub-nav-inner">
+      <span class="sub-nav-label">Molcore 1.0 Release</span>
+      <div class="sub-nav-links">
+        <a href="#architecture" class="sub-nav-link spy-link active">Architecture</a>
+        <a href="#purchase" class="sub-nav-link spy-link">Purchase Molcore 1.0</a>
+        <a href="#directory" class="sub-nav-link spy-link">Enterprise &amp; Hardware</a>
+      </div>
+    </div>
+  </nav>
+
+  <section class="hero">
+    <div class="container">
+      <span class="hero-badge">Production Release 1.0</span>
+      <h1>Quanalv Molcore 1.0 is now out and available.</h1>
+      <p>Designed for everyday home use and professional workplaces.</p>
+      <div class="hero-actions">
+        <a href="#purchase" class="btn-primary">Purchase Molcore 1.0</a>
+        <a href="#architecture" class="btn-outline-light">Explore Architecture</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="architecture">
+    <div class="container">
+      <span class="eyebrow-dark">System Foundation</span>
+      <h2 class="section-title">Proprietary Architectural Integrity</h2>
+
+      <div class="arch-layout">
+        <div class="arch-main">
+          <p>Unlike fractured open-source alternatives, Quanalv Molcore keeps its base system trees closed-source to enforce strict data security isolation across corporate workstations.</p>
+        </div>
+
+        <div class="arch-callout">
+          <h3>Closed and Secure OS</h3>
+          <p>Built on top of our QM Technology and powered by a proven FreeBSD core foundation.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-alt" id="purchase">
+    <div class="container">
+      <span class="eyebrow-dark">Official Purchase Center</span>
+      <h2 class="section-title">Purchase Molcore 1.0</h2>
+
+      <div class="pricing-grid">
+        <div class="pricing-col featured">
+          <div>
+            <h3>Molcore 1.0 ISO Image</h3>
+            <p class="pricing-desc">Official digital ISO with license key.</p>
+            <div class="pricing-price">$10.00 <span>USD</span></div>
+            <ul class="pricing-features">
+              <li>Rufus supported image</li>
+              <li>ImgBurn supported image</li>
+              <li>License key included with purchase</li>
+            </ul>
+          </div>
+          <button type="button" class="btn-primary open-checkout" data-medium="Molcore 1.0 ISO Image ($10.00 USD)">Purchase ISO License</button>
+        </div>
+
+        <div class="pricing-col">
+          <div>
+            <h3>Bootable USB Installation Media</h3>
+            <p class="pricing-desc">Physical USB media. Shipping and handling fees apply.</p>
+            <div class="pricing-price">$20.00 <span>USD</span></div>
+            <ul class="pricing-features">
+              <li>Original installation media</li>
+              <li>License key included with purchase</li>
+            </ul>
+          </div>
+          <button type="button" class="btn-outline-dark open-checkout" data-medium="Bootable USB Installation Media ($20.00 USD)">Purchase USB Media</button>
+        </div>
+
+        <div class="pricing-col">
+          <div>
+            <h3>Bootable DVD Installation Media</h3>
+            <p class="pricing-desc">Physical DVD media. Shipping and handling fees apply.</p>
+            <div class="pricing-price">$20.00 <span>USD</span></div>
+            <ul class="pricing-features">
+              <li>Original installation media</li>
+              <li>For older systems without USB boot support</li>
+              <li>License key included with purchase</li>
+            </ul>
+          </div>
+          <button type="button" class="btn-outline-dark open-checkout" data-medium="Bootable DVD Installation Media ($20.00 USD)">Purchase DVD Media</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="site-footer" id="directory">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col">
+          <h4>Quanalv Molcore OS</h4>
+          <p>An operating system developed and created by the Quanalv Corp&trade;. Engineered on FreeBSD for home users and commercial workplaces.</p>
+        </div>
+
+        <div class="footer-col">
+          <h4>Commercial Solutions</h4>
+          <ul class="footer-links">
+            <li><a href="molcore-business.html">Corporate Desktop Licensing</a></li>
+            <li><a href="molcore-familypack.html">Molcore Family Pack 1.0.0</a></li>
+            <li><a href="molcoreactivation.html">Product Activation Portal</a></li>
+            <li><a href="#architecture">Cryptographic Bulletins</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Hardware Support</h4>
+          <ul class="footer-links">
+            <li><a href="#architecture">Certified OEM Devices</a></li>
+            <li><a href="#architecture">Processor Architecture</a></li>
+            <li><a href="#architecture">Storage Driver Base</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Corporate Portal</h4>
+          <ul class="footer-links">
+            <li><a href="index.html">Quanalv Corporation Home</a></li>
+            <li><a href="about.html">About Quanalv</a></li>
+            <li><a href="careers.html">Careers &amp; Contributors</a></li>
+            <li><a href="quanalvsupport.html">Support Portal</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div>&copy; 2026 Quanalv Corporation. All Rights Reserved. Quanalv Molcore is a protected commercial proprietary asset.</div>
+        <div>Proprietary Commercial Infrastructures</div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Secured Procurement Checkout Modal -->
+  <div class="modal-backdrop" id="checkoutModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="modal-dialog">
+      <button type="button" class="modal-close" id="closeModal" aria-label="Close">&times;</button>
+      <h3 id="modalTitle">Secured Procurement Checkout</h3>
+      <p>Complete your corporate allocation request to receive payment and SHA-256 verification credentials.</p>
+
+      <form id="procurementForm">
+        <div class="form-group">
+          <label for="mediumSelect">Selected Distribution Medium</label>
+          <select id="mediumSelect" name="medium">
+            <option value="Molcore 1.0 ISO Image ($10.00 USD)">Molcore 1.0 ISO Image ($10.00 USD)</option>
+            <option value="Bootable USB Installation Media ($20.00 USD)">Bootable USB Installation Media ($20.00 USD)</option>
+            <option value="Bootable DVD Installation Media ($20.00 USD)">Bootable DVD Installation Media ($20.00 USD)</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="orgName">Organization / Corporate Entity Name</label>
+          <input type="text" id="orgName" name="orgName" placeholder="Individual Home User or Entity Name" required />
+        </div>
+
+        <div class="form-group">
+          <label for="corpEmail">Secure Corporate Destination Email</label>
+          <input type="email" id="corpEmail" name="corpEmail" placeholder="procurement@domain.com" required />
+        </div>
+
+        <button type="submit" class="btn-primary" style="width: 100%;">Initialize Secured Checkout</button>
+        <div class="checkout-status" id="checkoutStatus"></div>
+      </form>
+    </div>
+  </div>
+
+<script>
+  (function () {
+    var navToggle = document.getElementById('navToggle');
+    var navMenu = document.getElementById('navMenu');
+    var dropdownItems = document.querySelectorAll('[data-dropdown]');
+    var spyLinks = document.querySelectorAll('.spy-link');
+    var sections = document.querySelectorAll('section[id], footer[id]');
+
+    var modal = document.getElementById('checkoutModal');
+    var closeModalBtn = document.getElementById('closeModal');
+    var mediumSelect = document.getElementById('mediumSelect');
+    var procurementForm = document.getElementById('procurementForm');
+    var checkoutStatus = document.getElementById('checkoutStatus');
+
+    window.addEventListener('scroll', function () {
+      var currentId = '';
+      sections.forEach(function (sec) {
+        var top = sec.offsetTop - 110;
+        if (window.scrollY >= top) {
+          currentId = sec.getAttribute('id');
+        }
+      });
+
+      if (currentId) {
+        spyLinks.forEach(function (link) {
+          link.classList.remove('active');
+          if (link.getAttribute('href') === '#' + currentId) {
+            link.classList.add('active');
+          }
+        });
+      }
+    });
+
+    navToggle.addEventListener('click', function () {
+      var isOpen = navMenu.classList.toggle('mobile-open');
+      navToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+    });
+
+    dropdownItems.forEach(function (item) {
+      var btn = item.querySelector('button');
+      btn.addEventListener('click', function (e) {
+        e.stopPropagation();
+        var alreadyOpen = item.classList.contains('open');
+
+        dropdownItems.forEach(function (other) {
+          other.classList.remove('open');
+          other.querySelector('button').setAttribute('aria-expanded', 'false');
+        });
+
+        if (!alreadyOpen) {
+          item.classList.add('open');
+          btn.setAttribute('aria-expanded', 'true');
+        }
+      });
+    });
+
+    document.addEventListener('click', function () {
+      dropdownItems.forEach(function (item) {
+        item.classList.remove('open');
+        item.querySelector('button').setAttribute('aria-expanded', 'false');
+      });
+    });
+
+    document.querySelectorAll('.open-checkout').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var medium = btn.getAttribute('data-medium');
+        if (medium) {
+          mediumSelect.value = medium;
+        }
+        checkoutStatus.style.display = 'none';
+        modal.classList.add('open');
+      });
+    });
+
+    closeModalBtn.addEventListener('click', function () {
+      modal.classList.remove('open');
+    });
+
+    modal.addEventListener('click', function (e) {
+      if (e.target === modal) {
+        modal.classList.remove('open');
+      }
+    });
+
+    procurementForm.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var selected = mediumSelect.value;
+      var email = document.getElementById('corpEmail').value;
+      checkoutStatus.textContent = 'Allocation initialized for ' + selected + '. Verification instructions queued for ' + email + '.';
+      checkoutStatus.style.display = 'block';
+    });
+  })();
+</script>
+</body>
+</html>

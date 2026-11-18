@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Quanalv Office Product Activation | Online &amp; Offline Verification — Quanalv Corporation</title>
+<link rel="icon" type="image/png" href="pictures/browsericon.png" />
+<style>
+  :root {
+    --bg-primary: #ffffff;
+    --bg-secondary: #f8fafc;
+    --bg-dark: #101622;
+    --bg-hero: #202c39;
+    --text-main: #0f172a;
+    --text-muted: #475569;
+    --text-light: #f8fafc;
+    --accent-blue: #1d63b8;
+    --accent-blue-hover: #17529b;
+    --border-light: #e2e8f0;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    color: var(--text-main);
+    background-color: var(--bg-primary);
+    line-height: 1.6;
+  }
+  a { text-decoration: none; color: inherit; }
+  .container { max-width: 1160px; margin: 0 auto; padding: 0 24px; }
+  .top-strip { background: #0b101b; color: #94a3b8; font-size: 12px; border-bottom: 1px solid #1e293b; }
+  .top-strip-inner { display: flex; justify-content: space-between; align-items: center; height: 36px; }
+  .top-strip strong { color: #f8fafc; }
+  .top-strip a { color: #60a5fa; }
+  .main-header { background: var(--bg-dark); color: var(--text-light); position: sticky; top: 0; z-index: 1000; border-bottom: 1px solid #1e293b; }
+  .nav-inner { display: flex; align-items: center; justify-content: space-between; height: 64px; }
+  .brand { display: flex; align-items: center; gap: 10px; font-weight: 700; font-size: 14px; letter-spacing: 0.06em; color: #fff; text-transform: uppercase; }
+  .brand-logo { height: 30px; width: auto; display: block; object-fit: contain; }
+  .nav-toggle { display: none; background: #1e293b; border: 1px solid #475569; color: #fff; padding: 6px 12px; font-size: 13px; cursor: pointer; }
+  .nav-links { display: flex; align-items: center; gap: 26px; list-style: none; }
+  .nav-item { position: relative; }
+  .nav-link { font-size: 13.5px; font-weight: 500; color: #cbd5e1; padding: 20px 0; display: inline-flex; align-items: center; gap: 5px; }
+  .nav-link:hover, .nav-link.active { color: #fff; }
+  .dropdown-menu {
+    position: absolute; top: 100%; left: 0; min-width: 240px; background: #fff; color: var(--text-main);
+    border: 1px solid var(--border-light); box-shadow: 0 10px 25px rgba(15, 23, 42, 0.12);
+    padding: 8px 0; display: none; z-index: 200; list-style: none;
+  }
+  .nav-item:hover .dropdown-menu, .nav-item.open .dropdown-menu { display: block; }
+  .dropdown-item { display: block; padding: 8px 16px; font-size: 13px; color: #1e293b; }
+  .dropdown-item:hover { background: #f1f5f9; color: var(--accent-blue); }
+  .nav-cta { border: 1px solid #475569; background: #1e293b; color: #fff; font-size: 13px; font-weight: 600; padding: 8px 16px; }
+  .nav-cta:hover { background: #334155; }
+  .sub-nav { background: #fff; border-bottom: 1px solid var(--border-light); }
+  .sub-nav-inner { display: flex; align-items: center; justify-content: space-between; height: 46px; }
+  .sub-nav-label { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: #64748b; }
+  .sub-nav-links { display: flex; align-items: center; gap: 22px; height: 100%; list-style: none; }
+  .sub-nav-links li { height: 100%; }
+  .sub-nav-links a { font-size: 13px; font-weight: 500; color: #475569; height: 100%; display: inline-flex; align-items: center; border-bottom: 2px solid transparent; }
+  .sub-nav-links a:hover, .sub-nav-links a.active { color: var(--text-main); border-bottom-color: var(--accent-blue); }
+  .hero { background: var(--bg-hero); color: #fff; padding: 76px 0 84px; border-bottom: 1px solid #1e293b; }
+  .hero-eyebrow { font-size: 11.5px; font-weight: 700; letter-spacing: 0.09em; text-transform: uppercase; color: #60a5fa; margin-bottom: 14px; display: block; }
+  .hero h1 { font-size: 40px; font-weight: 700; line-height: 1.18; margin-bottom: 18px; max-width: 760px; }
+  .hero-desc { font-size: 17px; color: #cbd5e1; max-width: 700px; margin-bottom: 32px; }
+  .hero-actions { display: flex; flex-wrap: wrap; gap: 14px; }
+  .btn-primary { background: var(--accent-blue); color: #fff; font-size: 14px; font-weight: 600; padding: 12px 22px; border: 1px solid var(--accent-blue); cursor: pointer; display: inline-block; }
+  .btn-primary:hover { background: var(--accent-blue-hover); }
+  .btn-outline-light { background: rgba(255,255,255,0.04); color: #fff; font-size: 14px; font-weight: 600; padding: 12px 22px; border: 1px solid #475569; display: inline-block; }
+  .section { padding: 72px 0; border-bottom: 1px solid var(--border-light); scroll-margin-top: 64px; }
+  .section-subtle { background: var(--bg-secondary); }
+  .section-eyebrow { font-size: 11.5px; font-weight: 700; letter-spacing: 0.09em; text-transform: uppercase; color: var(--accent-blue); margin-bottom: 10px; display: block; }
+  .section-title { font-size: 30px; font-weight: 700; color: var(--text-main); margin-bottom: 12px; }
+  .section-subtitle { font-size: 16px; color: var(--text-muted); max-width: 720px; margin-bottom: 32px; }
+  .split-grid { display: grid; grid-template-columns: 1.45fr 1fr; gap: 56px; align-items: start; }
+  .console-box { background: #fff; border: 1px solid var(--border-light); }
+  .tab-bar { display: flex; border-bottom: 1px solid var(--border-light); background: #f8fafc; }
+  .tab-btn { flex: 1; padding: 14px 16px; font-size: 13.5px; font-weight: 600; color: #475569; background: none; border: none; border-bottom: 2px solid transparent; cursor: pointer; }
+  .tab-btn.active { color: var(--accent-blue); background: #fff; border-bottom-color: var(--accent-blue); }
+  .tab-panel { display: none; padding: 28px; }
+  .tab-panel.active { display: block; }
+  .form-group { margin-bottom: 18px; }
+  .form-label { display: block; font-size: 12px; font-weight: 700; text-transform: uppercase; color: #334155; margin-bottom: 6px; }
+  .form-input, .form-select { width: 100%; padding: 11px 14px; font-size: 14px; border: 1px solid #cbd5e1; background: #fff; }
+  .mono-input { font-family: monospace; letter-spacing: 0.05em; }
+  .form-hint { font-size: 12.5px; color: #64748b; margin-top: 6px; }
+  .demo-keys { margin-top: 22px; padding-top: 16px; border-top: 1px solid var(--border-light); font-size: 12.5px; color: #475569; }
+  .demo-key-btn { margin: 6px 6px 0 0; padding: 6px 10px; font-size: 12px; font-family: monospace; background: #f8fafc; border: 1px solid #cbd5e1; cursor: pointer; }
+  .demo-key-btn:hover { border-color: var(--accent-blue); color: var(--accent-blue); }
+  .status-banner { display: none; margin-top: 20px; padding: 16px; font-size: 13.5px; border: 1px solid var(--border-light); }
+  .status-banner.success { display: block; background: #f0fdf4; border-left: 3px solid #15803d; color: #14532d; }
+  .status-banner.error { display: block; background: #fef2f2; border-left: 3px solid #b91c1c; color: #7f1d1d; }
+  .status-title { font-weight: 700; margin-bottom: 4px; }
+  .cert-output { margin-top: 10px; padding: 10px 12px; background: #0f172a; color: #f8fafc; font-family: monospace; font-size: 12.5px; word-break: break-all; }
+  .spec-sidebar { border-left: 2px solid #cbd5e1; padding-left: 28px; }
+  .spec-item { padding: 13px 0; border-bottom: 1px solid var(--border-light); }
+  .spec-label { font-size: 11px; font-weight: 700; text-transform: uppercase; color: #64748b; }
+  .spec-value { font-size: 14.5px; font-weight: 500; }
+  .cli-block { background: #0f172a; color: #f8fafc; padding: 24px; font-family: monospace; font-size: 13.5px; overflow-x: auto; }
+  .cli-comment { color: #94a3b8; }
+  .table-wrap { border: 1px solid var(--border-light); background: #fff; overflow-x: auto; }
+  table { width: 100%; border-collapse: collapse; text-align: left; }
+  th, td { font-size: 14px; padding: 15px 20px; border-bottom: 1px solid var(--border-light); }
+  th { background: #f8fafc; font-weight: 700; }
+  .site-footer { background: var(--bg-dark); color: #94a3b8; padding: 64px 0 36px; font-size: 13.5px; }
+  .footer-grid { display: grid; grid-template-columns: 1.4fr 1fr 1fr 1fr; gap: 40px; padding-bottom: 44px; border-bottom: 1px solid #1e293b; }
+  .footer-col h4 { color: #fff; font-size: 13px; text-transform: uppercase; margin-bottom: 16px; }
+  .footer-links { list-style: none; }
+  .footer-links li { margin-bottom: 10px; }
+  .footer-links a:hover { color: #fff; }
+  .footer-bottom { padding-top: 24px; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px; font-size: 12.5px; color: #64748b; }
+  @media (max-width: 920px) {
+    .split-grid, .footer-grid { grid-template-columns: 1fr; }
+    .nav-toggle { display: inline-block; }
+    .nav-links { display: none; position: absolute; top: 64px; left: 0; right: 0; background: var(--bg-dark); flex-direction: column; align-items: flex-start; padding: 16px 24px 24px; gap: 12px; }
+    .nav-links.mobile-open { display: flex; }
+  }
+</style>
+</head>
+<body>
+  <div class="top-strip">
+    <div class="container top-strip-inner">
+      <div>A Proprietary Productivity Suite by <strong>Quanalv Corporation</strong></div>
+      <div><a href="index.html">&larr; Return to Quanalv Corporate Home</a></div>
+    </div>
+  </div>
+
+  <header class="main-header">
+    <div class="container nav-inner">
+      <a href="quanalvoffice.html" class="brand">
+        <img src="pictures/quanalvlogo.png" alt="Quanalv Corp Logo" class="brand-logo" />
+        <span>QUANALV OFFICE SUITE</span>
+      </a>
+      <button class="nav-toggle" id="navToggle" type="button">Menu &#9776;</button>
+      <ul class="nav-links" id="primaryNav">
+        <li class="nav-item"><a href="index.html" class="nav-link">Home</a></li>
+        <li class="nav-item">
+          <a href="molcoreindex.html" class="nav-link">Molcore OS &#9662;</a>
+          <div class="dropdown-menu">
+            <a href="molcoreindex.html" class="dropdown-item">Molcore 1.0 Overview</a>
+            <a href="molcore-business.html" class="dropdown-item">Molcore Business Edition</a>
+            <a href="molcore-familypack.html" class="dropdown-item">Molcore Family Pack 1.0.0</a>
+            <a href="molcoreactivation.html" class="dropdown-item">Molcore OS Activation</a>
+          </div>
+        </li>
+        <li class="nav-item">
+          <a href="quanalvoffice.html" class="nav-link active">Quanalv Office &#9662;</a>
+          <div class="dropdown-menu">
+            <a href="quanalvoffice.html" class="dropdown-item">Quanalv Office 1.0 Suite</a>
+            <a href="quanalvoffice.html#applications" class="dropdown-item">Core Applications</a>
+            <a href="quanalvoffice.html#editions" class="dropdown-item">Editions &amp; Licensing</a>
+            <a href="quanalvofficeactivation.html" class="dropdown-item">Office Product Activation</a>
+          </div>
+        </li>
+        <li class="nav-item">
+          <a href="aboutquanalv.html" class="nav-link">About Quanalv &#9662;</a>
+          <div class="dropdown-menu">
+            <a href="aboutquanalv.html" class="dropdown-item">Corporate Overview</a>
+            <a href="aboutquanalv.html#architecture" class="dropdown-item">Engineering Philosophy</a>
+          </div>
+        </li>
+        <li class="nav-item"><a href="careers.html" class="nav-link">Careers</a></li>
+        <li><a href="quanalvofficeactivation.html" class="nav-cta">Activate Office</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <nav class="sub-nav" aria-label="Activation Navigation">
+    <div class="container sub-nav-inner">
+      <div class="sub-nav-label">OFFICE PRODUCT ACTIVATION</div>
+      <ul class="sub-nav-links">
+        <li><a href="#activation-console" class="active">Key Validation &amp; Activation</a></li>
+        <li><a href="#cli-deployment">CLI &amp; Air-Gapped Setup</a></li>
+        <li><a href="#activation-rules">Edition Rules</a></li>
+        <li><a href="quanalvoffice.html">Quanalv Office Overview</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <section class="hero">
+    <div class="container">
+      <span class="hero-eyebrow">QUANALV LICENSING &amp; ENTITLEMENT CLEARINGHOUSE</span>
+      <h1>Quanalv Office Product Activation</h1>
+      <p class="hero-desc">Verify your 25-character Quanalv Office 1.0 license key, check genuine entitlement status, or generate a signed offline hardware activation certificate for air-gapped workstations.</p>
+      <div class="hero-actions">
+        <a href="#activation-console" class="btn-primary">Open Activation Console</a>
+        <a href="quanalvoffice.html#editions" class="btn-outline-light">Compare Office Editions</a>
+      </div>
+    </div>
+  </section>
+  <section id="activation-console" class="section">
+    <div class="container split-grid">
+      <div>
+        <span class="section-eyebrow">ONLINE &amp; OFFLINE VERIFICATION</span>
+        <h2 class="section-title">Validate &amp; Activate Quanalv Office 1.0</h2>
+        <p class="section-subtitle">Enter your Standard (<code>QO10-</code>) or Business Volume (<code>QOBZ-</code>) license key below. No user account or email address is required.</p>
+
+        <div class="console-box">
+          <div class="tab-bar">
+            <button type="button" class="tab-btn active" onclick="switchTab('online-tab', this)">1. Online Key Verification</button>
+            <button type="button" class="tab-btn" onclick="switchTab('offline-tab', this)">2. Offline Hardware Certificate</button>
+          </div>
+
+          <div id="online-tab" class="tab-panel active">
+            <form id="onlineForm" onsubmit="verifyOfficeKey(event)">
+              <div class="form-group">
+                <label class="form-label" for="officeEdition">Suite Edition</label>
+                <select id="officeEdition" class="form-select">
+                  <option value="auto">Auto-Detect from Product Key Prefix</option>
+                  <option value="standard">Quanalv Office 1.0 Standard (Workstation)</option>
+                  <option value="business">Quanalv Office 1.0 Business Volume (Organization)</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="productKeyInput">25-Character Product Key</label>
+                <input type="text" id="productKeyInput" class="form-input mono-input" maxlength="29" placeholder="QO10-XXXXX-XXXXX-XXXXX-XXXXX" oninput="formatKeyInput(this)" required />
+                <div class="form-hint">Standard keys begin with <strong>QO10-</strong>. Organizational master keys begin with <strong>QOBZ-</strong>.</div>
+              </div>
+              <button type="submit" class="btn-primary">Verify &amp; Activate Key</button>
+            </form>
+            <div class="demo-keys">
+              <strong>Sample Test Keys (Click to Populate):</strong><br />
+              <button type="button" class="demo-key-btn" onclick="fillDemoKey('QO10-8492A-7710C-3940E-9124B')">QO10-8492A-7710C-3940E-9124B (Standard)</button>
+              <button type="button" class="demo-key-btn" onclick="fillDemoKey('QOBZ-5501M-9024K-1184R-7730X')">QOBZ-5501M-9024K-1184R-7730X (Business)</button>
+              <button type="button" class="demo-key-btn" onclick="fillDemoKey('QO10-00000-00000-00000-9999X')">QO10-00000-00000-00000-9999X (Revoked)</button>
+            </div>
+            <div id="onlineResult" class="status-banner" role="status"></div>
+          </div>
+
+          <div id="offline-tab" class="tab-panel">
+            <form id="offlineForm" onsubmit="generateOfflineCert(event)">
+              <div class="form-group">
+                <label class="form-label" for="offlineKeyInput">25-Character Product Key</label>
+                <input type="text" id="offlineKeyInput" class="form-input mono-input" maxlength="29" placeholder="QOBZ-XXXXX-XXXXX-XXXXX-XXXXX" oninput="formatKeyInput(this)" required />
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="hwFingerprint">Workstation Hardware Fingerprint (from <code>qo-activate --hwid</code>)</label>
+                <input type="text" id="hwFingerprint" class="form-input mono-input" placeholder="QMHW-9A4F-22C8-88E1-40B7" required />
+                <div class="form-hint">Run <code>qo-activate --hwid</code> in your Molcore terminal to obtain your local machine hash.</div>
+              </div>
+              <button type="submit" class="btn-primary">Generate Signed Activation Token</button>
+            </form>
+            <div id="offlineResult" class="status-banner" role="status"></div>
+          </div>
+        </div>
+      </div>
+
+      <aside class="spec-sidebar">
+        <h3 style="font-size:18px; margin-bottom:18px;">Activation Specifications</h3>
+        <div class="spec-item"><div class="spec-label">KEY FORMAT</div><div class="spec-value">25-Character Alphanumeric (5 &times; 5 Blocks)</div></div>
+        <div class="spec-item"><div class="spec-label">STANDARD PREFIX</div><div class="spec-value">QO10- (1 Workstation + 1 Laptop)</div></div>
+        <div class="spec-item"><div class="spec-label">BUSINESS PREFIX</div><div class="spec-value">QOBZ- (Unlimited Internal Seats)</div></div>
+        <div class="spec-item"><div class="spec-label">GRACE EVALUATION PERIOD</div><div class="spec-value">30 Days Full Functionality Prior to Activation</div></div>
+        <div class="spec-item"><div class="spec-label">HARDWARE RE-ARMING</div><div class="spec-value">Self-Service Transfer Allowed on Motherboard Swap</div></div>
+      </aside>
+    </div>
+  </section>
+
+  <section id="cli-deployment" class="section section-subtle">
+    <div class="container">
+      <span class="section-eyebrow">WORKSTATION PROVISIONING</span>
+      <h2 class="section-title">Command-Line &amp; Air-Gapped Activation</h2>
+      <p class="section-subtitle">Administrators and workstation users can register Quanalv Office 1.0 directly from the Molcore terminal without launching a graphical wizard.</p>
+      <div class="cli-block">
+        <div class="cli-comment"># 1. Activate Quanalv Office online using your 25-character product key</div>
+        <div>sudo qo-activate --key QO10-8492A-7710C-3940E-9124B</div><br />
+        <div class="cli-comment"># 2. Generate a local hardware fingerprint for an air-gapped computer</div>
+        <div>qo-activate --hwid</div><br />
+        <div class="cli-comment"># 3. Apply the offline activation token generated on this portal</div>
+        <div>sudo qo-activate --apply-token QOCERT-1.0-8492A-9A4F22C8-PERPETUAL</div><br />
+        <div class="cli-comment"># 4. Inspect current license channel and genuine status</div>
+        <div>qo-activate --status</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="activation-rules" class="section">
+    <div class="container">
+      <span class="section-eyebrow">ENTITLEMENT POLICIES</span>
+      <h2 class="section-title">Standard vs. Business Volume Activation Rules</h2>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Policy Attribute</th><th>Quanalv Office Standard (QO10-)</th><th>Quanalv Office Business (QOBZ-)</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Licensed Seat Count</strong></td><td>1 primary desktop + 1 secondary portable device</td><td>Unlimited internal organizational workstations</td></tr>
+            <tr><td><strong>License Duration</strong></td><td>Perpetual (never expires)</td><td>Perpetual (never expires)</td></tr>
+            <tr><td><strong>Offline Certificate Support</strong></td><td>Yes, bound to individual hardware hash</td><td>Yes, supports single organization-wide signing token</td></tr>
+            <tr><td><strong>Hardware Replacement</strong></td><td>Deactivate old host via <code>qo-activate --release</code></td><td>Automatic re-provisioning without seat counter</td></tr>
+            <tr><td><strong>Telemetry Sent During Check</strong></td><td>Key hash + non-reversible hardware digest only</td><td>Key hash + organization ID only</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col">
+          <div style="display:flex; align-items:center; gap:10px; color:#fff; font-weight:700; margin-bottom:14px;">
+            <img src="pictures/quanalvlogo.png" alt="Quanalv Corp Logo" style="height:26px; width:auto;" />
+            <span>QUANALV CORPORATION</span>
+          </div>
+          <p>Enterprise operating systems, deterministic desktop productivity software, and perpetual local-first licensing built for workstations and organizations.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Productivity Suite</h4>
+          <ul class="footer-links">
+            <li><a href="quanalvoffice.html">Quanalv Office 1.0</a></li>
+            <li><a href="quanalvoffice.html#applications">Quanalv Write &amp; Grid</a></li>
+            <li><a href="quanalvoffice.html#applications">Quanalv Deck, Base &amp; Mail</a></li>
+            <li><a href="quanalvofficeactivation.html">Office Activation Portal</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Operating Systems</h4>
+          <ul class="footer-links">
+            <li><a href="molcoreindex.html">Molcore 1.0 Standard</a></li>
+            <li><a href="molcore-familypack.html">Molcore Family Pack 1.0.0</a></li>
+            <li><a href="molcore-business.html">Molcore Business Edition</a></li>
+            <li><a href="molcoreactivation.html">Molcore Activation</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Licensing &amp; Corporate</h4>
+          <ul class="footer-links">
+            <li><a href="quanalvofficeactivation.html">Office Activation Portal</a></li>
+            <li><a href="quanalvoffice.html#editions">Volume Site Licensing</a></li>
+            <li><a href="aboutquanalv.html">About Quanalv</a></li>
+            <li><a href="careers.html">Careers &amp; Contributors</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div>&copy; 2026 Quanalv Corporation. All rights reserved. Quanalv Office and Molcore are trademarks of Quanalv Corporation.</div>
+        <div>Native FreeBSD &amp; Molcore 1.0 Architecture</div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById('navToggle').addEventListener('click', function () {
+      document.getElementById('primaryNav').classList.toggle('mobile-open');
+    });
+    function switchTab(tabId, btn) {
+      document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      document.getElementById(tabId).classList.add('active');
+      btn.classList.add('active');
+    }
+    function formatKeyInput(input) {
+      let raw = input.value.toUpperCase().replace(/[^A-Z0-9]/g, '');
+      if (raw.length > 25) raw = raw.slice(0, 25);
+      let parts = [];
+      for (let i = 0; i < raw.length; i += 5) parts.push(raw.slice(i, i + 5));
+      input.value = parts.join('-');
+    }
+    function fillDemoKey(key) {
+      document.getElementById('productKeyInput').value = key;
+      verifyOfficeKey(new Event('submit'));
+    }
+    function verifyOfficeKey(e) {
+      e.preventDefault();
+      const key = document.getElementById('productKeyInput').value.trim().toUpperCase();
+      const editionSelect = document.getElementById('officeEdition').value;
+      const resultBox = document.getElementById('onlineResult');
+      const keyPattern = /^(QO10|QOBZ)-[A-Z0-9]{5}-[A-Z0-9]{5}-[A-Z0-9]{5}-[A-Z0-9]{5}$/;
+
+      if (key === 'QO10-00000-00000-00000-9999X') {
+        resultBox.className = 'status-banner error';
+        resultBox.innerHTML = `<div class="status-title">Validation Failed &mdash; Revoked or Blocked Product Key</div><div>The key <strong>${key}</strong> has been flagged by the Quanalv Licensing Clearinghouse as non-genuine or superseded.</div>`;
+        return;
+      }
+      if (!keyPattern.test(key)) {
+        resultBox.className = 'status-banner error';
+        resultBox.innerHTML = `<div class="status-title">Invalid Key Format</div><div>Please enter a complete 25-character Quanalv Office product key starting with <strong>QO10-</strong> or <strong>QOBZ-</strong>.</div>`;
+        return;
+      }
+      const isBusiness = key.startsWith('QOBZ-');
+      if ((editionSelect === 'standard' && isBusiness) || (editionSelect === 'business' && !isBusiness)) {
+        resultBox.className = 'status-banner error';
+        resultBox.innerHTML = `<div class="status-title">Edition Mismatch</div><div>The entered key prefix (<strong>${key.slice(0, 4)}</strong>) does not match the selected suite edition dropdown.</div>`;
+        return;
+      }
+      const editionName = isBusiness ? 'Quanalv Office 1.0 Business Volume Edition (Unlimited Organizational Seats)' : 'Quanalv Office 1.0 Standard Edition (Workstation Perpetual License)';
+      const authCode = 'QOAUTH-' + key.slice(5, 10) + '-' + Math.random().toString(36).substring(2, 8).toUpperCase();
+      resultBox.className = 'status-banner success';
+      resultBox.innerHTML = `<div class="status-title">Validation Complete &mdash; Genuine Quanalv Office Software</div><div><strong>Verified Edition:</strong> ${editionName}</div><div><strong>Entitlement Status:</strong> Active &bull; Perpetual License (No Expiration)</div><div><strong>Clearinghouse Confirmation ID:</strong> <code>${authCode}</code></div>`;
+    }
+    function generateOfflineCert(e) {
+      e.preventDefault();
+      const key = document.getElementById('offlineKeyInput').value.trim().toUpperCase();
+      const hwid = document.getElementById('hwFingerprint').value.trim().toUpperCase();
+      const resultBox = document.getElementById('offlineResult');
+      const keyPattern = /^(QO10|QOBZ)-[A-Z0-9]{5}-[A-Z0-9]{5}-[A-Z0-9]{5}-[A-Z0-9]{5}$/;
+
+      if (!keyPattern.test(key) || key === 'QO10-00000-00000-00000-9999X') {
+        resultBox.className = 'status-banner error';
+        resultBox.innerHTML = `<div class="status-title">Cannot Issue Offline Certificate</div><div>Please enter a valid, unrevoked 25-character <strong>QO10-</strong> or <strong>QOBZ-</strong> license key.</div>`;
+        return;
+      }
+      if (hwid.length < 8) {
+        resultBox.className = 'status-banner error';
+        resultBox.innerHTML = `<div class="status-title">Invalid Hardware Fingerprint</div><div>Run <code>qo-activate --hwid</code> on your target workstation and paste the full hardware digest string.</div>`;
+        return;
+      }
+      const cleanHwid = hwid.replace(/[^A-Z0-9]/g, '').slice(0, 12);
+      const token = `QOCERT-1.0-${key.slice(0, 4)}-${key.slice(5, 10)}-${cleanHwid}-PERPETUAL`;
+      resultBox.className = 'status-banner success';
+      resultBox.innerHTML = `<div class="status-title">Offline Activation Certificate Issued</div><div>Copy the signed token below and run <code>sudo qo-activate --apply-token &lt;TOKEN&gt;</code> on your air-gapped workstation:</div><div class="cert-output">${token}</div>`;
+    }
+  </script>
+</body>
+</html>

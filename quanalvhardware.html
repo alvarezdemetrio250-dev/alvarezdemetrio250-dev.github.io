@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Hardware Compatibility | Quanalv Corporation</title>
+<link rel="icon" type="image/png" href="pictures/browsericon.png" />
+<style>
+  :root {
+    --bg-primary: #ffffff;
+    --bg-secondary: #f8fafc;
+    --bg-dark: #101622;
+    --bg-hero: #202c39;
+    --text-main: #0f172a;
+    --text-muted: #475569;
+    --text-light: #f8fafc;
+    --accent-blue: #1d63b8;
+    --accent-blue-hover: #17529b;
+    --border-light: #e2e8f0;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    color: var(--text-main);
+    background-color: var(--bg-primary);
+    line-height: 1.6;
+  }
+  a { text-decoration: none; color: inherit; }
+  .container { max-width: 1160px; margin: 0 auto; padding: 0 24px; }
+  .top-strip { background: #0b101b; color: #94a3b8; font-size: 12px; border-bottom: 1px solid #1e293b; }
+  .top-strip-inner { display: flex; justify-content: space-between; align-items: center; height: 36px; }
+  .top-strip strong { color: #f8fafc; }
+  .top-strip a { color: #60a5fa; }
+  .main-header { background: var(--bg-dark); color: var(--text-light); position: sticky; top: 0; z-index: 1000; border-bottom: 1px solid #1e293b; }
+  .nav-inner { display: flex; align-items: center; justify-content: space-between; height: 64px; }
+  .brand { display: flex; align-items: center; gap: 10px; font-weight: 700; font-size: 14px; letter-spacing: 0.06em; color: #fff; text-transform: uppercase; }
+  .brand-logo { height: 30px; width: auto; display: block; object-fit: contain; }
+  .nav-toggle { display: none; background: #1e293b; border: 1px solid #475569; color: #fff; padding: 6px 12px; font-size: 13px; cursor: pointer; }
+  .nav-links { display: flex; align-items: center; gap: 26px; list-style: none; }
+  .nav-item { position: relative; }
+  .nav-link { font-size: 13.5px; font-weight: 500; color: #cbd5e1; padding: 20px 0; display: inline-flex; align-items: center; gap: 5px; }
+  .nav-link:hover, .nav-link.active { color: #fff; }
+  .dropdown-menu {
+    position: absolute; top: 100%; left: 0; min-width: 240px; background: #fff; color: var(--text-main);
+    border: 1px solid var(--border-light); box-shadow: 0 10px 25px rgba(15, 23, 42, 0.12);
+    padding: 8px 0; display: none; z-index: 200; list-style: none;
+  }
+  .nav-item:hover .dropdown-menu, .nav-item.open .dropdown-menu { display: block; }
+  .dropdown-item { display: block; padding: 8px 16px; font-size: 13px; color: #1e293b; }
+  .dropdown-item:hover { background: #f1f5f9; color: var(--accent-blue); }
+  .nav-cta { border: 1px solid #475569; background: #1e293b; color: #fff; font-size: 13px; font-weight: 600; padding: 8px 16px; }
+  .nav-cta:hover { background: #334155; }
+  .sub-nav { background: #fff; border-bottom: 1px solid var(--border-light); }
+  .sub-nav-inner { display: flex; align-items: center; justify-content: space-between; height: 46px; }
+  .sub-nav-label { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: #64748b; }
+  .sub-nav-links { display: flex; align-items: center; gap: 22px; height: 100%; list-style: none; }
+  .sub-nav-links li { height: 100%; }
+  .sub-nav-links a { font-size: 13px; font-weight: 500; color: #475569; height: 100%; display: inline-flex; align-items: center; border-bottom: 2px solid transparent; }
+  .sub-nav-links a:hover, .sub-nav-links a.active { color: var(--text-main); border-bottom-color: var(--accent-blue); }
+  .hero { background: var(--bg-hero); color: #fff; padding: 76px 0 84px; border-bottom: 1px solid #1e293b; }
+  .hero-eyebrow { font-size: 11.5px; font-weight: 700; letter-spacing: 0.09em; text-transform: uppercase; color: #60a5fa; margin-bottom: 14px; display: block; }
+  .hero h1 { font-size: 40px; font-weight: 700; line-height: 1.18; margin-bottom: 18px; max-width: 760px; }
+  .hero-desc { font-size: 17px; color: #cbd5e1; max-width: 700px; margin-bottom: 32px; }
+  .hero-actions { display: flex; flex-wrap: wrap; gap: 14px; }
+  .btn-primary { background: var(--accent-blue); color: #fff; font-size: 14px; font-weight: 600; padding: 12px 22px; border: 1px solid var(--accent-blue); cursor: pointer; display: inline-block; }
+  .btn-primary:hover { background: var(--accent-blue-hover); }
+  .btn-outline-light { background: rgba(255,255,255,0.04); color: #fff; font-size: 14px; font-weight: 600; padding: 12px 22px; border: 1px solid #475569; display: inline-block; }
+  .section { padding: 72px 0; border-bottom: 1px solid var(--border-light); scroll-margin-top: 64px; }
+  .section-subtle { background: var(--bg-secondary); }
+  .eyebrow-dark { font-size: 11.5px; font-weight: 700; letter-spacing: 0.09em; text-transform: uppercase; color: var(--accent-blue); margin-bottom: 10px; display: block; }
+  .section-title { font-size: 30px; font-weight: 700; color: var(--text-main); margin-bottom: 12px; }
+  .section-lead { font-size: 16px; color: var(--text-muted); max-width: 720px; margin-bottom: 36px; }
+  .three-col-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
+  .card { background: #fff; border: 1px solid var(--border-light); padding: 28px; }
+  .card-tag { font-size: 11px; font-weight: 700; text-transform: uppercase; color: var(--accent-blue); margin-bottom: 8px; display: block; }
+  .card h3 { font-size: 19px; margin-bottom: 10px; }
+  .card p { font-size: 14.5px; color: var(--text-muted); }
+  .filter-bar { display: flex; gap: 14px; margin-bottom: 24px; flex-wrap: wrap; }
+  .filter-input { flex: 1; min-width: 240px; padding: 11px 14px; font-size: 14px; border: 1px solid #cbd5e1; background: #fff; }
+  .filter-select { padding: 11px 14px; font-size: 14px; border: 1px solid #cbd5e1; background: #fff; }
+  .table-wrap { border: 1px solid var(--border-light); background: #fff; overflow-x: auto; }
+  table { width: 100%; border-collapse: collapse; text-align: left; }
+  th, td { font-size: 14px; padding: 15px 20px; border-bottom: 1px solid var(--border-light); }
+  th { background: #f8fafc; font-weight: 700; }
+  .badge-cert { display: inline-block; padding: 3px 8px; font-size: 11.5px; font-weight: 700; background: #f0fdf4; color: #15803d; border: 1px solid #bbf7d0; }
+  .badge-compat { display: inline-block; padding: 3px 8px; font-size: 11.5px; font-weight: 700; background: #eff6ff; color: #1d63b8; border: 1px solid #bfdbfe; }
+  .cli-block { background: #0f172a; color: #f8fafc; padding: 24px; font-family: monospace; font-size: 13.5px; overflow-x: auto; }
+  .cli-comment { color: #94a3b8; }
+  .site-footer { background: var(--bg-dark); color: #94a3b8; padding: 64px 0 36px; font-size: 13.5px; }
+  .footer-grid { display: grid; grid-template-columns: 1.4fr 1fr 1fr 1fr; gap: 40px; padding-bottom: 44px; border-bottom: 1px solid #1e293b; }
+  .footer-col h4 { color: #fff; font-size: 13px; text-transform: uppercase; margin-bottom: 16px; }
+  .footer-links { list-style: none; }
+  .footer-links li { margin-bottom: 10px; }
+  .footer-links a:hover { color: #fff; }
+  .footer-bottom { padding-top: 24px; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px; font-size: 12.5px; color: #64748b; }
+  @media (max-width: 920px) {
+    .three-col-grid, .footer-grid { grid-template-columns: 1fr; }
+    .nav-toggle { display: inline-block; }
+    .nav-links { display: none; position: absolute; top: 64px; left: 0; right: 0; background: var(--bg-dark); flex-direction: column; align-items: flex-start; padding: 16px 24px 24px; gap: 12px; }
+    .nav-links.mobile-open { display: flex; }
+  }
+</style>
+</head><body>
+  <div class="top-strip">
+    <div class="container top-strip-inner">
+      <div><strong>Quanalv Corporation</strong> &mdash; Certified OEM Hardware &amp; FreeBSD Kernel Compatibility</div>
+      <div><a href="index.html">&larr; Return to Quanalv Corporate Home</a></div>
+    </div>
+  </div>
+
+  <header class="main-header">
+    <div class="container nav-inner">
+      <a href="index.html" class="brand">
+        <img src="pictures/quanalvlogo.png" alt="Quanalv Corp Logo" class="brand-logo" />
+        <span>QUANALV HARDWARE</span>
+      </a>
+      <button class="nav-toggle" id="navToggle" type="button">Menu &#9776;</button>
+      <ul class="nav-links" id="primaryNav">
+        <li class="nav-item"><a href="index.html" class="nav-link">Home</a></li>
+        <li class="nav-item">
+          <a href="molcoreindex.html" class="nav-link">Molcore OS &#9662;</a>
+          <div class="dropdown-menu">
+            <a href="molcoreindex.html" class="dropdown-item">Molcore 1.0 Overview</a>
+            <a href="molcore-business.html" class="dropdown-item">Molcore Business Edition</a>
+            <a href="molcore-familypack.html" class="dropdown-item">Molcore Family Pack 1.0.0</a>
+            <a href="molcoreactivation.html" class="dropdown-item">Molcore OS Activation</a>
+          </div>
+        </li>
+        <li class="nav-item">
+          <a href="quanalvoffice.html" class="nav-link">Quanalv Office &#9662;</a>
+          <div class="dropdown-menu">
+            <a href="quanalvoffice.html" class="dropdown-item">Quanalv Office 1.0 Suite</a>
+            <a href="quanalvofficeactivation.html" class="dropdown-item">Office Product Activation</a>
+          </div>
+        </li>
+        <li class="nav-item"><a href="quanalvhardware.html" class="nav-link active">Hardware</a></li>
+        <li class="nav-item"><a href="quanalvallsoftware.html" class="nav-link">All Software</a></li>
+        <li class="nav-item"><a href="aboutquanalv.html" class="nav-link">About Quanalv</a></li>
+        <li class="nav-item"><a href="careers.html" class="nav-link">Careers</a></li>
+        <li><a href="quanalvsupport.html" class="nav-cta">Driver Support</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <nav class="sub-nav" aria-label="Hardware Sections">
+    <div class="container sub-nav-inner">
+      <div class="sub-nav-label">HARDWARE COMPATIBILITY</div>
+      <ul class="sub-nav-links">
+        <li><a href="#requirements" class="active">Minimum &amp; Recommended Specs</a></li>
+        <li><a href="#certified-matrix">Certified OEM Matrix</a></li>
+        <li><a href="#probe-utility">Hardware Probe CLI</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <section class="hero">
+    <div class="container">
+      <span class="hero-eyebrow">QUANALV MOLCORE OS 1.0 &bull; FREEBSD DRIVER BASE</span>
+      <h1>Hardware Compatibility &amp; Certified Systems</h1>
+      <p class="hero-desc">Verify processor architecture, NVMe storage controllers, Intel/AMD graphics support, and certified OEM workstation hardware for Quanalv Molcore 1.0.</p>
+      <div class="hero-actions">
+        <a href="#certified-matrix" class="btn-primary">Search Certified Hardware</a>
+        <a href="quanalvsupport.html" class="btn-outline-light">Request Driver Verification</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="requirements" class="section">
+    <div class="container">
+      <span class="eyebrow-dark">SYSTEM SPECIFICATIONS</span>
+      <h2 class="section-title">Baseline &amp; Workstation Requirements</h2>
+      <p class="section-lead">Quanalv Molcore 1.0 is engineered with a zero-bloat footprint to run smoothly on both modern enterprise workstations and older x86_64 desktops.</p>
+      <div class="three-col-grid">
+        <div class="card">
+          <span class="card-tag">PROCESSOR &amp; FIRMWARE</span>
+          <h3>64-Bit x86_64 Architecture</h3>
+          <p><strong>Minimum:</strong> Dual-core 1.6 GHz x86_64 (Intel Core 4th Gen+ or AMD Ryzen/FX).<br /><strong>Firmware:</strong> UEFI 2.3+ (Secure Boot optional) or Legacy BIOS.</p>
+        </div>
+        <div class="card">
+          <span class="card-tag">MEMORY &amp; STORAGE</span>
+          <h3>Low-Overhead Footprint</h3>
+          <p><strong>Memory:</strong> 4 GB RAM minimum (8 GB+ recommended for Quanalv Grid &amp; Office).<br /><strong>Storage:</strong> 24 GB free space on NVMe, SATA SSD, or SAS drive.</p>
+        </div>
+        <div class="card">
+          <span class="card-tag">GRAPHICS &amp; NETWORKING</span>
+          <h3>Native Kernel Drivers</h3>
+          <p><strong>Graphics:</strong> Intel UHD/Iris Xe, AMD Radeon GCN+, or UEFI GOP framebuffer.<br /><strong>Network:</strong> Intel Gigabit/2.5GbE, Realtek RTL8111/8125, Intel Wi-Fi 6.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section id="certified-matrix" class="section section-subtle">
+    <div class="container">
+      <span class="eyebrow-dark">VERIFIED HARDWARE DIRECTORY</span>
+      <h2 class="section-title">Certified OEM Devices &amp; Controllers</h2>
+      <p class="section-lead">Filter verified workstations, laptops, storage controllers, and network adapters tested against Quanalv Molcore 1.0.</p>
+
+      <div class="filter-bar">
+        <input type="text" id="hwSearch" class="filter-input" placeholder="Search by vendor, model, chipset, or driver (e.g. ThinkPad, NVMe, Intel, Ryzen)..." />
+        <select id="hwCategory" class="filter-select">
+          <option value="all">All Hardware Categories</option>
+          <option value="Workstation">Workstations &amp; Desktops</option>
+          <option value="Laptop">Business Laptops</option>
+          <option value="Storage">Storage &amp; NVMe Controllers</option>
+          <option value="Network">Ethernet &amp; Wi-Fi Adapters</option>
+        </select>
+      </div>
+
+      <div class="table-wrap">
+        <table id="hwTable">
+          <thead>
+            <tr>
+              <th>Category</th>
+              <th>Vendor &amp; Model / Chipset</th>
+              <th>Kernel Driver / Subsystem</th>
+              <th>Certification Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr data-cat="Laptop"><td>Laptop</td><td>Lenovo ThinkPad T14 / T480 / X1 Carbon</td><td><code>drm-kmod / iwlwifi / em</code></td><td><span class="badge-cert">Certified Tier 1</span></td></tr>
+            <tr data-cat="Workstation"><td>Workstation</td><td>Dell OptiPlex 7000 &amp; Precision 3000 Series</td><td><code>ahci / nvme / igb</code></td><td><span class="badge-cert">Certified Tier 1</span></td></tr>
+            <tr data-cat="Workstation"><td>Workstation</td><td>HP EliteDesk 800 &amp; Z2 Mini Workstations</td><td><code>nvme / amdgpu / em</code></td><td><span class="badge-cert">Certified Tier 1</span></td></tr>
+            <tr data-cat="Storage"><td>Storage</td><td>Standard PCIe 3.0 / 4.0 NVMe SSDs</td><td><code>nvme(4) / nda(4)</code></td><td><span class="badge-cert">Certified Tier 1</span></td></tr>
+            <tr data-cat="Network"><td>Network</td><td>Intel I219-LM / I225-V / I226-V Ethernet</td><td><code>em(4) / igc(4)</code></td><td><span class="badge-cert">Certified Tier 1</span></td></tr>
+            <tr data-cat="Network"><td>Network</td><td>Intel AX200 / AX210 Wi-Fi 6 &amp; 6E</td><td><code>iwlwifi(4)</code></td><td><span class="badge-compat">Compatible</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section id="probe-utility" class="section">
+    <div class="container">
+      <span class="eyebrow-dark">LIVE ISO DIAGNOSTICS</span>
+      <h2 class="section-title">Pre-Install Hardware Probe Utility</h2>
+      <p class="section-lead">Boot the Quanalv Molcore 1.0 Live ISO on any target machine and run the built-in hardware audit utility before writing to disk.</p>
+      <div class="cli-block">
+        <div class="cli-comment"># 1. Scan PCIe storage, graphics, and network controllers against the Molcore driver base</div>
+        <div>qm-hwprobe --scan</div><br />
+        <div class="cli-comment"># 2. Export a signed hardware compatibility report for Business SLA verification</div>
+        <div>qm-hwprobe --export /tmp/quanalv-hw-report.txt</div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col">
+          <div style="display:flex; align-items:center; gap:10px; color:#fff; font-weight:700; margin-bottom:14px;">
+            <img src="pictures/quanalvlogo.png" alt="Quanalv Corp Logo" style="height:26px; width:auto;" />
+            <span>QUANALV CORPORATION</span>
+          </div>
+          <p>Engineering deterministic operating systems and local-first productivity software built on our proprietary FreeBSD foundation.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Hardware &amp; Architecture</h4>
+          <ul class="footer-links">
+            <li><a href="quanalvhardware.html">Certified OEM Devices</a></li>
+            <li><a href="quanalvhardware.html#requirements">Processor Architecture</a></li>
+            <li><a href="quanalvhardware.html#certified-matrix">Storage &amp; Network Drivers</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Operating Systems</h4>
+          <ul class="footer-links">
+            <li><a href="molcoreindex.html">Molcore 1.0 Standard</a></li>
+            <li><a href="molcore-familypack.html">Molcore Family Pack 1.0.0</a></li>
+            <li><a href="molcore-business.html">Molcore Business Edition</a></li>
+            <li><a href="molcoreactivation.html">OS Activation Portal</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Corporate</h4>
+          <ul class="footer-links">
+            <li><a href="index.html">Quanalv Home</a></li>
+            <li><a href="aboutquanalv.html">About Quanalv</a></li>
+            <li><a href="careers.html">Careers &amp; Contributors</a></li>
+            <li><a href="quanalvsupport.html">Technical Support</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div>&copy; 2026 Quanalv Corporation. All Rights Reserved.</div>
+        <div>Quanalv Hardware Compatibility &amp; Driver Matrix</div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById('navToggle').addEventListener('click', function () {
+      document.getElementById('primaryNav').classList.toggle('mobile-open');
+    });
+    const hwSearch = document.getElementById('hwSearch');
+    const hwCategory = document.getElementById('hwCategory');
+    const rows = document.querySelectorAll('#hwTable tbody tr');
+    function filterHardware() {
+      const q = hwSearch.value.toLowerCase();
+      const cat = hwCategory.value;
+      rows.forEach(row => {
+        const matchesText = row.textContent.toLowerCase().includes(q);
+        const matchesCat = cat === 'all' || row.getAttribute('data-cat') === cat;
+        row.style.display = (matchesText && matchesCat) ? '' : 'none';
+      });
+    }
+    hwSearch.addEventListener('input', filterHardware);
+    hwCategory.addEventListener('change', filterHardware);
+  </script>
+</body>
+</html>

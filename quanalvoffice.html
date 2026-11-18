@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Quanalv Office 1.0 | Perpetual Desktop Productivity Suite — Quanalv Corporation</title>
+<link rel="icon" type="image/png" href="pictures/browsericon.png" />
+<style>
+  :root {
+    --bg-primary: #ffffff;
+    --bg-secondary: #f8fafc;
+    --bg-dark: #101622;
+    --bg-hero: #202c39;
+    --text-main: #0f172a;
+    --text-muted: #475569;
+    --text-light: #f8fafc;
+    --accent-blue: #1d63b8;
+    --accent-blue-hover: #17529b;
+    --border-light: #e2e8f0;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    color: var(--text-main);
+    background-color: var(--bg-primary);
+    line-height: 1.6;
+  }
+  a { text-decoration: none; color: inherit; }
+  .container { max-width: 1160px; margin: 0 auto; padding: 0 24px; }
+  .top-strip { background: #0b101b; color: #94a3b8; font-size: 12px; border-bottom: 1px solid #1e293b; }
+  .top-strip-inner { display: flex; justify-content: space-between; align-items: center; height: 36px; }
+  .top-strip strong { color: #f8fafc; }
+  .top-strip a { color: #60a5fa; }
+  .main-header { background: var(--bg-dark); color: var(--text-light); position: sticky; top: 0; z-index: 1000; border-bottom: 1px solid #1e293b; }
+  .nav-inner { display: flex; align-items: center; justify-content: space-between; height: 64px; }
+  .brand { display: flex; align-items: center; gap: 10px; font-weight: 700; font-size: 14px; letter-spacing: 0.06em; color: #fff; text-transform: uppercase; }
+  .brand-logo { height: 30px; width: auto; display: block; object-fit: contain; }
+  .nav-toggle { display: none; background: #1e293b; border: 1px solid #475569; color: #fff; padding: 6px 12px; font-size: 13px; cursor: pointer; }
+  .nav-links { display: flex; align-items: center; gap: 26px; list-style: none; }
+  .nav-item { position: relative; }
+  .nav-link { font-size: 13.5px; font-weight: 500; color: #cbd5e1; padding: 20px 0; display: inline-flex; align-items: center; gap: 5px; }
+  .nav-link:hover, .nav-link.active { color: #fff; }
+  .dropdown-menu {
+    position: absolute; top: 100%; left: 0; min-width: 240px; background: #fff; color: var(--text-main);
+    border: 1px solid var(--border-light); box-shadow: 0 10px 25px rgba(15, 23, 42, 0.12);
+    padding: 8px 0; display: none; z-index: 200; list-style: none;
+  }
+  .nav-item:hover .dropdown-menu, .nav-item.open .dropdown-menu { display: block; }
+  .dropdown-item { display: block; padding: 8px 16px; font-size: 13px; color: #1e293b; }
+  .dropdown-item:hover { background: #f1f5f9; color: var(--accent-blue); }
+  .nav-cta { border: 1px solid #475569; background: #1e293b; color: #fff; font-size: 13px; font-weight: 600; padding: 8px 16px; }
+  .nav-cta:hover { background: #334155; }
+  .sub-nav { background: #fff; border-bottom: 1px solid var(--border-light); }
+  .sub-nav-inner { display: flex; align-items: center; justify-content: space-between; height: 46px; }
+  .sub-nav-label { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: #64748b; }
+  .sub-nav-links { display: flex; align-items: center; gap: 22px; height: 100%; list-style: none; }
+  .sub-nav-links li { height: 100%; }
+  .sub-nav-links a { font-size: 13px; font-weight: 500; color: #475569; height: 100%; display: inline-flex; align-items: center; border-bottom: 2px solid transparent; }
+  .sub-nav-links a:hover, .sub-nav-links a.active { color: var(--text-main); border-bottom-color: var(--accent-blue); }
+  .hero { background: var(--bg-hero); color: #fff; padding: 76px 0 84px; border-bottom: 1px solid #1e293b; }
+  .hero-eyebrow { font-size: 11.5px; font-weight: 700; letter-spacing: 0.09em; text-transform: uppercase; color: #60a5fa; margin-bottom: 14px; display: block; }
+  .hero h1 { font-size: 40px; font-weight: 700; line-height: 1.18; margin-bottom: 18px; max-width: 760px; }
+  .hero-desc { font-size: 17px; color: #cbd5e1; max-width: 700px; margin-bottom: 32px; }
+  .hero-actions { display: flex; flex-wrap: wrap; gap: 14px; }
+  .btn-primary { background: var(--accent-blue); color: #fff; font-size: 14px; font-weight: 600; padding: 12px 22px; border: 1px solid var(--accent-blue); cursor: pointer; display: inline-block; text-align: center; }
+  .btn-primary:hover { background: var(--accent-blue-hover); }
+  .btn-outline-light { background: rgba(255,255,255,0.04); color: #fff; font-size: 14px; font-weight: 600; padding: 12px 22px; border: 1px solid #475569; display: inline-block; }
+  .btn-outline-dark { background: #fff; color: var(--text-main); font-size: 14px; font-weight: 600; padding: 12px 22px; border: 1px solid #cbd5e1; cursor: pointer; display: inline-block; text-align: center; width: 100%; }
+  .section { padding: 72px 0; border-bottom: 1px solid var(--border-light); scroll-margin-top: 64px; }
+  .section-subtle { background: var(--bg-secondary); }
+  .eyebrow-dark { font-size: 11.5px; font-weight: 700; letter-spacing: 0.09em; text-transform: uppercase; color: var(--accent-blue); margin-bottom: 10px; display: block; }
+  .section-title { font-size: 30px; font-weight: 700; color: var(--text-main); margin-bottom: 12px; }
+  .section-lead { font-size: 16px; color: var(--text-muted); max-width: 720px; margin-bottom: 36px; }
+  .two-col-grid { display: grid; grid-template-columns: 1.45fr 1fr; gap: 56px; align-items: start; }
+  .spec-sidebar { border-left: 2px solid #cbd5e1; padding-left: 28px; }
+  .spec-item { padding: 13px 0; border-bottom: 1px solid var(--border-light); }
+  .spec-label { font-size: 11px; font-weight: 700; text-transform: uppercase; color: #64748b; display: block; }
+  .spec-value { font-size: 14.5px; font-weight: 500; }
+  .three-col-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
+  .two-card-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; }
+  .card { background: #fff; border: 1px solid var(--border-light); padding: 28px; }
+  .table-wrap { border: 1px solid var(--border-light); background: #fff; overflow-x: auto; }
+  table { width: 100%; border-collapse: collapse; text-align: left; }
+  th, td { font-size: 14px; padding: 15px 20px; border-bottom: 1px solid var(--border-light); }
+  th { background: #f8fafc; font-weight: 700; }
+  .site-footer { background: var(--bg-dark); color: #94a3b8; padding: 64px 0 36px; font-size: 13.5px; }
+  .footer-grid { display: grid; grid-template-columns: 1.4fr 1fr 1fr 1fr; gap: 40px; padding-bottom: 44px; border-bottom: 1px solid #1e293b; }
+  .footer-col h4 { color: #fff; font-size: 13px; text-transform: uppercase; margin-bottom: 16px; }
+  .footer-links { list-style: none; }
+  .footer-links li { margin-bottom: 10px; }
+  .footer-links a:hover { color: #fff; }
+  .footer-bottom { padding-top: 24px; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px; font-size: 12.5px; color: #64748b; }
+  @media (max-width: 920px) {
+    .two-col-grid, .three-col-grid, .two-card-grid, .footer-grid { grid-template-columns: 1fr; }
+    .nav-toggle { display: inline-block; }
+    .nav-links { display: none; position: absolute; top: 64px; left: 0; right: 0; background: var(--bg-dark); flex-direction: column; align-items: flex-start; padding: 16px 24px 24px; gap: 12px; }
+    .nav-links.mobile-open { display: flex; }
+  }
+</style>
+</head>
+<body>
+  <div class="top-strip">
+    <div class="container top-strip-inner">
+      <div>A Proprietary Productivity Suite by <strong>Quanalv Corporation</strong></div>
+      <div><a href="index.html">&larr; Return to Quanalv Corporate Home</a></div>
+    </div>
+  </div>
+
+  <header class="main-header">
+    <div class="container nav-inner">
+      <a href="quanalvoffice.html" class="brand">
+        <img src="pictures/quanalvlogo.png" alt="Quanalv Corp Logo" class="brand-logo" />
+        <span>QUANALV OFFICE SUITE</span>
+      </a>
+      <button class="nav-toggle" id="navToggle" type="button">Menu &#9776;</button>
+      <ul class="nav-links" id="primaryNav">
+        <li class="nav-item"><a href="index.html" class="nav-link">Home</a></li>
+        <li class="nav-item">
+          <a href="molcoreindex.html" class="nav-link">Molcore OS &#9662;</a>
+          <div class="dropdown-menu">
+            <a href="molcoreindex.html" class="dropdown-item">Molcore 1.0 Overview</a>
+            <a href="molcore-business.html" class="dropdown-item">Molcore Business Edition</a>
+            <a href="molcore-familypack.html" class="dropdown-item">Molcore Family Pack 1.0.0</a>
+            <a href="molcoreactivation.html" class="dropdown-item">Molcore OS Activation</a>
+          </div>
+        </li>
+        <li class="nav-item">
+          <a href="quanalvoffice.html" class="nav-link active">Quanalv Office &#9662;</a>
+          <div class="dropdown-menu">
+            <a href="quanalvoffice.html" class="dropdown-item">Quanalv Office 1.0 Suite</a>
+            <a href="#applications" class="dropdown-item">Core Applications</a>
+            <a href="#editions" class="dropdown-item">Editions &amp; Licensing</a>
+            <a href="quanalvofficeactivation.html" class="dropdown-item">Office Product Activation</a>
+          </div>
+        </li>
+        <li class="nav-item">
+          <a href="aboutquanalv.html" class="nav-link">About Quanalv &#9662;</a>
+          <div class="dropdown-menu">
+            <a href="aboutquanalv.html" class="dropdown-item">Corporate Overview</a>
+            <a href="aboutquanalv.html#architecture" class="dropdown-item">Engineering Philosophy</a>
+          </div>
+        </li>
+        <li class="nav-item"><a href="careers.html" class="nav-link">Careers</a></li>
+        <li><a href="quanalvofficeactivation.html" class="nav-cta">Activate Office</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <nav class="sub-nav" aria-label="Section Navigation">
+    <div class="container sub-nav-inner">
+      <div class="sub-nav-label">QUANALV OFFICE 1.0</div>
+      <ul class="sub-nav-links">
+        <li><a href="#overview" class="active">Suite Overview</a></li>
+        <li><a href="#applications">Applications</a></li>
+        <li><a href="#compatibility">Format Compatibility</a></li>
+        <li><a href="#editions">Editions &amp; Licensing</a></li>
+        <li><a href="quanalvofficeactivation.html">Product Activation</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <section class="hero">
+    <div class="container">
+      <span class="hero-eyebrow">PERPETUAL DESKTOP PRODUCTIVITY SUITE</span>
+      <h1>Quanalv Office 1.0</h1>
+      <p class="hero-desc">A high-speed, native productivity suite engineered for Quanalv Molcore OS and FreeBSD workstations. Draft documents, build financial models, and deliver presentations with zero cloud subscriptions, zero telemetry, and full Microsoft Office file compatibility.</p>
+      <div class="hero-actions">
+        <a href="#editions" class="btn-primary">Acquire Office License</a>
+        <a href="quanalvofficeactivation.html" class="btn-outline-light">Activate Existing Product Key</a>
+      </div>
+    </div>
+  </section>
+  <section id="overview" class="section">
+    <div class="container two-col-grid">
+      <div>
+        <span class="eyebrow-dark">LOCAL-FIRST ARCHITECTURE</span>
+        <h2 class="section-title">Full Desktop Ownership Without Recurring Subscriptions</h2>
+        <p class="section-lead">Eliminate annual per-user seat subscriptions, forced cloud storage sync, and background AI data harvesting across your organization.</p>
+        <p style="margin-bottom:16px; color:#334155;"><strong>Quanalv Office 1.0</strong> is compiled natively in C++ for deterministic speed on <strong>Quanalv Molcore 1.0</strong>. Cold startup takes under 350 milliseconds, and multi-hundred-megabyte spreadsheets calculate locally without browser rendering overhead or network latency.</p>
+        <p style="margin-bottom:16px; color:#334155;">Every license is perpetual. Once activated online or via offline hardware certificate on <a href="quanalvofficeactivation.html" style="color:var(--accent-blue); text-decoration:underline;">quanalvofficeactivation.html</a>, your installation remains permanently unlocked on your workstation or across your entire organization under a Business Volume Key.</p>
+        <p style="color:#334155;">Full read, write, and macro-safe translation for <strong>.DOCX, .XLSX, .PPTX, .ODF, and PDF/A</strong> ensures seamless document exchange with external partners using Microsoft Office or LibreOffice.</p>
+      </div>
+      <aside class="spec-sidebar">
+        <h3 style="font-size:18px; margin-bottom:18px;">Suite Specifications</h3>
+        <div class="spec-item"><span class="spec-label">PRODUCT RELEASE</span><span class="spec-value">Quanalv Office 1.0 (Build 1040)</span></div>
+        <div class="spec-item"><span class="spec-label">SUPPORTED PLATFORMS</span><span class="spec-value">Quanalv Molcore 1.0 &amp; FreeBSD 14+ (x86_64)</span></div>
+        <div class="spec-item"><span class="spec-label">LICENSING MODEL</span><span class="spec-value">One-Time Perpetual Key (No Subscription)</span></div>
+        <div class="spec-item"><span class="spec-label">TELEMETRY &amp; CLOUD</span><span class="spec-value">100% Air-Gap Capable &bull; Zero Telemetry</span></div>
+        <div class="spec-item"><span class="spec-label">INTEROPERABILITY</span><span class="spec-value">Native .QDOC/.QGRD/.QDCK + .DOCX/.XLSX/.PPTX</span></div>
+      </aside>
+    </div>
+  </section>
+
+  <section id="applications" class="section section-subtle">
+    <div class="container">
+      <span class="eyebrow-dark">INCLUDED APPLICATIONS</span>
+      <h2 class="section-title">Six Integrated Workstation Applications</h2>
+      <p class="section-lead">Every edition of Quanalv Office 1.0 installs a unified, keyboard-driven application suite sharing a common ribbon or classic menu interface.</p>
+      <div class="three-col-grid">
+        <div class="card">
+          <div style="font-size:11px; font-weight:700; color:var(--accent-blue); margin-bottom:8px;">WORD PROCESSING</div>
+          <h3 style="font-size:19px; margin-bottom:8px;">Quanalv Write</h3>
+          <p style="font-size:14px; color:var(--text-muted); margin-bottom:14px;">Precision typography, legal redlining, master document indexing, and deterministic pagination for technical manuals, contracts, and long-form reports.</p>
+          <div style="font-size:12.5px; color:#64748b; border-top:1px solid var(--border-light); padding-top:10px;">Formats: .QDOC, .DOCX, .DOC, .RTF, .ODT, PDF/A</div>
+        </div>
+        <div class="card">
+          <div style="font-size:11px; font-weight:700; color:var(--accent-blue); margin-bottom:8px;">SPREADSHEETS &amp; MODELING</div>
+          <h3 style="font-size:19px; margin-bottom:8px;">Quanalv Grid</h3>
+          <p style="font-size:14px; color:var(--text-muted); margin-bottom:14px;">Multi-threaded calculation engine supporting 16 million rows, 480+ financial and statistical functions, pivot tables, and deterministic formula auditing.</p>
+          <div style="font-size:12.5px; color:#64748b; border-top:1px solid var(--border-light); padding-top:10px;">Formats: .QGRD, .XLSX, .XLS, .CSV, .ODS</div>
+        </div>
+        <div class="card">
+          <div style="font-size:11px; font-weight:700; color:var(--accent-blue); margin-bottom:8px;">PRESENTATIONS</div>
+          <h3 style="font-size:19px; margin-bottom:8px;">Quanalv Deck</h3>
+          <p style="font-size:14px; color:var(--text-muted); margin-bottom:14px;">Hardware-accelerated slide composition, vector diagramming, dual-monitor presenter console, and zero-dependency self-contained slide playback.</p>
+          <div style="font-size:12.5px; color:#64748b; border-top:1px solid var(--border-light); padding-top:10px;">Formats: .QDCK, .PPTX, .PPT, .ODP, PDF</div>
+        </div>
+        <div class="card">
+          <div style="font-size:11px; font-weight:700; color:var(--accent-blue); margin-bottom:8px;">RELATIONAL DESKTOP DATABASE</div>
+          <h3 style="font-size:19px; margin-bottom:8px;">Quanalv Base</h3>
+          <p style="font-size:14px; color:var(--text-muted); margin-bottom:14px;">Embedded SQLite and PostgreSQL client front-end for building internal inventory forms, query designers, and automated printable operational reports.</p>
+          <div style="font-size:12.5px; color:#64748b; border-top:1px solid var(--border-light); padding-top:10px;">Formats: .QDB, SQLite, PostgreSQL, ODBC</div>
+        </div>
+        <div class="card">
+          <div style="font-size:11px; font-weight:700; color:var(--accent-blue); margin-bottom:8px;">EMAIL &amp; SCHEDULING</div>
+          <h3 style="font-size:19px; margin-bottom:8px;">Quanalv Mail</h3>
+          <p style="font-size:14px; color:var(--text-muted); margin-bottom:14px;">Local IMAP, POP3, CalDAV, and CardDAV desktop client with built-in PGP/S-MIME encryption, offline mail indexing, and zero third-party cloud relays.</p>
+          <div style="font-size:12.5px; color:#64748b; border-top:1px solid var(--border-light); padding-top:10px;">Protocols: IMAP4, SMTP, CalDAV, S/MIME</div>
+        </div>
+        <div class="card">
+          <div style="font-size:11px; font-weight:700; color:var(--accent-blue); margin-bottom:8px;">TECHNICAL DIAGRAMMING</div>
+          <h3 style="font-size:19px; margin-bottom:8px;">Quanalv Schema</h3>
+          <p style="font-size:14px; color:var(--text-muted); margin-bottom:14px;">Structured vector flowcharts, network topology blueprints, floor plans, and engineering schematics with CAD-grade snap alignment.</p>
+          <div style="font-size:12.5px; color:#64748b; border-top:1px solid var(--border-light); padding-top:10px;">Formats: .QSCH, .VSDX, .SVG, .DXF, PDF</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="compatibility" class="section">
+    <div class="container">
+      <span class="eyebrow-dark">ARCHITECTURE COMPARISON</span>
+      <h2 class="section-title">Quanalv Office 1.0 vs. Subscription Cloud Suites</h2>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Capability</th><th>Quanalv Office 1.0</th><th>Microsoft 365 / Office</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Licensing &amp; Billing</strong></td><td>One-time perpetual license key</td><td>Recurring annual/monthly per-seat fees</td></tr>
+            <tr><td><strong>Account Requirement</strong></td><td>No online account or sign-in required</td><td>Mandatory Microsoft account &amp; periodic check-in</td></tr>
+            <tr><td><strong>Air-Gapped Deployment</strong></td><td>Full offline activation via certificate exchange</td><td>Limited; requires KMS/MAK enterprise infrastructure</td></tr>
+            <tr><td><strong>Telemetry &amp; AI Scraping</strong></td><td>Zero telemetry; documents never leave local disk</td><td>Connected experiences &amp; diagnostic telemetry enabled</td></tr>
+            <tr><td><strong>File Format Support</strong></td><td>Native open-spec formats + full .DOCX/.XLSX/.PPTX</td><td>Proprietary OOXML (.DOCX/.XLSX/.PPTX)</td></tr>
+            <tr><td><strong>Native OS Integration</strong></td><td>Compiled natively for Quanalv Molcore &amp; FreeBSD</td><td>Windows &amp; macOS only (no native BSD support)</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+  <section id="editions" class="section section-subtle">
+    <div class="container">
+      <span class="eyebrow-dark">LICENSING OPTIONS</span>
+      <h2 class="section-title">Choose Your Quanalv Office Edition</h2>
+      <p class="section-lead">Both editions include all six desktop applications with perpetual rights and free minor security updates for the 1.x lifecycle.</p>
+      <div class="two-card-grid">
+        <div class="card" style="display:flex; flex-direction:column; justify-content:space-between; border-top:3px solid var(--accent-blue);">
+          <div>
+            <div style="font-size:11px; font-weight:700; color:var(--accent-blue); margin-bottom:8px;">INDIVIDUAL &amp; WORKSTATION</div>
+            <h3 style="font-size:21px; margin-bottom:10px;">Quanalv Office 1.0 Standard</h3>
+            <div style="font-size:32px; font-weight:700; margin-bottom:8px;">$119 <span style="font-size:14px; font-weight:400; color:var(--text-muted);">one-time perpetual license</span></div>
+            <div style="font-family:monospace; font-size:12.5px; color:#475569; background:#f8fafc; padding:8px 12px; border:1px solid var(--border-light); margin-bottom:18px;">Key Prefix: QO10-XXXXX-XXXXX-XXXXX-XXXXX</div>
+            <ul style="list-style:none; margin-bottom:26px;">
+              <li style="padding:5px 0; font-size:14px;">&#9642; Includes Write, Grid, Deck, Base, Mail, and Schema</li>
+              <li style="padding:5px 0; font-size:14px;">&#9642; Licensed for 1 primary workstation + 1 portable laptop</li>
+              <li style="padding:5px 0; font-size:14px;">&#9642; Online or offline hardware certificate activation</li>
+              <li style="padding:5px 0; font-size:14px;">&#9642; No recurring fees or expiration date</li>
+            </ul>
+          </div>
+          <a href="quanalvofficeactivation.html" class="btn-primary">Activate Standard Key</a>
+        </div>
+
+        <div class="card" style="display:flex; flex-direction:column; justify-content:space-between;">
+          <div>
+            <div style="font-size:11px; font-weight:700; color:var(--accent-blue); margin-bottom:8px;">COMMERCIAL &amp; INSTITUTIONAL</div>
+            <h3 style="font-size:21px; margin-bottom:10px;">Quanalv Office 1.0 Business Volume</h3>
+            <div style="font-size:32px; font-weight:700; margin-bottom:8px;">$890 <span style="font-size:14px; font-weight:400; color:var(--text-muted);">per organizational master key</span></div>
+            <div style="font-family:monospace; font-size:12.5px; color:#475569; background:#f8fafc; padding:8px 12px; border:1px solid var(--border-light); margin-bottom:18px;">Key Prefix: QOBZ-XXXXX-XXXXX-XXXXX-XXXXX</div>
+            <ul style="list-style:none; margin-bottom:26px;">
+              <li style="padding:5px 0; font-size:14px;">&#9642; Single master key deploys across unlimited internal workstations</li>
+              <li style="padding:5px 0; font-size:14px;">&#9642; Silent CLI provisioning via <code>qo-activate --key</code></li>
+              <li style="padding:5px 0; font-size:14px;">&#9642; Air-gapped intranet activation certificate generator</li>
+              <li style="padding:5px 0; font-size:14px;">&#9642; Centralized policy lock for macros and external links</li>
+            </ul>
+          </div>
+          <a href="quanalvofficeactivation.html" class="btn-outline-dark">Activate Business Key</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col">
+          <div style="display:flex; align-items:center; gap:10px; color:#fff; font-weight:700; margin-bottom:14px;">
+            <img src="pictures/quanalvlogo.png" alt="Quanalv Corp Logo" style="height:26px; width:auto;" />
+            <span>QUANALV CORPORATION</span>
+          </div>
+          <p>Enterprise operating systems, deterministic desktop productivity software, and perpetual local-first licensing built for workstations and organizations.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Productivity Suite</h4>
+          <ul class="footer-links">
+            <li><a href="quanalvoffice.html">Quanalv Office 1.0</a></li>
+            <li><a href="quanalvoffice.html#applications">Quanalv Write &amp; Grid</a></li>
+            <li><a href="quanalvoffice.html#applications">Quanalv Deck, Base &amp; Mail</a></li>
+            <li><a href="quanalvofficeactivation.html">Office Activation Portal</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Operating Systems</h4>
+          <ul class="footer-links">
+            <li><a href="molcoreindex.html">Molcore 1.0 Standard</a></li>
+            <li><a href="molcore-familypack.html">Molcore Family Pack 1.0.0</a></li>
+            <li><a href="molcore-business.html">Molcore Business Edition</a></li>
+            <li><a href="molcoreactivation.html">Molcore Activation</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Corporate</h4>
+          <ul class="footer-links">
+            <li><a href="index.html">Quanalv Home</a></li>
+            <li><a href="aboutquanalv.html">About Quanalv</a></li>
+            <li><a href="careers.html">Careers &amp; Contributors</a></li>
+            <li><a href="quanalvallsoftware.html">All Software</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div>&copy; 2026 Quanalv Corporation. All rights reserved. Quanalv Office and Molcore are trademarks of Quanalv Corporation.</div>
+        <div>Native FreeBSD &amp; Molcore 1.0 Architecture</div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById('navToggle').addEventListener('click', function () {
+      document.getElementById('primaryNav').classList.toggle('mobile-open');
+    });
+  </script>
+</body>
+</html>

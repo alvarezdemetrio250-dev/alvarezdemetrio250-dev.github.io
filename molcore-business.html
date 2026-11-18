@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Molcore Business Edition | Unlimited Organizational Licensing — Quanalv Corporation</title>
+<link rel="icon" type="image/png" href="pictures/browsericon.png" />
+<style>
+  :root {
+    --bg-primary: #ffffff;
+    --bg-secondary: #f8fafc;
+    --bg-dark: #101622;
+    --bg-hero: #202c39;
+    --text-main: #0f172a;
+    --text-muted: #475569;
+    --text-light: #f8fafc;
+    --accent-blue: #1d63b8;
+    --accent-blue-hover: #17529b;
+    --border-light: #e2e8f0;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    color: var(--text-main);
+    background-color: var(--bg-primary);
+    line-height: 1.6;
+  }
+  a { text-decoration: none; color: inherit; }
+  .container { max-width: 1160px; margin: 0 auto; padding: 0 24px; }
+  .top-strip { background: #0b101b; color: #94a3b8; font-size: 12px; border-bottom: 1px solid #1e293b; }
+  .top-strip-inner { display: flex; justify-content: space-between; align-items: center; height: 36px; }
+  .top-strip strong { color: #f8fafc; }
+  .top-strip a { color: #60a5fa; }
+  .main-header { background: var(--bg-dark); color: var(--text-light); position: sticky; top: 0; z-index: 1000; border-bottom: 1px solid #1e293b; }
+  .nav-inner { display: flex; align-items: center; justify-content: space-between; height: 64px; }
+  .brand { display: flex; align-items: center; gap: 10px; font-weight: 700; font-size: 14px; letter-spacing: 0.06em; color: #fff; text-transform: uppercase; }
+  .brand-logo { height: 30px; width: auto; display: block; object-fit: contain; }
+  .nav-toggle { display: none; background: #1e293b; border: 1px solid #475569; color: #fff; padding: 6px 12px; font-size: 13px; cursor: pointer; }
+  .nav-links { display: flex; align-items: center; gap: 26px; list-style: none; }
+  .nav-item { position: relative; }
+  .nav-link { font-size: 13.5px; font-weight: 500; color: #cbd5e1; padding: 20px 0; display: inline-flex; align-items: center; gap: 5px; }
+  .nav-link:hover, .nav-link.active { color: #fff; }
+  .dropdown-menu {
+    position: absolute; top: 100%; left: 0; min-width: 240px; background: #fff; color: var(--text-main);
+    border: 1px solid var(--border-light); box-shadow: 0 10px 25px rgba(15, 23, 42, 0.12);
+    padding: 8px 0; display: none; z-index: 200; list-style: none;
+  }
+  .nav-item:hover .dropdown-menu, .nav-item.open .dropdown-menu { display: block; }
+  .dropdown-header { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: #64748b; padding: 8px 16px 4px; }
+  .dropdown-divider { height: 1px; background: var(--border-light); margin: 6px 0; }
+  .dropdown-item { display: block; padding: 8px 16px; font-size: 13px; color: #1e293b; }
+  .dropdown-item:hover { background: #f1f5f9; color: var(--accent-blue); }
+  .nav-cta { border: 1px solid #475569; background: #1e293b; color: #fff; font-size: 13px; font-weight: 600; padding: 8px 16px; }
+  .nav-cta:hover { background: #334155; }
+  .sub-nav { background: #fff; border-bottom: 1px solid var(--border-light); }
+  .sub-nav-inner { display: flex; align-items: center; justify-content: space-between; height: 46px; }
+  .sub-nav-label { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: #64748b; }
+  .sub-nav-links { display: flex; align-items: center; gap: 24px; height: 100%; list-style: none; }
+  .sub-nav-links li { height: 100%; }
+  .sub-nav-link { font-size: 13px; font-weight: 500; color: #475569; height: 100%; display: inline-flex; align-items: center; border-bottom: 2px solid transparent; }
+  .sub-nav-link:hover, .sub-nav-link.current { color: var(--text-main); border-bottom-color: var(--accent-blue); }
+  .hero { background: var(--bg-hero); color: #fff; padding: 76px 0 84px; border-bottom: 1px solid #1e293b; }
+  .eyebrow-light { font-size: 11.5px; font-weight: 700; letter-spacing: 0.09em; text-transform: uppercase; color: #60a5fa; margin-bottom: 14px; display: block; }
+  .hero h1 { font-size: 40px; font-weight: 700; line-height: 1.18; margin-bottom: 18px; max-width: 760px; }
+  .hero p { font-size: 17px; color: #cbd5e1; max-width: 680px; margin-bottom: 32px; }
+  .hero-actions { display: flex; flex-wrap: wrap; gap: 14px; }
+  .btn-primary { background: var(--accent-blue); color: #fff; font-size: 14px; font-weight: 600; padding: 12px 22px; border: 1px solid var(--accent-blue); cursor: pointer; display: inline-block; text-align: center; }
+  .btn-primary:hover { background: var(--accent-blue-hover); }
+  .btn-outline-light { background: rgba(255,255,255,0.04); color: #fff; font-size: 14px; font-weight: 600; padding: 12px 22px; border: 1px solid #475569; display: inline-block; }
+  .btn-outline-dark { background: #fff; color: var(--text-main); font-size: 14px; font-weight: 600; padding: 12px 22px; border: 1px solid #cbd5e1; cursor: pointer; display: inline-block; text-align: center; }
+  .btn-block { width: 100%; }
+  .section { padding: 72px 0; border-bottom: 1px solid var(--border-light); scroll-margin-top: 64px; }
+  .section-alt { background: var(--bg-secondary); }
+  .eyebrow-dark { font-size: 11.5px; font-weight: 700; letter-spacing: 0.09em; text-transform: uppercase; color: var(--accent-blue); margin-bottom: 10px; display: block; }
+  .section-title { font-size: 30px; font-weight: 700; color: var(--text-main); margin-bottom: 12px; }
+  .section-lead { font-size: 16px; color: var(--text-muted); max-width: 720px; margin-bottom: 40px; }
+  .two-col-grid { display: grid; grid-template-columns: 1.45fr 1fr; gap: 56px; align-items: start; }
+  .prose-block p { font-size: 15.5px; color: #334155; margin-bottom: 18px; }
+  .notice-box { background: #f8fafc; border: 1px solid var(--border-light); border-left: 3px solid var(--accent-blue); padding: 20px 22px; margin-top: 24px; }
+  .notice-box-title { font-size: 13.5px; font-weight: 700; margin-bottom: 6px; }
+  .spec-sidebar { border-left: 2px solid #cbd5e1; padding-left: 28px; }
+  .spec-sidebar h3 { font-size: 18px; margin-bottom: 20px; }
+  .spec-list { list-style: none; }
+  .spec-item { padding: 13px 0; border-bottom: 1px solid var(--border-light); }
+  .spec-label { display: block; font-size: 11px; font-weight: 700; text-transform: uppercase; color: #64748b; }
+  .spec-value { font-size: 14.5px; font-weight: 500; }
+  .table-wrap { border: 1px solid var(--border-light); background: #fff; overflow-x: auto; }
+  table { width: 100%; border-collapse: collapse; text-align: left; }
+  th, td { font-size: 14px; padding: 15px 20px; border-bottom: 1px solid var(--border-light); }
+  th { background: #f8fafc; font-weight: 700; }
+  .highlight-col { background: rgba(29, 99, 184, 0.03); font-weight: 500; }
+  .three-col-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
+  .two-card-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; }
+  .feature-card, .package-card { background: #fff; border: 1px solid var(--border-light); padding: 28px; }
+  .package-card { display: flex; flex-direction: column; justify-content: space-between; }
+  .package-card.featured { border-top: 3px solid var(--accent-blue); }
+  .package-tag { font-size: 11px; font-weight: 700; text-transform: uppercase; color: var(--accent-blue); margin-bottom: 10px; display: block; }
+  .price-tag { font-size: 30px; font-weight: 700; margin: 16px 0; }
+  .price-tag span { font-size: 13px; color: #64748b; }
+  .check-list { list-style: none; margin-bottom: 28px; border-top: 1px solid var(--border-light); padding-top: 18px; }
+  .check-list li { font-size: 14px; padding: 6px 0 6px 18px; position: relative; }
+  .check-list li::before { content: "▪"; position: absolute; left: 0; color: var(--accent-blue); }
+  .site-footer { background: var(--bg-dark); color: #94a3b8; padding: 64px 0 36px; font-size: 13.5px; }
+  .footer-grid { display: grid; grid-template-columns: 1.4fr 1fr 1fr 1fr; gap: 40px; padding-bottom: 44px; border-bottom: 1px solid #1e293b; }
+  .footer-col h4 { color: #fff; font-size: 13px; text-transform: uppercase; margin-bottom: 16px; }
+  .footer-links { list-style: none; }
+  .footer-links li { margin-bottom: 10px; }
+  .footer-links a:hover { color: #fff; }
+  .footer-bottom { padding-top: 24px; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px; font-size: 12.5px; color: #64748b; }
+  .modal-backdrop { position: fixed; inset: 0; background: rgba(15,23,42,0.65); display: none; align-items: center; justify-content: center; z-index: 2000; padding: 20px; }
+  .modal-backdrop.open { display: flex; }
+  .modal-dialog { background: #fff; width: 100%; max-width: 520px; border: 1px solid var(--border-light); padding: 32px; position: relative; }
+  .modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+  .modal-close { background: none; border: none; font-size: 24px; color: #64748b; cursor: pointer; }
+  .form-group { margin-bottom: 16px; }
+  .form-group label { display: block; font-size: 12px; font-weight: 700; text-transform: uppercase; margin-bottom: 6px; }
+  .form-control { width: 100%; padding: 11px 14px; font-size: 14px; border: 1px solid #cbd5e1; }
+  .checkout-feedback { display: none; margin-top: 16px; padding: 14px 16px; background: #f0fdf4; border-left: 3px solid #15803d; color: #14532d; font-size: 13.5px; }
+  @media (max-width: 920px) {
+    .two-col-grid, .three-col-grid, .two-card-grid, .footer-grid { grid-template-columns: 1fr; }
+    .nav-toggle { display: inline-block; }
+    .nav-links { display: none; position: absolute; top: 64px; left: 0; right: 0; background: var(--bg-dark); flex-direction: column; align-items: flex-start; padding: 16px 24px 24px; gap: 12px; }
+    .nav-links.mobile-open { display: flex; }
+    .dropdown-menu { position: static; background: #1e293b; box-shadow: none; border: none; }
+    .dropdown-item { color: #cbd5e1; }
+  }
+</style>
+</head>
+<body>
+  <div class="top-strip">
+    <div class="container top-strip-inner">
+      <span>A Proprietary Operating System by <strong>Quanalv Corporation</strong></span>
+      <a href="index.html">&larr; Return to Quanalv Corporate Home</a>
+    </div>
+  </div>
+
+  <header class="main-header" id="topNav">
+    <div class="container nav-inner">
+      <a href="molcoreindex.html" class="brand">
+        <img src="pictures/quanalvlogo.png" alt="Quanalv Corp Logo" class="brand-logo" />
+        <span>QUANALV MOLCORE OS</span>
+      </a>
+      <button class="nav-toggle" id="navToggle" type="button" aria-expanded="false">Menu &#9776;</button>
+      <ul class="nav-links" id="primaryNav">
+        <li class="nav-item"><a href="index.html" class="nav-link">Home</a></li>
+        <li class="nav-item has-dropdown">
+          <a href="molcoreindex.html" class="nav-link active">Molcore OS &#9662;</a>
+          <ul class="dropdown-menu">
+            <li class="dropdown-header">Editions &amp; Licensing</li>
+            <li><a href="molcoreindex.html" class="dropdown-item">Molcore 1.0 (Standard / Home)</a></li>
+            <li><a href="molcore-business.html" class="dropdown-item">Molcore Business Edition</a></li>
+            <li><a href="molcoreactivation.html" class="dropdown-item">Product Activation Portal</a></li>
+            <li class="dropdown-divider"></li>
+            <li><a href="#licensing-terms" class="dropdown-item">Organizational License Key</a></li>
+            <li><a href="#comparison" class="dropdown-item">Home vs. Business Edition</a></li>
+            <li><a href="#deployment" class="dropdown-item">Enterprise Deployment</a></li>
+          </ul>
+        </li>
+        <li class="nav-item has-dropdown">
+          <a href="about.html" class="nav-link">About Quanalv &#9662;</a>
+          <ul class="dropdown-menu">
+            <li><a href="about.html#origin-vision" class="dropdown-item">Our Origin &amp; Vision</a></li>
+            <li><a href="about.html#core-pillars" class="dropdown-item">Core Pillars</a></li>
+            <li><a href="about.html#milestones" class="dropdown-item">Company Timeline</a></li>
+          </ul>
+        </li>
+        <li class="nav-item"><a href="careers.html" class="nav-link">Careers</a></li>
+        <li class="nav-cta-wrap"><a href="#acquire-business" class="nav-cta">License Business Edition</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <nav class="sub-nav">
+    <div class="container sub-nav-inner">
+      <span class="sub-nav-label">Business Edition</span>
+      <ul class="sub-nav-links" id="subnavLinks">
+        <li><a href="#licensing-terms" class="sub-nav-link current">Organizational Licensing</a></li>
+        <li><a href="#comparison" class="sub-nav-link">Edition Comparison</a></li>
+        <li><a href="#deployment" class="sub-nav-link">Workstation Controls</a></li>
+        <li><a href="#acquire-business" class="sub-nav-link">Acquire Business License</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <section class="hero">
+    <div class="container">
+      <span class="eyebrow-light">Commercial &amp; Enterprise Volume Licensing</span>
+      <h1>Quanalv Molcore Business Edition</h1>
+      <p>Built on our closed-source FreeBSD foundation for workplaces, institutions, and IT departments. Deploy across your entire organization under a single unrestricted organizational license key.</p>
+      <div class="hero-actions">
+        <a href="#acquire-business" class="btn-primary">Acquire Business License</a>
+        <a href="#licensing-terms" class="btn-outline-light">Read Organizational License Terms</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="licensing-terms">
+    <div class="container">
+      <span class="eyebrow-dark">Organizational Licensing Policy</span>
+      <h2 class="section-title">One License Key for Your Entire Organization</h2>
+      <p class="section-lead">Eliminate per-seat activation audits, seat-count renewals, and per-machine key tracking across your internal workstations.</p>
+      <div class="two-col-grid">
+        <div class="prose-block">
+          <p>When your organization purchases <strong>Molcore Business Edition</strong>, Quanalv Corporation issues an official <strong>Organizational License Key</strong> registered directly to your company, school, agency, or commercial entity.</p>
+          <p>Unlike standard consumer licenses tied to a single workstation, your Business Edition license key can register and activate <strong>as many computers as needed</strong>, with no artificial seat caps or per-device activation fees—provided every activated machine belongs to and operates within your organization.</p>
+          <div class="notice-box">
+            <div class="notice-box-title">Official Business Licensing Note</div>
+            <p>Purchasing Molcore for Business (<strong>Molcore Business Edition</strong>) includes a commercial license key that can register <strong>as many computers as needed as long as they are within the organization</strong>. Redistribution, resale, or activation on systems outside the licensed organizational entity is strictly prohibited.</p>
+          </div>
+        </div>
+        <aside class="spec-sidebar">
+          <h3>License Specifications</h3>
+          <ul class="spec-list">
+            <li class="spec-item"><span class="spec-label">Product Edition</span><span class="spec-value">Quanalv Molcore 1.0 Business Edition</span></li>
+            <li class="spec-item"><span class="spec-label">Activation Limit</span><span class="spec-value">Unlimited systems within the licensed organization</span></li>
+            <li class="spec-item"><span class="spec-label">Key Format</span><span class="spec-value">Single Organization-Bound Master Key (QMBZ-)</span></li>
+            <li class="spec-item"><span class="spec-label">Architecture</span><span class="spec-value">Closed-Source QM Technology on FreeBSD Core</span></li>
+            <li class="spec-item"><span class="spec-label">Support Tier</span><span class="spec-value">Priority Commercial &amp; Technical SLA Access</span></li>
+          </ul>
+        </aside>
+      </div>
+    </div>
+  </section>
+  <section class="section section-alt" id="comparison">
+    <div class="container">
+      <span class="eyebrow-dark">Edition Comparison</span>
+      <h2 class="section-title">Standard Edition vs. Molcore Business Edition</h2>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Feature &amp; Licensing Term</th><th>Molcore 1.0 (Standard)</th><th class="highlight-col">Molcore Business Edition</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Licensed Computer Count</td><td>Single workstation per license key</td><td class="highlight-col">Unlimited computers within your organization</td></tr>
+            <tr><td>License Key Issuance</td><td>Individual machine license key</td><td class="highlight-col">Organization-wide master license key</td></tr>
+            <tr><td>Core Operating System</td><td>Closed-source QM Technology (FreeBSD core)</td><td class="highlight-col">Closed-source QM Technology (FreeBSD core)</td></tr>
+            <tr><td>Zero-Bloat Performance</td><td>Included</td><td class="highlight-col">Included + Workstation Policy Controls</td></tr>
+            <tr><td>Deployment Media</td><td>ISO Image, Bootable USB, or Bootable DVD</td><td class="highlight-col">Enterprise ISO Image + Bulk Imaging Support</td></tr>
+            <tr><td>Customer &amp; Technical Support</td><td>Standard Quanalv User Support</td><td class="highlight-col">Dedicated Technical SLA &amp; Priority Assistance</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="deployment">
+    <div class="container">
+      <span class="eyebrow-dark">Workstation &amp; Fleet Readiness</span>
+      <h2 class="section-title">Built for Predictable IT Administration</h2>
+      <div class="three-col-grid">
+        <div class="feature-card"><h3>Rapid Fleet Imaging</h3><p>Deploy your organizational master key into standard disk images or automated installation scripts so new hardware is ready for employees in minutes.</p></div>
+        <div class="feature-card"><h3>Closed-Source Isolation</h3><p>Enforces strict system-tree integrity and FreeBSD process isolation without unnecessary background telemetry or consumer bloatware.</p></div>
+        <div class="feature-card"><h3>Direct Engineering SLA</h3><p>Business Edition organizations receive direct access to Quanalv technical support specialists for hardware compatibility and driver verification.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-alt" id="acquire-business">
+    <div class="container">
+      <span class="eyebrow-dark">Commercial Procurement</span>
+      <h2 class="section-title">Acquire Molcore Business Edition</h2>
+      <div class="two-card-grid">
+        <div class="package-card featured">
+          <div>
+            <span class="package-tag">Most Popular for IT Teams</span>
+            <h3>Business Digital ISO</h3>
+            <p>Official Business Edition ISO image with SHA-256 verification and unlimited internal license key.</p>
+            <div class="price-tag">$149.00 <span>USD / Organization</span></div>
+            <ul class="check-list">
+              <li>Register unlimited computers inside your organization</li>
+              <li>Official Business Edition bootable ISO image</li>
+              <li>Rufus &amp; enterprise PXE/imaging compatible</li>
+              <li>Priority Technical SLA support access</li>
+            </ul>
+          </div>
+          <button type="button" class="btn-primary btn-block checkout-trigger" data-package="Molcore Business Edition — Digital ISO ($149.00 USD)">License Business ISO</button>
+        </div>
+        <div class="package-card">
+          <div>
+            <span class="package-tag">Physical Media Kit</span>
+            <h3>Business USB Media Kit</h3>
+            <p>Pre-flashed commercial installation USB drive plus your organizational master license key.</p>
+            <div class="price-tag">$169.00 <span>USD / Organization</span></div>
+            <ul class="check-list">
+              <li>Register unlimited computers inside your organization</li>
+              <li>Official pre-flashed bootable USB installation drive</li>
+              <li>Printed organizational license certificate</li>
+              <li>Priority Technical SLA support access</li>
+            </ul>
+          </div>
+          <button type="button" class="btn-outline-dark btn-block checkout-trigger" data-package="Molcore Business Edition — USB Media Kit ($169.00 USD)">License Business USB Kit</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="site-footer" id="support">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col"><h4>Quanalv Molcore OS</h4><p>An operating system developed and created by the Quanalv Corporation. Engineered on FreeBSD for home users and commercial workplaces.</p></div>
+        <div class="footer-col"><h4>Commercial Solutions</h4><ul class="footer-links"><li><a href="molcore-business.html">Corporate Desktop Licensing</a></li><li><a href="#licensing-terms">Unlimited Org License Terms</a></li><li><a href="molcoreindex.html">Molcore 1.0 Standard</a></li><li><a href="molcoreactivation.html">Product Activation Portal</a></li></ul></div>
+        <div class="footer-col"><h4>Hardware Support</h4><ul class="footer-links"><li><a href="molcoreindex.html#architecture">Certified OEM Devices</a></li><li><a href="molcoreindex.html#architecture">Processor Architecture</a></li><li><a href="molcoreindex.html#architecture">Storage Driver Base</a></li></ul></div>
+        <div class="footer-col"><h4>Corporate Portal</h4><ul class="footer-links"><li><a href="index.html">Quanalv Corporation Home</a></li><li><a href="#acquire-business">Procure Business Assets</a></li><li><a href="about.html">About Quanalv</a></li><li><a href="careers.html">Careers &amp; Contributors</a></li></ul></div>
+      </div>
+      <div class="footer-bottom">
+        <div>&copy; 2026 Quanalv Corporation. All Rights Reserved.</div>
+        <div>Quanalv Molcore Business Edition is a protected commercial proprietary asset.</div>
+      </div>
+    </div>
+  </footer>
+
+  <div class="modal-backdrop" id="checkoutModal" role="dialog" aria-modal="true">
+    <div class="modal-dialog">
+      <div class="modal-header"><h3>Business Edition Licensing Request</h3><button type="button" class="modal-close" id="modalClose">&times;</button></div>
+      <form id="checkoutForm">
+        <div class="form-group"><label>Selected Business Package</label><input type="text" id="selectedPackage" class="form-control" readonly /></div>
+        <div class="form-group"><label>Licensed Organization Name</label><input type="text" id="orgName" class="form-control" required /></div>
+        <div class="form-group"><label>Primary Organizational Domain</label><input type="text" id="orgDomain" class="form-control" required /></div>
+        <div class="form-group"><label>Corporate Destination Email</label><input type="email" id="corpEmail" class="form-control" required /></div>
+        <button type="submit" class="btn-primary btn-block">Initialize Business License Allocation</button>
+      </form>
+      <div class="checkout-feedback" id="checkoutFeedback"></div>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      var navToggle = document.getElementById('navToggle');
+      var primaryNav = document.getElementById('primaryNav');
+      var modal = document.getElementById('checkoutModal');
+      var modalClose = document.getElementById('modalClose');
+      var selectedPackageInput = document.getElementById('selectedPackage');
+      var checkoutForm = document.getElementById('checkoutForm');
+      var checkoutFeedback = document.getElementById('checkoutFeedback');
+      navToggle.addEventListener('click', function () { primaryNav.classList.toggle('mobile-open'); });
+      document.querySelectorAll('.checkout-trigger').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          selectedPackageInput.value = btn.getAttribute('data-package');
+          checkoutFeedback.style.display = 'none';
+          modal.classList.add('open');
+        });
+      });
+      modalClose.addEventListener('click', function () { modal.classList.remove('open'); });
+      checkoutForm.addEventListener('submit', function (e) {
+        e.preventDefault();
+        checkoutFeedback.innerHTML = '<strong>Allocation Initialized:</strong> Instructions queued for <strong>' + document.getElementById('corpEmail').value + '</strong>.';
+        checkoutFeedback.style.display = 'block';
+      });
+    })();
+  </script>
+</body>
+</html>

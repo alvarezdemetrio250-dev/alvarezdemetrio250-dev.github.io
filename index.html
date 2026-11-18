@@ -1,0 +1,834 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Quanalv Corporation | Home</title>
+<link rel="icon" type="image/png" href="pictures/browsericon.png" />
+<style>
+  :root {
+    --bg-primary: #ffffff;
+    --bg-secondary: #f8fafc;
+    --bg-dark: #101622;
+    --bg-hero: #202c39;
+    --text-main: #0f172a;
+    --text-muted: #475569;
+    --text-light: #f8fafc;
+    --accent-blue: #1d63b8;
+    --accent-blue-hover: #17529b;
+    --border-light: #e2e8f0;
+    --border-dark: #334155;
+  }
+
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    color: var(--text-main);
+    background-color: var(--bg-primary);
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  a {
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .container {
+    max-width: 1160px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  /* Top Corporate Bar */
+  .top-strip {
+    background-color: #0b101b;
+    color: #94a3b8;
+    font-size: 12px;
+    border-bottom: 1px solid #1e293b;
+  }
+
+  .top-strip-inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 36px;
+  }
+
+  .top-strip strong {
+    color: #f8fafc;
+    font-weight: 600;
+  }
+
+  .top-strip a {
+    color: #60a5fa;
+    transition: color 0.15s ease;
+  }
+
+  .top-strip a:hover {
+    color: #93c5fd;
+  }
+
+  /* Unified Dark Navigation Bar */
+  .main-header {
+    background-color: var(--bg-dark);
+    color: var(--text-light);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    border-bottom: 1px solid #1e293b;
+    transition: box-shadow 0.2s ease;
+  }
+
+  .main-header.scrolled {
+    box-shadow: 0 4px 16px rgba(2, 6, 23, 0.45);
+  }
+
+  .nav-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 64px;
+  }
+
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 700;
+    font-size: 14px;
+    letter-spacing: 0.06em;
+    color: #ffffff;
+    text-transform: uppercase;
+  }
+
+  .brand-logo {
+    height: 30px;
+    width: auto;
+    display: block;
+    object-fit: contain;
+  }
+
+  .nav-toggle {
+    display: none;
+    background: transparent;
+    border: 1px solid #334155;
+    color: #e2e8f0;
+    padding: 6px 12px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+  }
+
+  .nav-links {
+    display: flex;
+    align-items: center;
+    gap: 26px;
+    list-style: none;
+  }
+
+  .nav-item {
+    position: relative;
+  }
+
+  .nav-link {
+    font-size: 13.5px;
+    font-weight: 500;
+    color: #cbd5e1;
+    padding: 20px 0;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    background: none;
+    border: none;
+    font-family: inherit;
+    cursor: pointer;
+    transition: color 0.15s ease;
+  }
+
+  .nav-link:hover,
+  .nav-link.active {
+    color: #ffffff;
+  }
+
+  .dropdown-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    min-width: 240px;
+    background-color: #ffffff;
+    color: var(--text-main);
+    border: 1px solid var(--border-light);
+    box-shadow: 0 10px 25px rgba(15, 23, 42, 0.14);
+    padding: 8px 0;
+    list-style: none;
+    display: none;
+    z-index: 200;
+  }
+
+  .nav-item:hover .dropdown-menu,
+  .nav-item.open .dropdown-menu {
+    display: block;
+  }
+
+  .dropdown-header {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: #64748b;
+    padding: 8px 16px 4px;
+  }
+
+  .dropdown-divider {
+    height: 1px;
+    background-color: var(--border-light);
+    margin: 6px 0;
+  }
+
+  .dropdown-item {
+    display: block;
+    padding: 8px 16px;
+    font-size: 13px;
+    color: #1e293b;
+    transition: background-color 0.12s ease;
+  }
+
+  .dropdown-item:hover {
+    background-color: #f1f5f9;
+    color: var(--accent-blue);
+  }
+
+  .nav-cta {
+    border: 1px solid #475569;
+    background-color: #1e293b;
+    color: #ffffff;
+    font-size: 13px;
+    font-weight: 600;
+    padding: 8px 16px;
+    transition: background-color 0.15s ease, border-color 0.15s ease;
+  }
+
+  .nav-cta:hover {
+    background-color: #334155;
+    border-color: #64748b;
+  }
+
+  /* Secondary Section Jump Bar */
+  .subnav {
+    background-color: #ffffff;
+    border-bottom: 1px solid var(--border-light);
+  }
+
+  .subnav-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 46px;
+  }
+
+  .subnav-label {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: #64748b;
+  }
+
+  .subnav-links {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    height: 100%;
+  }
+
+  .spy-link {
+    font-size: 13px;
+    font-weight: 500;
+    color: #475569;
+    height: 100%;
+    display: inline-flex;
+    align-items: center;
+    border-bottom: 2px solid transparent;
+    transition: color 0.15s ease, border-color 0.15s ease;
+  }
+
+  .spy-link:hover,
+  .spy-link.active {
+    color: var(--text-main);
+    border-bottom-color: var(--accent-blue);
+  }
+
+  /* Hero Section */
+  .hero {
+    background-color: var(--bg-hero);
+    color: #ffffff;
+    padding: 84px 0 92px;
+    border-bottom: 1px solid #1e293b;
+  }
+
+  .eyebrow-light {
+    font-size: 11.5px;
+    font-weight: 700;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+    color: #60a5fa;
+    margin-bottom: 14px;
+    display: block;
+  }
+
+  .hero h1 {
+    font-size: 42px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    line-height: 1.18;
+    margin-bottom: 18px;
+    max-width: 780px;
+  }
+
+  .hero p {
+    font-size: 17.5px;
+    color: #cbd5e1;
+    max-width: 680px;
+    line-height: 1.65;
+    margin-bottom: 32px;
+  }
+
+  .hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+  }
+
+  .btn-primary {
+    background-color: var(--accent-blue);
+    color: #ffffff;
+    font-size: 14px;
+    font-weight: 600;
+    padding: 12px 24px;
+    border: 1px solid var(--accent-blue);
+    display: inline-block;
+    transition: background-color 0.15s ease;
+  }
+
+  .btn-primary:hover {
+    background-color: var(--accent-blue-hover);
+  }
+
+  .btn-outline-light {
+    background-color: rgba(255, 255, 255, 0.04);
+    color: #ffffff;
+    font-size: 14px;
+    font-weight: 600;
+    padding: 12px 24px;
+    border: 1px solid #475569;
+    display: inline-block;
+    transition: background-color 0.15s ease, border-color 0.15s ease;
+  }
+
+  .btn-outline-light:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-color: #94a3b8;
+  }
+
+  /* Sections */
+  .section {
+    padding: 76px 0;
+    border-bottom: 1px solid var(--border-light);
+    scroll-margin-top: 64px;
+  }
+
+  .section-header {
+    margin-bottom: 36px;
+  }
+
+  .eyebrow {
+    font-size: 11.5px;
+    font-weight: 700;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+    color: var(--accent-blue);
+    margin-bottom: 8px;
+    display: block;
+  }
+
+  .section-header h2 {
+    font-size: 32px;
+    font-weight: 700;
+    letter-spacing: -0.015em;
+    color: var(--text-main);
+  }
+
+  /* Story Layout */
+  .story-layout {
+    display: grid;
+    grid-template-columns: 1.55fr 1fr;
+    gap: 56px;
+    align-items: start;
+  }
+
+  .story-main p {
+    font-size: 15.5px;
+    color: #334155;
+    margin-bottom: 18px;
+    line-height: 1.75;
+  }
+
+  .story-main strong {
+    color: var(--text-main);
+    font-weight: 600;
+  }
+
+  .story-link {
+    display: inline-block;
+    margin-top: 8px;
+    font-size: 14.5px;
+    font-weight: 600;
+    color: var(--accent-blue);
+    transition: color 0.15s ease;
+  }
+
+  .story-link:hover {
+    color: var(--accent-blue-hover);
+  }
+
+  .story-sidebar {
+    border-left: 2px solid #cbd5e1;
+    padding-left: 28px;
+  }
+
+  .sidebar-item {
+    padding: 14px 0;
+    border-bottom: 1px solid var(--border-light);
+  }
+
+  .sidebar-item:last-child {
+    border-bottom: none;
+  }
+
+  .sidebar-label {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: #64748b;
+    margin-bottom: 4px;
+  }
+
+  .sidebar-value {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--text-main);
+  }
+
+  /* CTA Band */
+  .cta-band {
+    background-color: var(--bg-secondary);
+    padding: 68px 0;
+    border-bottom: 1px solid var(--border-light);
+    scroll-margin-top: 64px;
+  }
+
+  .cta-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 32px;
+    flex-wrap: wrap;
+  }
+
+  .cta-text h2 {
+    font-size: 26px;
+    font-weight: 700;
+    color: var(--text-main);
+    margin-bottom: 8px;
+  }
+
+  .cta-text p {
+    font-size: 15.5px;
+    color: var(--text-muted);
+  }
+
+  /* Corporate Footer */
+  .site-footer {
+    background-color: var(--bg-dark);
+    color: #94a3b8;
+    padding: 64px 0 36px;
+    font-size: 13.5px;
+  }
+
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr 1fr 1fr;
+    gap: 40px;
+    padding-bottom: 44px;
+    border-bottom: 1px solid #1e293b;
+  }
+
+  .footer-col h4 {
+    color: #ffffff;
+    font-size: 13px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: 16px;
+  }
+
+  .footer-col p {
+    font-size: 13.5px;
+    line-height: 1.65;
+    color: #94a3b8;
+  }
+
+  .footer-links {
+    list-style: none;
+  }
+
+  .footer-links li {
+    margin-bottom: 10px;
+  }
+
+  .footer-links a {
+    color: #94a3b8;
+    transition: color 0.15s ease;
+  }
+
+  .footer-links a:hover {
+    color: #ffffff;
+  }
+
+  .footer-bottom {
+    padding-top: 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    font-size: 12.5px;
+    color: #64748b;
+  }
+
+  @media (max-width: 920px) {
+    .story-layout,
+    .footer-grid {
+      grid-template-columns: 1fr;
+    }
+    .story-sidebar {
+      border-left: none;
+      border-top: 2px solid #cbd5e1;
+      padding-left: 0;
+      padding-top: 24px;
+    }
+    .nav-toggle {
+      display: inline-block;
+    }
+    .nav-links {
+      display: none;
+      position: absolute;
+      top: 64px;
+      left: 0;
+      right: 0;
+      background-color: var(--bg-dark);
+      flex-direction: column;
+      align-items: flex-start;
+      padding: 16px 24px;
+      gap: 12px;
+      border-bottom: 1px solid #1e293b;
+    }
+    .nav-links.mobile-open {
+      display: flex;
+    }
+    .nav-link {
+      padding: 8px 0;
+    }
+    .dropdown-menu {
+      position: static;
+      box-shadow: none;
+      border: none;
+      background-color: #1e293b;
+      width: 100%;
+      margin-top: 6px;
+    }
+    .dropdown-item {
+      color: #e2e8f0;
+    }
+    .dropdown-item:hover {
+      background-color: #334155;
+      color: #ffffff;
+    }
+    .nav-cta {
+      display: none;
+    }
+  }
+</style>
+</head>
+<body>
+
+  <div class="top-strip">
+    <div class="container top-strip-inner">
+      <div><strong>Quanalv Corporation</strong> &mdash; Proprietary Operating Systems &amp; Productivity Software</div>
+      <div><a href="careers.html">Join Our Contributor Roster &rarr;</a></div>
+    </div>
+  </div>
+
+  <header class="main-header" id="topNav">
+    <div class="container nav-inner">
+      <a href="index.html" class="brand">
+        <img src="pictures/quanalvlogo.png" alt="Quanalv Corp Logo" class="brand-logo" />
+        <span>QUANALV CORP&trade;</span>
+      </a>
+
+      <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="navMenu">Menu &#9776;</button>
+
+      <ul class="nav-links" id="navMenu">
+        <li class="nav-item">
+          <a href="index.html" class="nav-link active">Home</a>
+        </li>
+
+        <li class="nav-item" data-dropdown>
+          <button type="button" class="nav-link" aria-expanded="false">
+            About Quanalv &#9662;
+          </button>
+          <ul class="dropdown-menu">
+            <li class="dropdown-header">Company</li>
+            <li><a href="about.html#origin-vision" class="dropdown-item">Origin &amp; Vision</a></li>
+            <li><a href="about.html#core-pillars" class="dropdown-item">Core Engineering Pillars</a></li>
+            <li><a href="about.html#milestones" class="dropdown-item">Company Milestones</a></li>
+          </ul>
+        </li>
+
+        <li class="nav-item" data-dropdown>
+          <button type="button" class="nav-link" aria-expanded="false">
+            Quanalv Molcore OS &#9662;
+          </button>
+          <ul class="dropdown-menu">
+            <li class="dropdown-header">Operating System</li>
+            <li><a href="molcoreindex.html" class="dropdown-item">Molcore 1.0 Overview</a></li>
+            <li><a href="molcore-business.html" class="dropdown-item">Molcore Business Edition</a></li>
+            <li><a href="molcoreactivation.html" class="dropdown-item">Molcore Activation Portal</a></li>
+            <li><a href="molcoreindex.html#purchase" class="dropdown-item">Purchase Media &amp; Licenses</a></li>
+          </ul>
+        </li>
+
+        <li class="nav-item" data-dropdown>
+          <button type="button" class="nav-link" aria-expanded="false">
+            Explore Products &#9662;
+          </button>
+          <ul class="dropdown-menu">
+            <li class="dropdown-header">Software Catalog</li>
+            <li><a href="molcoreindex.html" class="dropdown-item">Molcore 1.0</a></li>
+            <li><a href="quanalvoffice.html" class="dropdown-item">Quanalv Office 1.0</a></li>
+            <li><a href="molcore-familypack.html" class="dropdown-item">Molcore Family Pack</a></li>
+            <li class="dropdown-divider"></li>
+            <li><a href="quanalvallsoftware.html" class="dropdown-item">Explore All Software</a></li>
+          </ul>
+        </li>
+
+        <li class="nav-item">
+          <a href="quanalvsupport.html" class="nav-link">Support</a>
+        </li>
+
+        <li class="nav-item">
+          <a href="careers.html" class="nav-link">Careers</a>
+        </li>
+      </ul>
+
+      <a href="quanalvallsoftware.html" class="nav-cta">All Software</a>
+    </div>
+  </header>
+
+  <nav class="subnav" aria-label="Page sections">
+    <div class="container subnav-inner">
+      <span class="subnav-label">Quanalv Corporate</span>
+      <div class="subnav-links">
+        <a href="#story" class="spy-link active">How It All Began</a>
+        <a href="#licensing" class="spy-link">Corporate Licensing</a>
+      </div>
+    </div>
+  </nav>
+
+  <section class="hero">
+    <div class="container">
+      <span class="eyebrow-light">Deterministic Systems &amp; Software</span>
+      <h1>Welcome to Quanalv Corporation</h1>
+      <p>Quanalv creates closed-source, highly secure software and operating systems built for both everyday home users and professional workplaces.</p>
+      <div class="hero-actions">
+        <a href="quanalvallsoftware.html" class="btn-primary">Explore All Quanalv Software</a>
+        <a href="careers.html" class="btn-outline-light">Join Contributor Roster</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="story">
+    <div class="container">
+      <div class="section-header">
+        <span class="eyebrow">Our Story</span>
+        <h2>How It All Began</h2>
+      </div>
+
+      <div class="story-layout">
+        <div class="story-main">
+          <p>Quanalv became an idea in 2024 out of a simple observation by founder Demetrio Alvarez: modern operating systems had lost sight of the user. Too often, major OS providers deliver bloated software that slows down hardware, relies on overly complex interfaces, and treats customer support as an afterthought.</p>
+
+          <p>Determined to change this, Demetrio began developing a better alternative during his freshman year in high school. Initially known as <strong>Project EasyOS</strong>, the vision quickly evolved into <strong>Quanalv Molcore</strong>&mdash;an operating system designed from the ground up for speed, simplicity, and dedicated user support.</p>
+
+          <p>Finding the right foundation for Molcore was a critical challenge. After exploring several options, Demetrio chose to build the operating system on top of <strong>FreeBSD</strong>. This strategic decision provided the robust hardware compatibility, driver support, and stability of an established platform, freeing Quanalv to innovate and craft a completely custom user experience without spending years reinventing the core infrastructure.</p>
+
+          <p>Today, Quanalv remains committed to that original mission: building fast, intuitive software that puts people first.</p>
+
+          <a href="about.html" class="story-link">View the full story &rarr;</a>
+        </div>
+
+        <aside class="story-sidebar">
+          <div class="sidebar-item">
+            <div class="sidebar-label">Founded</div>
+            <div class="sidebar-value">2024 by Demetrio Alvarez</div>
+          </div>
+          <div class="sidebar-item">
+            <div class="sidebar-label">Core Architecture</div>
+            <div class="sidebar-value">FreeBSD Kernel Foundation</div>
+          </div>
+          <div class="sidebar-item">
+            <div class="sidebar-label">Flagship Release</div>
+            <div class="sidebar-value">Quanalv Molcore OS 1.0</div>
+          </div>
+          <div class="sidebar-item">
+            <div class="sidebar-label">Distribution Model</div>
+            <div class="sidebar-value">Closed-Source Proprietary</div>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-band" id="licensing">
+    <div class="container cta-inner">
+      <div class="cta-text">
+        <h2>Purchasing Quanalv for your organization?</h2>
+        <p>Explore our workstation licensing. Completely closed-source and secure.</p>
+      </div>
+      <a href="molcoreindex.html#purchase" class="btn-primary">Corporate Licensing &amp; Media &rarr;</a>
+    </div>
+  </section>
+
+  <footer class="site-footer" id="support">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col">
+          <h4>Quanalv Corporation</h4>
+          <p>Building fast, deterministic, and user-focused operating systems and productivity software on a FreeBSD foundation.</p>
+        </div>
+
+        <div class="footer-col">
+          <h4>Operating Systems</h4>
+          <ul class="footer-links">
+            <li><a href="molcoreindex.html">Quanalv Molcore 1.0</a></li>
+            <li><a href="molcore-business.html">Molcore Business Edition</a></li>
+            <li><a href="molcore-familypack.html">Molcore Family Pack</a></li>
+            <li><a href="molcoreactivation.html">OS Activation Portal</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Productivity Suite</h4>
+          <ul class="footer-links">
+            <li><a href="quanalvoffice.html">Quanalv Office 1.0</a></li>
+            <li><a href="quanalvofficeactivation.html">Office Activation Portal</a></li>
+            <li><a href="quanalvallsoftware.html">All Quanalv Software</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Organization</h4>
+          <ul class="footer-links">
+            <li><a href="index.html">Quanalv Home</a></li>
+            <li><a href="about.html">About Quanalv</a></li>
+            <li><a href="quanalvsupport.html">Support Portal</a></li>
+            <li><a href="careers.html">Careers &amp; Contributors</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div>&copy; 2026 Quanalv Corporation. All Rights Reserved. Proprietary Commercial Infrastructures.</div>
+        <div>Closed-Source FreeBSD Architecture</div>
+      </div>
+    </div>
+  </footer>
+
+<script>
+  (function () {
+    var topNav = document.getElementById('topNav');
+    var navToggle = document.getElementById('navToggle');
+    var navMenu = document.getElementById('navMenu');
+    var dropdownItems = document.querySelectorAll('[data-dropdown]');
+    var spyLinks = document.querySelectorAll('.spy-link');
+    var sections = document.querySelectorAll('section[id]');
+
+    window.addEventListener('scroll', function () {
+      if (window.scrollY > 12) {
+        topNav.classList.add('scrolled');
+      } else {
+        topNav.classList.remove('scrolled');
+      }
+
+      var currentId = '';
+      sections.forEach(function (sec) {
+        var top = sec.offsetTop - 110;
+        if (window.scrollY >= top) {
+          currentId = sec.getAttribute('id');
+        }
+      });
+
+      if (currentId) {
+        spyLinks.forEach(function (link) {
+          link.classList.remove('active');
+          if (link.getAttribute('href') === '#' + currentId) {
+            link.classList.add('active');
+          }
+        });
+      }
+    });
+
+    navToggle.addEventListener('click', function () {
+      var isOpen = navMenu.classList.toggle('mobile-open');
+      navToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+    });
+
+    dropdownItems.forEach(function (item) {
+      var btn = item.querySelector('button');
+      btn.addEventListener('click', function (e) {
+        e.stopPropagation();
+        var alreadyOpen = item.classList.contains('open');
+
+        dropdownItems.forEach(function (other) {
+          other.classList.remove('open');
+          other.querySelector('button').setAttribute('aria-expanded', 'false');
+        });
+
+        if (!alreadyOpen) {
+          item.classList.add('open');
+          btn.setAttribute('aria-expanded', 'true');
+        }
+      });
+    });
+
+    document.addEventListener('click', function () {
+      dropdownItems.forEach(function (item) {
+        item.classList.remove('open');
+        item.querySelector('button').setAttribute('aria-expanded', 'false');
+      });
+    });
+  })();
+</script>
+</body>
+</html>

@@ -1,0 +1,1088 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Careers &amp; Contributor Registration — Quanalv Corporation</title>
+<link rel="icon" type="image/png" href="pictures/browsericon.png" />
+<style>
+  :root {
+    --bg-primary: #ffffff;
+    --bg-secondary: #f8fafc;
+    --bg-dark: #101622;
+    --bg-hero: #202c39;
+    --text-main: #0f172a;
+    --text-muted: #475569;
+    --text-light: #f8fafc;
+    --accent-blue: #1d63b8;
+    --accent-blue-hover: #17529b;
+    --border-light: #e2e8f0;
+    --border-dark: #334155;
+  }
+
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    color: var(--text-main);
+    background-color: var(--bg-primary);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  a {
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .container {
+    max-width: 1160px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  /* Top Corporate Bar */
+  .top-strip {
+    background-color: #0b101b;
+    color: #94a3b8;
+    font-size: 12px;
+    border-bottom: 1px solid #1e293b;
+  }
+
+  .top-strip-inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 36px;
+  }
+
+  .top-strip strong {
+    color: #f8fafc;
+    font-weight: 600;
+  }
+
+  .top-strip a {
+    color: #60a5fa;
+    transition: color 0.15s ease;
+  }
+
+  .top-strip a:hover {
+    color: #93c5fd;
+  }
+
+  /* Unified Dark Navigation Bar */
+  .main-header {
+    background-color: var(--bg-dark);
+    color: var(--text-light);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    border-bottom: 1px solid #1e293b;
+  }
+
+  .nav-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 64px;
+  }
+
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 700;
+    font-size: 14px;
+    letter-spacing: 0.06em;
+    color: #ffffff;
+    text-transform: uppercase;
+  }
+
+  .brand-logo {
+    height: 30px;
+    width: auto;
+    display: block;
+    object-fit: contain;
+  }
+
+  .nav-links {
+    display: flex;
+    align-items: center;
+    gap: 28px;
+    list-style: none;
+  }
+
+  .nav-item {
+    position: relative;
+  }
+
+  .nav-link {
+    font-size: 13.5px;
+    font-weight: 500;
+    color: #cbd5e1;
+    padding: 20px 0;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    transition: color 0.15s ease;
+  }
+
+  .nav-link:hover,
+  .nav-link.active {
+    color: #ffffff;
+  }
+
+  .dropdown-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    min-width: 240px;
+    background-color: #ffffff;
+    color: var(--text-main);
+    border: 1px solid var(--border-light);
+    box-shadow: 0 10px 25px rgba(15, 23, 42, 0.12);
+    padding: 8px 0;
+    display: none;
+    z-index: 200;
+  }
+
+  .nav-item:hover .dropdown-menu {
+    display: block;
+  }
+
+  .dropdown-header {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: #64748b;
+    padding: 8px 16px 4px;
+  }
+
+  .dropdown-divider {
+    height: 1px;
+    background-color: var(--border-light);
+    margin: 6px 0;
+  }
+
+  .dropdown-item {
+    display: block;
+    padding: 8px 16px;
+    font-size: 13px;
+    color: #1e293b;
+    transition: background-color 0.12s ease;
+  }
+
+  .dropdown-item:hover {
+    background-color: #f1f5f9;
+    color: var(--accent-blue);
+  }
+
+  .nav-cta {
+    border: 1px solid #475569;
+    background-color: #1e293b;
+    color: #ffffff;
+    font-size: 13px;
+    font-weight: 600;
+    padding: 8px 16px;
+    transition: background-color 0.15s ease, border-color 0.15s ease;
+  }
+
+  .nav-cta:hover {
+    background-color: #334155;
+    border-color: #64748b;
+  }
+
+  /* Secondary Sub-Navigation Strip */
+  .sub-nav {
+    background-color: #ffffff;
+    border-bottom: 1px solid var(--border-light);
+  }
+
+  .sub-nav-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 46px;
+  }
+
+  .sub-nav-label {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: #64748b;
+  }
+
+  .sub-nav-links {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    height: 100%;
+  }
+
+  .sub-nav-link {
+    font-size: 13px;
+    font-weight: 500;
+    color: #475569;
+    height: 100%;
+    display: inline-flex;
+    align-items: center;
+    border-bottom: 2px solid transparent;
+    transition: color 0.15s ease, border-color 0.15s ease;
+  }
+
+  .sub-nav-link:hover,
+  .sub-nav-link.active {
+    color: var(--text-main);
+    border-bottom-color: var(--accent-blue);
+  }
+
+  /* Hero Section */
+  .hero {
+    background-color: var(--bg-hero);
+    color: #ffffff;
+    padding: 76px 0 84px;
+    border-bottom: 1px solid #1e293b;
+  }
+
+  .eyebrow-light {
+    font-size: 11.5px;
+    font-weight: 700;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+    color: #60a5fa;
+    margin-bottom: 14px;
+    display: block;
+  }
+
+  .hero h1 {
+    font-size: 40px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    line-height: 1.18;
+    margin-bottom: 18px;
+    max-width: 780px;
+  }
+
+  .hero p {
+    font-size: 17px;
+    color: #cbd5e1;
+    max-width: 680px;
+    line-height: 1.65;
+    margin-bottom: 32px;
+  }
+
+  .hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+  }
+
+  .btn-primary {
+    background-color: var(--accent-blue);
+    color: #ffffff;
+    font-size: 14px;
+    font-weight: 600;
+    padding: 12px 22px;
+    border: 1px solid var(--accent-blue);
+    cursor: pointer;
+    display: inline-block;
+    transition: background-color 0.15s ease;
+  }
+
+  .btn-primary:hover {
+    background-color: var(--accent-blue-hover);
+  }
+
+  .btn-outline-light {
+    background-color: rgba(255, 255, 255, 0.04);
+    color: #ffffff;
+    font-size: 14px;
+    font-weight: 600;
+    padding: 12px 22px;
+    border: 1px solid #475569;
+    cursor: pointer;
+    display: inline-block;
+    transition: background-color 0.15s ease, border-color 0.15s ease;
+  }
+
+  .btn-outline-light:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-color: #94a3b8;
+  }
+
+  /* Sections */
+  .section {
+    padding: 72px 0;
+    border-bottom: 1px solid var(--border-light);
+    scroll-margin-top: 64px;
+  }
+
+  .section-alt {
+    background-color: var(--bg-secondary);
+  }
+
+  .eyebrow-dark {
+    font-size: 11.5px;
+    font-weight: 700;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+    color: var(--accent-blue);
+    margin-bottom: 10px;
+    display: block;
+  }
+
+  .section-title {
+    font-size: 30px;
+    font-weight: 700;
+    letter-spacing: -0.015em;
+    color: var(--text-main);
+    margin-bottom: 12px;
+  }
+
+  .section-lead {
+    font-size: 16px;
+    color: var(--text-muted);
+    max-width: 740px;
+    margin-bottom: 40px;
+  }
+
+  /* Legal Status Disclosure Banner */
+  .disclosure-banner {
+    background-color: #fefce8;
+    border: 1px solid #fde047;
+    border-left: 4px solid #ca8a04;
+    padding: 20px 24px;
+    margin-bottom: 44px;
+  }
+
+  .disclosure-title {
+    font-size: 14px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: #854d0e;
+    margin-bottom: 6px;
+  }
+
+  .disclosure-banner p {
+    font-size: 14.5px;
+    color: #713f12;
+    line-height: 1.6;
+  }
+
+  /* Three-Column Track Cards */
+  .three-col-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 28px;
+  }
+
+  .track-card {
+    background-color: #ffffff;
+    border: 1px solid var(--border-light);
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  .track-tag {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--accent-blue);
+    margin-bottom: 8px;
+    display: block;
+  }
+
+  .track-card h3 {
+    font-size: 19px;
+    font-weight: 700;
+    color: var(--text-main);
+    margin-bottom: 10px;
+  }
+
+  .track-card p {
+    font-size: 14.5px;
+    color: var(--text-muted);
+    margin-bottom: 18px;
+    line-height: 1.6;
+  }
+
+  .check-list {
+    list-style: none;
+    border-top: 1px solid var(--border-light);
+    padding-top: 16px;
+    margin-bottom: 22px;
+  }
+
+  .check-list li {
+    font-size: 13.5px;
+    color: #334155;
+    padding: 5px 0 5px 18px;
+    position: relative;
+  }
+
+  .check-list li::before {
+    content: "▪";
+    position: absolute;
+    left: 0;
+    color: var(--accent-blue);
+  }
+
+  .btn-select-track {
+    width: 100%;
+    text-align: center;
+    background-color: #ffffff;
+    color: var(--text-main);
+    font-size: 13.5px;
+    font-weight: 600;
+    padding: 10px 16px;
+    border: 1px solid #cbd5e1;
+    cursor: pointer;
+    transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+  }
+
+  .btn-select-track:hover {
+    background-color: var(--bg-dark);
+    border-color: var(--bg-dark);
+    color: #ffffff;
+  }
+
+  /* Two-Column Form Layout */
+  .two-col-grid {
+    display: grid;
+    grid-template-columns: 1.55fr 1fr;
+    gap: 48px;
+    align-items: start;
+  }
+
+  .console-panel {
+    background-color: #ffffff;
+    border: 1px solid var(--border-light);
+    padding: 36px;
+  }
+
+  .form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+
+  .form-group {
+    margin-bottom: 20px;
+  }
+
+  .form-label {
+    display: block;
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #334155;
+    margin-bottom: 7px;
+  }
+
+  .form-control {
+    width: 100%;
+    padding: 11px 14px;
+    font-size: 14px;
+    font-family: inherit;
+    color: var(--text-main);
+    background-color: #ffffff;
+    border: 1px solid #cbd5e1;
+    outline: none;
+    transition: border-color 0.15s ease;
+  }
+
+  .form-control:focus {
+    border-color: var(--accent-blue);
+  }
+
+  textarea.form-control {
+    min-height: 115px;
+    resize: vertical;
+  }
+
+  .form-hint {
+    font-size: 12.5px;
+    color: #64748b;
+    margin-top: 6px;
+  }
+
+  .checkbox-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    margin: 22px 0 26px;
+    padding: 14px 16px;
+    background-color: #f8fafc;
+    border: 1px solid var(--border-light);
+  }
+
+  .checkbox-row input[type="checkbox"] {
+    margin-top: 4px;
+    width: 16px;
+    height: 16px;
+    accent-color: var(--accent-blue);
+  }
+
+  .checkbox-row label {
+    font-size: 13.5px;
+    color: #334155;
+    line-height: 1.55;
+    cursor: pointer;
+  }
+
+  .status-banner {
+    margin-top: 24px;
+    padding: 18px 20px;
+    border: 1px solid var(--border-light);
+    background-color: #f8fafc;
+    font-size: 14px;
+    display: none;
+  }
+
+  .status-banner.success {
+    display: block;
+    border-left: 4px solid #15803d;
+    background-color: #f0fdf4;
+    color: #14532d;
+  }
+
+  .ref-box {
+    margin-top: 12px;
+    padding: 12px;
+    background-color: #0f172a;
+    color: #e2e8f0;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-size: 12.5px;
+    border: 1px solid #334155;
+  }
+
+  .btn-download {
+    margin-top: 12px;
+    background-color: #101622;
+    color: #ffffff;
+    border: 1px solid #334155;
+    padding: 8px 14px;
+    font-size: 12.5px;
+    font-weight: 600;
+    cursor: pointer;
+  }
+
+  .btn-download:hover {
+    background-color: #1e293b;
+  }
+
+  /* Right Sidebar */
+  .spec-sidebar {
+    border-left: 2px solid #cbd5e1;
+    padding-left: 28px;
+  }
+
+  .spec-sidebar h3 {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--text-main);
+    margin-bottom: 18px;
+  }
+
+  .spec-list {
+    list-style: none;
+  }
+
+  .spec-item {
+    padding: 14px 0;
+    border-bottom: 1px solid var(--border-light);
+  }
+
+  .spec-item:last-child {
+    border-bottom: none;
+  }
+
+  .spec-label {
+    display: block;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: #64748b;
+    margin-bottom: 4px;
+  }
+
+  .spec-value {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text-main);
+  }
+
+  /* Corporate Footer */
+  .site-footer {
+    background-color: var(--bg-dark);
+    color: #94a3b8;
+    padding: 64px 0 36px;
+    font-size: 13.5px;
+  }
+
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr 1fr 1fr;
+    gap: 40px;
+    padding-bottom: 44px;
+    border-bottom: 1px solid #1e293b;
+  }
+
+  .footer-col h4 {
+    color: #ffffff;
+    font-size: 13px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: 16px;
+  }
+
+  .footer-col p {
+    font-size: 13.5px;
+    line-height: 1.65;
+    color: #94a3b8;
+  }
+
+  .footer-links {
+    list-style: none;
+  }
+
+  .footer-links li {
+    margin-bottom: 10px;
+  }
+
+  .footer-links a {
+    color: #94a3b8;
+    transition: color 0.15s ease;
+  }
+
+  .footer-links a:hover {
+    color: #ffffff;
+  }
+
+  .footer-bottom {
+    padding-top: 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    font-size: 12.5px;
+    color: #64748b;
+  }
+
+  @media (max-width: 920px) {
+    .three-col-grid,
+    .two-col-grid,
+    .form-grid,
+    .footer-grid {
+      grid-template-columns: 1fr;
+    }
+    .spec-sidebar {
+      border-left: none;
+      border-top: 2px solid #cbd5e1;
+      padding-left: 0;
+      padding-top: 24px;
+    }
+    .nav-links {
+      display: none;
+    }
+  }
+</style>
+</head>
+<body>
+
+  <div class="top-strip">
+    <div class="container top-strip-inner">
+      <div><strong>Quanalv Corp&trade;</strong> &mdash; Independent Systems &amp; Software Initiative (Pre-Registration Status)</div>
+      <div><a href="index.html">&larr; Return to Quanalv Home</a></div>
+    </div>
+  </div>
+
+  <header class="main-header">
+    <div class="container nav-inner">
+      <a href="index.html" class="brand">
+        <img src="pictures/quanalvlogo.png" alt="Quanalv Corp Logo" class="brand-logo" />
+        <span>QUANALV CORP&trade;</span>
+      </a>
+
+      <ul class="nav-links">
+        <li class="nav-item"><a href="index.html" class="nav-link">Home</a></li>
+        <li class="nav-item">
+          <a href="molcoreindex.html" class="nav-link">Molcore OS ▾</a>
+          <div class="dropdown-menu">
+            <div class="dropdown-header">Operating System</div>
+            <a href="molcoreindex.html" class="dropdown-item">Molcore 1.0 Overview</a>
+            <a href="molcore-business.html" class="dropdown-item">Molcore Business Edition</a>
+            <a href="molcoreactivation.html" class="dropdown-item">Molcore Activation Portal</a>
+          </div>
+        </li>
+        <li class="nav-item">
+          <a href="quanalvoffice.html" class="nav-link">Quanalv Office ▾</a>
+          <div class="dropdown-menu">
+            <div class="dropdown-header">Productivity Suite</div>
+            <a href="quanalvoffice.html" class="dropdown-item">Quanalv Office 1.0</a>
+            <a href="quanalvofficeactivation.html" class="dropdown-item">Office Activation Portal</a>
+          </div>
+        </li>
+        <li class="nav-item">
+          <a href="about.html" class="nav-link">About Quanalv ▾</a>
+          <div class="dropdown-menu">
+            <div class="dropdown-header">Organization</div>
+            <a href="about.html" class="dropdown-item">Origin &amp; Vision</a>
+            <a href="careers.html" class="dropdown-item">Careers &amp; Contributors</a>
+          </div>
+        </li>
+        <li class="nav-item"><a href="careers.html" class="nav-link active">Careers</a></li>
+      </ul>
+
+      <a href="#register-form" class="nav-cta">Register Interest</a>
+    </div>
+  </header>
+
+  <div class="sub-nav">
+    <div class="container sub-nav-inner">
+      <span class="sub-nav-label">Careers &amp; Talent</span>
+      <div class="sub-nav-links">
+        <a href="#entity-status" class="sub-nav-link active">Entity Status</a>
+        <a href="#tracks" class="sub-nav-link">Contributor Tracks</a>
+        <a href="#register-form" class="sub-nav-link">Registration Form</a>
+      </div>
+    </div>
+  </div>
+
+  <section class="hero">
+    <div class="container">
+      <span class="eyebrow-light">Careers &amp; Early Contributor Program</span>
+      <h1>Build the Next Generation of Deterministic Software at Quanalv Corp&trade;</h1>
+      <p>
+        We are assembling builders, systems programmers, software testers, and creative specialists to help shape Quanalv Molcore OS and Quanalv Office from the ground up.
+      </p>
+      <div class="hero-actions">
+        <a href="#register-form" class="btn-primary">Submit Contributor Registration</a>
+        <a href="#tracks" class="btn-outline-light">Explore Open Tracks</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="entity-status" class="section">
+    <div class="container">
+      <div class="disclosure-banner">
+        <div class="disclosure-title">Important Organizational Status Notice</div>
+        <p>
+          <strong>Quanalv Corp&trade; is not currently a registered legal corporation or business entity.</strong> All opportunities listed on this page are early-stage project contributor, collaborative engineering, and volunteer testing roles. Registering below places you in our founding contributor roster for active development on Molcore OS and Quanalv Office, as well as future formal roles once official incorporation is completed.
+        </p>
+      </div>
+
+      <div id="tracks">
+        <span class="eyebrow-dark">Open Disciplines</span>
+        <h2 class="section-title">Contributor &amp; Engineering Tracks</h2>
+        <p class="section-lead">
+          Select the primary area where you want to contribute to Quanalv Corp&trade; projects, whether writing low-level FreeBSD system utilities, stress-testing desktop builds, or supporting other critical areas.
+        </p>
+
+        <div class="three-col-grid">
+          <div class="track-card">
+            <div>
+              <span class="track-tag">Track 01 &bull; Engineering</span>
+              <h3>Software Coding &amp; Development</h3>
+              <p>
+                Write clean, fast, low-overhead code across our operating system components, desktop environment, native C++ apps, and web portals.
+              </p>
+              <ul class="check-list">
+                <li>FreeBSD shell utilities &amp; system scripts</li>
+                <li>C / C++ desktop tools &amp; UI components</li>
+                <li>HTML, CSS &amp; JavaScript web infrastructure</li>
+                <li>Installer packaging &amp; build automation</li>
+              </ul>
+            </div>
+            <button type="button" class="btn-select-track" onclick="selectRole('Coding & Software Development')">Select Coding Track &rarr;</button>
+          </div>
+
+          <div class="track-card">
+            <div>
+              <span class="track-tag">Track 02 &bull; Quality Assurance</span>
+              <h3>Software Testing &amp; QA</h3>
+              <p>
+                Put Molcore OS and Quanalv Office builds through real-world hardware tests, virtual machine stress checks, and bug verification.
+              </p>
+              <ul class="check-list">
+                <li>ISO boot testing on bare metal &amp; VMs</li>
+                <li>Driver &amp; hardware compatibility reports</li>
+                <li>UI usability &amp; regression bug reproduction</li>
+                <li>Security &amp; activation flow verification</li>
+              </ul>
+            </div>
+            <button type="button" class="btn-select-track" onclick="selectRole('Quality Assurance & Software Testing')">Select Testing Track &rarr;</button>
+          </div>
+
+          <div class="track-card">
+            <div>
+              <span class="track-tag">Track 03 &bull; Multidisciplinary</span>
+              <h3>Other Specializations</h3>
+              <p>
+                Contribute your skills outside of core coding and QA to help grow the Quanalv ecosystem, documentation, and user experience.
+              </p>
+              <ul class="check-list">
+                <li>UI / UX interface &amp; icon design</li>
+                <li>Technical documentation &amp; user guides</li>
+                <li>Community moderation &amp; user support</li>
+                <li>Project operations, media &amp; outreach</li>
+              </ul>
+            </div>
+            <button type="button" class="btn-select-track" onclick="selectRole('Other (Design, Documentation, Support, or Operations)')">Select Other Track &rarr;</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="register-form" class="section section-alt">
+    <div class="container">
+      <span class="eyebrow-dark">Candidate Intake</span>
+      <h2 class="section-title">Quanalv Corp&trade; Contributor Registration</h2>
+      <p class="section-lead">
+        Complete the form below to register your interest in coding, testing, or other roles. We review every submission directly.
+      </p>
+
+      <div class="two-col-grid">
+        <div class="console-panel">
+          <form id="careerForm" onsubmit="handleCareerSubmit(event)">
+            <div class="form-grid">
+              <div class="form-group">
+                <label class="form-label" for="fullName">Full Name or Handle *</label>
+                <input type="text" id="fullName" class="form-control" placeholder="e.g., Jordan Rivera" required />
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="email">Contact Email Address *</label>
+                <input type="email" id="email" class="form-control" placeholder="you@example.com" required />
+              </div>
+            </div>
+
+            <div class="form-grid">
+              <div class="form-group">
+                <label class="form-label" for="primaryRole">Primary Role / Track *</label>
+                <select id="primaryRole" class="form-control" onchange="toggleOtherInput()" required>
+                  <option value="">-- Choose a Primary Track --</option>
+                  <option value="Coding & Software Development">Coding &amp; Software Development</option>
+                  <option value="Quality Assurance & Software Testing">Quality Assurance &amp; Software Testing</option>
+                  <option value="Other (Design, Documentation, Support, or Operations)">Other (Specify Below)</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="availability">Weekly Availability</label>
+                <select id="availability" class="form-control">
+                  <option value="Casual / Flexible (1-5 hrs/week)">Casual / Flexible (1&ndash;5 hrs/week)</option>
+                  <option value="Part-Time Contributor (5-15 hrs/week)">Part-Time Contributor (5&ndash;15 hrs/week)</option>
+                  <option value="Dedicated Builder (15+ hrs/week)">Dedicated Builder (15+ hrs/week)</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-group" id="otherRoleGroup" style="display: none;">
+              <label class="form-label" for="otherRoleDetail">Specify Your "Other" Role or Specialty *</label>
+              <input type="text" id="otherRoleDetail" class="form-control" placeholder="e.g., UI Design, Technical Writing, Audio/Branding, Support" />
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="skills">Technical Skills, Languages, or Tools *</label>
+              <input type="text" id="skills" class="form-control" placeholder="e.g., C++, FreeBSD, Shell Scripting, HTML/CSS/JS, VirtualBox, UI Design" required />
+              <div class="form-hint">List programming languages, testing environments, or tools you are comfortable using.</div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="portfolio">GitHub, Portfolio, or Discord / Contact Handle (Optional)</label>
+              <input type="text" id="portfolio" class="form-control" placeholder="https://github.com/username or @handle" />
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="notes">How Would You Like to Contribute? *</label>
+              <textarea id="notes" class="form-control" placeholder="Tell us about your background, what excites you about Molcore OS or Quanalv Office, and what you want to build or test." required></textarea>
+            </div>
+
+            <div class="checkbox-row">
+              <input type="checkbox" id="acknowledgeStatus" required />
+              <label for="acknowledgeStatus">
+                I understand and acknowledge that <strong>Quanalv Corp&trade; is not currently a registered legal business entity</strong>, and that this registration is for early-stage project collaboration and future consideration rather than formal corporate employment.
+              </label>
+            </div>
+
+            <button type="submit" class="btn-primary">Complete Contributor Registration</button>
+          </form>
+
+          <div id="formResult" class="status-banner"></div>
+        </div>
+
+        <aside class="spec-sidebar">
+          <h3>Program Overview</h3>
+          <ul class="spec-list">
+            <li class="spec-item">
+              <span class="spec-label">Organization Name</span>
+              <span class="spec-value">Quanalv Corp&trade; (Founded 2024)</span>
+            </li>
+            <li class="spec-item">
+              <span class="spec-label">Registration Status</span>
+              <span class="spec-value">Unregistered Initiative / Pre-Incorporation</span>
+            </li>
+            <li class="spec-item">
+              <span class="spec-label">Core Focus Areas</span>
+              <span class="spec-value">Coding, QA Testing, Design, Docs &amp; Operations</span>
+            </li>
+            <li class="spec-item">
+              <span class="spec-label">Active Platforms</span>
+              <span class="spec-value">Quanalv Molcore OS (FreeBSD) &amp; Quanalv Office</span>
+            </li>
+            <li class="spec-item">
+              <span class="spec-label">Collaboration Format</span>
+              <span class="spec-value">Remote / Asynchronous Contributor Roster</span>
+            </li>
+          </ul>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col">
+          <h4>Quanalv Corp&trade;</h4>
+          <p>
+            Building fast, deterministic, and user-focused operating systems and productivity software on a FreeBSD foundation. Currently operating as an unregistered independent software project.
+          </p>
+        </div>
+
+        <div class="footer-col">
+          <h4>Operating Systems</h4>
+          <ul class="footer-links">
+            <li><a href="molcoreindex.html">Quanalv Molcore 1.0</a></li>
+            <li><a href="molcore-business.html">Molcore Business Edition</a></li>
+            <li><a href="molcoreactivation.html">OS Activation Portal</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Productivity Suite</h4>
+          <ul class="footer-links">
+            <li><a href="quanalvoffice.html">Quanalv Office 1.0</a></li>
+            <li><a href="quanalvofficeactivation.html">Office Activation Portal</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Organization</h4>
+          <ul class="footer-links">
+            <li><a href="index.html">Quanalv Home</a></li>
+            <li><a href="about.html">About Quanalv</a></li>
+            <li><a href="careers.html">Careers &amp; Contributors</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div>&copy; 2026 Quanalv Corp&trade;. All Rights Reserved.</div>
+        <div>Pre-Registration Independent Software Project</div>
+      </div>
+    </div>
+  </footer>
+
+<script>
+  let lastSubmission = null;
+
+  function selectRole(roleValue) {
+    const selectEl = document.getElementById('primaryRole');
+    selectEl.value = roleValue;
+    toggleOtherInput();
+    document.getElementById('register-form').scrollIntoView({ behavior: 'smooth' });
+  }
+
+  function toggleOtherInput() {
+    const selectEl = document.getElementById('primaryRole');
+    const otherGroup = document.getElementById('otherRoleGroup');
+    const otherInput = document.getElementById('otherRoleDetail');
+
+    if (selectEl.value.startsWith('Other')) {
+      otherGroup.style.display = 'block';
+      otherInput.required = true;
+    } else {
+      otherGroup.style.display = 'none';
+      otherInput.required = false;
+      otherInput.value = '';
+    }
+  }
+
+  function handleCareerSubmit(event) {
+    event.preventDefault();
+
+    const name = document.getElementById('fullName').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const role = document.getElementById('primaryRole').value;
+    const otherDetail = document.getElementById('otherRoleDetail').value.trim();
+    const availability = document.getElementById('availability').value;
+    const skills = document.getElementById('skills').value.trim();
+    const portfolio = document.getElementById('portfolio').value.trim();
+    const notes = document.getElementById('notes').value.trim();
+
+    const refId = 'QVC-' + Math.floor(100000 + Math.random() * 900000);
+    const finalRole = role.startsWith('Other') && otherDetail ? 'Other — ' + otherDetail : role;
+
+    lastSubmission = {
+      registrationId: refId,
+      organization: 'Quanalv Corp (Unregistered Pre-Incorporation Initiative)',
+      submittedAt: new Date().toISOString(),
+      applicant: { name, email, role: finalRole, availability, skills, portfolio, notes }
+    };
+
+    try {
+      const existing = JSON.parse(localStorage.getItem('quanalv_career_submissions') || '[]');
+      existing.push(lastSubmission);
+      localStorage.setItem('quanalv_career_submissions', JSON.stringify(existing));
+    } catch (e) {}
+
+    const resultBox = document.getElementById('formResult');
+    resultBox.className = 'status-banner success';
+    resultBox.innerHTML =
+      '<strong>Registration Logged for ' + escapeHtml(name) + '</strong><br>' +
+      'Thank you for registering interest in <strong>' + escapeHtml(finalRole) + '</strong> (' + escapeHtml(availability) + ') at Quanalv Corp&trade;. ' +
+      'We have recorded your contact email (<strong>' + escapeHtml(email) + '</strong>) and skillset (' + escapeHtml(skills) + ').' +
+      '<div class="ref-box">REGISTRATION ID: ' + refId + ' | STATUS: PRE-REGISTRATION ROSTER | ENTITY: QUANALV CORP (UNREGISTERED)</div>' +
+      '<button type="button" class="btn-download" onclick="downloadReceipt()">Download Registration Receipt (.json)</button>';
+  }
+
+  function downloadReceipt() {
+    if (!lastSubmission) return;
+    const blob = new Blob([JSON.stringify(lastSubmission, null, 2)], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = lastSubmission.registrationId + '-quanalv-registration.json';
+    a.click();
+    URL.revokeObjectURL(url);
+  }
+
+  function escapeHtml(text) {
+    const div = document.createElement('div');
+    div.textContent = text;
+    return div.innerHTML;
+  }
+</script>
+</body>
+</html>
